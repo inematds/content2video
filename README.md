@@ -4,7 +4,7 @@ Um link entra, um vídeo editável sai. O projeto lê uma página, cria roteiro,
 
 O padrão atual é vídeo vertical em português brasileiro, com cerca de 1 minuto e 30% de tolerância (42–78 s), voz fixa `pt-BR-FranciscaNeural` e nota mínima 8. A língua da página de origem não troca a voz: uma fonte em inglês continua recebendo narração pt-BR, salvo pedido explícito.
 
-[Abrir o guia visual](https://inematds.github.io/videoimpacto/guia/) · [Plano do projeto](docs/plano_content2video_inema.md)
+[Abrir o guia visual](https://inematds.github.io/content2video/guia/) · [Plano do projeto](docs/plano_content2video_inema.md)
 
 ## Pré-requisitos
 
@@ -25,8 +25,8 @@ codex login status
 ## Instalação
 
 ```bash
-git clone https://github.com/inematds/videoimpacto.git
-cd videoimpacto
+git clone https://github.com/inematds/content2video.git
+cd content2video
 cp .env.example .env
 npm install
 ```

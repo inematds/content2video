@@ -101,14 +101,14 @@
   <div class="links">
     <a class="sec" href="#oque">O que é</a><a class="sec" href="#fluxo">Como funciona</a><a class="sec" href="#guia">Guia de uso</a><a class="sec" href="#exemplos">Exemplos</a>
     <button class="tgl" id="themeToggle" aria-label="Alternar tema" title="Alternar tema">🌙</button>
-    <a class="btn" href="https://github.com/inematds/videoimpacto" target="_blank" rel="noopener">GitHub</a>
+    <a class="btn" href="https://github.com/inematds/content2video" target="_blank" rel="noopener">GitHub</a>
   </div>
 </div></nav>
 
 <header class="hero" id="top"><div class="glow"></div><div class="wrap">
   <div><span class="chip">Do conteúdo ao MP4</span><h1>Um link entra.<br><span class="amb">Um vídeo sai.</span></h1>
     <p class="lead">Transforme páginas e artigos em vídeos verticais editáveis, narrados em português e prontos para revisão antes do render.</p>
-    <div class="cta"><a class="btn" href="#guia">Começar o guia</a><a class="btn ghost" href="https://github.com/inematds/videoimpacto" target="_blank" rel="noopener">Ver no GitHub</a></div>
+    <div class="cta"><a class="btn" href="#guia">Começar o guia</a><a class="btn ghost" href="https://github.com/inematds/content2video" target="_blank" rel="noopener">Ver no GitHub</a></div>
   </div>
   <figure><img src="assets/hero.png" alt="Capa do Content2Video INEMA"></figure>
 </div></header>
@@ -139,8 +139,8 @@ codex login status</pre></div>
 
 <section id="guia"><div class="wrap"><span class="chip">Guia de uso · passo a passo</span><h2>Escolha interface ou linha de comando</h2>
   <p class="sub">Nos dois modos, os padrões vêm do <code>.env</code>: 60 segundos, tolerância de 30%, nota 8, voz Francisca e vídeo 9:16.</p>
-  <div class="step"><div class="b">1</div><div><h3>Instale</h3><p>Clone o projeto e crie sua configuração local.</p><pre><span class="k">git clone https://github.com/inematds/videoimpacto.git
-cd videoimpacto
+  <div class="step"><div class="b">1</div><div><h3>Instale</h3><p>Clone o projeto e crie sua configuração local.</p><pre><span class="k">git clone https://github.com/inematds/content2video.git
+cd content2video
 cp .env.example .env
 npm install</span></pre></div></div>
   <div class="step"><div class="b">2</div><div><h3>Inicie a interface</h3><p>Ajuste os IPs do <code>.env</code> se necessário e abra o endereço exibido.</p><pre><span class="k">npm start</span>  <span class="c"># padrão: http://192.168.2.99:3080</span></pre></div></div>
@@ -164,8 +164,8 @@ npm run video:check -- inema-club-promo</span></pre></div></div>
   <div class="phase"><div class="tag">Depois</div><div class="d"><strong>Operação pública</strong><span>Adicionar autenticação, HTTPS, fila persistente e limites antes de expor a interface à internet.</span></div></div>
 </div></section>
 
-<footer><div class="wrap"><div class="pill">Node.js</div><div class="pill">Codex</div><div class="pill">HyperFrames</div><p style="margin-top:18px">Content2Video INEMA · Projeto experimental · <a href="https://github.com/inematds/videoimpacto">inematds/videoimpacto</a> · <a href="https://inema.club">INEMA.CLUB</a></p></div></footer>
+<footer><div class="wrap"><div class="pill">Node.js</div><div class="pill">Codex</div><div class="pill">HyperFrames</div><p style="margin-top:18px">Content2Video INEMA · Projeto experimental · <a href="https://github.com/inematds/content2video">inematds/content2video</a> · <a href="https://inema.club">INEMA.CLUB</a></p></div></footer>
 
-<script>(function(){var KEY='videoimpacto-theme',b=document.body,t=document.getElementById('themeToggle');if(localStorage.getItem(KEY)==='light'){b.classList.add('light');t.textContent='☀️';}t.addEventListener('click',function(){var light=b.classList.toggle('light');t.textContent=light?'☀️':'🌙';localStorage.setItem(KEY,light?'light':'dark');});})();</script>
+<script>(function(){var KEY='content2video-theme',b=document.body,t=document.getElementById('themeToggle');if(localStorage.getItem(KEY)==='light'){b.classList.add('light');t.textContent='☀️';}t.addEventListener('click',function(){var light=b.classList.toggle('light');t.textContent=light?'☀️':'🌙';localStorage.setItem(KEY,light?'light':'dark');});})();</script>
 </body>
 </html>
