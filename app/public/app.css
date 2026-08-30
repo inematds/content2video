@@ -168,7 +168,7 @@ main { padding: clamp(30px, 5vw, 72px) clamp(20px, 4vw, 64px) 72px; }
   font-family: "Anton", sans-serif;
   font-size: clamp(44px, 5.2vw, 82px);
   line-height: 1.04;
-  letter-spacing: -0.025em;
+  letter-spacing: 0.03em;
   text-wrap: balance;
 }
 

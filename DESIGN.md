@@ -23,7 +23,7 @@ typography:
     fontSize: "clamp(44px, 5.2vw, 82px)"
     fontWeight: 400
     lineHeight: 1.04
-    letterSpacing: "-0.025em"
+    letterSpacing: "0.03em"
   headline:
     fontFamily: "Hanken Grotesk, system-ui, sans-serif"
     fontSize: "20px"
@@ -178,7 +178,7 @@ A paleta usa o azul-marinho como ambiente de trabalho e o ciano como sinal raro 
 
 ### Hierarchy
 
-- **Display** (400, escala fluida, 1.04): somente para a manchete de maior impacto; usa linhas curtas, tracking compacto, quebra por sentido e separação óptica entre blocos de cor.
+- **Display** (400, escala fluida, 1.04): somente para a manchete de maior impacto; usa linhas curtas, tracking aberto de 0.03em para compensar o desenho condensado da Anton, quebra por sentido e separação óptica entre blocos de cor.
 - **Headline** (650, 20px, 1.2): títulos de painéis e seções operacionais.
 - **Title** (600, 19px, 1.25): nome de projeto dentro da filmoteca, sempre com truncamento seguro quando necessário.
 - **Body** (400, 16px, 1.55): descrição da proposta e conteúdo de leitura contínua.
