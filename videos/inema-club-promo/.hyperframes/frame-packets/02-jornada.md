@@ -2,8 +2,8 @@
 
 ## Project inputs
 
-- Project: /home/nmaldaner/projetos/videoimpacto/videos/inema-club-promo
-- Design tokens: /home/nmaldaner/projetos/videoimpacto/videos/inema-club-promo/frame.md
+- Project: /home/nmaldaner/projetos/content2video/videos/inema-club-promo
+- Design tokens: /home/nmaldaner/projetos/content2video/videos/inema-club-promo/frame.md
 - RULES_DIR: /home/nmaldaner/.claude/skills/hyperframes-animation/rules
 
 ## Assigned storyboard block

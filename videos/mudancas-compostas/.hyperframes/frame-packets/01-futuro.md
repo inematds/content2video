@@ -2,8 +2,8 @@
 
 ## Project inputs
 
-- Project: /home/nmaldaner/projetos/videoimpacto/videos/mudancas-compostas
-- Design tokens: /home/nmaldaner/projetos/videoimpacto/videos/mudancas-compostas/frame.md
+- Project: /home/nmaldaner/projetos/content2video/videos/mudancas-compostas
+- Design tokens: /home/nmaldaner/projetos/content2video/videos/mudancas-compostas/frame.md
 - RULES_DIR: /home/nmaldaner/.agents/skills/hyperframes-animation/rules
 
 ## Assigned storyboard block

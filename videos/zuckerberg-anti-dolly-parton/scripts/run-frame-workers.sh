@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-project_dir="/home/nmaldaner/projetos/videoimpacto/videos/zuckerberg-anti-dolly-parton"
+project_dir="/home/nmaldaner/projetos/content2video/videos/zuckerberg-anti-dolly-parton"
 role_file="$project_dir/.hyperframes/frame-packets/_role.md"
 log_dir="$project_dir/.hyperframes/worker-logs"
 mkdir -p "$log_dir" "$project_dir/compositions/frames"

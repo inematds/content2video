@@ -2,8 +2,8 @@
 
 ## Project inputs
 
-- Project: /home/nmaldaner/projetos/videoimpacto/videos/zuckerberg-anti-dolly-parton
-- Design tokens: /home/nmaldaner/projetos/videoimpacto/videos/zuckerberg-anti-dolly-parton/frame.md
+- Project: /home/nmaldaner/projetos/content2video/videos/zuckerberg-anti-dolly-parton
+- Design tokens: /home/nmaldaner/projetos/content2video/videos/zuckerberg-anti-dolly-parton/frame.md
 - RULES_DIR: /home/nmaldaner/.claude/skills/hyperframes-animation/rules
 
 ## Assigned storyboard block
