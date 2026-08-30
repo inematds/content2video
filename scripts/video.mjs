@@ -78,7 +78,7 @@ async function createVideo(sourceUrl, requestedSlug) {
 
   console.log(`Criando videos/${slug} com ${settings.provider === "codex" ? "OAuth Codex" : "OpenAI API"}...`);
   await run("codex", [
-    "exec", "--ephemeral", "--sandbox", "workspace-write", "--approve-for-me",
+    "exec", "--ephemeral", "--approve-for-me",
     "--skip-git-repo-check", "-C", ROOT, prompt
   ], ROOT, childEnv);
 

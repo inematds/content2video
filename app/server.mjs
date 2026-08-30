@@ -249,7 +249,7 @@ function startGeneration(job) {
     `Não renderize o MP4 ainda: a aprovação ocorrerá na interface. Não faça perguntas; os defaults já foram aprovados.`;
 
   const args = [
-    "exec", "--json", "--ephemeral", "--sandbox", "workspace-write", "--approve-for-me",
+    "exec", "--json", "--ephemeral", "--approve-for-me",
     "--skip-git-repo-check", "-C", ROOT, prompt
   ];
   const childEnv = { ...process.env };
