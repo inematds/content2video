@@ -1,0 +1,504 @@
+<template>
+  <style>
+    #root {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      container-type: size;
+      color: #1a1a1a;
+      font-family: sans-serif;
+    }
+
+    .clip {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+    }
+
+    .f03-dolly-no-alto-ground {
+      background: linear-gradient(90deg, #f5f0e8 0 60%, #1a1a1a 60% 100%);
+    }
+
+    .f03-dolly-no-alto-ground::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 59.55cqw;
+      width: 0.45cqw;
+      background: #e85d5d;
+    }
+
+    .f03-dolly-no-alto-camera {
+      position: absolute;
+      inset: 0;
+      transform-origin: 60% 42%;
+      will-change: transform;
+    }
+
+    .f03-dolly-no-alto-title-block {
+      position: absolute;
+      top: 8.6cqh;
+      left: 6cqw;
+      width: 49cqw;
+    }
+
+    .f03-dolly-no-alto-kicker {
+      margin: 0 0 1.2cqh;
+      color: #e85d5d;
+      font-size: 2.1cqw;
+      font-weight: 800;
+      letter-spacing: 0.36cqw;
+      line-height: 1;
+      text-transform: uppercase;
+    }
+
+    .f03-dolly-no-alto-title {
+      margin: 0;
+      max-width: 48cqw;
+      font-family: sans-serif;
+      font-size: 11.8cqw;
+      font-stretch: condensed;
+      font-weight: 900;
+      letter-spacing: 0.35cqw;
+      line-height: 0.82;
+      text-transform: uppercase;
+    }
+
+    .f03-dolly-no-alto-title span {
+      display: block;
+    }
+
+    .f03-dolly-no-alto-accent {
+      width: 10cqw;
+      height: 0.45cqw;
+      margin-top: 2.2cqh;
+      background: #e85d5d;
+    }
+
+    .f03-dolly-no-alto-scale {
+      position: absolute;
+      top: 31cqh;
+      left: 6cqw;
+      width: 48cqw;
+      height: 43cqh;
+    }
+
+    .f03-dolly-no-alto-scale-rail {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 10cqw;
+      width: 0.28cqw;
+      background: #1a1a1a;
+    }
+
+    .f03-dolly-no-alto-tick {
+      position: absolute;
+      left: 0;
+      width: 46cqw;
+      height: 0.18cqw;
+      background: rgba(26, 26, 26, 0.18);
+      transform-origin: left center;
+    }
+
+    .f03-dolly-no-alto-tick::before {
+      content: attr(data-value);
+      position: absolute;
+      top: -1.05cqw;
+      left: 0;
+      width: 7.8cqw;
+      color: #6b6b6b;
+      font-size: 2.1cqw;
+      font-weight: 800;
+      letter-spacing: 0.1cqw;
+      line-height: 1;
+      text-align: right;
+    }
+
+    .f03-dolly-no-alto-tick:nth-child(2) { top: 0; }
+    .f03-dolly-no-alto-tick:nth-child(3) { top: 10.75cqh; }
+    .f03-dolly-no-alto-tick:nth-child(4) { top: 21.5cqh; }
+    .f03-dolly-no-alto-tick:nth-child(5) { top: 32.25cqh; }
+    .f03-dolly-no-alto-tick:nth-child(6) { top: 43cqh; }
+
+    .f03-dolly-no-alto-panel-label {
+      position: absolute;
+      top: 9.4cqh;
+      left: 66.7cqw;
+      margin: 0;
+      color: #e85d5d;
+      font-size: 2cqw;
+      font-weight: 800;
+      letter-spacing: 0.32cqw;
+      line-height: 1;
+      text-transform: uppercase;
+    }
+
+    .f03-dolly-no-alto-high-lockup {
+      position: absolute;
+      top: 19.2cqh;
+      left: 66.5cqw;
+      width: 29cqw;
+      color: #f5f0e8;
+      text-align: center;
+    }
+
+    .f03-dolly-no-alto-high-word {
+      display: block;
+      font-family: sans-serif;
+      font-size: 7.5cqw;
+      font-stretch: condensed;
+      font-weight: 900;
+      letter-spacing: 0.4cqw;
+      line-height: 1;
+      text-transform: uppercase;
+    }
+
+    .f03-dolly-no-alto-bracket {
+      display: block;
+      width: 29cqw;
+      height: 4.5cqh;
+      margin-top: 0.3cqh;
+      overflow: visible;
+    }
+
+    .f03-dolly-no-alto-bracket path {
+      fill: none;
+      stroke: #e85d5d;
+      stroke-width: 1.25cqw;
+      stroke-linecap: square;
+      stroke-linejoin: miter;
+    }
+
+    .f03-dolly-no-alto-bars {
+      position: absolute;
+      top: 31cqh;
+      left: 66.7cqw;
+      width: 28.6cqw;
+      height: 43cqh;
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+    }
+
+    .f03-dolly-no-alto-stat {
+      position: relative;
+      width: 12cqw;
+      height: 43cqh;
+    }
+
+    .f03-dolly-no-alto-track {
+      position: absolute;
+      inset: 0;
+      border: 0.28cqw solid rgba(245, 240, 232, 0.35);
+      background: rgba(245, 240, 232, 0.07);
+    }
+
+    .f03-dolly-no-alto-fill {
+      position: absolute;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      background: #e85d5d;
+      transform-origin: bottom center;
+      will-change: transform;
+    }
+
+    .f03-dolly-no-alto-fill-dem { height: 33.54cqh; }
+    .f03-dolly-no-alto-fill-rep { height: 31.39cqh; }
+
+    .f03-dolly-no-alto-value-wrap {
+      position: absolute;
+      left: -1.7cqw;
+      width: 15.4cqw;
+      display: flex;
+      align-items: baseline;
+      justify-content: center;
+      color: #f5f0e8;
+      font-family: sans-serif;
+      font-size: 8.8cqw;
+      font-stretch: condensed;
+      font-weight: 900;
+      letter-spacing: -0.15cqw;
+      line-height: 1;
+      font-variant-numeric: tabular-nums;
+      transform-origin: center center;
+    }
+
+    .f03-dolly-no-alto-value-wrap-dem { top: -0.2cqh; }
+    .f03-dolly-no-alto-value-wrap-rep { top: 1.95cqh; }
+
+    .f03-dolly-no-alto-value {
+      display: inline-block;
+      min-width: 9.5cqw;
+      text-align: right;
+      transform-origin: right center;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .f03-dolly-no-alto-suffix {
+      display: inline-block;
+      margin-left: 0.25cqw;
+      font-size: 4.4cqw;
+      letter-spacing: 0;
+      transform-origin: left bottom;
+    }
+
+    .f03-dolly-no-alto-party {
+      position: absolute;
+      top: 44.7cqh;
+      left: -2cqw;
+      width: 16cqw;
+      margin: 0;
+      color: #f5f0e8;
+      font-size: 2.15cqw;
+      font-weight: 800;
+      letter-spacing: 0.22cqw;
+      line-height: 1;
+      text-align: center;
+      text-transform: uppercase;
+    }
+
+    .f03-dolly-no-alto-baseline {
+      position: absolute;
+      top: 74cqh;
+      left: 64.5cqw;
+      width: 33cqw;
+      height: 0.28cqw;
+      background: #f5f0e8;
+    }
+  </style>
+
+  <div data-hf-id="hf-6isp" id="root" data-composition-id="03-dolly-no-alto" data-duration="9.02" data-width="1080" data-height="1920">
+    <div data-hf-id="hf-3jq2" class="clip f03-dolly-no-alto-ground" data-start="0" data-duration="9.161" data-track-index="0"></div>
+
+    <div data-hf-id="hf-3uex" class="clip f03-dolly-no-alto-content" data-start="0" data-duration="9.161" data-track-index="1">
+      <div data-hf-id="hf-eyg3" class="03-dolly-no-alto-camera f03-dolly-no-alto-camera" id="f03-dolly-no-alto-camera">
+        <section data-hf-id="hf-e91a" class="03-dolly-no-alto-title-block f03-dolly-no-alto-title-block" id="f03-dolly-no-alto-title-block">
+          <p data-hf-id="hf-ih1g" class="03-dolly-no-alto-kicker f03-dolly-no-alto-kicker">NO TOPO</p>
+          <h1 data-hf-id="hf-z458" class="03-dolly-no-alto-title f03-dolly-no-alto-title"><span data-hf-id="hf-iacu" data-layout-allow-overlap="">Dolly</span><span data-hf-id="hf-jww2" data-layout-allow-overlap="">Parton</span></h1>
+          <div data-hf-id="hf-8kmq" class="03-dolly-no-alto-accent f03-dolly-no-alto-accent" id="f03-dolly-no-alto-accent"></div>
+        </section>
+
+        <div data-hf-id="hf-pcod" class="03-dolly-no-alto-scale f03-dolly-no-alto-scale" id="f03-dolly-no-alto-scale" aria-hidden="true">
+          <div data-hf-id="hf-hejs" class="03-dolly-no-alto-scale-rail f03-dolly-no-alto-scale-rail"></div>
+          <div data-hf-id="hf-ykdk" class="03-dolly-no-alto-tick f03-dolly-no-alto-tick" data-value="100"></div>
+          <div data-hf-id="hf-bvef" class="03-dolly-no-alto-tick f03-dolly-no-alto-tick" data-value="75"></div>
+          <div data-hf-id="hf-zar0" class="03-dolly-no-alto-tick f03-dolly-no-alto-tick" data-value="50"></div>
+          <div data-hf-id="hf-n5t8" class="03-dolly-no-alto-tick f03-dolly-no-alto-tick" data-value="25"></div>
+          <div data-hf-id="hf-9h69" class="03-dolly-no-alto-tick f03-dolly-no-alto-tick" data-value="0"></div>
+        </div>
+
+        <p data-hf-id="hf-uyah" class="03-dolly-no-alto-panel-label f03-dolly-no-alto-panel-label" id="f03-dolly-no-alto-panel-label">0—100</p>
+
+        <div data-hf-id="hf-9axv" class="03-dolly-no-alto-high-lockup f03-dolly-no-alto-high-lockup" id="f03-dolly-no-alto-high-lockup">
+          <span data-hf-id="hf-cbc3" class="03-dolly-no-alto-high-word f03-dolly-no-alto-high-word">Alto</span>
+          <svg data-hf-id="hf-e6ht" class="03-dolly-no-alto-bracket f03-dolly-no-alto-bracket" viewBox="0 0 300 72" preserveAspectRatio="none" aria-hidden="true">
+            <path data-hf-id="hf-eked" id="f03-dolly-no-alto-bracket-path" d="M 5 66 L 5 12 L 295 12 L 295 66" />
+          </svg>
+        </div>
+
+        <div data-hf-id="hf-b4yi" class="03-dolly-no-alto-bars f03-dolly-no-alto-bars">
+          <article data-hf-id="hf-u99k" class="03-dolly-no-alto-stat f03-dolly-no-alto-stat" id="f03-dolly-no-alto-dem-stat">
+            <div data-hf-id="hf-wt5w" class="03-dolly-no-alto-track f03-dolly-no-alto-track" id="f03-dolly-no-alto-dem-track"></div>
+            <div data-hf-id="hf-t1h0" class="03-dolly-no-alto-fill f03-dolly-no-alto-fill f03-dolly-no-alto-fill-dem" id="f03-dolly-no-alto-dem-fill"></div>
+            <div data-hf-id="hf-iq8e" class="03-dolly-no-alto-value-wrap f03-dolly-no-alto-value-wrap f03-dolly-no-alto-value-wrap-dem" id="f03-dolly-no-alto-dem-value-wrap">
+              <span data-hf-id="hf-hx57" class="03-dolly-no-alto-value f03-dolly-no-alto-value" id="f03-dolly-no-alto-dem-value">0</span><span data-hf-id="hf-3q9e" class="03-dolly-no-alto-suffix f03-dolly-no-alto-suffix" id="f03-dolly-no-alto-dem-suffix">%</span>
+            </div>
+            <p data-hf-id="hf-f5f5" class="03-dolly-no-alto-party f03-dolly-no-alto-party" id="f03-dolly-no-alto-dem-label">Democratas</p>
+          </article>
+
+          <article data-hf-id="hf-b3q5" class="03-dolly-no-alto-stat f03-dolly-no-alto-stat" id="f03-dolly-no-alto-rep-stat">
+            <div data-hf-id="hf-ao0j" class="03-dolly-no-alto-track f03-dolly-no-alto-track" id="f03-dolly-no-alto-rep-track"></div>
+            <div data-hf-id="hf-fh6u" class="03-dolly-no-alto-fill f03-dolly-no-alto-fill f03-dolly-no-alto-fill-rep" id="f03-dolly-no-alto-rep-fill"></div>
+            <div data-hf-id="hf-64ds" class="03-dolly-no-alto-value-wrap f03-dolly-no-alto-value-wrap f03-dolly-no-alto-value-wrap-rep" id="f03-dolly-no-alto-rep-value-wrap">
+              <span data-hf-id="hf-bsky" class="03-dolly-no-alto-value f03-dolly-no-alto-value" id="f03-dolly-no-alto-rep-value">0</span><span data-hf-id="hf-i21t" class="03-dolly-no-alto-suffix f03-dolly-no-alto-suffix" id="f03-dolly-no-alto-rep-suffix">%</span>
+            </div>
+            <p data-hf-id="hf-66fc" class="03-dolly-no-alto-party f03-dolly-no-alto-party" id="f03-dolly-no-alto-rep-label">Republicanos</p>
+          </article>
+        </div>
+
+        <div data-hf-id="hf-aukr" class="03-dolly-no-alto-baseline f03-dolly-no-alto-baseline" id="f03-dolly-no-alto-baseline"></div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    (() => {
+      const root = document.querySelector('[data-composition-id="03-dolly-no-alto"]');
+      const q = (selector) => root.querySelector(selector);
+      const qa = (selector) => Array.from(root.querySelectorAll(selector));
+      const tl = gsap.timeline({ paused: true });
+
+      window.__timelines = window.__timelines || {};
+      window.__timelines["03-dolly-no-alto"] = tl;
+
+      const demState = { value: 0 };
+      const repState = { value: 0 };
+      const demValue = q("#f03-dolly-no-alto-dem-value");
+      const repValue = q("#f03-dolly-no-alto-rep-value");
+      const bracketPath = q("#f03-dolly-no-alto-bracket-path");
+      const bracketLength = bracketPath.getTotalLength();
+
+      tl.set([
+        q("#f03-dolly-no-alto-dem-fill"),
+        q("#f03-dolly-no-alto-rep-fill")
+      ], { scaleY: 0, transformOrigin: "bottom center" }, 0);
+      tl.set([
+        q("#f03-dolly-no-alto-dem-value-wrap"),
+        q("#f03-dolly-no-alto-dem-label"),
+        q("#f03-dolly-no-alto-rep-track"),
+        q("#f03-dolly-no-alto-rep-value-wrap"),
+        q("#f03-dolly-no-alto-rep-label"),
+        q("#f03-dolly-no-alto-high-lockup")
+      ], { opacity: 0 }, 0);
+      tl.set([
+        q("#f03-dolly-no-alto-dem-suffix"),
+        q("#f03-dolly-no-alto-rep-suffix")
+      ], { opacity: 0, y: 20 }, 0);
+      tl.set(bracketPath, {
+        strokeDasharray: bracketLength,
+        strokeDashoffset: bracketLength
+      }, 0);
+
+      tl.fromTo(
+        q("#f03-dolly-no-alto-camera"),
+        { scale: 0.985 },
+        { scale: 1.025, duration: 8.661, ease: "none" },
+        0
+      );
+
+      tl.fromTo(
+        q("#f03-dolly-no-alto-title-block"),
+        { opacity: 0, x: -70 },
+        { opacity: 1, x: 0, duration: 0.48, ease: "power4.out" },
+        0.04
+      );
+      tl.fromTo(
+        q("#f03-dolly-no-alto-accent"),
+        { scaleX: 0, transformOrigin: "left center" },
+        { scaleX: 1, duration: 0.55, ease: "power3.out" },
+        0.36
+      );
+      tl.fromTo(
+        q("#f03-dolly-no-alto-panel-label"),
+        { opacity: 0, y: -24 },
+        { opacity: 1, y: 0, duration: 0.45, ease: "power3.out" },
+        0.28
+      );
+      tl.fromTo(
+        q("#f03-dolly-no-alto-scale"),
+        { opacity: 0, x: -34 },
+        { opacity: 1, x: 0, duration: 0.65, ease: "power3.out" },
+        0.62
+      );
+      tl.fromTo(
+        qa(".f03-dolly-no-alto-tick"),
+        { scaleX: 0, transformOrigin: "left center" },
+        { scaleX: 1, duration: 0.42, stagger: 0.14, ease: "power3.out" },
+        0.82
+      );
+      tl.fromTo(
+        q("#f03-dolly-no-alto-baseline"),
+        { scaleX: 0, transformOrigin: "left center" },
+        { scaleX: 1, duration: 0.5, ease: "power3.out" },
+        1.05
+      );
+      tl.fromTo(
+        q("#f03-dolly-no-alto-dem-track"),
+        { opacity: 0, y: 90 },
+        { opacity: 1, y: 0, duration: 0.62, ease: "power4.out" },
+        1.42
+      );
+
+      tl.fromTo(
+        q("#f03-dolly-no-alto-dem-label"),
+        { opacity: 0, y: 28 },
+        { opacity: 1, y: 0, duration: 0.52, ease: "power3.out" },
+        2.2
+      );
+      tl.fromTo(
+        q("#f03-dolly-no-alto-dem-value-wrap"),
+        { opacity: 0, scale: 0.48 },
+        { opacity: 1, scale: 1, duration: 2.25, ease: "power3.out" },
+        2.28
+      );
+      tl.to(
+        demState,
+        {
+          value: 78,
+          duration: 2.25,
+          ease: "power3.out",
+          onUpdate: () => { demValue.textContent = String(Math.round(demState.value)); }
+        },
+        2.28
+      );
+      tl.to(
+        q("#f03-dolly-no-alto-dem-fill"),
+        { scaleY: 1, duration: 2.25, ease: "power3.out" },
+        2.28
+      );
+      tl.to(
+        q("#f03-dolly-no-alto-dem-suffix"),
+        { opacity: 1, y: 0, duration: 0.42, ease: "back.out(1.6)" },
+        4.53
+      );
+
+      tl.fromTo(
+        q("#f03-dolly-no-alto-rep-track"),
+        { opacity: 0, y: 90 },
+        { opacity: 1, y: 0, duration: 0.58, ease: "power4.out" },
+        5.3
+      );
+      tl.fromTo(
+        q("#f03-dolly-no-alto-rep-label"),
+        { opacity: 0, y: 28 },
+        { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" },
+        5.42
+      );
+      tl.fromTo(
+        q("#f03-dolly-no-alto-rep-value-wrap"),
+        { opacity: 0, scale: 0.48 },
+        { opacity: 1, scale: 1, duration: 2.05, ease: "power3.out" },
+        5.48
+      );
+      tl.to(
+        repState,
+        {
+          value: 73,
+          duration: 2.05,
+          ease: "power3.out",
+          onUpdate: () => { repValue.textContent = String(Math.round(repState.value)); }
+        },
+        5.48
+      );
+      tl.to(
+        q("#f03-dolly-no-alto-rep-fill"),
+        { scaleY: 1, duration: 2.05, ease: "power3.out" },
+        5.48
+      );
+      tl.to(
+        q("#f03-dolly-no-alto-rep-suffix"),
+        { opacity: 1, y: 0, duration: 0.4, ease: "back.out(1.6)" },
+        7.53
+      );
+
+      tl.fromTo(
+        q("#f03-dolly-no-alto-high-lockup"),
+        { opacity: 0, y: 52 },
+        { opacity: 1, y: 0, duration: 0.62, ease: "power4.out" },
+        7.66
+      );
+      tl.to(
+        bracketPath,
+        { strokeDashoffset: 0, duration: 0.62, ease: "power3.out" },
+        7.78
+      );
+    })();
+  </script>
+</template>

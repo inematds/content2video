@@ -1,0 +1,18 @@
+{
+  "name": "content2video-inema",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "node app/server.mjs",
+    "dev": "node --watch app/server.mjs",
+    "video": "node scripts/video.mjs",
+    "video:create": "node scripts/video.mjs create",
+    "video:list": "node scripts/video.mjs list",
+    "video:check": "node scripts/video.mjs check",
+    "video:preview": "node scripts/video.mjs preview",
+    "video:render": "node scripts/video.mjs render"
+  },
+  "engines": {
+    "node": ">=22"
+  }
+}

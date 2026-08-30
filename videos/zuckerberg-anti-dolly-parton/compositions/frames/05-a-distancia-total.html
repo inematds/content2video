@@ -1,0 +1,404 @@
+<template>
+  <style>
+    @font-face {
+      font-family: "Bebas Neue";
+      src: url("assets/fonts/BebasNeue-Regular.ttf") format("truetype");
+      font-style: normal;
+      font-weight: 400;
+      font-display: block;
+    }
+
+    #root {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      container-type: size;
+      color: #f5f0e8;
+      isolation: isolate;
+    }
+
+    .clip {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+    }
+
+    .f05-a-distancia-total-ground {
+      background: #1a1a1a;
+    }
+
+    .f05-a-distancia-total-ground::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image: repeating-linear-gradient(45deg, transparent 0 38px, rgba(245, 240, 232, 0.018) 38px 40px);
+      pointer-events: none;
+    }
+
+    .f05-a-distancia-total-coral-band {
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 13cqw;
+      height: 83.333cqh;
+      background-color: #e85d5d;
+      transform-origin: right center;
+      overflow: hidden;
+    }
+
+    .f05-a-distancia-total-coral-band::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image: repeating-linear-gradient(45deg, transparent 0 20px, rgba(0, 0, 0, 0.06) 20px 40px);
+    }
+
+    .f05-a-distancia-total-stage {
+      position: absolute;
+      inset: 0;
+      height: 83.333cqh;
+      padding: 6.2cqw 7.4cqw 4cqw;
+      box-sizing: border-box;
+    }
+
+    .f05-a-distancia-total-kicker {
+      position: absolute;
+      top: 6.2cqw;
+      left: 7.4cqw;
+      margin: 0;
+      font-family: "Bebas Neue", sans-serif;
+      font-size: 7.8cqw;
+      font-weight: 400;
+      line-height: 0.9;
+      letter-spacing: 5px;
+      text-transform: uppercase;
+      color: #f5f0e8;
+      white-space: nowrap;
+    }
+
+    .f05-a-distancia-total-kicker::after {
+      content: "";
+      display: block;
+      width: 15cqw;
+      height: 0.55cqw;
+      margin-top: 2.2cqw;
+      background: #e85d5d;
+    }
+
+    .f05-a-distancia-total-wallpaper {
+      position: absolute;
+      left: -1.5cqw;
+      top: 43.5cqh;
+      width: 92cqw;
+      margin: 0;
+      font-family: "Bebas Neue", sans-serif;
+      font-size: 29cqw;
+      font-weight: 400;
+      line-height: 0.72;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      text-align: center;
+      color: rgba(232, 93, 93, 0.15);
+      white-space: nowrap;
+      pointer-events: none;
+    }
+
+    .f05-a-distancia-total-rail-svg {
+      position: absolute;
+      left: 46.1cqw;
+      top: 23cqh;
+      width: 7.8cqw;
+      height: 48cqh;
+      overflow: visible;
+    }
+
+    .f05-a-distancia-total-base-rail {
+      stroke: rgba(245, 240, 232, 0.36);
+      stroke-width: 4;
+      fill: none;
+    }
+
+    .f05-a-distancia-total-active-rail {
+      stroke: #e85d5d;
+      stroke-width: 13;
+      stroke-linecap: square;
+      fill: none;
+    }
+
+    .f05-a-distancia-total-empty-node {
+      position: absolute;
+      left: 50%;
+      width: 4.8cqw;
+      height: 4.8cqw;
+      margin-left: -2.4cqw;
+      border: 0.55cqw solid #f5f0e8;
+      border-radius: 50%;
+      background: #1a1a1a;
+      box-sizing: border-box;
+      z-index: 4;
+    }
+
+    .f05-a-distancia-total-empty-node-top {
+      top: 23cqh;
+      margin-top: -2.4cqw;
+    }
+
+    .f05-a-distancia-total-empty-node-bottom {
+      top: 71cqh;
+      margin-top: -2.4cqw;
+    }
+
+    .f05-a-distancia-total-empty-node::after {
+      content: "";
+      position: absolute;
+      inset: 0.72cqw;
+      border-radius: 50%;
+      background: #e85d5d;
+    }
+
+    .f05-a-distancia-total-stat {
+      position: absolute;
+      display: grid;
+      grid-template-columns: 1fr;
+      width: 39cqw;
+      z-index: 5;
+    }
+
+    .f05-a-distancia-total-stat-top {
+      top: 18.4cqh;
+      right: 8.5cqw;
+      text-align: left;
+    }
+
+    .f05-a-distancia-total-stat-bottom {
+      top: 64.8cqh;
+      left: 7.4cqw;
+      text-align: right;
+    }
+
+    .f05-a-distancia-total-label {
+      margin: 0 0 0.8cqw;
+      font-family: "Bebas Neue", sans-serif;
+      font-size: 4.6cqw;
+      font-weight: 400;
+      line-height: 1;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: #f5f0e8;
+    }
+
+    .f05-a-distancia-total-stat-top .f05-a-distancia-total-label {
+      color: #e85d5d;
+    }
+
+    .f05-a-distancia-total-counter-wrap {
+      display: flex;
+      align-items: baseline;
+      width: 100%;
+      white-space: nowrap;
+      font-family: "Bebas Neue", sans-serif;
+      font-weight: 400;
+      line-height: 0.82;
+      letter-spacing: 1px;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .f05-a-distancia-total-stat-bottom .f05-a-distancia-total-counter-wrap {
+      justify-content: flex-end;
+    }
+
+    .f05-a-distancia-total-counter {
+      display: inline-block;
+      min-width: 20cqw;
+      font-size: 18.5cqw;
+      color: #f5f0e8;
+      transform-origin: center center;
+    }
+
+    .f05-a-distancia-total-stat-top .f05-a-distancia-total-counter {
+      color: #e85d5d;
+    }
+
+    .f05-a-distancia-total-suffix {
+      display: inline-block;
+      font-size: 8.3cqw;
+      color: inherit;
+    }
+
+    .f05-a-distancia-total-delta-lockup {
+      position: absolute;
+      left: 50%;
+      top: 45.2cqh;
+      width: 38cqw;
+      margin-left: -19cqw;
+      z-index: 6;
+      text-align: center;
+      font-family: "Bebas Neue", sans-serif;
+      text-transform: uppercase;
+    }
+
+    .f05-a-distancia-total-delta-value {
+      display: block;
+      margin: 0;
+      font-size: 11.5cqw;
+      font-weight: 400;
+      line-height: 0.82;
+      letter-spacing: 3px;
+      color: #f5f0e8;
+    }
+
+    .f05-a-distancia-total-delta-label {
+      display: block;
+      margin-top: 1.5cqw;
+      font-size: 4.2cqw;
+      font-weight: 400;
+      line-height: 1;
+      letter-spacing: 4px;
+      color: #e85d5d;
+    }
+  </style>
+
+  <div data-hf-id="hf-3nf4" id="root" data-composition-id="05-a-distancia-total" data-duration="8.976" data-width="1080" data-height="1920">
+    <div data-hf-id="hf-8yy5" class="clip f05-a-distancia-total-ground" data-start="0" data-duration="9.069" data-track-index="0">
+      <div data-hf-id="hf-kzga" class="f05-a-distancia-total-coral-band" aria-hidden="true"></div>
+    </div>
+
+    <div data-hf-id="hf-398e" class="clip f05-a-distancia-total-content" data-start="0" data-duration="9.069" data-track-index="1">
+      <div data-hf-id="hf-3qg8" class="f05-a-distancia-total-stage">
+        <h2 data-hf-id="hf-dilj" class="f05-a-distancia-total-kicker">No total</h2>
+
+        <div data-hf-id="hf-gktp" class="f05-a-distancia-total-wallpaper" aria-hidden="true">60</div>
+
+        <svg data-hf-id="hf-wyc3" class="f05-a-distancia-total-rail-svg" viewBox="0 0 84 900" preserveAspectRatio="none" aria-hidden="true">
+          <path data-hf-id="hf-1y5z" class="f05-a-distancia-total-base-rail" d="M42 0 L42 900" />
+          <path data-hf-id="hf-iuf7" id="f05-a-distancia-total-active-rail" class="f05-a-distancia-total-active-rail" d="M42 0 L42 900" />
+        </svg>
+
+        <div data-hf-id="hf-hhut" class="f05-a-distancia-total-empty-node f05-a-distancia-total-empty-node-top" aria-hidden="true"></div>
+        <div data-hf-id="hf-ych9" class="f05-a-distancia-total-empty-node f05-a-distancia-total-empty-node-bottom" aria-hidden="true"></div>
+
+        <section data-hf-id="hf-jvy1" class="f05-a-distancia-total-stat f05-a-distancia-total-stat-top" aria-label="Dolly, setenta por cento">
+          <p data-hf-id="hf-ts1n" class="f05-a-distancia-total-label" data-layout-allow-overlap="">Dolly</p>
+          <div data-hf-id="hf-5w97" class="f05-a-distancia-total-counter-wrap">
+            <span data-hf-id="hf-w8gc" id="f05-a-distancia-total-dolly-counter" class="f05-a-distancia-total-counter">0</span><span data-hf-id="hf-6qsn" class="f05-a-distancia-total-suffix f05-a-distancia-total-dolly-suffix">%</span>
+          </div>
+        </section>
+
+        <section data-hf-id="hf-rrgc" class="f05-a-distancia-total-stat f05-a-distancia-total-stat-bottom" aria-label="Zuckerberg, dez por cento">
+          <p data-hf-id="hf-o9zf" class="f05-a-distancia-total-label" data-layout-allow-overlap="">Zuckerberg</p>
+          <div data-hf-id="hf-ryzv" class="f05-a-distancia-total-counter-wrap">
+            <span data-hf-id="hf-oi00" id="f05-a-distancia-total-zuckerberg-counter" class="f05-a-distancia-total-counter">0</span><span data-hf-id="hf-b2c1" class="f05-a-distancia-total-suffix f05-a-distancia-total-zuckerberg-suffix">%</span>
+          </div>
+        </section>
+
+        <div data-hf-id="hf-ukm1" class="f05-a-distancia-total-delta-lockup" aria-label="Distância de sessenta pontos">
+          <span data-hf-id="hf-ulit" class="f05-a-distancia-total-delta-value">60</span>
+          <span data-hf-id="hf-7igr" class="f05-a-distancia-total-delta-label">Pontos</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+  <script>
+    (() => {
+      const frame = document.querySelector('[data-composition-id="05-a-distancia-total"]');
+      const dollyCounter = document.getElementById('f05-a-distancia-total-dolly-counter');
+      const zuckerbergCounter = document.getElementById('f05-a-distancia-total-zuckerberg-counter');
+      const activeRail = document.getElementById('f05-a-distancia-total-active-rail');
+      const activeRailLength = activeRail.getTotalLength();
+      const dollyState = { value: 0 };
+      const zuckerbergState = { value: 0 };
+
+      activeRail.style.strokeDasharray = String(activeRailLength);
+      activeRail.style.strokeDashoffset = String(activeRailLength);
+
+      const tl = gsap.timeline({ paused: true });
+      window.__timelines = window.__timelines || {};
+      window.__timelines['05-a-distancia-total'] = tl;
+
+      tl.fromTo('.f05-a-distancia-total-kicker',
+        { opacity: 0, y: 38 },
+        { opacity: 1, y: 0, duration: 0.65, ease: 'power3.out' },
+        0.08
+      );
+      tl.fromTo('.f05-a-distancia-total-base-rail',
+        { opacity: 0 },
+        { opacity: 1, duration: 0.65, ease: 'power1.out' },
+        0.18
+      );
+      tl.fromTo('.f05-a-distancia-total-empty-node-top',
+        { opacity: 0, scale: 0.45 },
+        { opacity: 1, scale: 1, duration: 0.62, ease: 'back.out(1.65)' },
+        0.22
+      );
+      tl.fromTo('.f05-a-distancia-total-empty-node-bottom',
+        { opacity: 0, scale: 0.45 },
+        { opacity: 1, scale: 1, duration: 0.62, ease: 'back.out(1.65)' },
+        0.48
+      );
+
+      tl.fromTo('.f05-a-distancia-total-stat-top',
+        { opacity: 0, x: 230 },
+        { opacity: 1, x: 0, duration: 0.46, ease: 'power4.out' },
+        2.4
+      );
+      tl.fromTo('.f05-a-distancia-total-stat-bottom',
+        { opacity: 0, x: -230 },
+        { opacity: 1, x: 0, duration: 0.46, ease: 'power4.out' },
+        2.52
+      );
+      tl.to(dollyState, {
+        value: 70,
+        duration: 2.25,
+        ease: 'power3.out',
+        onUpdate: () => { dollyCounter.textContent = String(Math.round(dollyState.value)); }
+      }, 2.55);
+      tl.fromTo(dollyCounter,
+        { scale: 0.48 },
+        { scale: 1, duration: 2.25, ease: 'power3.out' },
+        2.55
+      );
+      tl.to(zuckerbergState, {
+        value: 10,
+        duration: 2.25,
+        ease: 'power3.out',
+        onUpdate: () => { zuckerbergCounter.textContent = String(Math.round(zuckerbergState.value)); }
+      }, 2.55);
+      tl.fromTo(zuckerbergCounter,
+        { scale: 0.48 },
+        { scale: 1, duration: 2.25, ease: 'power3.out' },
+        2.55
+      );
+      tl.fromTo('.f05-a-distancia-total-suffix',
+        { opacity: 0, y: 20 },
+        { opacity: 1, y: 0, duration: 0.42, ease: 'back.out(1.55)' },
+        4.8
+      );
+
+      tl.to(activeRail, {
+        strokeDashoffset: 0,
+        duration: 0.85,
+        ease: 'power2.out'
+      }, 5.5);
+      tl.fromTo('.f05-a-distancia-total-coral-band',
+        { scaleX: 0 },
+        { scaleX: 1, duration: 0.72, ease: 'power3.out' },
+        5.62
+      );
+      tl.fromTo('.f05-a-distancia-total-wallpaper',
+        { opacity: 0, scale: 0.82 },
+        { opacity: 1, scale: 1, duration: 1.05, ease: 'expo.out' },
+        5.74
+      );
+      tl.fromTo('.f05-a-distancia-total-delta-lockup',
+        { opacity: 0.15, scale: 1.25, filter: 'blur(10px)' },
+        { opacity: 1, scale: 1, filter: 'blur(0px)', duration: 0.72, ease: 'expo.out' },
+        6.18
+      );
+    })();
+  </script>
+</template>

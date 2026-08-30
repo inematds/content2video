@@ -1,0 +1,353 @@
+<template>
+  <style>
+    #root {
+      position: relative;
+      width: 1080px;
+      height: 1920px;
+      overflow: hidden;
+      container-type: size;
+      color: #e2e8f0;
+    }
+
+    [class~="f01-direcao-ground"] {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+      background:
+        radial-gradient(circle at 82% 28%, rgba(0, 217, 255, 0.08), transparent 31%),
+        #1a1f3a;
+    }
+
+    [class~="f01-direcao-stage"] {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+    }
+
+    [class~="f01-direcao-edge"] {
+      position: absolute;
+      top: 104px;
+      width: 4px;
+      height: 1390px;
+      border-radius: 6px;
+      background: #00d9ff;
+      transform-origin: 50% 0%;
+      opacity: 0.82;
+    }
+
+    [class~="f01-direcao-edge-left"] {
+      left: 52px;
+    }
+
+    [class~="f01-direcao-edge-right"] {
+      right: 52px;
+    }
+
+    [id="f01-direcao-noise-group"] {
+      position: absolute;
+      inset: 0;
+      z-index: 3;
+      will-change: transform, opacity;
+    }
+
+    [class~="f01-direcao-question"] {
+      position: absolute;
+      top: 260px;
+      left: 81px;
+      width: 918px;
+      min-height: 260px;
+      letter-spacing: -0.045em;
+      font-size: 106px;
+      font-weight: 800;
+      line-height: 0.98;
+      color: #e2e8f0;
+    }
+
+    [class~="f01-direcao-text-wrap"] {
+      display: inline-flex;
+      align-items: baseline;
+      min-width: 0;
+      max-width: 100%;
+      white-space: nowrap;
+    }
+
+    [class~="f01-direcao-caret"] {
+      display: inline-block;
+      width: 26px;
+      margin-left: 8px;
+      color: #00d9ff;
+      font-weight: 500;
+    }
+
+    [class~="f01-direcao-ticker-label"] {
+      position: absolute;
+      top: 745px;
+      left: 92px;
+      color: #10b981;
+      font-size: 24px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    [id="f01-direcao-ticker"] {
+      position: absolute;
+      top: 802px;
+      left: 92px;
+      width: 870px;
+      height: 146px;
+      overflow: hidden;
+      border: 1.5px solid rgba(0, 217, 255, 0.2);
+      border-radius: 14px;
+      background: rgba(0, 217, 255, 0.04);
+    }
+
+    [id="f01-direcao-stack"] {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      will-change: transform;
+    }
+
+    [class~="f01-direcao-ticker-item"] {
+      display: flex;
+      align-items: center;
+      width: 100%;
+      height: 146px;
+      padding: 0 44px;
+      box-sizing: border-box;
+      color: #e2e8f0;
+      font-size: 72px;
+      font-weight: 700;
+      letter-spacing: -0.025em;
+      line-height: 1;
+    }
+
+    [class~="f01-direcao-ticker-item"]::before {
+      content: "";
+      width: 42px;
+      height: 4px;
+      margin-right: 26px;
+      border-radius: 6px;
+      background: #00d9ff;
+    }
+
+    [id="f01-direcao-official-card"] {
+      position: absolute;
+      z-index: 2;
+      top: 246px;
+      left: 54px;
+      width: 972px;
+      height: 792px;
+      box-sizing: border-box;
+      overflow: hidden;
+      border: 1.5px solid rgba(0, 217, 255, 0.2);
+      border-radius: 14px;
+      background: rgba(0, 217, 255, 0.04);
+      will-change: transform, opacity, filter;
+    }
+
+    [id="f01-direcao-official-card"] img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+
+    [id="f01-direcao-path"] {
+      position: absolute;
+      z-index: 5;
+      top: 1080px;
+      left: 78px;
+      color: #e2e8f0;
+      font-size: 136px;
+      font-weight: 800;
+      letter-spacing: -0.055em;
+      line-height: 1;
+      white-space: nowrap;
+      filter: url(#f01-direcao-streak);
+      will-change: transform, opacity;
+    }
+
+    [id="f01-direcao-final-line"] {
+      position: absolute;
+      z-index: 6;
+      top: 1350px;
+      left: 92px;
+      width: 896px;
+      padding: 30px 38px 28px;
+      box-sizing: border-box;
+      border-left: 4px solid #00d9ff;
+      border-radius: 12px;
+      background: rgba(0, 217, 255, 0.08);
+      color: #e2e8f0;
+      font-size: 59px;
+      font-weight: 700;
+      letter-spacing: -0.025em;
+      line-height: 1;
+      white-space: nowrap;
+      will-change: transform, opacity;
+    }
+  </style>
+
+  <div data-hf-id="hf-x4gt" id="root" data-composition-id="01-direcao" data-width="1080" data-height="1920" data-duration="8.104">
+    <div data-hf-id="hf-wvnu" class="clip f01-direcao-ground" data-start="0" data-duration="8.104" data-track-index="0"></div>
+
+    <div data-hf-id="hf-mbt0" class="clip f01-direcao-stage" data-start="0" data-duration="8.104" data-track-index="1">
+      <div data-hf-id="hf-top4" class="f01-direcao-edge f01-direcao-edge-left"></div>
+      <div data-hf-id="hf-k993" class="f01-direcao-edge f01-direcao-edge-right"></div>
+
+      <div data-hf-id="hf-8h41" id="f01-direcao-noise-group">
+        <div data-hf-id="hf-njp6" class="f01-direcao-question">
+          <span data-hf-id="hf-q033" class="f01-direcao-text-wrap">
+            <span data-hf-id="hf-8yqs" id="f01-direcao-question-text"></span><span data-hf-id="hf-ybo7" id="f01-direcao-caret" class="f01-direcao-caret">|</span>
+          </span>
+        </div>
+
+        <div data-hf-id="hf-hpck" id="f01-direcao-ticker-label" class="f01-direcao-ticker-label" data-layout-allow-overlap="">ESCOLHAS DISPERSAS</div>
+        <div data-hf-id="hf-w9b1" id="f01-direcao-ticker">
+          <div data-hf-id="hf-1jya" id="f01-direcao-stack" data-layout-allow-overflow="">
+            <div data-hf-id="hf-ywrk" class="f01-direcao-ticker-item">FERRAMENTAS</div>
+            <div data-hf-id="hf-mer9" class="f01-direcao-ticker-item">CURSOS</div>
+            <div data-hf-id="hf-1sc1" class="f01-direcao-ticker-item">TENDÊNCIAS</div>
+          </div>
+        </div>
+      </div>
+
+      <div data-hf-id="hf-ckfr" id="f01-direcao-official-card">
+        <img data-hf-id="hf-hv30" src="assets/inemaclub-aprenda-pratique-evolua-o-ecos.webp" alt="Peça oficial INEMA.CLUB: Aprenda, Pratique, Evolua">
+      </div>
+
+      <svg data-hf-id="hf-30au" width="0" height="0" aria-hidden="true" style="position:absolute">
+        <filter data-hf-id="hf-n1og" id="f01-direcao-streak" x="-50%" y="-50%" width="200%" height="200%">
+          <fegaussianblur data-hf-id="hf-5jtp" id="f01-direcao-streak-blur" in="SourceGraphic" stdDeviation="24 0" />
+        </filter>
+      </svg>
+      <div data-hf-id="hf-81en" id="f01-direcao-path">CAMINHO</div>
+      <div data-hf-id="hf-gd1j" id="f01-direcao-final-line">USE IA DE VERDADE</div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+  <script>
+    (() => {
+      const tl = gsap.timeline({ paused: true });
+      window.__timelines = window.__timelines || {};
+      window.__timelines["01-direcao"] = tl;
+
+      const questionText = document.getElementById("f01-direcao-question-text");
+      const caret = document.getElementById("f01-direcao-caret");
+      const fullQuestion = "MAIS UMA LISTA?";
+      const typeDriver = { v: 0 };
+      const blinkDriver = { p: 0 };
+
+      questionText.textContent = "";
+      caret.style.opacity = "1";
+
+      tl.fromTo(
+        '[class~="f01-direcao-edge"]',
+        { scaleY: 0, opacity: 0 },
+        { scaleY: 1, opacity: 0.82, duration: 1.15, ease: "power3.out", stagger: 0.08 },
+        0
+      );
+
+      tl.to(typeDriver, {
+        v: fullQuestion.length,
+        duration: 1.28,
+        ease: "power1.inOut",
+        onUpdate: () => {
+          questionText.textContent = fullQuestion.substring(0, Math.floor(typeDriver.v));
+        }
+      }, 0.08);
+
+      tl.to(blinkDriver, {
+        p: Math.PI * 6,
+        duration: 1.55,
+        ease: "none",
+        onUpdate: () => {
+          caret.style.opacity = Math.sin(blinkDriver.p) > 0 ? "1" : "0";
+        }
+      }, 0);
+      tl.set(caret, { opacity: 0 }, 1.56);
+
+      tl.fromTo(
+        "#f01-direcao-ticker-label",
+        { x: 230, opacity: 0 },
+        { x: 0, opacity: 1, duration: 0.34, ease: "power4.out" },
+        1.6
+      );
+      tl.fromTo(
+        "#f01-direcao-ticker",
+        { x: 230, opacity: 0 },
+        { x: 0, opacity: 1, duration: 0.34, ease: "power4.out" },
+        1.66
+      );
+
+      const tickerStack = document.getElementById("f01-direcao-stack");
+      const tickerSprings = [{ p: 0 }, { p: 0 }];
+      const applyTicker = () => {
+        const total = tickerSprings.reduce((sum, spring) => sum + spring.p, 0);
+        tickerStack.style.transform = `translateY(${-total * 146}px)`;
+      };
+      applyTicker();
+
+      tickerSprings.forEach((spring, index) => {
+        tl.to(spring, {
+          p: 1,
+          duration: 0.58,
+          ease: "back.out(1.8)",
+          onUpdate: applyTicker
+        }, 2.48 + index * 0.46);
+      });
+
+      const officialCard = document.getElementById("f01-direcao-official-card");
+      tl.fromTo(
+        officialCard,
+        { opacity: 0, scale: 0.93, y: 92, filter: "blur(18px)" },
+        { opacity: 0.58, scale: 1, y: 0, filter: "blur(8px)", duration: 1.15, ease: "power2.out" },
+        4.4
+      );
+
+      const path = document.getElementById("f01-direcao-path");
+      const victim = document.getElementById("f01-direcao-noise-group");
+      const streakBlur = document.getElementById("f01-direcao-streak-blur");
+      const collision = { p: 0 };
+      const collisionDuration = 1.08;
+      streakBlur.setAttribute("stdDeviation", "24 0");
+
+      tl.to(collision, {
+        p: 1,
+        duration: collisionDuration,
+        ease: "power2.out",
+        onUpdate: () => {
+          const intruderX = 1180 * (1 - collision.p);
+          const intruderOpacity = Math.min(1, collision.p * 6);
+          const intruderRotation = -8 * (1 - collision.p);
+          const victimP = Math.min(1, collision.p / 0.48);
+          const victimX = -1180 * victimP;
+          const blurAmount = 24 * (1 - collision.p);
+
+          path.style.transform = `translateX(${intruderX}px) rotate(${intruderRotation}deg)`;
+          path.style.opacity = String(intruderOpacity);
+          victim.style.transform = `translateX(${victimX}px) rotate(${-12 * victimP}deg)`;
+          victim.style.opacity = String(1 - victimP);
+          streakBlur.setAttribute("stdDeviation", `${blurAmount} 0`);
+        }
+      }, 4.4);
+
+      tl.to(officialCard, {
+        opacity: 1,
+        filter: "blur(0px)",
+        duration: 0.52,
+        ease: "power3.out"
+      }, 6.2);
+
+      tl.fromTo(
+        "#f01-direcao-final-line",
+        { x: 230, opacity: 0 },
+        { x: 0, opacity: 1, duration: 0.5, ease: "power4.out" },
+        6.2
+      );
+    })();
+  </script>
+</template>

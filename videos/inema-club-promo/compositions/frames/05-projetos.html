@@ -1,0 +1,420 @@
+<template>
+  <style>
+    #root {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      container-type: size;
+      color: #e2e8f0;
+      font-family: inherit;
+    }
+
+    .clip {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+    }
+
+    .ff05-projetos-ground {
+      background:
+        radial-gradient(circle at 18% 19%, rgba(0, 217, 255, 0.13), transparent 31%),
+        radial-gradient(circle at 87% 60%, rgba(0, 217, 255, 0.08), transparent 34%),
+        #1a1f3a;
+    }
+
+    .ff05-projetos-ground::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      opacity: 0.17;
+      background-image:
+        linear-gradient(rgba(0, 217, 255, 0.06) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 217, 255, 0.06) 1px, transparent 1px);
+      background-size: 72px 72px;
+      mask-image: linear-gradient(to bottom, #000 0%, transparent 76%);
+    }
+
+    .ff05-projetos-scene { perspective: 1800px; }
+
+    .ff05-projetos-camera {
+      position: absolute;
+      inset: 0;
+      transform-origin: 50% 50%;
+      will-change: transform;
+    }
+
+    .ff05-projetos-count-stage,
+    .ff05-projetos-proof-stage,
+    .ff05-projetos-final-stat {
+      position: absolute;
+      will-change: transform, opacity, filter;
+    }
+
+    .ff05-projetos-count-stage {
+      left: 270px;
+      top: 270px;
+      width: 540px;
+      height: 540px;
+      display: grid;
+      place-items: center;
+      transform-origin: 50% 50%;
+    }
+
+    .ff05-projetos-ring-glow {
+      position: absolute;
+      inset: 46px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(0, 217, 255, 0.18), rgba(0, 217, 255, 0.03) 54%, transparent 70%);
+    }
+
+    .ff05-projetos-ring-svg {
+      position: absolute;
+      inset: 15px;
+      width: 510px;
+      height: 510px;
+      overflow: visible;
+    }
+
+    .ff05-projetos-ring-track,
+    .ff05-projetos-ring-progress {
+      fill: none;
+      stroke-width: 18;
+    }
+
+    .ff05-projetos-ring-track { stroke: rgba(0, 217, 255, 0.08); }
+
+    .ff05-projetos-ring-progress {
+      stroke: #00d9ff;
+      stroke-linecap: round;
+      transform: rotate(-90deg);
+      transform-origin: 50% 50%;
+      filter: drop-shadow(0 0 14px rgba(0, 217, 255, 0.45));
+    }
+
+    .ff05-projetos-counter-lockup {
+      position: relative;
+      width: 500px;
+      text-align: center;
+    }
+
+    .ff05-projetos-counter-row {
+      display: flex;
+      align-items: baseline;
+      justify-content: center;
+      width: 500px;
+      color: #00d9ff;
+      font-size: 172px;
+      font-weight: 700;
+      line-height: 0.92;
+      letter-spacing: -0.065em;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .ff05-projetos-plus {
+      display: inline-block;
+      margin-right: 12px;
+      font-size: 112px;
+      font-weight: 600;
+      letter-spacing: -0.04em;
+    }
+
+    .ff05-projetos-counter {
+      display: inline-block;
+      min-width: 350px;
+      text-align: left;
+      transform-origin: 0 55%;
+    }
+
+    .ff05-projetos-counter-label {
+      margin-top: 30px;
+      color: #e2e8f0;
+      font-size: 28px;
+      font-weight: 600;
+      line-height: 1.15;
+      letter-spacing: 0.11em;
+      text-transform: uppercase;
+    }
+
+    .ff05-projetos-proof-stage {
+      left: 68px;
+      top: 260px;
+      width: 944px;
+      transform-origin: 50% 50%;
+    }
+
+    .ff05-projetos-proof-kicker {
+      display: inline-flex;
+      align-items: center;
+      min-height: 58px;
+      margin-left: 34px;
+      padding: 0 28px;
+      border: 1.5px solid rgba(0, 217, 255, 0.2);
+      border-radius: 100px;
+      background: rgba(0, 217, 255, 0.08);
+      color: #00d9ff;
+      font-size: 25px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .ff05-projetos-browser-card {
+      position: relative;
+      width: 944px;
+      margin-top: 20px;
+      overflow: hidden;
+      border: 1.5px solid rgba(0, 217, 255, 0.2);
+      border-radius: 14px;
+      background: rgba(0, 217, 255, 0.04);
+    }
+
+    .ff05-projetos-browser-chrome {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      height: 46px;
+      padding: 0 20px;
+      border-bottom: 1px solid rgba(0, 217, 255, 0.16);
+      background: #1a1f3a;
+    }
+
+    .ff05-projetos-browser-dot {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: rgba(0, 217, 255, 0.28);
+    }
+
+    .ff05-projetos-browser-dot:nth-child(2) { opacity: 0.7; }
+    .ff05-projetos-browser-dot:nth-child(3) { opacity: 0.45; }
+
+    .ff05-projetos-shot-window {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      overflow: hidden;
+      background: #0d1219;
+    }
+
+    .ff05-projetos-shot {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: 50% 43%;
+      display: block;
+    }
+
+    .ff05-projetos-pills {
+      position: absolute;
+      left: 70px;
+      top: 1125px;
+      width: 940px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    .ff05-projetos-pill {
+      display: flex;
+      align-items: center;
+      min-height: 104px;
+      padding: 0 30px;
+      border: 1.5px solid rgba(0, 217, 255, 0.2);
+      border-radius: 100px;
+      background: rgba(0, 217, 255, 0.08);
+      color: #e2e8f0;
+      font-size: 27px;
+      font-weight: 600;
+      letter-spacing: 0.075em;
+      text-transform: uppercase;
+      will-change: transform, opacity;
+    }
+
+    .ff05-projetos-pill-index {
+      display: grid;
+      place-items: center;
+      width: 48px;
+      height: 48px;
+      margin-right: 17px;
+      flex: 0 0 auto;
+      border-radius: 50%;
+      background: #00d9ff;
+      color: #1a1f3a;
+      font-size: 19px;
+      font-weight: 700;
+      letter-spacing: 0;
+    }
+
+    .ff05-projetos-final-stat {
+      left: 704px;
+      top: 520px;
+      width: 320px;
+      padding: 48px 24px 45px;
+      border: 1.5px solid rgba(0, 217, 255, 0.2);
+      border-radius: 14px;
+      background: rgba(0, 217, 255, 0.04);
+      text-align: center;
+    }
+
+    .ff05-projetos-final-stat::before {
+      content: "";
+      position: absolute;
+      left: -44px;
+      top: -55px;
+      width: 410px;
+      height: 410px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(0, 217, 255, 0.25), rgba(0, 217, 255, 0.07) 44%, transparent 70%);
+      z-index: -1;
+    }
+
+    .ff05-projetos-final-value {
+      color: #00d9ff;
+      font-size: 92px;
+      font-weight: 700;
+      line-height: 1;
+      letter-spacing: -0.07em;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .ff05-projetos-final-label {
+      margin-top: 24px;
+      color: #e2e8f0;
+      font-size: 23px;
+      font-weight: 600;
+      line-height: 1.22;
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
+    }
+  </style>
+
+  <div data-hf-id="hf-ezbw" id="root" data-composition-id="05-projetos" data-width="1080" data-height="1920" data-duration="8.904">
+    <div data-hf-id="hf-kakv" class="clip ff05-projetos-ground" data-start="0" data-duration="8.904" data-track-index="0"></div>
+    <div data-hf-id="hf-k185" class="clip ff05-projetos-scene" data-start="0" data-duration="8.904" data-track-index="1">
+      <div data-hf-id="hf-jp42" class="ff05-projetos-camera" id="ff05-projetos-camera">
+        <div data-hf-id="hf-numg" class="ff05-projetos-count-stage" id="ff05-projetos-count-stage">
+          <div data-hf-id="hf-9n85" class="ff05-projetos-ring-glow"></div>
+          <svg data-hf-id="hf-v7bn" class="ff05-projetos-ring-svg" viewBox="0 0 510 510" aria-hidden="true">
+            <circle data-hf-id="hf-t0ia" class="ff05-projetos-ring-track" cx="255" cy="255" r="224" />
+            <circle data-hf-id="hf-uobf" class="ff05-projetos-ring-progress" id="ff05-projetos-ring" cx="255" cy="255" r="224" />
+          </svg>
+          <div data-hf-id="hf-39h4" class="ff05-projetos-counter-lockup">
+            <div data-hf-id="hf-kype" class="ff05-projetos-counter-row">
+              <span data-hf-id="hf-ou8n" class="ff05-projetos-plus">+</span><span data-hf-id="hf-yswr" class="ff05-projetos-counter" id="ff05-projetos-counter">0</span>
+            </div>
+            <div data-hf-id="hf-kcbt" class="ff05-projetos-counter-label" id="ff05-projetos-counter-label">projetos prontos</div>
+          </div>
+        </div>
+
+        <div data-hf-id="hf-ucii" class="ff05-projetos-proof-stage" id="ff05-projetos-proof-stage">
+          <div data-hf-id="hf-tje5" class="ff05-projetos-proof-kicker" id="ff05-projetos-proof-kicker">Projetos prontos</div>
+          <div data-hf-id="hf-wa24" class="ff05-projetos-browser-card">
+            <div data-hf-id="hf-8n45" class="ff05-projetos-browser-chrome" aria-hidden="true">
+              <span data-hf-id="hf-956g" class="ff05-projetos-browser-dot"></span><span data-hf-id="hf-3tcg" class="ff05-projetos-browser-dot"></span><span data-hf-id="hf-2mfd" class="ff05-projetos-browser-dot"></span>
+            </div>
+            <div data-hf-id="hf-3sp8" class="ff05-projetos-shot-window">
+              <img data-hf-id="hf-v8qs" class="ff05-projetos-shot" src="assets/scroll-078.png" alt="Seção oficial de projetos do INEMA Club">
+            </div>
+          </div>
+        </div>
+
+        <div data-hf-id="hf-mbno" class="ff05-projetos-pills" id="ff05-projetos-pills">
+          <div data-hf-id="hf-5l51" class="ff05-projetos-pill"><span data-hf-id="hf-gkkb" class="ff05-projetos-pill-index">01</span>Baixar</div>
+          <div data-hf-id="hf-8pi0" class="ff05-projetos-pill"><span data-hf-id="hf-g69a" class="ff05-projetos-pill-index">02</span>Estudar</div>
+          <div data-hf-id="hf-e2lt" class="ff05-projetos-pill"><span data-hf-id="hf-fry9" class="ff05-projetos-pill-index">03</span>Adaptar</div>
+          <div data-hf-id="hf-rtrh" class="ff05-projetos-pill"><span data-hf-id="hf-fdn8" class="ff05-projetos-pill-index">04</span>Usar</div>
+        </div>
+
+        <div data-hf-id="hf-ypi6" class="ff05-projetos-final-stat" id="ff05-projetos-final-stat">
+          <div data-hf-id="hf-nozm" class="ff05-projetos-final-value">+400</div>
+          <div data-hf-id="hf-2lkb" class="ff05-projetos-final-label">projetos<br data-hf-id="hf-x5px">prontos</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+  <script>
+    (() => {
+      const DURATION = 8.304;
+      const counter = document.getElementById("ff05-projetos-counter");
+      const ring = document.getElementById("ff05-projetos-ring");
+      const camera = document.getElementById("ff05-projetos-camera");
+      const countStage = document.getElementById("ff05-projetos-count-stage");
+      const proofStage = document.getElementById("ff05-projetos-proof-stage");
+      const kicker = document.getElementById("ff05-projetos-proof-kicker");
+      const finalStat = document.getElementById("ff05-projetos-final-stat");
+      const counterLabel = document.getElementById("ff05-projetos-counter-label");
+      const pills = Array.from(document.querySelectorAll(".ff05-projetos-pill"));
+
+      const tl = gsap.timeline({ paused: true });
+      window.__timelines = window.__timelines || {};
+      window.__timelines["05-projetos"] = tl;
+
+      const ringLength = ring.getTotalLength();
+      ring.style.strokeDasharray = ringLength;
+      ring.style.strokeDashoffset = ringLength;
+
+      const countState = { value: 0 };
+      const cameraPhase = { scale: 0.98, x: 0, y: 0 };
+      const drift = { p: 0 };
+
+      gsap.set(proofStage, { opacity: 0, scale: 0.72, filter: "blur(20px)" });
+      gsap.set(kicker, { opacity: 0, y: 28 });
+      gsap.set(pills, { opacity: 0, y: 34, scale: 0.9 });
+      gsap.set(finalStat, { opacity: 0, x: 90, scale: 0.88 });
+
+      tl.fromTo(countStage, { opacity: 0.3, scale: 0.86, filter: "blur(8px)" }, { opacity: 1, scale: 1, filter: "blur(0px)", duration: 0.5, ease: "power3.out" }, 0);
+      tl.to(countState, {
+        value: 400,
+        duration: 2.3,
+        ease: "power3.out",
+        onUpdate: () => { counter.textContent = Math.round(countState.value).toLocaleString("pt-BR"); }
+      }, 0.2);
+      tl.fromTo(counter, { scale: 0.48 }, { scale: 1, duration: 2.3, ease: "power3.out" }, 0.2);
+      tl.to(ring, { strokeDashoffset: ringLength * 0.08, duration: 2.3, ease: "power3.out" }, 0.2);
+      tl.fromTo(counterLabel, { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" }, 0.65);
+
+      tl.to(countStage, { scale: 2.15, opacity: 0.15, filter: "blur(20px)", duration: 0.34, ease: "power3.in" }, 2.68);
+      tl.set(countStage, { opacity: 0 }, 3.02);
+      tl.set(proofStage, { opacity: 0.15, scale: 0.72, filter: "blur(20px)" }, 3.02);
+      tl.to(proofStage, { opacity: 1, scale: 1, filter: "blur(0px)", duration: 0.72, ease: "expo.out" }, 3.02);
+      tl.fromTo(kicker, { opacity: 0, y: 28 }, { opacity: 1, y: 0, duration: 0.62, ease: "power3.out" }, 3.28);
+
+      const pillContent = ["Baixar", "Estudar", "Adaptar", "Usar"];
+      const sequenceWindow = 1.18;
+      const weights = pillContent.map((item) => 0.6 + item.length * 0.045);
+      const totalWeight = weights.reduce((sum, value) => sum + value, 0);
+      let elapsed = 0;
+      const pillStarts = weights.map((weight) => {
+        const start = 5.54 + (elapsed / totalWeight) * sequenceWindow;
+        elapsed += weight;
+        return start;
+      });
+      pills.forEach((pill, index) => {
+        tl.fromTo(pill, { opacity: 0, y: 34, scale: 0.9 }, { opacity: 1, y: 0, scale: 1, duration: 0.42, ease: "back.out(1.55)" }, pillStarts[index]);
+      });
+
+      tl.to(proofStage, { x: -126, y: 138, scale: 0.65, duration: 0.72, ease: "power3.inOut" }, 6.86);
+      tl.fromTo(finalStat, { opacity: 0, x: 90, scale: 0.88 }, { opacity: 1, x: 0, scale: 1, duration: 0.72, ease: "power3.out" }, 6.98);
+
+      tl.to(cameraPhase, { scale: 1.075, x: 0, y: -18, duration: 1.45, ease: "power2.inOut" }, 2.62);
+      tl.to(cameraPhase, { scale: 1, x: 0, y: 0, duration: 1.05, ease: "power3.out" }, 6.9);
+      tl.to(drift, {
+        p: Math.PI * 2 * 0.7,
+        duration: DURATION,
+        ease: "none",
+        onUpdate: () => {
+          const dx = Math.sin(drift.p) * 4;
+          const dy = Math.sin(drift.p * 1.31) * 2;
+          camera.style.transform = `translate(${cameraPhase.x + dx}px, ${cameraPhase.y + dy}px) scale(${cameraPhase.scale})`;
+        }
+      }, 0);
+    })();
+  </script>
+</template>

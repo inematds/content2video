@@ -1,0 +1,875 @@
+{
+  "provider": "edge-tts",
+  "voice": "pt-BR-FranciscaNeural",
+  "voices": [
+    {
+      "frame": 1,
+      "path": "assets/voice/01.wav",
+      "duration_s": 7.704,
+      "words": [
+        {
+          "id": "w0",
+          "text": "Você",
+          "start": 0.1,
+          "end": 0.444
+        },
+        {
+          "id": "w1",
+          "text": "não",
+          "start": 0.444,
+          "end": 0.789
+        },
+        {
+          "id": "w2",
+          "text": "precisa",
+          "start": 0.789,
+          "end": 1.133
+        },
+        {
+          "id": "w3",
+          "text": "de",
+          "start": 1.133,
+          "end": 1.478
+        },
+        {
+          "id": "w4",
+          "text": "mais",
+          "start": 1.478,
+          "end": 1.822
+        },
+        {
+          "id": "w5",
+          "text": "uma",
+          "start": 1.822,
+          "end": 2.167
+        },
+        {
+          "id": "w6",
+          "text": "lista",
+          "start": 2.167,
+          "end": 2.511
+        },
+        {
+          "id": "w7",
+          "text": "de",
+          "start": 2.511,
+          "end": 2.856
+        },
+        {
+          "id": "w8",
+          "text": "ferramentas.",
+          "start": 2.856,
+          "end": 3.2
+        },
+        {
+          "id": "w9",
+          "text": "Precisa",
+          "start": 3.15,
+          "end": 3.599
+        },
+        {
+          "id": "w10",
+          "text": "de",
+          "start": 3.599,
+          "end": 4.047
+        },
+        {
+          "id": "w11",
+          "text": "um",
+          "start": 4.047,
+          "end": 4.496
+        },
+        {
+          "id": "w12",
+          "text": "caminho",
+          "start": 4.496,
+          "end": 4.945
+        },
+        {
+          "id": "w13",
+          "text": "para",
+          "start": 4.945,
+          "end": 5.393
+        },
+        {
+          "id": "w14",
+          "text": "usar",
+          "start": 5.393,
+          "end": 5.842
+        },
+        {
+          "id": "w15",
+          "text": "inteligência",
+          "start": 5.842,
+          "end": 6.291
+        },
+        {
+          "id": "w16",
+          "text": "artificial",
+          "start": 6.291,
+          "end": 6.74
+        },
+        {
+          "id": "w17",
+          "text": "de",
+          "start": 6.74,
+          "end": 7.188
+        },
+        {
+          "id": "w18",
+          "text": "verdade.",
+          "start": 7.188,
+          "end": 7.637
+        }
+      ]
+    },
+    {
+      "frame": 2,
+      "path": "assets/voice/02.wav",
+      "duration_s": 8.328,
+      "words": [
+        {
+          "id": "w0",
+          "text": "No",
+          "start": 0.1,
+          "end": 0.556
+        },
+        {
+          "id": "w1",
+          "text": "INEMA.CLUB,",
+          "start": 0.556,
+          "end": 1.012
+        },
+        {
+          "id": "w2",
+          "text": "aprender,",
+          "start": 1.012,
+          "end": 1.469
+        },
+        {
+          "id": "w3",
+          "text": "praticar",
+          "start": 1.469,
+          "end": 1.925
+        },
+        {
+          "id": "w4",
+          "text": "e",
+          "start": 1.925,
+          "end": 2.381
+        },
+        {
+          "id": "w5",
+          "text": "evoluir",
+          "start": 2.381,
+          "end": 2.837
+        },
+        {
+          "id": "w6",
+          "text": "fazem",
+          "start": 2.837,
+          "end": 3.294
+        },
+        {
+          "id": "w7",
+          "text": "parte",
+          "start": 3.294,
+          "end": 3.75
+        },
+        {
+          "id": "w8",
+          "text": "da",
+          "start": 3.75,
+          "end": 4.206
+        },
+        {
+          "id": "w9",
+          "text": "mesma",
+          "start": 4.206,
+          "end": 4.662
+        },
+        {
+          "id": "w10",
+          "text": "jornada",
+          "start": 4.662,
+          "end": 5.118
+        },
+        {
+          "id": "w11",
+          "text": "—",
+          "start": 5.118,
+          "end": 5.575
+        },
+        {
+          "id": "w12",
+          "text": "do",
+          "start": 5.575,
+          "end": 6.031
+        },
+        {
+          "id": "w13",
+          "text": "primeiro",
+          "start": 6.031,
+          "end": 6.487
+        },
+        {
+          "id": "w14",
+          "text": "prompt",
+          "start": 6.487,
+          "end": 6.943
+        },
+        {
+          "id": "w15",
+          "text": "ao",
+          "start": 6.943,
+          "end": 7.4
+        },
+        {
+          "id": "w16",
+          "text": "projeto",
+          "start": 7.4,
+          "end": 7.856
+        },
+        {
+          "id": "w17",
+          "text": "publicado.",
+          "start": 7.856,
+          "end": 8.312
+        }
+      ]
+    },
+    {
+      "frame": 3,
+      "path": "assets/voice/03.wav",
+      "duration_s": 8.232,
+      "words": [
+        {
+          "id": "w0",
+          "text": "A",
+          "start": 0.1,
+          "end": 0.551
+        },
+        {
+          "id": "w1",
+          "text": "trilha",
+          "start": 0.551,
+          "end": 1.003
+        },
+        {
+          "id": "w2",
+          "text": "para",
+          "start": 1.003,
+          "end": 1.454
+        },
+        {
+          "id": "w3",
+          "text": "iniciantes",
+          "start": 1.454,
+          "end": 1.906
+        },
+        {
+          "id": "w4",
+          "text": "organiza",
+          "start": 1.906,
+          "end": 2.357
+        },
+        {
+          "id": "w5",
+          "text": "os",
+          "start": 2.357,
+          "end": 2.808
+        },
+        {
+          "id": "w6",
+          "text": "cursos",
+          "start": 2.808,
+          "end": 3.26
+        },
+        {
+          "id": "w7",
+          "text": "na",
+          "start": 3.26,
+          "end": 3.711
+        },
+        {
+          "id": "w8",
+          "text": "ordem",
+          "start": 3.711,
+          "end": 4.162
+        },
+        {
+          "id": "w9",
+          "text": "certa:",
+          "start": 4.162,
+          "end": 4.614
+        },
+        {
+          "id": "w10",
+          "text": "fundamentos,",
+          "start": 4.614,
+          "end": 5.065
+        },
+        {
+          "id": "w11",
+          "text": "dados,",
+          "start": 5.065,
+          "end": 5.517
+        },
+        {
+          "id": "w12",
+          "text": "visão,",
+          "start": 5.517,
+          "end": 5.968
+        },
+        {
+          "id": "w13",
+          "text": "agentes",
+          "start": 5.968,
+          "end": 6.419
+        },
+        {
+          "id": "w14",
+          "text": "de",
+          "start": 6.419,
+          "end": 6.871
+        },
+        {
+          "id": "w15",
+          "text": "código",
+          "start": 6.871,
+          "end": 7.322
+        },
+        {
+          "id": "w16",
+          "text": "e",
+          "start": 7.322,
+          "end": 7.774
+        },
+        {
+          "id": "w17",
+          "text": "deploy.",
+          "start": 7.774,
+          "end": 8.225
+        }
+      ]
+    },
+    {
+      "frame": 4,
+      "path": "assets/voice/04.wav",
+      "duration_s": 7.8,
+      "words": [
+        {
+          "id": "w0",
+          "text": "Depois,",
+          "start": 0.1,
+          "end": 0.612
+        },
+        {
+          "id": "w1",
+          "text": "você",
+          "start": 0.612,
+          "end": 1.125
+        },
+        {
+          "id": "w2",
+          "text": "escolhe",
+          "start": 1.125,
+          "end": 1.637
+        },
+        {
+          "id": "w3",
+          "text": "seu",
+          "start": 1.637,
+          "end": 2.15
+        },
+        {
+          "id": "w4",
+          "text": "foco:",
+          "start": 2.15,
+          "end": 2.662
+        },
+        {
+          "id": "w5",
+          "text": "automação,",
+          "start": 2.662,
+          "end": 3.175
+        },
+        {
+          "id": "w6",
+          "text": "design,",
+          "start": 3.175,
+          "end": 3.687
+        },
+        {
+          "id": "w7",
+          "text": "negócios,",
+          "start": 3.687,
+          "end": 4.2
+        },
+        {
+          "id": "w8",
+          "text": "Codex,",
+          "start": 4.2,
+          "end": 4.712
+        },
+        {
+          "id": "w9",
+          "text": "Claude",
+          "start": 4.712,
+          "end": 5.225
+        },
+        {
+          "id": "w10",
+          "text": "Code,",
+          "start": 5.225,
+          "end": 5.737
+        },
+        {
+          "id": "w11",
+          "text": "agentes",
+          "start": 5.737,
+          "end": 6.25
+        },
+        {
+          "id": "w12",
+          "text": "e",
+          "start": 6.25,
+          "end": 6.762
+        },
+        {
+          "id": "w13",
+          "text": "muito",
+          "start": 6.762,
+          "end": 7.275
+        },
+        {
+          "id": "w14",
+          "text": "mais.",
+          "start": 7.275,
+          "end": 7.787
+        }
+      ]
+    },
+    {
+      "frame": 5,
+      "path": "assets/voice/05.wav",
+      "duration_s": 8.304,
+      "words": [
+        {
+          "id": "w0",
+          "text": "E",
+          "start": 0.1,
+          "end": 0.531
+        },
+        {
+          "id": "w1",
+          "text": "conhecimento",
+          "start": 0.531,
+          "end": 0.962
+        },
+        {
+          "id": "w2",
+          "text": "não",
+          "start": 0.962,
+          "end": 1.393
+        },
+        {
+          "id": "w3",
+          "text": "fica",
+          "start": 1.393,
+          "end": 1.824
+        },
+        {
+          "id": "w4",
+          "text": "parado:",
+          "start": 1.824,
+          "end": 2.254
+        },
+        {
+          "id": "w5",
+          "text": "são",
+          "start": 2.254,
+          "end": 2.685
+        },
+        {
+          "id": "w6",
+          "text": "mais",
+          "start": 2.685,
+          "end": 3.116
+        },
+        {
+          "id": "w7",
+          "text": "de",
+          "start": 3.116,
+          "end": 3.547
+        },
+        {
+          "id": "w8",
+          "text": "quatrocentos",
+          "start": 3.547,
+          "end": 3.978
+        },
+        {
+          "id": "w9",
+          "text": "projetos",
+          "start": 3.978,
+          "end": 4.409
+        },
+        {
+          "id": "w10",
+          "text": "prontos",
+          "start": 4.409,
+          "end": 4.84
+        },
+        {
+          "id": "w11",
+          "text": "para",
+          "start": 4.84,
+          "end": 5.271
+        },
+        {
+          "id": "w12",
+          "text": "baixar,",
+          "start": 5.271,
+          "end": 5.702
+        },
+        {
+          "id": "w13",
+          "text": "estudar,",
+          "start": 5.702,
+          "end": 6.133
+        },
+        {
+          "id": "w14",
+          "text": "adaptar",
+          "start": 6.133,
+          "end": 6.563
+        },
+        {
+          "id": "w15",
+          "text": "e",
+          "start": 6.563,
+          "end": 6.994
+        },
+        {
+          "id": "w16",
+          "text": "colocar",
+          "start": 6.994,
+          "end": 7.425
+        },
+        {
+          "id": "w17",
+          "text": "em",
+          "start": 7.425,
+          "end": 7.856
+        },
+        {
+          "id": "w18",
+          "text": "uso.",
+          "start": 7.856,
+          "end": 8.287
+        }
+      ]
+    },
+    {
+      "frame": 6,
+      "path": "assets/voice/06.wav",
+      "duration_s": 8.064,
+      "words": [
+        {
+          "id": "w0",
+          "text": "Conteúdo",
+          "start": 0.1,
+          "end": 0.568
+        },
+        {
+          "id": "w1",
+          "text": "para",
+          "start": 0.568,
+          "end": 1.037
+        },
+        {
+          "id": "w2",
+          "text": "quem",
+          "start": 1.037,
+          "end": 1.505
+        },
+        {
+          "id": "w3",
+          "text": "quer",
+          "start": 1.505,
+          "end": 1.973
+        },
+        {
+          "id": "w4",
+          "text": "produzir",
+          "start": 1.973,
+          "end": 2.442
+        },
+        {
+          "id": "w5",
+          "text": "melhor,",
+          "start": 2.442,
+          "end": 2.91
+        },
+        {
+          "id": "w6",
+          "text": "liderar",
+          "start": 2.91,
+          "end": 3.378
+        },
+        {
+          "id": "w7",
+          "text": "com",
+          "start": 3.378,
+          "end": 3.847
+        },
+        {
+          "id": "w8",
+          "text": "IA,",
+          "start": 3.847,
+          "end": 4.315
+        },
+        {
+          "id": "w9",
+          "text": "criar",
+          "start": 4.315,
+          "end": 4.784
+        },
+        {
+          "id": "w10",
+          "text": "um",
+          "start": 4.784,
+          "end": 5.252
+        },
+        {
+          "id": "w11",
+          "text": "negócio",
+          "start": 5.252,
+          "end": 5.72
+        },
+        {
+          "id": "w12",
+          "text": "ou",
+          "start": 5.72,
+          "end": 6.189
+        },
+        {
+          "id": "w13",
+          "text": "acelerar",
+          "start": 6.189,
+          "end": 6.657
+        },
+        {
+          "id": "w14",
+          "text": "a",
+          "start": 6.657,
+          "end": 7.125
+        },
+        {
+          "id": "w15",
+          "text": "própria",
+          "start": 7.125,
+          "end": 7.594
+        },
+        {
+          "id": "w16",
+          "text": "carreira.",
+          "start": 7.594,
+          "end": 8.062
+        }
+      ]
+    },
+    {
+      "frame": 7,
+      "path": "assets/voice/07.wav",
+      "duration_s": 6.888,
+      "words": [
+        {
+          "id": "w0",
+          "text": "Tudo",
+          "start": 0.1,
+          "end": 0.622
+        },
+        {
+          "id": "w1",
+          "text": "conectado",
+          "start": 0.622,
+          "end": 1.144
+        },
+        {
+          "id": "w2",
+          "text": "a",
+          "start": 1.144,
+          "end": 1.666
+        },
+        {
+          "id": "w3",
+          "text": "uma",
+          "start": 1.666,
+          "end": 2.188
+        },
+        {
+          "id": "w4",
+          "text": "comunidade",
+          "start": 2.188,
+          "end": 2.71
+        },
+        {
+          "id": "w5",
+          "text": "ativa,",
+          "start": 2.71,
+          "end": 3.232
+        },
+        {
+          "id": "w6",
+          "text": "com",
+          "start": 3.232,
+          "end": 3.755
+        },
+        {
+          "id": "w7",
+          "text": "grupos",
+          "start": 3.755,
+          "end": 4.277
+        },
+        {
+          "id": "w8",
+          "text": "especializados,",
+          "start": 4.277,
+          "end": 4.799
+        },
+        {
+          "id": "w9",
+          "text": "novidades",
+          "start": 4.799,
+          "end": 5.321
+        },
+        {
+          "id": "w10",
+          "text": "e",
+          "start": 5.321,
+          "end": 5.843
+        },
+        {
+          "id": "w11",
+          "text": "aprendizado",
+          "start": 5.843,
+          "end": 6.365
+        },
+        {
+          "id": "w12",
+          "text": "contínuo.",
+          "start": 6.365,
+          "end": 6.887
+        }
+      ]
+    },
+    {
+      "frame": 8,
+      "path": "assets/voice/08.wav",
+      "duration_s": 7.92,
+      "words": [
+        {
+          "id": "w0",
+          "text": "Entre",
+          "start": 0.1,
+          "end": 0.477
+        },
+        {
+          "id": "w1",
+          "text": "em",
+          "start": 0.477,
+          "end": 0.855
+        },
+        {
+          "id": "w2",
+          "text": "inema",
+          "start": 0.855,
+          "end": 1.232
+        },
+        {
+          "id": "w3",
+          "text": "ponto",
+          "start": 1.232,
+          "end": 1.61
+        },
+        {
+          "id": "w4",
+          "text": "club.",
+          "start": 1.61,
+          "end": 1.987
+        },
+        {
+          "id": "w5",
+          "text": "Escolha",
+          "start": 1.937,
+          "end": 2.412
+        },
+        {
+          "id": "w6",
+          "text": "sua",
+          "start": 2.412,
+          "end": 2.887
+        },
+        {
+          "id": "w7",
+          "text": "trilha.",
+          "start": 2.887,
+          "end": 3.362
+        },
+        {
+          "id": "w8",
+          "text": "Construa",
+          "start": 3.362,
+          "end": 3.85
+        },
+        {
+          "id": "w9",
+          "text": "algo",
+          "start": 3.85,
+          "end": 4.337
+        },
+        {
+          "id": "w10",
+          "text": "real.",
+          "start": 4.337,
+          "end": 4.825
+        },
+        {
+          "id": "w11",
+          "text": "E",
+          "start": 4.825,
+          "end": 5.432
+        },
+        {
+          "id": "w12",
+          "text": "evolua",
+          "start": 5.432,
+          "end": 6.04
+        },
+        {
+          "id": "w13",
+          "text": "com",
+          "start": 6.04,
+          "end": 6.647
+        },
+        {
+          "id": "w14",
+          "text": "inteligência",
+          "start": 6.647,
+          "end": 7.255
+        },
+        {
+          "id": "w15",
+          "text": "artificial.",
+          "start": 7.255,
+          "end": 7.862
+        }
+      ]
+    }
+  ],
+  "bgm": null,
+  "sfx": [],
+  "total_duration_s": 63.24
+}

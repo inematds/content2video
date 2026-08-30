@@ -1,0 +1,273 @@
+<template>
+  <style>
+    #root {
+      position: relative;
+      width: 1080px;
+      height: 1920px;
+      overflow: hidden;
+      container-type: size;
+      color: #1f2be0;
+    }
+
+    [class~="03-lancamentos-ground"],
+    [class~="03-lancamentos-content"] {
+      position: absolute;
+      inset: 0;
+      width: 1080px;
+      height: 1920px;
+    }
+
+    [class~="03-lancamentos-ground"] {
+      background-color: #f0ebde;
+      background-image:
+        linear-gradient(rgba(31, 43, 224, 0.10) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(31, 43, 224, 0.10) 1px, transparent 1px);
+      background-size: 22px 22px;
+    }
+
+    [class~="03-lancamentos-content"] {
+      box-sizing: border-box;
+      padding: 0 44px;
+      font-family: sans-serif;
+    }
+
+    [class~="03-lancamentos-hairline"] {
+      position: absolute;
+      left: 44px;
+      right: 44px;
+      height: 2px;
+      background: #1f2be0;
+    }
+
+    [class~="03-lancamentos-hairline-top"] { top: 64px; }
+    [class~="03-lancamentos-hairline-bottom"] { top: 1560px; }
+
+    [class~="03-lancamentos-topbar"] {
+      position: absolute;
+      left: 44px;
+      top: 166px;
+      width: 992px;
+      height: 150px;
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+    }
+
+    [class~="03-lancamentos-kicker"] {
+      margin: 0;
+      max-width: 780px;
+      font-family: sans-serif;
+      font-size: 34px;
+      font-weight: 600;
+      line-height: 1.1;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+    }
+
+    [class~="03-lancamentos-folio"] {
+      padding-top: 4px;
+      font-family: monospace;
+      font-size: 26px;
+      line-height: 1;
+      letter-spacing: 0.08em;
+    }
+
+    [class~="03-lancamentos-top-rule"] {
+      position: absolute;
+      left: 44px;
+      top: 300px;
+      width: 992px;
+      height: 2px;
+      background: #1f2be0;
+      transform-origin: left center;
+    }
+
+    [class~="03-lancamentos-ledger"] {
+      position: absolute;
+      left: 44px;
+      top: 390px;
+      width: 992px;
+    }
+
+    [class~="03-lancamentos-row"] {
+      position: relative;
+      display: grid;
+      grid-template-columns: 112px 1fr;
+      align-items: center;
+      min-height: 250px;
+      border-bottom: 1px solid rgba(31, 43, 224, 0.18);
+      box-sizing: border-box;
+      overflow: hidden;
+    }
+
+    [class~="03-lancamentos-index"] {
+      display: inline-block;
+      font-family: monospace;
+      font-size: 27px;
+      line-height: 1;
+      letter-spacing: 0.08em;
+    }
+
+    [class~="03-lancamentos-label"] {
+      display: inline-block;
+      margin: 0;
+      font-family: serif;
+      font-size: 78px;
+      font-weight: 400;
+      line-height: 0.98;
+      letter-spacing: -0.008em;
+    }
+
+    [class~="03-lancamentos-observation"] {
+      position: absolute;
+      left: 44px;
+      top: 1265px;
+      width: 992px;
+      padding-top: 32px;
+      border-top: 2px solid #1f2be0;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      opacity: 0;
+    }
+
+    [class~="03-lancamentos-observation-label"] {
+      font-family: sans-serif;
+      font-size: 24px;
+      font-weight: 600;
+      line-height: 1.2;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+    }
+
+    [class~="03-lancamentos-observation-value"] {
+      max-width: 650px;
+      margin: 0;
+      text-align: right;
+      font-family: serif;
+      font-size: 62px;
+      font-weight: 400;
+      line-height: 1;
+      letter-spacing: -0.005em;
+    }
+
+    [class~="03-lancamentos-side-marks"] {
+      position: absolute;
+      right: 44px;
+      top: 336px;
+      width: 22px;
+      height: 846px;
+      border-right: 2px solid rgba(31, 43, 224, 0.18);
+      background: repeating-linear-gradient(
+        to bottom,
+        #1f2be0 0 2px,
+        transparent 2px 42px
+      );
+      opacity: 0.45;
+    }
+  </style>
+
+  <div data-hf-id="hf-zc7r" id="root" data-composition-id="03-lancamentos" data-duration="7.82" data-width="1080" data-height="1920">
+    <div data-hf-id="hf-2qjc" class="clip 03-lancamentos-ground" data-start="0" data-duration="7.82" data-track-index="0"></div>
+
+    <div data-hf-id="hf-mvyf" class="clip 03-lancamentos-content" data-start="0" data-duration="7.82" data-track-index="1">
+      <div data-hf-id="hf-yhx2" class="03-lancamentos-hairline 03-lancamentos-hairline-top"></div>
+      <div data-hf-id="hf-sutg" class="03-lancamentos-hairline 03-lancamentos-hairline-bottom"></div>
+
+      <header data-hf-id="hf-02jw" class="03-lancamentos-topbar">
+        <h1 data-hf-id="hf-296s" id="03-lancamentos-kicker" class="03-lancamentos-kicker">Lançamentos possíveis</h1>
+        <span data-hf-id="hf-0h1u" id="03-lancamentos-folio" class="03-lancamentos-folio">03</span>
+      </header>
+      <div data-hf-id="hf-9p0i" id="03-lancamentos-top-rule" class="03-lancamentos-top-rule"></div>
+
+      <div data-hf-id="hf-gd7v" class="03-lancamentos-ledger">
+        <div data-hf-id="hf-z3kq" id="03-lancamentos-row-01" class="03-lancamentos-row">
+          <span data-hf-id="hf-q9ii" id="03-lancamentos-index-01" class="03-lancamentos-index">01</span>
+          <p data-hf-id="hf-jkud" id="03-lancamentos-label-01" class="03-lancamentos-label">5 páginas</p>
+        </div>
+        <div data-hf-id="hf-sxux" id="03-lancamentos-row-02" class="03-lancamentos-row">
+          <span data-hf-id="hf-rokw" id="03-lancamentos-index-02" class="03-lancamentos-index">02</span>
+          <p data-hf-id="hf-bw2p" id="03-lancamentos-label-02" class="03-lancamentos-label">15 min de caminhada</p>
+        </div>
+        <div data-hf-id="hf-s674" id="03-lancamentos-row-03" class="03-lancamentos-row">
+          <span data-hf-id="hf-p74y" id="03-lancamentos-index-03" class="03-lancamentos-index">03</span>
+          <p data-hf-id="hf-qscm" id="03-lancamentos-label-03" class="03-lancamentos-label">pequena reserva</p>
+        </div>
+      </div>
+
+      <div data-hf-id="hf-6ctm" id="03-lancamentos-observation" class="03-lancamentos-observation">
+        <span data-hf-id="hf-q1ho" class="03-lancamentos-observation-label">Em um dia</span>
+        <p data-hf-id="hf-7678" class="03-lancamentos-observation-value">quase nada</p>
+      </div>
+
+      <div data-hf-id="hf-asof" class="03-lancamentos-side-marks" aria-hidden="true"></div>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      var tl = gsap.timeline({ paused: true });
+
+      tl.fromTo(
+        '[id="03-lancamentos-kicker"]',
+        { y: 72, opacity: 0 },
+        { y: 0, opacity: 1, duration: 0.42, ease: "power4.out" },
+        0.08
+      );
+      tl.fromTo(
+        '[id="03-lancamentos-folio"]',
+        { y: 42, opacity: 0 },
+        { y: 0, opacity: 1, duration: 0.24, ease: "power4.out" },
+        0.31
+      );
+      tl.fromTo(
+        '[id="03-lancamentos-top-rule"]',
+        { scaleX: 0 },
+        { scaleX: 1, duration: 1.06, ease: "power3.out" },
+        0.52
+      );
+
+      function waterfallRow(index, at, indexOffset, labelOffset, labelDuration) {
+        var row = '[id="03-lancamentos-row-' + index + '"]';
+        var number = '[id="03-lancamentos-index-' + index + '"]';
+        var label = '[id="03-lancamentos-label-' + index + '"]';
+
+        tl.set(row, { opacity: 1 }, at);
+        tl.set(number, { opacity: 1, y: indexOffset }, at);
+        tl.to(number, { y: 0, duration: 0.18, ease: "power4.out" }, at);
+        tl.set(label, { opacity: 1, y: labelOffset }, at + 0.15);
+        tl.to(label, { y: 0, duration: labelDuration, ease: "power4.out" }, at + 0.15);
+      }
+
+      tl.set(
+        [
+          '[id="03-lancamentos-row-01"]',
+          '[id="03-lancamentos-row-02"]',
+          '[id="03-lancamentos-row-03"]',
+          '[id="03-lancamentos-index-01"]',
+          '[id="03-lancamentos-index-02"]',
+          '[id="03-lancamentos-index-03"]',
+          '[id="03-lancamentos-label-01"]',
+          '[id="03-lancamentos-label-02"]',
+          '[id="03-lancamentos-label-03"]'
+        ],
+        { opacity: 0 },
+        0
+      );
+
+      waterfallRow("01", 1.86, 46, 78, 0.20);
+      waterfallRow("02", 3.08, 42, 60, 0.17);
+      waterfallRow("03", 4.31, 36, 48, 0.14);
+
+      tl.fromTo(
+        '[id="03-lancamentos-observation"]',
+        { opacity: 0, y: 52 },
+        { opacity: 1, y: 0, duration: 0.48, ease: "power4.out" },
+        5.48
+      );
+
+      window.__timelines = window.__timelines || {};
+      window.__timelines["03-lancamentos"] = tl;
+    })();
+  </script>
+</template>

@@ -1,0 +1,334 @@
+<template>
+  <style>
+    #root {
+      position: relative;
+      width: 1080px;
+      height: 1920px;
+      overflow: hidden;
+      container-type: size;
+      font-family: -apple-system, sans-serif;
+      color: #e2e8f0;
+    }
+
+    .clip {
+      position: absolute;
+      inset: 0;
+      width: 1080px;
+      height: 1920px;
+      overflow: hidden;
+    }
+
+    .f06-perfis-ground {
+      background:
+        linear-gradient(90deg, rgba(0, 217, 255, 0.055) 0, rgba(0, 217, 255, 0.018) 39%, transparent 39%),
+        #1a1f3a;
+    }
+
+    .f06-perfis-layout {
+      position: absolute;
+      inset: 0;
+    }
+
+    .f06-perfis-rail {
+      position: absolute;
+      left: 68px;
+      top: 154px;
+      width: 4px;
+      height: 1260px;
+      border-radius: 6px;
+      background: rgba(0, 217, 255, 0.15);
+    }
+
+    .f06-perfis-rail::before {
+      content: "";
+      position: absolute;
+      inset: 0 auto auto 0;
+      width: 4px;
+      height: 116px;
+      border-radius: 6px;
+      background: #00d9ff;
+    }
+
+    .f06-perfis-anchor {
+      position: absolute;
+      left: 104px;
+      top: 164px;
+      width: 330px;
+      min-height: 360px;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: flex-start;
+      gap: 2px;
+    }
+
+    .f06-perfis-anchor-word {
+      display: block;
+      font-size: 78px;
+      line-height: 0.95;
+      font-weight: 700;
+      letter-spacing: -0.035em;
+      white-space: nowrap;
+      color: #e2e8f0;
+    }
+
+    .f06-perfis-anchor-word[data-accent="true"] {
+      color: #00d9ff;
+    }
+
+    .f06-perfis-rule {
+      width: 60px;
+      height: 4px;
+      margin-top: 30px;
+      border-radius: 2px;
+      background: #00d9ff;
+    }
+
+    .f06-perfis-card-zone {
+      position: absolute;
+      left: 462px;
+      top: 256px;
+      width: 554px;
+      height: 1096px;
+    }
+
+    .f06-perfis-card-shell {
+      position: absolute;
+      left: 0;
+      top: 92px;
+      width: 554px;
+      height: 985px;
+      overflow: hidden;
+      border: 1.5px solid rgba(0, 217, 255, 0.2);
+      border-radius: 14px;
+      background: rgba(0, 217, 255, 0.04);
+    }
+
+    .f06-perfis-card-image {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;
+    }
+
+    .f06-perfis-label {
+      position: absolute;
+      left: 0;
+      top: 0;
+      min-width: 392px;
+      max-width: 554px;
+      min-height: 66px;
+      box-sizing: border-box;
+      display: flex;
+      align-items: center;
+      padding: 16px 25px;
+      border: 1.5px solid rgba(0, 217, 255, 0.2);
+      border-radius: 100px;
+      background: rgba(0, 217, 255, 0.08);
+      color: #00d9ff;
+      font-size: 25px;
+      line-height: 1.1;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      white-space: nowrap;
+    }
+
+    .f06-perfis-state-markers {
+      position: absolute;
+      left: 104px;
+      top: 650px;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    .f06-perfis-marker {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      border: 1.5px solid rgba(0, 217, 255, 0.2);
+      background: rgba(0, 217, 255, 0.04);
+    }
+
+    .f06-perfis-marker[data-active="true"] {
+      border-color: #00d9ff;
+      background: #00d9ff;
+    }
+
+    .f06-perfis-lockup {
+      position: absolute;
+      left: 104px;
+      top: 815px;
+      width: 318px;
+      padding: 22px 0 20px 24px;
+      border-left: 4px solid #00d9ff;
+      border-radius: 0 12px 12px 0;
+      background: rgba(0, 217, 255, 0.08);
+      color: #10b981;
+      font-size: 29px;
+      line-height: 1.16;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+    }
+
+    .f06-perfis-footer-line {
+      position: absolute;
+      left: 104px;
+      top: 1398px;
+      width: 912px;
+      height: 3px;
+      border-radius: 0;
+      background: rgba(0, 217, 255, 0.15);
+    }
+
+    .f06-perfis-footer-line span {
+      display: block;
+      width: 64%;
+      height: 100%;
+      background: #00d9ff;
+    }
+  </style>
+
+  <div data-hf-id="hf-bgua" id="root" data-composition-id="06-perfis" data-width="1080" data-height="1920" data-duration="8.564">
+    <div data-hf-id="hf-gk47" class="clip f06-perfis-ground" data-start="0" data-duration="8.564" data-track-index="0"></div>
+
+    <div data-hf-id="hf-u5z6" class="clip f06-perfis-content" data-start="0" data-duration="8.564" data-track-index="1">
+      <div data-hf-id="hf-q13z" class="f06-perfis-layout">
+        <div data-hf-id="hf-nkgt" class="f06-perfis-rail"></div>
+
+        <div data-hf-id="hf-f676" class="f06-perfis-anchor" id="f06-perfis-anchor">
+          <span data-hf-id="hf-am7l" class="f06-perfis-anchor-word" data-anchor-step="0">USE</span>
+          <span data-hf-id="hf-wd0p" class="f06-perfis-anchor-word" data-anchor-step="1" data-accent="true">IA</span>
+          <span data-hf-id="hf-pj02" class="f06-perfis-anchor-word" data-anchor-step="2">PARA</span>
+          <span data-hf-id="hf-c0tz" class="f06-perfis-anchor-word" data-anchor-step="3">EVOLUIR</span>
+          <span data-hf-id="hf-2gao" class="f06-perfis-rule"></span>
+        </div>
+
+        <div data-hf-id="hf-4tdb" class="f06-perfis-state-markers" aria-hidden="true">
+          <span data-hf-id="hf-ny3g" class="f06-perfis-marker" data-marker="0"></span>
+          <span data-hf-id="hf-opr9" class="f06-perfis-marker" data-marker="1"></span>
+          <span data-hf-id="hf-snva" class="f06-perfis-marker" data-marker="2"></span>
+          <span data-hf-id="hf-ytl3" class="f06-perfis-marker" data-marker="3"></span>
+        </div>
+
+        <div data-hf-id="hf-rcve" class="f06-perfis-card-zone" id="f06-perfis-card-zone">
+          <div data-hf-id="hf-n2s6" class="f06-perfis-label" id="f06-perfis-label">PRODUZIR MELHOR</div>
+          <div data-hf-id="hf-k8bm" class="f06-perfis-card-shell" id="f06-perfis-card-shell">
+            <img data-hf-id="hf-8xbq" class="f06-perfis-card-image" data-card-key="produzir" src="assets/profissional-operacional-mais-produtivid.webp" alt="Perfil profissional operacional">
+            <img data-hf-id="hf-7xm3" class="f06-perfis-card-image" data-card-key="liderar" src="assets/gestor-e-lder-lidere-melhor-com-ia.webp" alt="Perfil gestor e líder">
+            <img data-hf-id="hf-hrup" class="f06-perfis-card-image" data-card-key="negocio" src="assets/empreendedor-estratgico-com-ia.webp" alt="Perfil empreendedor estratégico">
+          </div>
+        </div>
+
+        <div data-hf-id="hf-doyx" class="f06-perfis-lockup" id="f06-perfis-lockup">PARA O SEU<br data-hf-id="hf-x5px">MOMENTO</div>
+
+        <div data-hf-id="hf-hz5i" class="f06-perfis-footer-line" aria-hidden="true"><span data-hf-id="hf-uckh"></span></div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
+  <script>
+    (() => {
+      const root = document.querySelector('[data-composition-id="06-perfis"]');
+      const tl = gsap.timeline({ paused: true });
+      window.__timelines = window.__timelines || {};
+      window.__timelines["06-perfis"] = tl;
+
+      const anchor = root.querySelector("#f06-perfis-anchor");
+      const anchorWords = Array.from(root.querySelectorAll(".f06-perfis-anchor-word"));
+      const cardZone = root.querySelector("#f06-perfis-card-zone");
+      const label = root.querySelector("#f06-perfis-label");
+      const cardShell = root.querySelector("#f06-perfis-card-shell");
+      const cards = Array.from(root.querySelectorAll(".f06-perfis-card-image"));
+      const markers = Array.from(root.querySelectorAll(".f06-perfis-marker"));
+      const lockup = root.querySelector("#f06-perfis-lockup");
+
+      const ANCHOR_CONTENT = ["USE", "IA", "PARA", "EVOLUIR"];
+      const ANCHOR_BASE = 0.16;
+      const ANCHOR_SEC_PER_CHAR = 0.035;
+      let anchorCumulative = 0;
+      const ANCHOR_TIMELINE = ANCHOR_CONTENT.map((word, index) => {
+        const start = anchorCumulative;
+        anchorCumulative += ANCHOR_BASE + word.length * ANCHOR_SEC_PER_CHAR;
+        return { word, index, start, end: anchorCumulative };
+      });
+      const anchorScale = 1.42 / anchorCumulative;
+
+      const anchorDriver = { t: 0 };
+      let lastAnchorCount = -1;
+
+      tl.set(anchorWords, { opacity: 0, y: 20 }, 0);
+      tl.fromTo(anchor, { opacity: 0, scale: 0.975 }, { opacity: 1, scale: 1, duration: 0.42, ease: "power2.out" }, 0.04);
+      tl.to(anchorDriver, {
+        t: anchorCumulative,
+        duration: anchorCumulative * anchorScale,
+        ease: "none",
+        onUpdate: () => {
+          let activeIndex = 0;
+          for (let i = ANCHOR_TIMELINE.length - 1; i >= 0; i -= 1) {
+            if (anchorDriver.t >= ANCHOR_TIMELINE[i].start) {
+              activeIndex = i;
+              break;
+            }
+          }
+          const visibleCount = activeIndex + 1;
+          if (visibleCount !== lastAnchorCount) {
+            anchorWords.forEach((word, index) => {
+              gsap.set(word, { opacity: index < visibleCount ? 1 : 0, y: index < visibleCount ? 0 : 20 });
+            });
+            lastAnchorCount = visibleCount;
+          }
+        }
+      }, 0.08);
+
+      const CARD_STATES = [
+        { start: 1.8, key: "produzir", label: "PRODUZIR MELHOR", marker: 0, resolved: false },
+        { start: 3.15, key: "liderar", label: "LIDERAR", marker: 1, resolved: false },
+        { start: 4.55, key: "negocio", label: "CRIAR UM NEGÓCIO", marker: 2, resolved: false },
+        { start: 5.8, key: "negocio", label: "ACELERAR A CARREIRA", marker: 3, resolved: true }
+      ];
+
+      function cardStateAt(time) {
+        for (let i = CARD_STATES.length - 1; i >= 0; i -= 1) {
+          if (time >= CARD_STATES[i].start) return CARD_STATES[i];
+        }
+        return CARD_STATES[0];
+      }
+
+      tl.set(cards, { opacity: 0 }, 0);
+      tl.set(cards[0], { opacity: 1 }, 0);
+      tl.fromTo(cardZone, { opacity: 0, scale: 0.985 }, { opacity: 1, scale: 1, duration: 0.48, ease: "power2.out" }, 1.32);
+
+      const cardDriver = { t: 1.8 };
+      let lastCardState = "";
+      tl.to(cardDriver, {
+        t: 6.9,
+        duration: 5.1,
+        ease: "none",
+        onUpdate: () => {
+          const state = cardStateAt(cardDriver.t);
+          const stateId = `${state.key}:${state.label}`;
+          if (stateId !== lastCardState) {
+            label.textContent = state.label;
+            cards.forEach((card) => {
+              card.style.opacity = card.dataset.cardKey === state.key ? "1" : "0";
+            });
+            markers.forEach((marker, index) => {
+              marker.dataset.active = index === state.marker ? "true" : "false";
+            });
+            label.style.color = state.resolved ? "#1a1f3a" : "#00d9ff";
+            label.style.backgroundColor = state.resolved ? "#00d9ff" : "rgba(0, 217, 255, 0.08)";
+            label.style.borderColor = state.resolved ? "#00d9ff" : "rgba(0, 217, 255, 0.2)";
+            cardShell.style.borderColor = state.resolved ? "#00d9ff" : "rgba(0, 217, 255, 0.2)";
+            lastCardState = stateId;
+          }
+        }
+      }, 1.8);
+
+      tl.fromTo(lockup, { opacity: 0, y: 28 }, { opacity: 1, y: 0, duration: 0.42, ease: "power3.out" }, 6.9);
+    })();
+  </script>
+</template>

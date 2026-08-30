@@ -1,0 +1,177 @@
+#!/usr/bin/env node
+
+import { existsSync, readFileSync, readdirSync } from "node:fs";
+import path from "node:path";
+import { spawn } from "node:child_process";
+import { fileURLToPath } from "node:url";
+
+const ROOT = path.dirname(path.dirname(fileURLToPath(import.meta.url)));
+loadEnv(path.join(ROOT, ".env"));
+
+const settings = {
+  provider: process.env.AI_PROVIDER || "codex",
+  language: process.env.OUTPUT_LANGUAGE || "pt-BR",
+  voiceProvider: process.env.VOICE_PROVIDER || "edge-tts",
+  voiceId: process.env.VOICE_ID || "pt-BR-FranciscaNeural",
+  targetDuration: numberSetting("TARGET_DURATION_SECONDS", 60),
+  minimumDuration: numberSetting("MINIMUM_DURATION_SECONDS", 42),
+  maximumDuration: numberSetting("MAXIMUM_DURATION_SECONDS", 78),
+  minimumQuality: numberSetting("MINIMUM_QUALITY_SCORE", 8),
+  aspectRatio: process.env.VIDEO_ASPECT_RATIO || "9:16",
+  width: numberSetting("VIDEO_WIDTH", 1080),
+  height: numberSetting("VIDEO_HEIGHT", 1920),
+  fps: numberSetting("VIDEO_FPS", 30),
+  renderQuality: process.env.RENDER_QUALITY || "high",
+  previewPort: numberSetting("PREVIEW_PORT", 3022),
+  videosDir: path.resolve(ROOT, process.env.VIDEOS_DIRECTORY || "./videos"),
+  rendersDirName: process.env.RENDERS_DIRECTORY_NAME || "renders"
+};
+
+const [command = "help", value, optionalSlug] = process.argv.slice(2);
+
+try {
+  if (command === "create") await createVideo(value, optionalSlug);
+  else if (command === "list") listVideos();
+  else if (command === "check") await runHyperFrames("check", value);
+  else if (command === "preview") await runHyperFrames("preview", value);
+  else if (command === "render") await runHyperFrames("render", value);
+  else if (command === "help" || command === "--help" || command === "-h") showHelp();
+  else fail(`Comando desconhecido: ${command}`);
+} catch (error) {
+  fail(error.message || String(error));
+}
+
+async function createVideo(sourceUrl, requestedSlug) {
+  if (!sourceUrl) fail("Informe uma URL. Exemplo: npm run video:create -- https://exemplo.com/artigo");
+  let parsed;
+  try {
+    parsed = new URL(sourceUrl);
+  } catch {
+    fail("A origem precisa ser uma URL completa iniciada por http:// ou https://.");
+  }
+  if (!/^https?:$/.test(parsed.protocol)) fail("Somente URLs http:// e https:// são aceitas.");
+
+  const slug = requestedSlug || slugFromUrl(parsed);
+  if (!safeSlug(slug)) fail("O slug deve usar apenas letras minúsculas, números e hífens, com até 80 caracteres.");
+  const projectDir = path.join(settings.videosDir, slug);
+  if (existsSync(projectDir)) fail(`O projeto videos/${slug} já existe. Escolha outro slug.`);
+
+  if (settings.provider === "openai" && !process.env.OPENAI_API_KEY) {
+    fail("AI_PROVIDER=openai exige OPENAI_API_KEY no .env.");
+  }
+
+  const prompt = `Crie um vídeo HyperFrames completo a partir desta URL: ${parsed.href}\n\n` +
+    `Trabalhe dentro de ${projectDir}. Siga integralmente o AGENTS.md e os defaults do projeto. ` +
+    `Use saída ${settings.language}, voz ${settings.voiceProvider}/${settings.voiceId} em todas as cenas, ` +
+    `duração alvo ${settings.targetDuration}s entre ${settings.minimumDuration}s e ${settings.maximumDuration}s, ` +
+    `formato ${settings.aspectRatio} ${settings.width}x${settings.height} ${settings.fps}fps e qualidade mínima ${settings.minimumQuality}. ` +
+    `Pesquise e leia a URL, crie BRIEF.md, roteiro, mídia local, narração, composição e snapshots. ` +
+    `Garanta que todas as manchetes caibam na área segura. Rode hyperframes check ao final. ` +
+    `Não renderize o MP4 ainda. Não faça perguntas; os defaults já foram aprovados.`;
+
+  const childEnv = { ...process.env };
+  if (settings.provider === "openai") childEnv.CODEX_API_KEY = process.env.OPENAI_API_KEY;
+  else {
+    delete childEnv.CODEX_API_KEY;
+    delete childEnv.OPENAI_API_KEY;
+  }
+
+  console.log(`Criando videos/${slug} com ${settings.provider === "codex" ? "OAuth Codex" : "OpenAI API"}...`);
+  await run("codex", [
+    "exec", "--ephemeral", "--sandbox", "workspace-write", "--approve-for-me",
+    "--skip-git-repo-check", "-C", ROOT, prompt
+  ], ROOT, childEnv);
+
+  if (!existsSync(path.join(projectDir, "index.html"))) {
+    fail("O Codex terminou, mas a composição index.html não foi criada.");
+  }
+  console.log(`\nProjeto pronto para revisão: videos/${slug}`);
+  console.log(`Abra o editor: npm run video:preview -- ${slug}`);
+}
+
+function listVideos() {
+  if (!existsSync(settings.videosDir)) return console.log("Nenhum vídeo criado.");
+  const projects = readdirSync(settings.videosDir, { withFileTypes: true })
+    .filter((entry) => entry.isDirectory() && existsSync(path.join(settings.videosDir, entry.name, "index.html")))
+    .map((entry) => entry.name)
+    .sort();
+  if (!projects.length) return console.log("Nenhum vídeo criado.");
+  for (const project of projects) {
+    const output = path.join(settings.videosDir, project, settings.rendersDirName, `${project}.mp4`);
+    console.log(`${existsSync(output) ? "✓" : "·"} ${project}${existsSync(output) ? `  ${path.relative(ROOT, output)}` : ""}`);
+  }
+}
+
+async function runHyperFrames(action, slug) {
+  if (!safeSlug(slug)) fail(`Informe um projeto válido. Exemplo: npm run video:${action} -- meu-video`);
+  const projectDir = path.join(settings.videosDir, slug);
+  if (!existsSync(path.join(projectDir, "index.html"))) fail(`Não encontrei videos/${slug}/index.html.`);
+
+  if (action === "check") {
+    await run("npx", ["--yes", "hyperframes@0.8.19", "check"], projectDir);
+    return;
+  }
+  if (action === "preview") {
+    await run("npx", ["--yes", "hyperframes@0.8.19", "preview", "--foreground", "--port", String(settings.previewPort)], projectDir);
+    return;
+  }
+  const output = path.join(settings.rendersDirName, `${slug}.mp4`);
+  await run("npx", ["--yes", "hyperframes@0.8.19", "check"], projectDir);
+  await run("npx", ["--yes", "hyperframes@0.8.19", "render", "--quality", settings.renderQuality, "--output", output], projectDir);
+  console.log(`\nMP4 pronto: ${path.relative(ROOT, path.join(projectDir, output))}`);
+}
+
+function run(commandName, args, cwd, env = process.env) {
+  return new Promise((resolve, reject) => {
+    const child = spawn(commandName, args, { cwd, env, stdio: "inherit" });
+    child.on("error", reject);
+    child.on("close", (code) => code === 0 ? resolve() : reject(new Error(`${commandName} terminou com código ${code}.`)));
+  });
+}
+
+function loadEnv(filename) {
+  if (!existsSync(filename)) return;
+  for (const rawLine of readFileSync(filename, "utf8").split(/\r?\n/)) {
+    const line = rawLine.trim();
+    if (!line || line.startsWith("#")) continue;
+    const separator = line.indexOf("=");
+    if (separator < 1) continue;
+    const key = line.slice(0, separator).trim();
+    let envValue = line.slice(separator + 1).trim();
+    if ((envValue.startsWith('"') && envValue.endsWith('"')) || (envValue.startsWith("'") && envValue.endsWith("'"))) {
+      envValue = envValue.slice(1, -1);
+    }
+    if (!(key in process.env)) process.env[key] = envValue;
+  }
+}
+
+function slugFromUrl(parsed) {
+  const host = parsed.hostname.replace(/^www\./, "").split(".")[0];
+  const lastPath = parsed.pathname.split("/").filter(Boolean).at(-1) || "video";
+  return `${host}-${lastPath}`
+    .normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "").slice(0, 64) || `video-${Date.now()}`;
+}
+
+function safeSlug(slug) {
+  return typeof slug === "string" && /^[a-z0-9][a-z0-9-]{0,79}$/.test(slug);
+}
+
+function numberSetting(name, fallback) {
+  const number = Number(process.env[name]);
+  return Number.isFinite(number) ? number : fallback;
+}
+
+function showHelp() {
+  console.log(`Content2Video INEMA\n\n` +
+    `  npm run video:create -- <url> [slug]  cria o projeto sem renderizar\n` +
+    `  npm run video:list                     lista os projetos e MP4s\n` +
+    `  npm run video:check -- <slug>           valida a composição\n` +
+    `  npm run video:preview -- <slug>         abre o editor HyperFrames\n` +
+    `  npm run video:render -- <slug>          valida e gera o MP4\n`);
+}
+
+function fail(message) {
+  console.error(`Erro: ${message}`);
+  process.exit(1);
+}

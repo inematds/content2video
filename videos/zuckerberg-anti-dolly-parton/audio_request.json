@@ -1,0 +1,9 @@
+{
+  "provider": "edge-tts",
+  "lang": "pt-BR",
+  "voice_id": "pt-BR-FranciscaNeural",
+  "lines": [],
+  "bgm": {
+    "mode": "none"
+  }
+}

@@ -1,0 +1,941 @@
+{
+  "provider": "edge-tts",
+  "voice": "pt-BR-FranciscaNeural",
+  "voices": [
+    {
+      "frame": 1,
+      "path": "assets/voice/01.wav",
+      "duration_s": 8.112,
+      "words": [
+        {
+          "id": "w0",
+          "text": "Democratas",
+          "start": 0.1,
+          "end": 0.609
+        },
+        {
+          "id": "w1",
+          "text": "e",
+          "start": 0.609,
+          "end": 1.118
+        },
+        {
+          "id": "w2",
+          "text": "republicanos",
+          "start": 1.118,
+          "end": 1.627
+        },
+        {
+          "id": "w3",
+          "text": "discordam",
+          "start": 1.627,
+          "end": 2.135
+        },
+        {
+          "id": "w4",
+          "text": "sobre",
+          "start": 2.135,
+          "end": 2.644
+        },
+        {
+          "id": "w5",
+          "text": "quase",
+          "start": 2.644,
+          "end": 3.153
+        },
+        {
+          "id": "w6",
+          "text": "tudo.",
+          "start": 3.153,
+          "end": 3.662
+        },
+        {
+          "id": "w7",
+          "text": "Mas",
+          "start": 3.612,
+          "end": 4.106
+        },
+        {
+          "id": "w8",
+          "text": "dois",
+          "start": 4.106,
+          "end": 4.601
+        },
+        {
+          "id": "w9",
+          "text": "nomes",
+          "start": 4.601,
+          "end": 5.095
+        },
+        {
+          "id": "w10",
+          "text": "produziram",
+          "start": 5.095,
+          "end": 5.59
+        },
+        {
+          "id": "w11",
+          "text": "consensos",
+          "start": 5.59,
+          "end": 6.084
+        },
+        {
+          "id": "w12",
+          "text": "—",
+          "start": 6.084,
+          "end": 6.579
+        },
+        {
+          "id": "w13",
+          "text": "em",
+          "start": 6.579,
+          "end": 7.073
+        },
+        {
+          "id": "w14",
+          "text": "direções",
+          "start": 7.073,
+          "end": 7.568
+        },
+        {
+          "id": "w15",
+          "text": "opostas.",
+          "start": 7.568,
+          "end": 8.062
+        }
+      ]
+    },
+    {
+      "frame": 2,
+      "path": "assets/voice/02.wav",
+      "duration_s": 8.64,
+      "words": [
+        {
+          "id": "w0",
+          "text": "A",
+          "start": 0.1,
+          "end": 0.549
+        },
+        {
+          "id": "w1",
+          "text": "pesquisa",
+          "start": 0.549,
+          "end": 0.999
+        },
+        {
+          "id": "w2",
+          "text": "nacional",
+          "start": 0.999,
+          "end": 1.448
+        },
+        {
+          "id": "w3",
+          "text": "da",
+          "start": 1.448,
+          "end": 1.897
+        },
+        {
+          "id": "w4",
+          "text": "UMass",
+          "start": 1.897,
+          "end": 2.347
+        },
+        {
+          "id": "w5",
+          "text": "Lowell,",
+          "start": 2.347,
+          "end": 2.796
+        },
+        {
+          "id": "w6",
+          "text": "feita",
+          "start": 2.796,
+          "end": 3.245
+        },
+        {
+          "id": "w7",
+          "text": "em",
+          "start": 3.245,
+          "end": 3.695
+        },
+        {
+          "id": "w8",
+          "text": "abril",
+          "start": 3.695,
+          "end": 4.144
+        },
+        {
+          "id": "w9",
+          "text": "de",
+          "start": 4.144,
+          "end": 4.593
+        },
+        {
+          "id": "w10",
+          "text": "2026,",
+          "start": 4.593,
+          "end": 5.042
+        },
+        {
+          "id": "w11",
+          "text": "perguntou",
+          "start": 5.042,
+          "end": 5.492
+        },
+        {
+          "id": "w12",
+          "text": "a",
+          "start": 5.492,
+          "end": 5.941
+        },
+        {
+          "id": "w13",
+          "text": "adultos",
+          "start": 5.941,
+          "end": 6.39
+        },
+        {
+          "id": "w14",
+          "text": "americanos",
+          "start": 6.39,
+          "end": 6.84
+        },
+        {
+          "id": "w15",
+          "text": "como",
+          "start": 6.84,
+          "end": 7.289
+        },
+        {
+          "id": "w16",
+          "text": "viam",
+          "start": 7.289,
+          "end": 7.738
+        },
+        {
+          "id": "w17",
+          "text": "figuras",
+          "start": 7.738,
+          "end": 8.188
+        },
+        {
+          "id": "w18",
+          "text": "públicas.",
+          "start": 8.188,
+          "end": 8.637
+        }
+      ]
+    },
+    {
+      "frame": 3,
+      "path": "assets/voice/03.wav",
+      "duration_s": 8.52,
+      "words": [
+        {
+          "id": "w0",
+          "text": "Dolly",
+          "start": 0.1,
+          "end": 0.7
+        },
+        {
+          "id": "w1",
+          "text": "Parton",
+          "start": 0.7,
+          "end": 1.3
+        },
+        {
+          "id": "w2",
+          "text": "aparece",
+          "start": 1.3,
+          "end": 1.9
+        },
+        {
+          "id": "w3",
+          "text": "no",
+          "start": 1.9,
+          "end": 2.5
+        },
+        {
+          "id": "w4",
+          "text": "topo:",
+          "start": 2.5,
+          "end": 3.1
+        },
+        {
+          "id": "w5",
+          "text": "favorável",
+          "start": 3.1,
+          "end": 3.7
+        },
+        {
+          "id": "w6",
+          "text": "para",
+          "start": 3.7,
+          "end": 4.3
+        },
+        {
+          "id": "w7",
+          "text": "78%",
+          "start": 4.3,
+          "end": 4.9
+        },
+        {
+          "id": "w8",
+          "text": "dos",
+          "start": 4.9,
+          "end": 5.5
+        },
+        {
+          "id": "w9",
+          "text": "democratas",
+          "start": 5.5,
+          "end": 6.1
+        },
+        {
+          "id": "w10",
+          "text": "e",
+          "start": 6.1,
+          "end": 6.7
+        },
+        {
+          "id": "w11",
+          "text": "73%",
+          "start": 6.7,
+          "end": 7.3
+        },
+        {
+          "id": "w12",
+          "text": "dos",
+          "start": 7.3,
+          "end": 7.9
+        },
+        {
+          "id": "w13",
+          "text": "republicanos.",
+          "start": 7.9,
+          "end": 8.5
+        }
+      ]
+    },
+    {
+      "frame": 4,
+      "path": "assets/voice/04.wav",
+      "duration_s": 7.536,
+      "words": [
+        {
+          "id": "w0",
+          "text": "Mark",
+          "start": 0.1,
+          "end": 0.671
+        },
+        {
+          "id": "w1",
+          "text": "Zuckerberg",
+          "start": 0.671,
+          "end": 1.242
+        },
+        {
+          "id": "w2",
+          "text": "quase",
+          "start": 1.242,
+          "end": 1.813
+        },
+        {
+          "id": "w3",
+          "text": "encosta",
+          "start": 1.813,
+          "end": 2.385
+        },
+        {
+          "id": "w4",
+          "text": "no",
+          "start": 2.385,
+          "end": 2.956
+        },
+        {
+          "id": "w5",
+          "text": "chão:",
+          "start": 2.956,
+          "end": 3.527
+        },
+        {
+          "id": "w6",
+          "text": "8%",
+          "start": 3.527,
+          "end": 4.098
+        },
+        {
+          "id": "w7",
+          "text": "entre",
+          "start": 4.098,
+          "end": 4.669
+        },
+        {
+          "id": "w8",
+          "text": "democratas",
+          "start": 4.669,
+          "end": 5.24
+        },
+        {
+          "id": "w9",
+          "text": "e",
+          "start": 5.24,
+          "end": 5.812
+        },
+        {
+          "id": "w10",
+          "text": "13%",
+          "start": 5.812,
+          "end": 6.383
+        },
+        {
+          "id": "w11",
+          "text": "entre",
+          "start": 6.383,
+          "end": 6.954
+        },
+        {
+          "id": "w12",
+          "text": "republicanos.",
+          "start": 6.954,
+          "end": 7.525
+        }
+      ]
+    },
+    {
+      "frame": 5,
+      "path": "assets/voice/05.wav",
+      "duration_s": 8.376,
+      "words": [
+        {
+          "id": "w0",
+          "text": "No",
+          "start": 0.1,
+          "end": 0.617
+        },
+        {
+          "id": "w1",
+          "text": "total,",
+          "start": 0.617,
+          "end": 1.134
+        },
+        {
+          "id": "w2",
+          "text": "a",
+          "start": 1.134,
+          "end": 1.652
+        },
+        {
+          "id": "w3",
+          "text": "diferença",
+          "start": 1.652,
+          "end": 2.169
+        },
+        {
+          "id": "w4",
+          "text": "também",
+          "start": 2.169,
+          "end": 2.686
+        },
+        {
+          "id": "w5",
+          "text": "é",
+          "start": 2.686,
+          "end": 3.203
+        },
+        {
+          "id": "w6",
+          "text": "enorme:",
+          "start": 3.203,
+          "end": 3.72
+        },
+        {
+          "id": "w7",
+          "text": "70%",
+          "start": 3.72,
+          "end": 4.237
+        },
+        {
+          "id": "w8",
+          "text": "de",
+          "start": 4.237,
+          "end": 4.755
+        },
+        {
+          "id": "w9",
+          "text": "favorabilidade",
+          "start": 4.755,
+          "end": 5.272
+        },
+        {
+          "id": "w10",
+          "text": "para",
+          "start": 5.272,
+          "end": 5.789
+        },
+        {
+          "id": "w11",
+          "text": "Dolly,",
+          "start": 5.789,
+          "end": 6.306
+        },
+        {
+          "id": "w12",
+          "text": "contra",
+          "start": 6.306,
+          "end": 6.823
+        },
+        {
+          "id": "w13",
+          "text": "10%",
+          "start": 6.823,
+          "end": 7.341
+        },
+        {
+          "id": "w14",
+          "text": "para",
+          "start": 7.341,
+          "end": 7.858
+        },
+        {
+          "id": "w15",
+          "text": "Zuckerberg.",
+          "start": 7.858,
+          "end": 8.375
+        }
+      ]
+    },
+    {
+      "frame": 6,
+      "path": "assets/voice/06.wav",
+      "duration_s": 8.424,
+      "words": [
+        {
+          "id": "w0",
+          "text": "A",
+          "start": 0.1,
+          "end": 0.496
+        },
+        {
+          "id": "w1",
+          "text": "Futurism",
+          "start": 0.496,
+          "end": 0.893
+        },
+        {
+          "id": "w2",
+          "text": "chamou",
+          "start": 0.893,
+          "end": 1.289
+        },
+        {
+          "id": "w3",
+          "text": "isso",
+          "start": 1.289,
+          "end": 1.686
+        },
+        {
+          "id": "w4",
+          "text": "de",
+          "start": 1.686,
+          "end": 2.082
+        },
+        {
+          "id": "w5",
+          "text": "relação",
+          "start": 2.082,
+          "end": 2.479
+        },
+        {
+          "id": "w6",
+          "text": "anti-Dolly",
+          "start": 2.479,
+          "end": 2.875
+        },
+        {
+          "id": "w7",
+          "text": "Parton:",
+          "start": 2.875,
+          "end": 3.271
+        },
+        {
+          "id": "w8",
+          "text": "uma",
+          "start": 3.271,
+          "end": 3.668
+        },
+        {
+          "id": "w9",
+          "text": "é",
+          "start": 3.668,
+          "end": 4.064
+        },
+        {
+          "id": "w10",
+          "text": "admirada",
+          "start": 4.064,
+          "end": 4.461
+        },
+        {
+          "id": "w11",
+          "text": "dos",
+          "start": 4.461,
+          "end": 4.857
+        },
+        {
+          "id": "w12",
+          "text": "dois",
+          "start": 4.857,
+          "end": 5.254
+        },
+        {
+          "id": "w13",
+          "text": "lados;",
+          "start": 5.254,
+          "end": 5.65
+        },
+        {
+          "id": "w14",
+          "text": "o",
+          "start": 5.65,
+          "end": 6.046
+        },
+        {
+          "id": "w15",
+          "text": "outro",
+          "start": 6.046,
+          "end": 6.443
+        },
+        {
+          "id": "w16",
+          "text": "registra",
+          "start": 6.443,
+          "end": 6.839
+        },
+        {
+          "id": "w17",
+          "text": "baixa",
+          "start": 6.839,
+          "end": 7.236
+        },
+        {
+          "id": "w18",
+          "text": "aprovação",
+          "start": 7.236,
+          "end": 7.632
+        },
+        {
+          "id": "w19",
+          "text": "nos",
+          "start": 7.632,
+          "end": 8.029
+        },
+        {
+          "id": "w20",
+          "text": "dois.",
+          "start": 8.029,
+          "end": 8.425
+        }
+      ]
+    },
+    {
+      "frame": 7,
+      "path": "assets/voice/07.wav",
+      "duration_s": 9.768,
+      "words": [
+        {
+          "id": "w0",
+          "text": "Os",
+          "start": 0.1,
+          "end": 0.472
+        },
+        {
+          "id": "w1",
+          "text": "números",
+          "start": 0.472,
+          "end": 0.845
+        },
+        {
+          "id": "w2",
+          "text": "não",
+          "start": 0.845,
+          "end": 1.217
+        },
+        {
+          "id": "w3",
+          "text": "explicam",
+          "start": 1.217,
+          "end": 1.589
+        },
+        {
+          "id": "w4",
+          "text": "sozinhos",
+          "start": 1.589,
+          "end": 1.961
+        },
+        {
+          "id": "w5",
+          "text": "o",
+          "start": 1.961,
+          "end": 2.334
+        },
+        {
+          "id": "w6",
+          "text": "motivo,",
+          "start": 2.334,
+          "end": 2.706
+        },
+        {
+          "id": "w7",
+          "text": "e",
+          "start": 2.706,
+          "end": 3.078
+        },
+        {
+          "id": "w8",
+          "text": "a",
+          "start": 3.078,
+          "end": 3.451
+        },
+        {
+          "id": "w9",
+          "text": "pesquisa",
+          "start": 3.451,
+          "end": 3.823
+        },
+        {
+          "id": "w10",
+          "text": "mede",
+          "start": 3.823,
+          "end": 4.195
+        },
+        {
+          "id": "w11",
+          "text": "opinião,",
+          "start": 4.195,
+          "end": 4.567
+        },
+        {
+          "id": "w12",
+          "text": "não",
+          "start": 4.567,
+          "end": 4.94
+        },
+        {
+          "id": "w13",
+          "text": "caráter.",
+          "start": 4.94,
+          "end": 5.312
+        },
+        {
+          "id": "w14",
+          "text": "Mas",
+          "start": 5.262,
+          "end": 5.755
+        },
+        {
+          "id": "w15",
+          "text": "revelam",
+          "start": 5.755,
+          "end": 6.248
+        },
+        {
+          "id": "w16",
+          "text": "algo",
+          "start": 6.248,
+          "end": 6.741
+        },
+        {
+          "id": "w17",
+          "text": "raro:",
+          "start": 6.741,
+          "end": 7.234
+        },
+        {
+          "id": "w18",
+          "text": "consenso",
+          "start": 7.234,
+          "end": 7.728
+        },
+        {
+          "id": "w19",
+          "text": "em",
+          "start": 7.728,
+          "end": 8.221
+        },
+        {
+          "id": "w20",
+          "text": "uma",
+          "start": 8.221,
+          "end": 8.714
+        },
+        {
+          "id": "w21",
+          "text": "época",
+          "start": 8.714,
+          "end": 9.207
+        },
+        {
+          "id": "w22",
+          "text": "polarizada.",
+          "start": 9.207,
+          "end": 9.7
+        }
+      ]
+    },
+    {
+      "frame": 8,
+      "path": "assets/voice/08.wav",
+      "duration_s": 9.048,
+      "words": [
+        {
+          "id": "w0",
+          "text": "Quando",
+          "start": 0.1,
+          "end": 0.461
+        },
+        {
+          "id": "w1",
+          "text": "os",
+          "start": 0.461,
+          "end": 0.823
+        },
+        {
+          "id": "w2",
+          "text": "extremos",
+          "start": 0.823,
+          "end": 1.184
+        },
+        {
+          "id": "w3",
+          "text": "concordam,",
+          "start": 1.184,
+          "end": 1.545
+        },
+        {
+          "id": "w4",
+          "text": "vale",
+          "start": 1.545,
+          "end": 1.907
+        },
+        {
+          "id": "w5",
+          "text": "olhar",
+          "start": 1.907,
+          "end": 2.268
+        },
+        {
+          "id": "w6",
+          "text": "o",
+          "start": 2.268,
+          "end": 2.63
+        },
+        {
+          "id": "w7",
+          "text": "dado",
+          "start": 2.63,
+          "end": 2.991
+        },
+        {
+          "id": "w8",
+          "text": "antes",
+          "start": 2.991,
+          "end": 3.352
+        },
+        {
+          "id": "w9",
+          "text": "da",
+          "start": 3.352,
+          "end": 3.714
+        },
+        {
+          "id": "w10",
+          "text": "manchete.",
+          "start": 3.714,
+          "end": 4.075
+        },
+        {
+          "id": "w11",
+          "text": "Às",
+          "start": 4.025,
+          "end": 4.407
+        },
+        {
+          "id": "w12",
+          "text": "vezes,",
+          "start": 4.407,
+          "end": 4.788
+        },
+        {
+          "id": "w13",
+          "text": "o",
+          "start": 4.788,
+          "end": 5.17
+        },
+        {
+          "id": "w14",
+          "text": "verdadeiro",
+          "start": 5.17,
+          "end": 5.552
+        },
+        {
+          "id": "w15",
+          "text": "fato",
+          "start": 5.552,
+          "end": 5.933
+        },
+        {
+          "id": "w16",
+          "text": "não",
+          "start": 5.933,
+          "end": 6.315
+        },
+        {
+          "id": "w17",
+          "text": "é",
+          "start": 6.315,
+          "end": 6.697
+        },
+        {
+          "id": "w18",
+          "text": "a",
+          "start": 6.697,
+          "end": 7.079
+        },
+        {
+          "id": "w19",
+          "text": "divisão",
+          "start": 7.079,
+          "end": 7.46
+        },
+        {
+          "id": "w20",
+          "text": "—",
+          "start": 7.46,
+          "end": 7.842
+        },
+        {
+          "id": "w21",
+          "text": "é",
+          "start": 7.842,
+          "end": 8.224
+        },
+        {
+          "id": "w22",
+          "text": "a",
+          "start": 8.224,
+          "end": 8.605
+        },
+        {
+          "id": "w23",
+          "text": "convergência.",
+          "start": 8.605,
+          "end": 8.987
+        }
+      ]
+    }
+  ],
+  "bgm": null,
+  "sfx": [],
+  "total_duration_s": 68.424
+}

@@ -1,0 +1,325 @@
+<template>
+  <style>
+    #root {
+      position: relative;
+      width: 1080px;
+      height: 1920px;
+      overflow: hidden;
+      container-type: size;
+      color: #1f2be0;
+    }
+
+    #root [class~="06-retomar-ground"],
+    #root [class~="06-retomar-stage"] {
+      position: absolute;
+      inset: 0;
+      width: 1080px;
+      height: 1920px;
+    }
+
+    #root [class~="06-retomar-ground"] {
+      background-color: #f0ebde;
+      background-image:
+        linear-gradient(rgba(31, 43, 224, 0.10) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(31, 43, 224, 0.10) 1px, transparent 1px);
+      background-size: 22px 22px;
+    }
+
+    #root [class~="06-retomar-hairline"] {
+      position: absolute;
+      left: 44px;
+      right: 44px;
+      height: 2px;
+      background: #1f2be0;
+    }
+
+    #root [class~="06-retomar-hairline-top"] { top: 58px; }
+    #root [class~="06-retomar-hairline-bottom"] { top: 1560px; }
+
+    #root [class~="06-retomar-kicker"],
+    #root [class~="06-retomar-calendar-label"] {
+      position: absolute;
+      margin: 0;
+      font-family: sans-serif;
+      font-size: 18px;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      line-height: 1;
+      text-transform: uppercase;
+    }
+
+    #root [class~="06-retomar-kicker"] {
+      left: 72px;
+      top: 190px;
+    }
+
+    #root [class~="06-retomar-anchor"] {
+      position: absolute;
+      left: 68px;
+      top: 306px;
+      width: 470px;
+      margin: 0;
+      font-family: serif;
+      font-size: 102px;
+      font-weight: 400;
+      line-height: 0.9;
+      letter-spacing: -0.008em;
+      transform-origin: 0 50%;
+      white-space: nowrap;
+    }
+
+    #root [class~="06-retomar-anchor-rule"] {
+      position: absolute;
+      left: 72px;
+      top: 440px;
+      width: 452px;
+      height: 2px;
+      background: #1f2be0;
+    }
+
+    #root [class~="06-retomar-state-wrap"] {
+      position: absolute;
+      left: 72px;
+      top: 565px;
+      width: 480px;
+      min-height: 210px;
+      border-top: 1px solid rgba(31, 43, 224, 0.18);
+      border-bottom: 1px solid rgba(31, 43, 224, 0.18);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    #root [class~="06-retomar-state-index"] {
+      margin: 0 0 20px;
+      font-family: monospace;
+      font-size: 16px;
+      letter-spacing: 0.08em;
+      line-height: 1;
+      text-transform: uppercase;
+    }
+
+    #root [class~="06-retomar-state"] {
+      display: block;
+      min-width: 470px;
+      min-height: 78px;
+      margin: 0;
+      font-family: serif;
+      font-size: 69px;
+      font-weight: 400;
+      letter-spacing: -0.005em;
+      line-height: 1;
+      white-space: nowrap;
+    }
+
+    #root [class~="06-retomar-calendar"] {
+      position: absolute;
+      left: 606px;
+      top: 188px;
+      width: 402px;
+      height: 1014px;
+      border-top: 2px solid #1f2be0;
+      border-bottom: 2px solid #1f2be0;
+    }
+
+    #root [class~="06-retomar-calendar-label"] {
+      left: 0;
+      top: 25px;
+    }
+
+    #root [class~="06-retomar-weekdays"] {
+      position: absolute;
+      left: 0;
+      top: 102px;
+      width: 402px;
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 10px;
+      font-family: monospace;
+      font-size: 15px;
+      letter-spacing: 0.06em;
+      text-align: center;
+    }
+
+    #root [class~="06-retomar-calendar-grid"] {
+      position: absolute;
+      left: 0;
+      top: 154px;
+      width: 402px;
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 12px 10px;
+    }
+
+    #root [class~="06-retomar-day"] {
+      position: relative;
+      width: 72px;
+      height: 116px;
+      box-sizing: border-box;
+      border: 2px solid rgba(31, 43, 224, 0.18);
+      background: rgba(240, 235, 222, 0.82);
+    }
+
+    #root [class~="06-retomar-day-fill"] {
+      position: absolute;
+      inset: 8px;
+      background: #1f2be0;
+      transform-origin: 50% 100%;
+    }
+
+    #root [class~="06-retomar-day-gap"] {
+      border-color: #1f2be0;
+      background:
+        linear-gradient(153deg, transparent 48%, #1f2be0 49%, #1f2be0 51%, transparent 52%);
+    }
+
+    #root [class~="06-retomar-day-next"] {
+      border-color: #1f2be0;
+    }
+
+    #root [class~="06-retomar-flowline"] {
+      position: absolute;
+      left: 72px;
+      top: 930px;
+      width: 452px;
+      height: 302px;
+      border-left: 2px solid #1f2be0;
+      border-bottom: 2px solid #1f2be0;
+    }
+
+    #root [class~="06-retomar-flowline"]::after {
+      content: "";
+      position: absolute;
+      right: -2px;
+      bottom: -8px;
+      width: 16px;
+      height: 16px;
+      box-sizing: border-box;
+      border-right: 2px solid #1f2be0;
+      border-bottom: 2px solid #1f2be0;
+      transform: rotate(-45deg);
+    }
+
+    #root [class~="06-retomar-flow-label"] {
+      position: absolute;
+      left: 94px;
+      top: 1168px;
+      margin: 0;
+      font-family: monospace;
+      font-size: 18px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    #root [class~="06-retomar-page"] {
+      position: absolute;
+      left: 72px;
+      right: 72px;
+      top: 1501px;
+      display: flex;
+      justify-content: space-between;
+      font-family: monospace;
+      font-size: 16px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+  </style>
+
+  <div data-hf-id="hf-15cu" id="root" data-composition-id="06-retomar" data-width="1080" data-height="1920" data-duration="8.352">
+    <div data-hf-id="hf-g79l" class="clip 06-retomar-ground" data-start="0" data-duration="8.352" data-track-index="0">
+      <div data-hf-id="hf-qrki" class="06-retomar-hairline 06-retomar-hairline-top"></div>
+      <div data-hf-id="hf-3dow" class="06-retomar-hairline 06-retomar-hairline-bottom"></div>
+    </div>
+
+    <div data-hf-id="hf-lmtj" class="clip 06-retomar-stage" data-start="0" data-duration="8.352" data-track-index="1">
+      <p data-hf-id="hf-ccxm" class="06-retomar-kicker">ritmo editorial</p>
+      <h1 data-hf-id="hf-7f8o" id="06-retomar-anchor" class="06-retomar-anchor">PROCESSO</h1>
+      <div data-hf-id="hf-ndrm" id="06-retomar-anchor-rule" class="06-retomar-anchor-rule"></div>
+
+      <div data-hf-id="hf-wtgi" id="06-retomar-state-wrap" class="06-retomar-state-wrap">
+        <p data-hf-id="hf-5bqi" class="06-retomar-state-index">estado atual</p>
+        <span data-hf-id="hf-8rl1" id="06-retomar-state" class="06-retomar-state" aria-live="off"></span>
+      </div>
+
+      <div data-hf-id="hf-ddmd" id="06-retomar-calendar" class="06-retomar-calendar" aria-label="Calendário simplificado">
+        <p data-hf-id="hf-j4sr" class="06-retomar-calendar-label">cadência</p>
+        <div data-hf-id="hf-8ys8" class="06-retomar-weekdays" aria-hidden="true">
+          <span data-hf-id="hf-fmnq">S</span><span data-hf-id="hf-efqn">T</span><span data-hf-id="hf-gf9s">Q</span><span data-hf-id="hf-ppgo">Q</span><span data-hf-id="hf-wgd6">S</span>
+        </div>
+        <div data-hf-id="hf-c5m0" class="06-retomar-calendar-grid" aria-hidden="true">
+          <div data-hf-id="hf-o824" class="06-retomar-day"><i data-hf-id="hf-w87u" class="06-retomar-day-fill"></i></div>
+          <div data-hf-id="hf-e4mc" class="06-retomar-day"><i data-hf-id="hf-6pxa" class="06-retomar-day-fill"></i></div>
+          <div data-hf-id="hf-cxp9" class="06-retomar-day"><i data-hf-id="hf-748b" class="06-retomar-day-fill"></i></div>
+          <div data-hf-id="hf-dc0a" class="06-retomar-day"><i data-hf-id="hf-7ijc" class="06-retomar-day-fill"></i></div>
+          <div data-hf-id="hf-fbjf" class="06-retomar-day"><i data-hf-id="hf-4qe5" class="06-retomar-day-fill"></i></div>
+          <div data-hf-id="hf-7wgv" id="06-retomar-gap" class="06-retomar-day 06-retomar-day-gap"></div>
+          <div data-hf-id="hf-5lx5" id="06-retomar-next" class="06-retomar-day 06-retomar-day-next"><i data-hf-id="hf-tf8l" id="06-retomar-next-fill" class="06-retomar-day-fill"></i></div>
+          <div data-hf-id="hf-fpug" class="06-retomar-day"></div>
+          <div data-hf-id="hf-eixd" class="06-retomar-day"></div>
+          <div data-hf-id="hf-ex8e" class="06-retomar-day"></div>
+        </div>
+      </div>
+
+      <div data-hf-id="hf-66ya" id="06-retomar-flowline" class="06-retomar-flowline"></div>
+      <p data-hf-id="hf-y94h" id="06-retomar-flow-label" class="06-retomar-flow-label">a linha segue</p>
+
+      <div data-hf-id="hf-h2vr" class="06-retomar-page"><span data-hf-id="hf-dyf4">caderno / 06</span><span data-hf-id="hf-hvao">continuidade</span></div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+  <script>
+    (() => {
+      const tl = gsap.timeline({ paused: true });
+      window.__timelines = window.__timelines || {};
+      window.__timelines["06-retomar"] = tl;
+
+      const anchor = document.getElementById("06-retomar-anchor");
+      const anchorRule = document.getElementById("06-retomar-anchor-rule");
+      const calendar = document.getElementById("06-retomar-calendar");
+      const stateWrap = document.getElementById("06-retomar-state-wrap");
+      const state = document.getElementById("06-retomar-state");
+      const gap = document.getElementById("06-retomar-gap");
+      const next = document.getElementById("06-retomar-next");
+      const nextFill = document.getElementById("06-retomar-next-fill");
+      const flowline = document.getElementById("06-retomar-flowline");
+      const flowLabel = document.getElementById("06-retomar-flow-label");
+      const priorFills = Array.from(document.querySelectorAll('[class~="06-retomar-calendar-grid"] [class~="06-retomar-day-fill"]')).slice(0, 5);
+
+      tl.set(next, { opacity: 0 }, 0);
+      tl.fromTo(anchor, { opacity: 0, scale: 0.96 }, { opacity: 1, scale: 1, duration: 0.48, ease: "expo.out" }, 0);
+      tl.fromTo(anchorRule, { opacity: 0, scaleX: 0 }, { opacity: 1, scaleX: 1, duration: 0.62, ease: "power3.out", transformOrigin: "0 50%" }, 0.22);
+      tl.fromTo(calendar, { opacity: 0, y: 28 }, { opacity: 1, y: 0, duration: 0.62, ease: "power3.out" }, 0.34);
+      tl.fromTo(priorFills, { opacity: 0, scaleY: 0 }, { opacity: 1, scaleY: 1, duration: 0.28, stagger: 0.16, ease: "power3.out" }, 0.72);
+
+      tl.fromTo(stateWrap, { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.44, ease: "power3.out" }, 1.58);
+
+      const stateSequence = [
+        { t: 1.80, text: "REPETIR" },
+        { t: 2.92, text: "PAUSA" },
+        { t: 4.08, text: "RETOMAR" },
+        { t: 5.50, text: "CONTINUAR" }
+      ];
+      const stateAt = (time) => {
+        for (let i = stateSequence.length - 1; i >= 0; i -= 1) {
+          if (time >= stateSequence[i].t) return stateSequence[i].text;
+        }
+        return "";
+      };
+      const driver = { t: 0 };
+      tl.to(driver, {
+        t: 7.752,
+        duration: 7.752,
+        ease: "none",
+        onUpdate: () => { state.textContent = stateAt(driver.t); }
+      }, 0);
+
+      tl.fromTo(gap, { opacity: 0, scale: 0.9 }, { opacity: 1, scale: 1, duration: 0.34, ease: "power3.out" }, 2.84);
+      tl.fromTo(flowline, { opacity: 0, scaleY: 0 }, { opacity: 1, scaleY: 1, duration: 0.72, ease: "power3.out", transformOrigin: "0 0" }, 3.66);
+      tl.fromTo(flowLabel, { opacity: 0, x: -18 }, { opacity: 1, x: 0, duration: 0.4, ease: "power3.out" }, 4.34);
+
+      tl.set(next, { opacity: 1 }, 5.5);
+      tl.fromTo(nextFill, { opacity: 0, scaleY: 0 }, { opacity: 1, scaleY: 1, duration: 0.48, ease: "expo.out", transformOrigin: "50% 100%" }, 5.58);
+    })();
+  </script>
+</template>

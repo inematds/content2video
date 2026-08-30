@@ -1,0 +1,358 @@
+<template>
+  <style>
+    #root {
+      position: relative;
+      width: 1080px;
+      height: 1920px;
+      overflow: hidden;
+      container-type: size;
+      color: #1f2be0;
+    }
+
+    .clip {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+    }
+
+    [class~="04-acumulo-ground"] {
+      z-index: 0;
+      background-color: #f0ebde;
+      background-image:
+        linear-gradient(rgba(31, 43, 224, 0.1) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(31, 43, 224, 0.1) 1px, transparent 1px);
+      background-size: 2cqw 2cqw;
+    }
+
+    [class~="04-acumulo-scene"] {
+      z-index: 1;
+      font-family: sans-serif;
+    }
+
+    [class~="04-acumulo-hairline"] {
+      position: absolute;
+      left: 4cqw;
+      width: 92cqw;
+      height: 2px;
+      background: #1f2be0;
+    }
+
+    [class~="04-acumulo-hairline-top"] { top: 3cqw; }
+    [class~="04-acumulo-hairline-bottom"] { top: 1420px; }
+
+    [class~="04-acumulo-chrome"] {
+      position: absolute;
+      top: 82px;
+      left: 4cqw;
+      right: 4cqw;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-family: monospace;
+      font-size: 17px;
+      line-height: 1;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    [class~="04-acumulo-stage"] {
+      position: absolute;
+      top: 210px;
+      left: 4cqw;
+      width: 92cqw;
+      height: 1130px;
+      transform-origin: 42% 54%;
+    }
+
+    [class~="04-acumulo-chart"] {
+      position: absolute;
+      left: 0;
+      top: 88px;
+      width: 61%;
+      height: 930px;
+      border-top: 2px solid #1f2be0;
+    }
+
+    [class~="04-acumulo-action"] {
+      position: absolute;
+      left: 0;
+      top: 28px;
+      font-size: 21px;
+      line-height: 1;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+    }
+
+    [class~="04-acumulo-chart-grid"] {
+      position: absolute;
+      inset: 112px 0 168px 0;
+      border-left: 2px solid #1f2be0;
+      border-bottom: 2px solid #1f2be0;
+      background-image:
+        linear-gradient(rgba(31, 43, 224, 0.1) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(31, 43, 224, 0.1) 1px, transparent 1px);
+      background-size: 12.5% 25%;
+    }
+
+    [class~="04-acumulo-curve-svg"] {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      overflow: visible;
+    }
+
+    [class~="04-acumulo-curve"] {
+      fill: none;
+      stroke: #1f2be0;
+      stroke-width: 10;
+      stroke-linecap: square;
+      stroke-linejoin: miter;
+    }
+
+    [class~="04-acumulo-area"] {
+      fill: rgba(31, 43, 224, 0.08);
+      opacity: 0;
+    }
+
+    [class~="04-acumulo-pulse"] {
+      fill: #f0ebde;
+      stroke: #1f2be0;
+      stroke-width: 7;
+      opacity: 0;
+    }
+
+    [class~="04-acumulo-cells"] {
+      position: absolute;
+      left: 0;
+      bottom: 62px;
+      width: 100%;
+      height: 74px;
+      display: grid;
+      grid-template-columns: repeat(8, 1fr);
+      gap: 10px;
+      align-items: end;
+    }
+
+    [class~="04-acumulo-cell"] {
+      position: relative;
+      height: 74px;
+      border: 2px solid rgba(31, 43, 224, 0.18);
+      background: #f0ebde;
+      overflow: hidden;
+    }
+
+    [class~="04-acumulo-cell-fill"] {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      background: #1f2be0;
+      transform-origin: bottom center;
+    }
+
+    [class~="04-acumulo-baseline"] {
+      position: absolute;
+      left: 0;
+      bottom: 42px;
+      width: 100%;
+      height: 2px;
+      background: #1f2be0;
+    }
+
+    [class~="04-acumulo-repeat-tag"] {
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      font-family: monospace;
+      font-size: 17px;
+      line-height: 1;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    [class~="04-acumulo-labels"] {
+      position: absolute;
+      right: 0;
+      top: 500px;
+      width: 34%;
+      display: flex;
+      flex-direction: column;
+      gap: 26px;
+    }
+
+    [class~="04-acumulo-label"] {
+      position: relative;
+      min-height: 104px;
+      display: flex;
+      align-items: center;
+      border-top: 2px solid #1f2be0;
+      border-bottom: 1px solid rgba(31, 43, 224, 0.18);
+      font-family: serif;
+      font-size: 42px;
+      line-height: 0.95;
+      font-weight: 400;
+      letter-spacing: -0.01em;
+    }
+
+    [class~="04-acumulo-label"]::before {
+      content: "";
+      position: absolute;
+      left: -76px;
+      top: 50%;
+      width: 58px;
+      height: 2px;
+      background: #1f2be0;
+    }
+
+    [class~="04-acumulo-index"] {
+      position: absolute;
+      right: 0;
+      bottom: 0;
+      font-family: monospace;
+      font-size: 17px;
+      line-height: 1;
+      letter-spacing: 0.12em;
+    }
+  </style>
+
+  <div data-hf-id="hf-3orr" id="root" data-composition-id="04-acumulo" data-width="1080" data-height="1920" data-duration="7.844">
+    <div data-hf-id="hf-tv12" class="clip 04-acumulo-ground" data-start="0" data-duration="7.844" data-track-index="0"></div>
+
+    <div data-hf-id="hf-koy6" class="clip 04-acumulo-scene" data-start="0" data-duration="7.844" data-track-index="1">
+      <div data-hf-id="hf-tnem" class="04-acumulo-hairline 04-acumulo-hairline-top"></div>
+      <div data-hf-id="hf-sqho" class="04-acumulo-hairline 04-acumulo-hairline-bottom"></div>
+
+      <div data-hf-id="hf-rh6e" class="04-acumulo-chrome">
+        <span data-hf-id="hf-kx3v">FIG. 04</span>
+        <span data-hf-id="hf-mn4u">ACÚMULO</span>
+      </div>
+
+      <div data-hf-id="hf-4nte" class="04-acumulo-stage">
+        <div data-hf-id="hf-6n2g" class="04-acumulo-chart">
+          <div data-hf-id="hf-3sw0" class="04-acumulo-action">AÇÃO</div>
+
+          <div data-hf-id="hf-vpnt" class="04-acumulo-chart-grid">
+            <svg data-hf-id="hf-bjs3" class="04-acumulo-curve-svg" viewBox="0 0 610 650" preserveAspectRatio="none" aria-hidden="true">
+              <path data-hf-id="hf-fn85" class="04-acumulo-area" d="M0 598 C76 584 122 558 174 521 C226 484 250 433 305 391 C361 348 397 277 452 224 C503 174 554 112 610 48 L610 650 L0 650 Z" />
+              <path data-hf-id="hf-33fn" id="04-acumulo-curve" class="04-acumulo-curve" d="M0 598 C76 584 122 558 174 521 C226 484 250 433 305 391 C361 348 397 277 452 224 C503 174 554 112 610 48" />
+              <rect data-hf-id="hf-qp29" class="04-acumulo-pulse" x="-7" y="591" width="14" height="14" />
+              <rect data-hf-id="hf-etwc" class="04-acumulo-pulse" x="167" y="514" width="14" height="14" />
+              <rect data-hf-id="hf-rjhc" class="04-acumulo-pulse" x="298" y="384" width="14" height="14" />
+              <rect data-hf-id="hf-und9" class="04-acumulo-pulse" x="445" y="217" width="14" height="14" />
+              <rect data-hf-id="hf-jc6g" class="04-acumulo-pulse" x="603" y="41" width="14" height="14" />
+            </svg>
+          </div>
+
+          <div data-hf-id="hf-9cxp" class="04-acumulo-cells" aria-label="Marcas sucessivas de repetição">
+            <div data-hf-id="hf-rock" class="04-acumulo-cell"><div data-hf-id="hf-o4bq" class="04-acumulo-cell-fill"></div></div>
+            <div data-hf-id="hf-fi9o" class="04-acumulo-cell"><div data-hf-id="hf-jh4a" class="04-acumulo-cell-fill"></div></div>
+            <div data-hf-id="hf-ebcl" class="04-acumulo-cell"><div data-hf-id="hf-jvfb" class="04-acumulo-cell-fill"></div></div>
+            <div data-hf-id="hf-epnm" class="04-acumulo-cell"><div data-hf-id="hf-k9qc" class="04-acumulo-cell-fill"></div></div>
+            <div data-hf-id="hf-gp6r" class="04-acumulo-cell"><div data-hf-id="hf-ko1d" class="04-acumulo-cell-fill"></div></div>
+            <div data-hf-id="hf-h3hs" class="04-acumulo-cell"><div data-hf-id="hf-l2ce" class="04-acumulo-cell-fill"></div></div>
+            <div data-hf-id="hf-fwkp" class="04-acumulo-cell"><div data-hf-id="hf-lgnf" class="04-acumulo-cell-fill"></div></div>
+            <div data-hf-id="hf-gavq" class="04-acumulo-cell"><div data-hf-id="hf-luyg" class="04-acumulo-cell-fill"></div></div>
+          </div>
+          <div data-hf-id="hf-uu7x" class="04-acumulo-baseline"></div>
+          <div data-hf-id="hf-7hhw" class="04-acumulo-repeat-tag">REPETIÇÃO →</div>
+        </div>
+
+        <div data-hf-id="hf-r145" class="04-acumulo-labels">
+          <div data-hf-id="hf-a26n" class="04-acumulo-label">EVIDÊNCIA</div>
+          <div data-hf-id="hf-ep21" class="04-acumulo-label">CAPACIDADE</div>
+          <div data-hf-id="hf-mog4" class="04-acumulo-label">CONFIANÇA</div>
+        </div>
+
+        <div data-hf-id="hf-lw03" class="04-acumulo-index">AÇÃO × REPETIÇÃO</div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+  <script>
+    (() => {
+      const root = document.querySelector('[data-composition-id="04-acumulo"]');
+      const stage = root.querySelector('[class~="04-acumulo-stage"]');
+      const action = root.querySelector('[class~="04-acumulo-action"]');
+      const repeatTag = root.querySelector('[class~="04-acumulo-repeat-tag"]');
+      const area = root.querySelector('[class~="04-acumulo-area"]');
+      const cellFills = root.querySelectorAll('[class~="04-acumulo-cell-fill"]');
+      const pulses = root.querySelectorAll('[class~="04-acumulo-pulse"]');
+      const labels = root.querySelectorAll('[class~="04-acumulo-label"]');
+      const curve = root.querySelector('[id="04-acumulo-curve"]');
+      const curveLength = curve.getTotalLength();
+      curve.style.strokeDasharray = `${curveLength}`;
+      curve.style.strokeDashoffset = `${curveLength}`;
+
+      window.__timelines = window.__timelines || {};
+      const tl = gsap.timeline({ paused: true });
+      window.__timelines['04-acumulo'] = tl;
+
+      tl.fromTo(stage,
+        { scale: 0.985, x: 0 },
+        { scale: 1.025, x: -8, duration: 5.6, ease: 'none' },
+        0
+      );
+
+      tl.fromTo(action,
+        { opacity: 0, x: -70 },
+        { opacity: 1, x: 0, duration: 0.5, ease: 'power4.out' },
+        0.05
+      );
+
+      tl.fromTo(cellFills[0],
+        { scaleY: 0 },
+        { scaleY: 1, duration: 0.72, ease: 'power3.out' },
+        0.18
+      );
+
+      tl.fromTo(repeatTag,
+        { opacity: 0, x: -36 },
+        { opacity: 1, x: 0, duration: 0.45, ease: 'power3.out' },
+        0.58
+      );
+
+      cellFills.forEach((cell, index) => {
+        if (index === 0) return;
+        tl.fromTo(cell,
+          { scaleY: 0 },
+          { scaleY: 1, duration: 0.52, ease: 'power3.out' },
+          1.9 + (index - 1) * 0.43
+        );
+      });
+
+      tl.to(curve,
+        { strokeDashoffset: 0, duration: 3.45, ease: 'power2.out' },
+        2.02
+      );
+
+      tl.to(area,
+        { opacity: 1, duration: 1.15, ease: 'power1.out' },
+        4.35
+      );
+
+      pulses.forEach((pulse, index) => {
+        tl.fromTo(pulse,
+          { opacity: 0, scale: 0.35, transformOrigin: 'center center' },
+          { opacity: 1, scale: 1, duration: 0.38, ease: 'back.out(1.8)' },
+          2.12 + index * 0.72
+        );
+      });
+
+      labels.forEach((label, index) => {
+        tl.fromTo(label,
+          { opacity: 0, x: 150 },
+          { opacity: 1, x: 0, duration: 0.56, ease: 'power4.out' },
+          5.62 + index * 0.43
+        );
+      });
+
+      tl.to(stage,
+        { scale: 1, x: 0, duration: 1.18, ease: 'power2.out' },
+        6.16
+      );
+    })();
+  </script>
+</template>

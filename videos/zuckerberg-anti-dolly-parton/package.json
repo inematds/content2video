@@ -1,0 +1,11 @@
+{
+  "name": "zuckerberg-anti-dolly-parton",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "npx --yes hyperframes@0.8.19 preview",
+    "check": "npx --yes hyperframes@0.8.19 check",
+    "render": "npx --yes hyperframes@0.8.19 render",
+    "publish": "npx --yes hyperframes@0.8.19 publish"
+  }
+}

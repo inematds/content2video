@@ -1,0 +1,404 @@
+<template>
+  <style>
+    @font-face {
+      font-family: "Bebas Neue";
+      src: url("assets/fonts/BebasNeue-Regular.ttf") format("truetype");
+      font-weight: 400;
+      font-style: normal;
+    }
+
+    @font-face {
+      font-family: "Inter";
+      src: url("assets/fonts/Inter-700.woff2") format("woff2");
+      font-weight: 700;
+      font-style: normal;
+    }
+
+    #root {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      container-type: size;
+      color: #1a1a1a;
+    }
+
+    #root * {
+      box-sizing: border-box;
+    }
+
+    .clip {
+      position: absolute;
+      inset: 0;
+    }
+
+    [class~="06-a-leitura-da-manchete-ground"] {
+      background: linear-gradient(to bottom, #e85d5d 0 50%, #1a1a1a 50% 100%);
+    }
+
+    [class~="06-a-leitura-da-manchete-ground"]::before {
+      content: "";
+      position: absolute;
+      inset: 0 0 50%;
+      background-image: repeating-linear-gradient(45deg, transparent 0 20px, rgba(0, 0, 0, 0.06) 20px 40px);
+    }
+
+    [class~="06-a-leitura-da-manchete-ground"]::after {
+      content: "VERSUS";
+      position: absolute;
+      top: 39cqh;
+      left: -5cqw;
+      width: 110cqw;
+      text-align: center;
+      font-family: "Bebas Neue";
+      font-size: 24cqw;
+      line-height: 0.8;
+      letter-spacing: 12px;
+      color: rgba(245, 240, 232, 0.055);
+      white-space: nowrap;
+    }
+
+    [class~="06-a-leitura-da-manchete-stage"] {
+      position: absolute;
+      inset: 0;
+      perspective: 1800px;
+    }
+
+    [class~="06-a-leitura-da-manchete-stamp-wrap"] {
+      position: absolute;
+      z-index: 8;
+      top: 13cqh;
+      left: 7cqw;
+      width: 86cqw;
+      height: 19cqh;
+      display: grid;
+      place-items: center;
+      transform-style: preserve-3d;
+    }
+
+    [class~="06-a-leitura-da-manchete-stamp"] {
+      position: relative;
+      width: 82cqw;
+      padding: 2.1cqh 3cqw 1.7cqh;
+      border: 10px solid #f5f0e8;
+      background: #1a1a1a;
+      color: #f5f0e8;
+      text-align: center;
+      transform-origin: center;
+    }
+
+    [class~="06-a-leitura-da-manchete-source-row"] {
+      min-height: 2.8cqh;
+      display: flex;
+      justify-content: center;
+      align-items: baseline;
+      font-family: "Inter";
+      font-size: 2.6cqw;
+      font-weight: 700;
+      letter-spacing: 5px;
+      text-transform: uppercase;
+      color: #e85d5d;
+      white-space: nowrap;
+    }
+
+    [class~="06-a-leitura-da-manchete-source-cursor"] {
+      display: inline-block;
+      width: 1.5cqw;
+      margin-left: 0.5cqw;
+      color: #e85d5d;
+    }
+
+    [class~="06-a-leitura-da-manchete-stamp-title"] {
+      margin-top: 1cqh;
+      font-family: "Bebas Neue";
+      font-size: 15.5cqw;
+      font-weight: 400;
+      line-height: 0.82;
+      letter-spacing: 5px;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    [class~="06-a-leitura-da-manchete-panels"] {
+      position: absolute;
+      z-index: 3;
+      top: 34.5cqh;
+      left: 7cqw;
+      width: 86cqw;
+      height: 45.5cqh;
+      display: grid;
+      grid-template-rows: 1fr 1fr;
+      gap: 2.3cqh;
+      transform-style: preserve-3d;
+    }
+
+    [class~="06-a-leitura-da-manchete-panel"] {
+      position: relative;
+      width: 100%;
+      min-height: 0;
+      padding: 3.1cqh 5cqw 2.5cqh;
+      overflow: hidden;
+      transform-style: preserve-3d;
+      will-change: transform;
+    }
+
+    [class~="06-a-leitura-da-manchete-panel--dolly"] {
+      background: #f5f0e8;
+      border-top: 8px solid #1a1a1a;
+      color: #1a1a1a;
+    }
+
+    [class~="06-a-leitura-da-manchete-panel--zuck"] {
+      background: #1a1a1a;
+      border-top: 8px solid #e85d5d;
+      color: #f5f0e8;
+    }
+
+    [class~="06-a-leitura-da-manchete-index"] {
+      position: absolute;
+      right: 3cqw;
+      top: -1.6cqh;
+      font-family: "Bebas Neue";
+      font-size: 17cqw;
+      line-height: 1;
+      letter-spacing: 2px;
+      color: rgba(26, 26, 26, 0.09);
+    }
+
+    [class~="06-a-leitura-da-manchete-panel--zuck"] [class~="06-a-leitura-da-manchete-index"] {
+      color: rgba(245, 240, 232, 0.08);
+    }
+
+    [class~="06-a-leitura-da-manchete-panel-label"] {
+      position: relative;
+      margin: 0 0 1.4cqh;
+      font-family: "Inter";
+      font-size: 2.1cqw;
+      font-weight: 700;
+      line-height: 1;
+      letter-spacing: 5px;
+      text-transform: uppercase;
+      color: #e85d5d;
+    }
+
+    [class~="06-a-leitura-da-manchete-panel-name"] {
+      position: relative;
+      margin: 0;
+      font-family: "Bebas Neue";
+      font-size: 11.8cqw;
+      font-weight: 400;
+      line-height: 0.86;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+    }
+
+    [class~="06-a-leitura-da-manchete-panel-result"] {
+      position: relative;
+      margin: 1.25cqh 0 0;
+      max-width: 72cqw;
+      font-family: "Bebas Neue";
+      font-size: 6.2cqw;
+      font-weight: 400;
+      line-height: 0.94;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: #e85d5d;
+    }
+
+    [class~="06-a-leitura-da-manchete-panel--dolly"] [class~="06-a-leitura-da-manchete-panel-result"] {
+      color: #d44a4a;
+    }
+
+    [class~="06-a-leitura-da-manchete-badge"] {
+      position: absolute;
+      z-index: 7;
+      width: 38cqw;
+      min-height: 4.7cqh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0 2cqw;
+      background: #e85d5d;
+      color: #1a1a1a;
+      font-family: "Inter";
+      font-size: 1.65cqw;
+      font-weight: 700;
+      line-height: 1.1;
+      letter-spacing: 3px;
+      text-align: center;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    [class~="06-a-leitura-da-manchete-badge--top"] {
+      top: 53.8cqh;
+      right: 3cqw;
+    }
+
+    [class~="06-a-leitura-da-manchete-badge--bottom"] {
+      top: 77.6cqh;
+      left: 3cqw;
+    }
+  </style>
+
+  <div data-hf-id="hf-tlov" id="root" data-composition-id="06-a-leitura-da-manchete" data-duration="8.924" data-width="1080" data-height="1920">
+    <div data-hf-id="hf-b9b4" class="clip f06-a-leitura-da-manchete-ground" data-start="0" data-duration="9.439" data-track-index="0"></div>
+
+    <section data-hf-id="hf-vvot" class="clip f06-a-leitura-da-manchete-stage" data-start="0" data-duration="9.439" data-track-index="1" aria-label="Comparação editorial anti-Dolly">
+      <div data-hf-id="hf-4v5q" class="06-a-leitura-da-manchete-stamp-wrap f06-a-leitura-da-manchete-stamp-wrap">
+        <div data-hf-id="hf-t6g6" class="06-a-leitura-da-manchete-stamp f06-a-leitura-da-manchete-stamp">
+          <div data-hf-id="hf-zkl2" class="06-a-leitura-da-manchete-source-row f06-a-leitura-da-manchete-source-row">
+            <span data-hf-id="hf-j0z9" id="f06-a-leitura-da-manchete-source"></span><span data-hf-id="hf-qoyu" id="f06-a-leitura-da-manchete-source-cursor" class="06-a-leitura-da-manchete-source-cursor f06-a-leitura-da-manchete-source-cursor">_</span>
+          </div>
+          <div data-hf-id="hf-4qav" class="06-a-leitura-da-manchete-stamp-title f06-a-leitura-da-manchete-stamp-title">Anti-Dolly</div>
+        </div>
+      </div>
+
+      <div data-hf-id="hf-za0g" class="06-a-leitura-da-manchete-panels f06-a-leitura-da-manchete-panels">
+        <article data-hf-id="hf-0rtp" class="06-a-leitura-da-manchete-panel f06-a-leitura-da-manchete-panel f06-a-leitura-da-manchete-panel--dolly">
+          <span data-hf-id="hf-mgb3" class="06-a-leitura-da-manchete-index f06-a-leitura-da-manchete-index" aria-hidden="true">01</span>
+          <p data-hf-id="hf-uom1" class="06-a-leitura-da-manchete-panel-label f06-a-leitura-da-manchete-panel-label">Dolly Parton</p>
+          <h2 data-hf-id="hf-b4rn" class="06-a-leitura-da-manchete-panel-name f06-a-leitura-da-manchete-panel-name">Alta</h2>
+          <p data-hf-id="hf-t2on" class="06-a-leitura-da-manchete-panel-result f06-a-leitura-da-manchete-panel-result">nos dois lados</p>
+        </article>
+
+        <article data-hf-id="hf-qihm" class="06-a-leitura-da-manchete-panel f06-a-leitura-da-manchete-panel f06-a-leitura-da-manchete-panel--zuck">
+          <span data-hf-id="hf-m202" class="06-a-leitura-da-manchete-index f06-a-leitura-da-manchete-index" aria-hidden="true">02</span>
+          <p data-hf-id="hf-bjoj" class="06-a-leitura-da-manchete-panel-label f06-a-leitura-da-manchete-panel-label">Zuckerberg</p>
+          <h2 data-hf-id="hf-us28" class="06-a-leitura-da-manchete-panel-name f06-a-leitura-da-manchete-panel-name">Baixa</h2>
+          <p data-hf-id="hf-qsif" class="06-a-leitura-da-manchete-panel-result f06-a-leitura-da-manchete-panel-result">nos dois lados</p>
+        </article>
+      </div>
+
+      <div data-hf-id="hf-olh6" class="06-a-leitura-da-manchete-badge f06-a-leitura-da-manchete-badge f06-a-leitura-da-manchete-badge--top" data-layout-allow-overlap="" data-layout-allow-occlusion="">Interpretação editorial</div>
+      <div data-hf-id="hf-7ve8" class="06-a-leitura-da-manchete-badge f06-a-leitura-da-manchete-badge f06-a-leitura-da-manchete-badge--bottom" data-layout-allow-overlap="" data-layout-allow-occlusion="">Interpretação editorial</div>
+    </section>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+  <script>
+    (() => {
+      const tl = gsap.timeline({ paused: true });
+      window.__timelines = window.__timelines || {};
+      window.__timelines["06-a-leitura-da-manchete"] = tl;
+
+      const sourceEl = document.getElementById("f06-a-leitura-da-manchete-source");
+      const cursorEl = document.getElementById("f06-a-leitura-da-manchete-source-cursor");
+      const sourceStates = [
+        { t: 0, text: "" },
+        { t: 0.18, text: "FUT" },
+        { t: 0.42, text: "FUTUR" },
+        { t: 0.66, text: "FUTURISM" },
+        { t: 1.05, text: "FUTURISM:" },
+      ];
+      const sourceDriver = { t: 0 };
+      const blinkDriver = { p: 0 };
+
+      function sourceAt(time) {
+        for (let i = sourceStates.length - 1; i >= 0; i -= 1) {
+          if (time >= sourceStates[i].t) return sourceStates[i].text;
+        }
+        return "";
+      }
+
+      tl.fromTo(
+        '[class~="06-a-leitura-da-manchete-stamp-wrap"]',
+        { opacity: 0, y: -180 },
+        { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" },
+        0,
+      );
+      tl.fromTo(
+        '[class~="06-a-leitura-da-manchete-stamp"]',
+        { scale: 1.14, rotation: -4 },
+        { scale: 1, rotation: -1.5, duration: 0.62, ease: "power3.out" },
+        0.02,
+      );
+      tl.to(
+        sourceDriver,
+        {
+          t: 1.2,
+          duration: 1.2,
+          ease: "none",
+          onUpdate: () => {
+            sourceEl.textContent = sourceAt(sourceDriver.t);
+          },
+        },
+        0.08,
+      );
+      tl.to(
+        blinkDriver,
+        {
+          p: Math.PI * 6,
+          duration: 2.35,
+          ease: "none",
+          onUpdate: () => {
+            cursorEl.style.opacity = Math.sin(blinkDriver.p) > 0 ? "1" : "0";
+          },
+        },
+        0.08,
+      );
+      tl.fromTo(
+        '[class~="06-a-leitura-da-manchete-stamp-title"]',
+        { opacity: 0, scale: 1.22 },
+        { opacity: 1, scale: 1, duration: 0.48, ease: "power4.out" },
+        1.12,
+      );
+
+      tl.fromTo(
+        '[class~="06-a-leitura-da-manchete-panel--dolly"]',
+        { x: -380, scale: 0.88, opacity: 0, clipPath: "inset(0 100% 0 0)" },
+        { x: 0, scale: 1, opacity: 1, clipPath: "inset(0 0% 0 0)", duration: 0.86, ease: "power4.out" },
+        2.5,
+      );
+      tl.fromTo(
+        '[class~="06-a-leitura-da-manchete-panel--zuck"]',
+        { x: 380, scale: 0.88, opacity: 0, clipPath: "inset(0 0 0 100%)" },
+        { x: 0, scale: 1, opacity: 1, clipPath: "inset(0 0 0 0%)", duration: 0.86, ease: "power4.out" },
+        3.15,
+      );
+      tl.fromTo(
+        '[class~="06-a-leitura-da-manchete-panel--dolly"] [class~="06-a-leitura-da-manchete-panel-label"], [class~="06-a-leitura-da-manchete-panel--dolly"] [class~="06-a-leitura-da-manchete-panel-name"], [class~="06-a-leitura-da-manchete-panel--dolly"] [class~="06-a-leitura-da-manchete-panel-result"]',
+        { opacity: 0, x: 90 },
+        { opacity: 1, x: 0, duration: 0.5, ease: "power3.out", stagger: 0.14 },
+        2.92,
+      );
+      tl.fromTo(
+        '[class~="06-a-leitura-da-manchete-panel--zuck"] [class~="06-a-leitura-da-manchete-panel-label"], [class~="06-a-leitura-da-manchete-panel--zuck"] [class~="06-a-leitura-da-manchete-panel-name"], [class~="06-a-leitura-da-manchete-panel--zuck"] [class~="06-a-leitura-da-manchete-panel-result"]',
+        { opacity: 0, x: -90 },
+        { opacity: 1, x: 0, duration: 0.5, ease: "power3.out", stagger: 0.14 },
+        3.57,
+      );
+      tl.fromTo(
+        '[class~="06-a-leitura-da-manchete-stamp-wrap"]',
+        { scale: 1, y: 0 },
+        { scale: 0.72, y: -74, duration: 0.72, ease: "power3.inOut" },
+        4.65,
+      );
+
+      tl.fromTo(
+        '[class~="06-a-leitura-da-manchete-badge--top"]',
+        { opacity: 0, x: 170 },
+        { opacity: 1, x: 0, duration: 0.52, ease: "power3.out" },
+        6.2,
+      );
+      tl.fromTo(
+        '[class~="06-a-leitura-da-manchete-badge--bottom"]',
+        { opacity: 0, x: -170 },
+        { opacity: 1, x: 0, duration: 0.52, ease: "power3.out" },
+        6.62,
+      );
+      tl.fromTo(
+        '[class~="06-a-leitura-da-manchete-panel--dolly"]',
+        { y: 0 },
+        { y: -5, duration: 0.72, ease: "sine.inOut" },
+        7.25,
+      );
+      tl.fromTo(
+        '[class~="06-a-leitura-da-manchete-panel--zuck"]',
+        { y: 0 },
+        { y: 5, duration: 0.72, ease: "sine.inOut" },
+        7.25,
+      );
+    })();
+  </script>
+</template>

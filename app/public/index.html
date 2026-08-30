@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#11182f">
+    <title>Content2Video INEMA</title>
+    <link rel="stylesheet" href="/app.css">
+  </head>
+  <body>
+    <!--
+      DIRECTION: uma bancada editorial de operação, inspirada na identidade azul-marinho e ciano do vídeo INEMA.
+      SCENE: uso pessoal em desktop ou celular, com foco imediato em colar uma URL e acompanhar o trabalho.
+      HIERARCHY: entrada ampla no topo, atividade em trilho compacto e projetos como uma filmoteca vertical acionável.
+      INTERACTION: a linha luminosa percorre o formulário quando um trabalho começa; estados permanecem legíveis sem depender de cor.
+      MATERIAL: superfícies foscas profundas, divisórias finas e tipografia funcional; nenhuma decoração compete com URL, status ou preview.
+    -->
+    <header class="topbar">
+      <div class="brand-group">
+        <a class="brand" href="/" aria-label="Content2Video INEMA — início">
+          <span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i></span>
+          <span>Content<span>2</span>Video</span>
+        </a>
+        <span class="brand-separator" aria-hidden="true">/</span>
+        <a class="inema-link" href="https://www.inema.club/" target="_blank" rel="noopener noreferrer">INEMA.CLUB</a>
+      </div>
+      <div class="system-state is-checking" id="system-state">
+        <span class="status-dot" aria-hidden="true"></span>
+        <span id="auth-label">Verificando sistema</span>
+      </div>
+    </header>
+
+    <main>
+      <section class="intake" aria-labelledby="intake-title">
+        <div class="intake-copy">
+          <h1 id="intake-title">Um link entra.<br><span>Um vídeo sai.</span></h1>
+          <p>Cole uma matéria ou site. O sistema cria roteiro, voz, cenas e uma versão pronta para sua revisão.</p>
+        </div>
+        <form id="create-form" class="url-form">
+          <label for="source-url">Link de origem</label>
+          <div class="url-control">
+            <input id="source-url" name="url" type="url" inputmode="url" autocomplete="url" placeholder="https://exemplo.com/materia" required>
+            <button id="create-button" class="primary-action" type="submit">
+              <span>Gerar vídeo</span>
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6"/></svg>
+            </button>
+          </div>
+          <div class="defaults" id="defaults" aria-label="Configuração padrão"></div>
+          <p class="form-message" id="form-message" role="status" aria-live="polite"></p>
+        </form>
+      </section>
+
+      <section class="workspace" aria-label="Área de produção">
+        <aside class="activity-panel">
+          <div class="section-heading">
+            <div>
+              <h2>Produção</h2>
+              <p>Etapas em andamento</p>
+            </div>
+            <button class="icon-button" id="refresh-button" type="button" aria-label="Atualizar">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 11a8 8 0 1 0-2.3 5.7M20 4v7h-7"/></svg>
+            </button>
+          </div>
+          <div id="jobs" class="jobs-list"></div>
+        </aside>
+
+        <section class="library-panel" aria-labelledby="library-title">
+          <div class="section-heading library-heading">
+            <div>
+              <h2 id="library-title">Seus vídeos</h2>
+              <p id="project-count">Carregando projetos</p>
+            </div>
+          </div>
+          <div id="projects" class="project-list"></div>
+        </section>
+      </section>
+    </main>
+
+    <template id="empty-jobs-template">
+      <div class="empty-state compact">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v18M3 12h18"/></svg>
+        <p>Nenhuma produção nesta sessão.</p>
+      </div>
+    </template>
+
+    <template id="empty-projects-template">
+      <div class="empty-state">
+        <p>Seu primeiro vídeo aparecerá aqui.</p>
+      </div>
+    </template>
+
+    <div class="toast-region" id="toast-region" aria-live="polite"></div>
+    <script type="module" src="/app.js"></script>
+  </body>
+</html>

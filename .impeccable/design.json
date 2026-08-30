@@ -1,0 +1,149 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-08-30T05:42:00-03:00",
+  "title": "Design System: Content2Video INEMA",
+  "extensions": {
+    "colorMeta": {
+      "navy-ink": { "role": "neutral", "displayName": "Tinta Marinho", "canonical": "#0b1021", "tonalRamp": ["oklch(15% 0.04 265)", "oklch(26% 0.04 265)", "oklch(38% 0.04 265)", "oklch(50% 0.04 265)", "oklch(62% 0.04 265)", "oklch(74% 0.04 265)", "oklch(86% 0.04 265)", "oklch(95% 0.04 265)"] },
+      "navy-surface": { "role": "neutral", "displayName": "Mesa Marinho", "canonical": "#11182f", "tonalRamp": ["oklch(15% 0.05 265)", "oklch(26% 0.05 265)", "oklch(38% 0.05 265)", "oklch(50% 0.05 265)", "oklch(62% 0.05 265)", "oklch(74% 0.05 265)", "oklch(86% 0.05 265)", "oklch(95% 0.05 265)"] },
+      "navy-raised": { "role": "neutral", "displayName": "Plano Elevado", "canonical": "#17213d", "tonalRamp": ["oklch(15% 0.06 265)", "oklch(26% 0.06 265)", "oklch(38% 0.06 265)", "oklch(50% 0.06 265)", "oklch(62% 0.06 265)", "oklch(74% 0.06 265)", "oklch(86% 0.06 265)", "oklch(95% 0.06 265)"] },
+      "navy-hover": { "role": "neutral", "displayName": "Marinho de Passagem", "canonical": "#1d2948", "tonalRamp": ["oklch(15% 0.07 265)", "oklch(26% 0.07 265)", "oklch(38% 0.07 265)", "oklch(50% 0.07 265)", "oklch(62% 0.07 265)", "oklch(74% 0.07 265)", "oklch(86% 0.07 265)", "oklch(95% 0.07 265)"] },
+      "divider": { "role": "neutral", "displayName": "Divisor Técnico", "canonical": "#2a385a", "tonalRamp": ["oklch(15% 0.07 260)", "oklch(26% 0.07 260)", "oklch(38% 0.07 260)", "oklch(50% 0.07 260)", "oklch(62% 0.07 260)", "oklch(74% 0.07 260)", "oklch(86% 0.07 260)", "oklch(95% 0.07 260)"] },
+      "divider-bright": { "role": "neutral", "displayName": "Divisor Ativo", "canonical": "#3e5279", "tonalRamp": ["oklch(15% 0.08 260)", "oklch(26% 0.08 260)", "oklch(38% 0.08 260)", "oklch(50% 0.08 260)", "oklch(62% 0.08 260)", "oklch(74% 0.08 260)", "oklch(86% 0.08 260)", "oklch(95% 0.08 260)"] },
+      "text-primary": { "role": "neutral", "displayName": "Papel Frio", "canonical": "#eef3ff", "tonalRamp": ["oklch(15% 0.02 260)", "oklch(26% 0.02 260)", "oklch(38% 0.02 260)", "oklch(50% 0.02 260)", "oklch(62% 0.02 260)", "oklch(74% 0.02 260)", "oklch(86% 0.02 260)", "oklch(95% 0.02 260)"] },
+      "text-muted": { "role": "neutral", "displayName": "Azul de Apoio", "canonical": "#a9b6d0", "tonalRamp": ["oklch(15% 0.04 260)", "oklch(26% 0.04 260)", "oklch(38% 0.04 260)", "oklch(50% 0.04 260)", "oklch(62% 0.04 260)", "oklch(74% 0.04 260)", "oklch(86% 0.04 260)", "oklch(95% 0.04 260)"] },
+      "cyan-signal": { "role": "primary", "displayName": "Ciano de Sinal", "canonical": "#00d9ff", "tonalRamp": ["oklch(15% 0.16 210)", "oklch(26% 0.16 210)", "oklch(38% 0.16 210)", "oklch(50% 0.16 210)", "oklch(62% 0.16 210)", "oklch(74% 0.16 210)", "oklch(86% 0.16 210)", "oklch(95% 0.16 210)"] },
+      "cyan-soft": { "role": "primary", "displayName": "Ciano de Leitura", "canonical": "#8cecff", "tonalRamp": ["oklch(15% 0.09 210)", "oklch(26% 0.09 210)", "oklch(38% 0.09 210)", "oklch(50% 0.09 210)", "oklch(62% 0.09 210)", "oklch(74% 0.09 210)", "oklch(86% 0.09 210)", "oklch(95% 0.09 210)"] },
+      "cyan-hover": { "role": "primary", "displayName": "Ciano de Passagem", "canonical": "#66e8ff", "tonalRamp": ["oklch(15% 0.11 210)", "oklch(26% 0.11 210)", "oklch(38% 0.11 210)", "oklch(50% 0.11 210)", "oklch(62% 0.11 210)", "oklch(74% 0.11 210)", "oklch(86% 0.11 210)", "oklch(95% 0.11 210)"] },
+      "progress-track": { "role": "neutral", "displayName": "Trilho de Progresso", "canonical": "#263451", "tonalRamp": ["oklch(15% 0.06 260)", "oklch(26% 0.06 260)", "oklch(38% 0.06 260)", "oklch(50% 0.06 260)", "oklch(62% 0.06 260)", "oklch(74% 0.06 260)", "oklch(86% 0.06 260)", "oklch(95% 0.06 260)"] },
+      "ready": { "role": "secondary", "displayName": "Verde Pronto", "canonical": "#27dda1", "tonalRamp": ["oklch(15% 0.14 165)", "oklch(26% 0.14 165)", "oklch(38% 0.14 165)", "oklch(50% 0.14 165)", "oklch(62% 0.14 165)", "oklch(74% 0.14 165)", "oklch(86% 0.14 165)", "oklch(95% 0.14 165)"] },
+      "warning": { "role": "secondary", "displayName": "Âmbar de Atenção", "canonical": "#ffca6a", "tonalRamp": ["oklch(15% 0.12 80)", "oklch(26% 0.12 80)", "oklch(38% 0.12 80)", "oklch(50% 0.12 80)", "oklch(62% 0.12 80)", "oklch(74% 0.12 80)", "oklch(86% 0.12 80)", "oklch(95% 0.12 80)"] },
+      "error": { "role": "secondary", "displayName": "Rosa de Erro", "canonical": "#ff7f8e", "tonalRamp": ["oklch(15% 0.14 15)", "oklch(26% 0.14 15)", "oklch(38% 0.14 15)", "oklch(50% 0.14 15)", "oklch(62% 0.14 15)", "oklch(74% 0.14 15)", "oklch(86% 0.14 15)", "oklch(95% 0.14 15)"] }
+    },
+    "typographyMeta": {
+      "display": { "displayName": "Manchete Editorial", "purpose": "Promessa principal e impacto concentrado no intake." },
+      "headline": { "displayName": "Cabeçalho Operacional", "purpose": "Títulos dos painéis de produção e biblioteca." },
+      "title": { "displayName": "Título de Projeto", "purpose": "Nome escaneável de cada artefato da filmoteca." },
+      "body": { "displayName": "Leitura Funcional", "purpose": "Descrição da proposta e mensagens contínuas." },
+      "label": { "displayName": "Controle e Estado", "purpose": "Rótulos, ações e estados compactos." },
+      "job-title": { "displayName": "Título de Trabalho", "purpose": "Identificação truncável no trilho de produção." },
+      "metadata": { "displayName": "Metadado", "purpose": "Etapas, datas, fatos e detalhes auxiliares." },
+      "state": { "displayName": "Estado Compacto", "purpose": "Rótulo semântico em caixa alta dentro de uma linha contextual." }
+    },
+    "shadows": [
+      { "name": "bench", "value": "0 18px 50px rgba(2, 6, 18, 0.36)", "purpose": "Separar formulário composto e painéis principais do fundo." },
+      { "name": "poster", "value": "0 10px 26px rgba(2, 6, 18, 0.35)", "purpose": "Dar espessura mínima ao preview vertical." },
+      { "name": "state", "value": "0 3px 12px currentColor", "purpose": "Sinal luminoso curto em pronto, erro e trabalho em curso." }
+    ],
+    "motion": [
+      { "name": "state-fast", "value": "160ms ease", "purpose": "Hover, active e respostas de controles." },
+      { "name": "focus-standard", "value": "180ms ease", "purpose": "Transição de borda e profundidade no campo composto." },
+      { "name": "working-scan", "value": "1.25s cubic-bezier(.2,.8,.2,1) infinite alternate", "purpose": "Linha luminosa que percorre o formulário durante a criação." },
+      { "name": "job-progress", "value": "1.3s ease-in-out infinite alternate", "purpose": "Progresso indeterminado no trilho de produção." }
+    ],
+    "breakpoints": [
+      { "name": "stack", "value": "980px" },
+      { "name": "compact", "value": "680px" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Action",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Ação dominante para iniciar uma produção a partir da URL.",
+      "html": "<button class=\"ds-primary-action\"><span>Gerar vídeo</span><svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"M5 12h13M13 6l6 6-6 6\"/></svg></button>",
+      "css": ".ds-primary-action { min-height: 66px; padding: 0 22px; display: inline-flex; align-items: center; gap: 14px; border: 0; border-radius: 14px; background: var(--cyan, #00d9ff); color: var(--ink, #0b1021); font: 650 13px/1.2 'Hanken Grotesk', system-ui, sans-serif; cursor: pointer; transition: background 160ms ease, transform 160ms ease; } .ds-primary-action svg { width: 20px; fill: none; stroke: currentColor; stroke-width: 2; } .ds-primary-action:hover { background: #66e8ff; } .ds-primary-action:active { transform: translateY(1px); } .ds-primary-action:focus-visible { outline: 3px solid var(--cyan-soft, #8cecff); outline-offset: 3px; }"
+    },
+    {
+      "name": "Secondary Action",
+      "kind": "button",
+      "refersTo": "button-secondary",
+      "description": "Ação operacional para editar ou aprovar e renderizar.",
+      "html": "<button class=\"ds-secondary-action\"><svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"m8 5 11 7-11 7V5Z\"/></svg><span>Aprovar e renderizar</span></button>",
+      "css": ".ds-secondary-action { min-height: 44px; padding: 0 14px; display: inline-flex; align-items: center; justify-content: center; gap: 8px; border: 1px solid var(--line-bright, #3e5279); border-radius: 12px; background: transparent; color: var(--text, #eef3ff); font: 550 13px/1.2 'Hanken Grotesk', system-ui, sans-serif; cursor: pointer; transition: border-color 160ms ease, background 160ms ease; } .ds-secondary-action svg { width: 16px; fill: none; stroke: currentColor; stroke-width: 1.8; } .ds-secondary-action:hover { border-color: var(--cyan, #00d9ff); background: rgba(0,217,255,.07); } .ds-secondary-action:focus-visible { outline: 3px solid var(--cyan-soft, #8cecff); outline-offset: 3px; }"
+    },
+    {
+      "name": "Download Action",
+      "kind": "button",
+      "refersTo": "button-download",
+      "description": "Ação de entrega disponível apenas quando o MP4 está pronto.",
+      "html": "<a class=\"ds-download-action\" href=\"#\"><svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"M12 3v12m-5-5 5 5 5-5M5 21h14\"/></svg><span>Baixar</span></a>",
+      "css": ".ds-download-action { min-height: 44px; padding: 0 14px; display: inline-flex; align-items: center; justify-content: center; gap: 8px; border: 1px solid transparent; border-radius: 12px; background: var(--text, #eef3ff); color: var(--ink, #0b1021); font: 550 13px/1.2 'Hanken Grotesk', system-ui, sans-serif; text-decoration: none; transition: background 160ms ease; } .ds-download-action svg { width: 16px; fill: none; stroke: currentColor; stroke-width: 1.8; } .ds-download-action:hover { background: var(--cyan-soft, #8cecff); } .ds-download-action:focus-visible { outline: 3px solid var(--cyan-soft, #8cecff); outline-offset: 3px; }"
+    },
+    {
+      "name": "URL Intake",
+      "kind": "input",
+      "refersTo": "input-url",
+      "description": "Campo composto largo que inicia o fluxo com um link.",
+      "html": "<label class=\"ds-url-label\" for=\"ds-url\">Link de origem</label><div class=\"ds-url-control\"><input id=\"ds-url\" type=\"url\" placeholder=\"https://exemplo.com/materia\"><button>Gerar vídeo</button></div>",
+      "css": ".ds-url-label { display: block; margin-bottom: 10px; color: var(--cyan-soft, #8cecff); font: 650 13px/1.2 'Hanken Grotesk', system-ui, sans-serif; } .ds-url-control { display: grid; grid-template-columns: 1fr auto; overflow: hidden; border: 1px solid var(--line-bright, #3e5279); border-radius: 14px; background: var(--surface, #11182f); box-shadow: 0 18px 50px rgba(2,6,18,.36); transition: border-color 180ms ease, box-shadow 180ms ease; } .ds-url-control:focus-within { border-color: var(--cyan, #00d9ff); box-shadow: 0 18px 52px rgba(0,217,255,.11); } .ds-url-control input { min-width: 260px; min-height: 66px; padding: 0 20px; border: 0; outline: 0; background: transparent; color: var(--text, #eef3ff); font: 400 16px/1.55 'Hanken Grotesk', system-ui, sans-serif; } .ds-url-control input::placeholder { color: #7886a6; } .ds-url-control button { min-height: 66px; padding: 0 22px; border: 0; background: var(--cyan, #00d9ff); color: var(--ink, #0b1021); font-weight: 650; cursor: pointer; } .ds-url-control button:hover { background: #66e8ff; }"
+    },
+    {
+      "name": "System Ready State",
+      "kind": "chip",
+      "refersTo": "system-state-ready",
+      "description": "Estado compacto que combina ponto semântico e rótulo explícito.",
+      "html": "<div class=\"ds-system-state ds-is-ready\"><span class=\"ds-status-dot\" aria-hidden=\"true\"></span><span>Codex OAuth pronto · pt-BR-FranciscaNeural</span></div>",
+      "css": ".ds-system-state { display: inline-flex; align-items: center; gap: 9px; color: var(--muted, #a9b6d0); font: 400 13px/1.2 'Hanken Grotesk', system-ui, sans-serif; } .ds-status-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--muted, #a9b6d0); } .ds-is-ready .ds-status-dot { background: var(--green, #27dda1); box-shadow: 0 3px 12px rgba(39,221,161,.45); }"
+    },
+    {
+      "name": "Production Job",
+      "kind": "card",
+      "refersTo": "card-panel",
+      "description": "Linha compacta do trilho de produção com estado e progresso legíveis.",
+      "html": "<article class=\"ds-job\"><div class=\"ds-job-top\"><strong>Projeto Editorial</strong><span class=\"ds-job-state\">Em andamento</span></div><p>Gerando narração e preparando cenas</p><div class=\"ds-job-progress\" aria-label=\"Em andamento\"><i></i></div></article>",
+      "css": ".ds-job { width: min(340px,100%); padding: 20px 24px; border-bottom: 1px solid var(--line, #2a385a); background: var(--surface, #11182f); color: var(--text, #eef3ff); font-family: 'Hanken Grotesk', system-ui, sans-serif; } .ds-job-top { display: flex; justify-content: space-between; gap: 12px; } .ds-job strong { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: 14px; } .ds-job-state { flex: none; color: var(--cyan-soft, #8cecff); font-size: 11px; font-weight: 650; text-transform: uppercase; letter-spacing: .04em; } .ds-job p { margin: 8px 0 0; color: var(--muted, #a9b6d0); font-size: 12px; line-height: 1.45; } .ds-job-progress { height: 3px; margin-top: 16px; overflow: hidden; border-radius: 3px; background: #263451; } .ds-job-progress i { display: block; width: 34%; height: 100%; background: var(--cyan, #00d9ff); animation: ds-job-progress 1.3s ease-in-out infinite alternate; } @keyframes ds-job-progress { to { transform: translateX(195%); } } @media (prefers-reduced-motion: reduce) { .ds-job-progress i { animation-duration: .01ms; animation-iteration-count: 1; } }"
+    },
+    {
+      "name": "Vertical Film Row",
+      "kind": "custom",
+      "refersTo": "project-row",
+      "description": "Linha de filmoteca com pôster 9:16, metadados e ação final.",
+      "html": "<article class=\"ds-project\"><div class=\"ds-project-poster\"><span>▶</span></div><div class=\"ds-project-body\"><h3>Manifesto INEMA</h3><p>28,4 MB · MP4 pronto</p></div><a class=\"ds-project-action\" href=\"#\">Baixar</a></article>",
+      "css": ".ds-project { min-height: 184px; padding: 18px 24px; display: grid; grid-template-columns: 92px minmax(0,1fr) auto; gap: 22px; align-items: center; border-bottom: 1px solid var(--line, #2a385a); background: var(--surface, #11182f); color: var(--text, #eef3ff); font-family: 'Hanken Grotesk', system-ui, sans-serif; transition: background 160ms ease; } .ds-project:hover { background: var(--surface-hover, #1d2948); } .ds-project-poster { width: 92px; aspect-ratio: 9/16; display: grid; place-items: center; overflow: hidden; border-radius: 12px; background: #202b49; color: var(--cyan, #00d9ff); box-shadow: 0 10px 26px rgba(2,6,18,.35); font: 400 26px/1 Anton, sans-serif; } .ds-project-body { min-width: 0; } .ds-project h3 { margin: 0 0 8px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: 19px; letter-spacing: -.02em; } .ds-project p { margin: 0; color: var(--muted, #a9b6d0); font-size: 12px; } .ds-project-action { min-height: 44px; padding: 0 14px; display: inline-flex; align-items: center; border-radius: 12px; background: var(--text, #eef3ff); color: var(--ink, #0b1021); font-size: 13px; font-weight: 550; text-decoration: none; } .ds-project-action:hover { background: var(--cyan-soft, #8cecff); } .ds-project-action:focus-visible { outline: 3px solid var(--cyan-soft, #8cecff); outline-offset: 3px; }"
+    },
+    {
+      "name": "Workbench Panel",
+      "kind": "card",
+      "refersTo": "card-panel",
+      "description": "Recipiente fosco com cabeçalho e divisória técnica.",
+      "html": "<section class=\"ds-panel\"><header><div><h2>Produção</h2><p>Etapas em andamento</p></div><button aria-label=\"Atualizar\"><svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"M20 11a8 8 0 1 0-2.3 5.7M20 4v7h-7\"/></svg></button></header><div class=\"ds-panel-empty\">Nenhuma produção nesta sessão.</div></section>",
+      "css": ".ds-panel { width: min(380px,100%); overflow: hidden; border-radius: 14px; background: var(--surface, #11182f); color: var(--text, #eef3ff); box-shadow: 0 18px 50px rgba(2,6,18,.36); font-family: 'Hanken Grotesk', system-ui, sans-serif; } .ds-panel header { padding: 22px 24px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid var(--line, #2a385a); } .ds-panel h2 { margin: 0 0 5px; font-size: 20px; letter-spacing: -.02em; } .ds-panel p { margin: 0; color: var(--muted, #a9b6d0); font-size: 12px; } .ds-panel button { width: 44px; height: 44px; display: grid; place-items: center; border: 0; border-radius: 12px; background: transparent; color: var(--muted, #a9b6d0); cursor: pointer; } .ds-panel button:hover { background: var(--surface-hover, #1d2948); } .ds-panel button:focus-visible { outline: 3px solid var(--cyan-soft, #8cecff); outline-offset: 3px; } .ds-panel svg { width: 18px; fill: none; stroke: currentColor; stroke-width: 1.8; } .ds-panel-empty { min-height: 150px; padding: 32px; display: grid; place-items: center; color: var(--muted, #a9b6d0); text-align: center; font-size: 13px; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "A Bancada Editorial",
+    "overview": "Content2Video INEMA é uma bancada de operação editorial: escura, precisa e silenciosa, com a energia do ciano reservada para decisões, foco e progresso. A interface deve parecer uma ferramenta de produção madura — superfícies azul-marinho foscas, divisórias finas, densidade controlada e hierarquia imediatamente legível — sem ornamentação que dispute atenção com a URL, o estado do trabalho ou o preview do vídeo.\n\nO fluxo visual é intake-first. A entrada ampla abre a experiência; abaixo dela, o trilho de produção explica o que está acontecendo e a filmoteca vertical oferece os artefatos acionáveis. Em telas estreitas, essa mesma ordem vira uma pilha contínua, preservando prioridade, legibilidade e acesso às ações.",
+    "keyCharacteristics": [
+      "Azul-marinho profundo e ciano editorial de alta precisão.",
+      "Anton apenas para a manchete; Hanken Grotesk conduz toda a operação.",
+      "Superfícies foscas, divisórias finas, cantos controlados e profundidade pontual.",
+      "Estados neutro, pronto e erro combinam cor, texto e forma — nunca apenas cor.",
+      "Entrada por URL primeiro, produção em trilho compacto e filmoteca vertical acionável."
+    ],
+    "rules": [
+      { "name": "The Signal Rarity Rule", "body": "O ciano forte aparece apenas onde uma ação, foco ou progresso precisa vencer a hierarquia.", "section": "colors" },
+      { "name": "The Semantic Trio Rule", "body": "Neutro, pronto e erro mantêm papéis estáveis; cada estado repete seu significado em texto ou forma além da cor.", "section": "colors" },
+      { "name": "The One Poster Voice Rule", "body": "Anton é uma voz de manchete, nunca uma fonte de interface; Hanken Grotesk assume tudo o que o usuário precisa operar ou comparar.", "section": "typography" },
+      { "name": "The Intake-First Rule", "body": "A URL e sua ação permanecem acima do acompanhamento e da biblioteca em qualquer largura.", "section": "layout" },
+      { "name": "The Vertical Film Library Rule", "body": "Projetos são linhas editoriais com pôster 9:16, título, metadados e ações; não se convertem em uma grade de thumbnails genérica.", "section": "layout" },
+      { "name": "The Controlled Depth Rule", "body": "Elevação pertence a recipientes, previews e estados ativos; linhas de lista permanecem planas e separadas por divisores.", "section": "elevation" },
+      { "name": "The Fourteen-Pixel Surface Rule", "body": "Recipientes principais compartilham o mesmo raio de 14px para parecerem partes da mesma bancada.", "section": "shapes" }
+    ],
+    "dos": [
+      "Do preservar a ordem intake, produção e filmoteca em desktop e mobile.",
+      "Do usar Ciano de Sinal para ação, foco e progresso, mantendo-o raro no restante da tela.",
+      "Do combinar toda semântica de pronto ou erro com rótulo textual, ícone, barra ou outra forma não cromática.",
+      "Do manter pôsteres de projeto em 9:16 e ações inequívocas como “Editar”, “Aprovar e renderizar” e “Baixar”.",
+      "Do respeitar foco visível, alvos mínimos de 44px e preferência por movimento reduzido."
+    ],
+    "donts": [
+      "Don't trocar as superfícies foscas por vidro brilhante, gradientes decorativos ou cartões flutuantes em excesso.",
+      "Don't usar Anton em botões, metadados, estados ou conteúdo operacional.",
+      "Don't transformar a filmoteca vertical em uma grade genérica de capas.",
+      "Don't depender apenas de verde, rosa ou ciano para comunicar estado.",
+      "Don't deixar ornamento competir com URL, status, preview ou ação principal."
+    ]
+  }
+}

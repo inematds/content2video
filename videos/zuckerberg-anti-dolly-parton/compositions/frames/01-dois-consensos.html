@@ -1,0 +1,547 @@
+<template>
+  <style>
+    #root {
+      position: relative;
+      width: 1080px;
+      height: 1920px;
+      overflow: hidden;
+      container-type: size;
+      color: #1A1A1A;
+      font-family: sans-serif;
+    }
+
+    .f01-dois-consensos-ground,
+    .f01-dois-consensos-scene {
+      position: absolute;
+      inset: 0;
+      width: 1080px;
+      height: 1920px;
+      overflow: hidden;
+    }
+
+    .f01-dois-consensos-ground {
+      background-color: #E85D5D;
+      background-image: repeating-linear-gradient(
+        45deg,
+        transparent 0 20px,
+        rgba(0, 0, 0, 0.06) 20px 40px
+      );
+    }
+
+    .f01-dois-consensos-register {
+      position: absolute;
+      background: #1A1A1A;
+      opacity: 0.34;
+    }
+
+    .f01-dois-consensos-register.is-v {
+      top: 86px;
+      left: 82px;
+      width: 4px;
+      height: 1370px;
+      transform-origin: top center;
+    }
+
+    .f01-dois-consensos-register.is-h {
+      top: 132px;
+      left: 40px;
+      width: 1000px;
+      height: 4px;
+      transform-origin: left center;
+    }
+
+    .f01-dois-consensos-corner {
+      position: absolute;
+      width: 54px;
+      height: 54px;
+      opacity: 0.45;
+    }
+
+    .f01-dois-consensos-corner::before,
+    .f01-dois-consensos-corner::after {
+      content: "";
+      position: absolute;
+      background: #1A1A1A;
+    }
+
+    .f01-dois-consensos-corner::before {
+      top: 25px;
+      left: 0;
+      width: 54px;
+      height: 4px;
+    }
+
+    .f01-dois-consensos-corner::after {
+      top: 0;
+      left: 25px;
+      width: 4px;
+      height: 54px;
+    }
+
+    .f01-dois-consensos-corner.is-tr {
+      top: 106px;
+      right: 64px;
+    }
+
+    .f01-dois-consensos-corner.is-bl {
+      top: 1390px;
+      left: 58px;
+    }
+
+    .f01-dois-consensos-party-stack {
+      position: absolute;
+      top: 300px;
+      left: 82px;
+      width: 916px;
+      display: grid;
+      gap: 42px;
+    }
+
+    .f01-dois-consensos-party-band {
+      position: relative;
+      height: 252px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      border: 4px solid #1A1A1A;
+    }
+
+    .f01-dois-consensos-party-band.is-ink {
+      background: #1A1A1A;
+      color: #F5F0E8;
+    }
+
+    .f01-dois-consensos-party-band.is-cream {
+      background: #F5F0E8;
+      color: #1A1A1A;
+    }
+
+    .f01-dois-consensos-party-word {
+      display: inline-block;
+      font-size: 118px;
+      line-height: 0.88;
+      font-weight: 900;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      white-space: nowrap;
+      font-stretch: condensed;
+    }
+
+    .f01-dois-consensos-party-index {
+      position: absolute;
+      top: 22px;
+      left: 28px;
+      font-size: 22px;
+      line-height: 1;
+      font-weight: 800;
+      letter-spacing: 4px;
+    }
+
+    .f01-dois-consensos-scene-two-panel,
+    .f01-dois-consensos-scene-three-panel {
+      position: absolute;
+      left: 54px;
+      width: 972px;
+      background: #F5F0E8;
+      border-top: 8px solid #1A1A1A;
+      border-bottom: 8px solid #1A1A1A;
+    }
+
+    .f01-dois-consensos-scene-two-panel {
+      top: 236px;
+      height: 1170px;
+    }
+
+    .f01-dois-consensos-scene-three-panel {
+      top: 204px;
+      height: 1268px;
+    }
+
+    .f01-dois-consensos-discordam {
+      position: absolute;
+      top: 410px;
+      left: 88px;
+      width: 904px;
+      min-height: 154px;
+      color: #1A1A1A;
+      font-size: 148px;
+      line-height: 0.9;
+      font-weight: 900;
+      letter-spacing: 4px;
+      text-align: center;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    .f01-dois-consensos-ruler {
+      position: absolute;
+      top: 728px;
+      left: 540px;
+      width: 0;
+      height: 104px;
+    }
+
+    .f01-dois-consensos-ruler-half {
+      position: absolute;
+      top: 48px;
+      width: 350px;
+      height: 8px;
+      background: #1A1A1A;
+      transform-origin: center center;
+    }
+
+    .f01-dois-consensos-ruler-half.is-left {
+      right: 0;
+    }
+
+    .f01-dois-consensos-ruler-half.is-right {
+      left: 0;
+    }
+
+    .f01-dois-consensos-ruler-tick {
+      position: absolute;
+      top: 26px;
+      width: 6px;
+      height: 52px;
+      background: #1A1A1A;
+    }
+
+    .f01-dois-consensos-ruler-tick.is-left {
+      left: -350px;
+    }
+
+    .f01-dois-consensos-ruler-tick.is-right {
+      left: 344px;
+    }
+
+    .f01-dois-consensos-quase {
+      position: absolute;
+      top: 938px;
+      left: 112px;
+      width: 856px;
+      color: #E85D5D;
+      font-size: 114px;
+      line-height: 0.92;
+      font-weight: 900;
+      letter-spacing: 8px;
+      text-align: center;
+      text-transform: uppercase;
+    }
+
+    .f01-dois-consensos-consenso-wrap {
+      position: absolute;
+      top: 515px;
+      left: 81px;
+      width: 918px;
+      height: 520px;
+    }
+
+    .f01-dois-consensos-consenso {
+      position: absolute;
+      z-index: 2;
+      top: 178px;
+      left: 0;
+      width: 100%;
+      color: #1A1A1A;
+      font-size: 138px;
+      line-height: 0.9;
+      font-weight: 900;
+      letter-spacing: 2px;
+      text-align: center;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    .f01-dois-consensos-arrow-stage {
+      position: absolute;
+      z-index: 3;
+      inset: 0;
+    }
+
+    .f01-dois-consensos-arrow {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 352px;
+      height: 68px;
+      will-change: transform, opacity;
+    }
+
+    .f01-dois-consensos-arrow-line {
+      position: absolute;
+      top: 30px;
+      width: 320px;
+      height: 8px;
+      background: #E85D5D;
+    }
+
+    .f01-dois-consensos-arrow.is-left .f01-dois-consensos-arrow-line {
+      right: 0;
+    }
+
+    .f01-dois-consensos-arrow.is-right .f01-dois-consensos-arrow-line {
+      left: 0;
+    }
+
+    .f01-dois-consensos-arrow-head {
+      position: absolute;
+      top: 12px;
+      width: 0;
+      height: 0;
+      border-top: 22px solid transparent;
+      border-bottom: 22px solid transparent;
+    }
+
+    .f01-dois-consensos-arrow.is-left .f01-dois-consensos-arrow-head {
+      left: 0;
+      border-right: 34px solid #E85D5D;
+    }
+
+    .f01-dois-consensos-arrow.is-right .f01-dois-consensos-arrow-head {
+      right: 0;
+      border-left: 34px solid #E85D5D;
+    }
+
+    .f01-dois-consensos-direction-label {
+      position: absolute;
+      top: 1120px;
+      left: 116px;
+      width: 848px;
+      color: #E85D5D;
+      font-size: 90px;
+      line-height: 1;
+      font-weight: 900;
+      letter-spacing: 8px;
+      text-align: center;
+      text-transform: uppercase;
+    }
+
+    .f01-dois-consensos-direction-rule {
+      position: absolute;
+      top: 1280px;
+      left: 420px;
+      width: 240px;
+      height: 8px;
+      background: #1A1A1A;
+      transform-origin: center center;
+    }
+  </style>
+
+  <div data-hf-id="hf-qovc" id="root" data-composition-id="01-dois-consensos" data-duration="8.612" data-width="1080" data-height="1920">
+    <div data-hf-id="hf-azvf" class="clip f01-dois-consensos-ground" data-start="0" data-duration="8.671" data-track-index="0"></div>
+
+    <div data-hf-id="hf-4klc" class="clip f01-dois-consensos-scene f01-dois-consensos-scene-one" data-start="0" data-duration="8.671" data-track-index="1">
+      <div data-hf-id="hf-p40k" class="f01-dois-consensos-register is-v"></div>
+      <div data-hf-id="hf-l5si" class="f01-dois-consensos-register is-h"></div>
+      <div data-hf-id="hf-c678" class="f01-dois-consensos-corner is-tr"></div>
+      <div data-hf-id="hf-5unc" class="f01-dois-consensos-corner is-bl"></div>
+      <div data-hf-id="hf-3hc3" class="f01-dois-consensos-party-stack">
+        <div data-hf-id="hf-ztas" class="f01-dois-consensos-party-band is-ink" data-sequence-title="DEMOCRATAS">
+          <span data-hf-id="hf-99m5" class="f01-dois-consensos-party-index">01</span>
+          <span data-hf-id="hf-jitp" class="f01-dois-consensos-party-word">DEMOCRATAS</span>
+        </div>
+        <div data-hf-id="hf-pwfs" class="f01-dois-consensos-party-band is-cream" data-sequence-title="REPUBLICANOS">
+          <span data-hf-id="hf-agj8" class="f01-dois-consensos-party-index">02</span>
+          <span data-hf-id="hf-nc7j" class="f01-dois-consensos-party-word">REPUBLICANOS</span>
+        </div>
+      </div>
+    </div>
+
+    <div data-hf-id="hf-0oxh" class="clip f01-dois-consensos-scene f01-dois-consensos-scene-two" data-start="0" data-duration="8.671" data-track-index="2">
+      <div data-hf-id="hf-v1g0" class="f01-dois-consensos-scene-two-panel"></div>
+      <div data-hf-id="hf-js33" class="f01-dois-consensos-discordam" id="f01-dois-consensos-discrete-text"></div>
+      <div data-hf-id="hf-7is8" class="f01-dois-consensos-ruler">
+        <div data-hf-id="hf-h78o" class="f01-dois-consensos-ruler-half is-left"></div>
+        <div data-hf-id="hf-we7r" class="f01-dois-consensos-ruler-half is-right"></div>
+        <div data-hf-id="hf-36z8" class="f01-dois-consensos-ruler-tick is-left"></div>
+        <div data-hf-id="hf-jrd7" class="f01-dois-consensos-ruler-tick is-right"></div>
+      </div>
+      <div data-hf-id="hf-jmb2" class="f01-dois-consensos-quase">QUASE TUDO</div>
+    </div>
+
+    <div data-hf-id="hf-c2tq" class="clip f01-dois-consensos-scene f01-dois-consensos-scene-three" data-start="0" data-duration="8.671" data-track-index="3">
+      <div data-hf-id="hf-ri8m" class="f01-dois-consensos-scene-three-panel"></div>
+      <div data-hf-id="hf-x7zx" class="f01-dois-consensos-consenso-wrap">
+        <div data-hf-id="hf-6k7h" class="f01-dois-consensos-consenso">CONSENSOS</div>
+        <div data-hf-id="hf-at8i" class="f01-dois-consensos-arrow-stage">
+          <div data-hf-id="hf-hwfq" class="f01-dois-consensos-arrow is-left" data-target-x="-300" data-target-y="0">
+            <span data-hf-id="hf-o46t" class="f01-dois-consensos-arrow-line"></span>
+            <span data-hf-id="hf-0tax" class="f01-dois-consensos-arrow-head"></span>
+          </div>
+          <div data-hf-id="hf-0mpe" class="f01-dois-consensos-arrow is-right" data-target-x="300" data-target-y="0">
+            <span data-hf-id="hf-xwmh" class="f01-dois-consensos-arrow-line"></span>
+            <span data-hf-id="hf-bynh" class="f01-dois-consensos-arrow-head"></span>
+          </div>
+        </div>
+      </div>
+      <div data-hf-id="hf-k3g9" class="f01-dois-consensos-direction-label">DUAS DIREÇÕES</div>
+      <div data-hf-id="hf-rr2a" class="f01-dois-consensos-direction-rule"></div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+  <script>
+    (() => {
+      const tl = gsap.timeline({ paused: true });
+      const sceneOne = document.querySelector('.f01-dois-consensos-scene-one');
+      const sceneTwo = document.querySelector('.f01-dois-consensos-scene-two');
+      const sceneThree = document.querySelector('.f01-dois-consensos-scene-three');
+      const partyBands = Array.from(document.querySelectorAll('.f01-dois-consensos-party-band'));
+      const rulerHalves = document.querySelectorAll('.f01-dois-consensos-ruler-half');
+      const rulerTicks = document.querySelectorAll('.f01-dois-consensos-ruler-tick');
+      const discreteText = document.getElementById('f01-dois-consensos-discrete-text');
+      const arrows = document.querySelectorAll('.f01-dois-consensos-arrow');
+
+      gsap.set([sceneTwo, sceneThree], { opacity: 0 });
+      gsap.set('.f01-dois-consensos-quase', { opacity: 0 });
+      gsap.set(rulerTicks, { opacity: 0 });
+
+      const CONTENT = partyBands.map((element) => ({
+        element,
+        title: element.dataset.sequenceTitle,
+        body: element.dataset.sequenceTitle,
+        hold: 0.12
+      }));
+      let cumulative = 0;
+      const BAND_TIMELINE = CONTENT.map((entry) => {
+        const duration = 0.34 + entry.body.length * 0.018 + entry.hold;
+        const start = cumulative;
+        cumulative += duration;
+        return { ...entry, start, end: cumulative };
+      });
+
+      BAND_TIMELINE.forEach((entry, index) => {
+        tl.fromTo(
+          entry.element,
+          { y: index === 0 ? -180 : 180, opacity: 0 },
+          { y: 0, opacity: 1, duration: 0.64, ease: 'power4.out' },
+          0.08 + entry.start
+        );
+      });
+      tl.fromTo(
+        '.f01-dois-consensos-register.is-v',
+        { scaleY: 0, opacity: 0 },
+        { scaleY: 1, opacity: 0.34, duration: 0.72, ease: 'power3.out' },
+        1.34
+      );
+      tl.fromTo(
+        '.f01-dois-consensos-register.is-h',
+        { scaleX: 0, opacity: 0 },
+        { scaleX: 1, opacity: 0.34, duration: 0.68, ease: 'power3.out' },
+        1.62
+      );
+      tl.fromTo(
+        '.f01-dois-consensos-corner',
+        { scale: 0.55, opacity: 0 },
+        { scale: 1, opacity: 0.45, duration: 0.42, stagger: 0.1, ease: 'power3.out' },
+        1.86
+      );
+
+      tl.to(sceneOne, { y: -230, duration: 0.3, ease: 'power4.in' }, 2.1);
+      tl.to(sceneOne, { opacity: 0, duration: 0.28, ease: 'power1.in' }, 2.12);
+      tl.set(sceneOne, { opacity: 0 }, 2.4);
+      tl.fromTo(
+        sceneTwo,
+        { y: 230, opacity: 0.35 },
+        { y: 0, opacity: 1, duration: 0.32, ease: 'power4.out' },
+        2.4
+      );
+
+      const DISCRETE_SEQUENCE = [
+        { t: 0, text: '' },
+        { t: 0.025, text: 'DISCORDAM' }
+      ];
+      const textAt = (time) => {
+        for (let i = DISCRETE_SEQUENCE.length - 1; i >= 0; i -= 1) {
+          if (time >= DISCRETE_SEQUENCE[i].t) return DISCRETE_SEQUENCE[i].text;
+        }
+        return '';
+      };
+      const discreteDriver = { t: 0 };
+      let lastText = null;
+      tl.to(
+        discreteDriver,
+        {
+          t: 0.3,
+          duration: 0.3,
+          ease: 'none',
+          onUpdate: () => {
+            const nextText = textAt(discreteDriver.t);
+            if (nextText !== lastText) {
+              discreteText.textContent = nextText;
+              lastText = nextText;
+            }
+          }
+        },
+        2.4
+      );
+
+      tl.fromTo(
+        rulerHalves,
+        { scaleX: 0, opacity: 0 },
+        { scaleX: 1, opacity: 1, duration: 1.08, stagger: 0.05, ease: 'power3.out' },
+        3.18
+      );
+      tl.fromTo(
+        rulerTicks,
+        { scaleY: 0.2, opacity: 0 },
+        { scaleY: 1, opacity: 1, duration: 0.38, stagger: 0.06, ease: 'power3.out' },
+        3.98
+      );
+      tl.fromTo(
+        '.f01-dois-consensos-quase',
+        { y: 52, opacity: 0 },
+        { y: 0, opacity: 1, duration: 0.58, ease: 'power4.out' },
+        4.34
+      );
+
+      tl.to(sceneTwo, { scale: 0.8, filter: 'blur(10px)', duration: 0.2, ease: 'power3.in' }, 5.1);
+      tl.to(sceneTwo, { opacity: 0.15, duration: 0.2, ease: 'none' }, 5.1);
+      tl.set(sceneTwo, { opacity: 0 }, 5.3);
+      tl.set(sceneThree, { opacity: 0.15, scale: 1, filter: 'blur(10px)' }, 5.3);
+      tl.to(
+        sceneThree,
+        { opacity: 1, scale: 1, filter: 'blur(0px)', duration: 0.5, ease: 'expo.out' },
+        5.3
+      );
+      tl.fromTo(
+        '.f01-dois-consensos-consenso',
+        { scale: 0.68, opacity: 0 },
+        { scale: 1, opacity: 1, duration: 0.82, ease: 'power3.out' },
+        5.34
+      );
+      tl.fromTo(
+        '.f01-dois-consensos-direction-label',
+        { y: 46, opacity: 0 },
+        { y: 0, opacity: 1, duration: 0.56, ease: 'power3.out' },
+        6.16
+      );
+      tl.fromTo(
+        '.f01-dois-consensos-direction-rule',
+        { scaleX: 0, opacity: 0 },
+        { scaleX: 1, opacity: 1, duration: 0.48, ease: 'power3.out' },
+        6.46
+      );
+
+      arrows.forEach((arrow, index) => {
+        tl.fromTo(
+          arrow,
+          { xPercent: -50, yPercent: -50, x: 0, y: 0, scale: 0.6, opacity: 0 },
+          {
+            x: Number(arrow.dataset.targetX),
+            y: Number(arrow.dataset.targetY),
+            scale: 1,
+            opacity: 1,
+            duration: 1.28,
+            ease: 'power3.out'
+          },
+          6.48 + index * 0.06
+        );
+      });
+
+      window.__timelines = window.__timelines || {};
+      window.__timelines['01-dois-consensos'] = tl;
+    })();
+  </script>
+</template>

@@ -1,0 +1,317 @@
+<template>
+  <style>
+    #root {
+      position: relative;
+      width: 1080px;
+      height: 1920px;
+      overflow: hidden;
+      color: #1f2be0;
+      container-type: size;
+    }
+
+    #root * {
+      box-sizing: border-box;
+    }
+
+    [id="08-promessa-ground"] {
+      position: absolute;
+      inset: 0;
+      background-color: #f0ebde;
+      background-image:
+        linear-gradient(rgba(31, 43, 224, 0.10) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(31, 43, 224, 0.10) 1px, transparent 1px);
+      background-size: 2cqw 2cqw;
+    }
+
+    [id="08-promessa-stage"] {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+    }
+
+    [id="08-promessa-top-rule"],
+    [id="08-promessa-bottom-rule"] {
+      position: absolute;
+      left: 44px;
+      right: 44px;
+      height: 2px;
+      background: #1f2be0;
+    }
+
+    [id="08-promessa-top-rule"] {
+      top: 58px;
+    }
+
+    [id="08-promessa-bottom-rule"] {
+      top: 1544px;
+    }
+
+    [id="08-promessa-glitch"] {
+      position: absolute;
+      top: 118px;
+      right: 44px;
+      width: 118px;
+      height: 1160px;
+      opacity: 0.12;
+      background:
+        linear-gradient(#f0ebde, #f0ebde) 0 0 / 42px 100% no-repeat,
+        repeating-linear-gradient(90deg, #1f2be0 0 3px, transparent 3px 11px);
+      clip-path: polygon(35% 0, 100% 0, 100% 18%, 73% 18%, 73% 38%, 92% 38%, 92% 61%, 58% 61%, 58% 82%, 100% 82%, 100% 100%, 18% 100%, 18% 73%, 0 73%, 0 45%, 31% 45%);
+    }
+
+    [id="08-promessa-kicker"] {
+      position: absolute;
+      top: 118px;
+      left: 64px;
+      font-family: sans-serif;
+      font-size: 18px;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      line-height: 1;
+      text-transform: uppercase;
+    }
+
+    [id="08-promessa-opening"] {
+      position: absolute;
+      top: 320px;
+      left: 64px;
+      width: 860px;
+      font-family: serif;
+      font-size: 130px;
+      font-weight: 400;
+      line-height: 1;
+      letter-spacing: -0.008em;
+    }
+
+    [id="08-promessa-opening"] span {
+      display: block;
+    }
+
+    [id="08-promessa-sequence-wrap"] {
+      position: absolute;
+      top: 440px;
+      left: 64px;
+      width: 892px;
+      max-width: calc(100% - 128px);
+      min-height: 320px;
+      display: flex;
+      align-items: flex-start;
+    }
+
+    [id="08-promessa-sequence"] {
+      display: inline-flex;
+      align-items: baseline;
+      width: 892px;
+      min-width: 892px;
+      white-space: pre-wrap;
+      font-family: monospace;
+      font-size: 65px;
+      font-weight: 400;
+      line-height: 1.14;
+      letter-spacing: 0.035em;
+      text-transform: uppercase;
+    }
+
+    [id="08-promessa-ledger"] {
+      position: absolute;
+      top: 1122px;
+      left: 64px;
+      width: 892px;
+      height: 154px;
+      border-top: 2px solid #1f2be0;
+      border-bottom: 1px solid rgba(31, 43, 224, 0.18);
+    }
+
+    [id="08-promessa-ledger-mark"] {
+      position: absolute;
+      left: 0;
+      top: 36px;
+      width: 54px;
+      height: 54px;
+      border: 2px solid #1f2be0;
+      display: grid;
+      place-items: center;
+      font-family: monospace;
+      font-size: 39px;
+      line-height: 1;
+    }
+
+    [id="08-promessa-ledger-line"] {
+      position: absolute;
+      left: 82px;
+      right: 0;
+      top: 62px;
+      height: 2px;
+      background: rgba(31, 43, 224, 0.18);
+      transform-origin: left center;
+    }
+
+    [id="08-promessa-final"] {
+      position: absolute;
+      top: 370px;
+      left: 64px;
+      width: 880px;
+      font-family: serif;
+      font-size: 145px;
+      font-weight: 400;
+      line-height: 1;
+      letter-spacing: -0.008em;
+      text-align: left;
+      opacity: 0;
+    }
+
+    [id="08-promessa-final"] span {
+      display: block;
+    }
+
+    [id="08-promessa-stamp"] {
+      position: absolute;
+      top: 1298px;
+      right: 124px;
+      padding: 18px 22px 16px;
+      border: 3px solid #1f2be0;
+      font-family: monospace;
+      font-size: 27px;
+      font-weight: 400;
+      line-height: 1;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      transform: rotate(-3deg);
+      transform-origin: center;
+    }
+  </style>
+
+  <div data-hf-id="hf-1ql8" id="root" data-composition-id="08-promessa" data-width="1080" data-height="1920" data-duration="6.648">
+    <div data-hf-id="hf-8orn" id="08-promessa-ground" class="clip" data-start="0" data-duration="6.648" data-track-index="0"></div>
+
+    <div data-hf-id="hf-b97r" id="08-promessa-stage" class="clip" data-start="0" data-duration="6.648" data-track-index="1">
+      <div data-hf-id="hf-4fx5" id="08-promessa-top-rule"></div>
+      <div data-hf-id="hf-0zxb" id="08-promessa-bottom-rule"></div>
+      <div data-hf-id="hf-31z6" id="08-promessa-glitch"></div>
+      <div data-hf-id="hf-didb" id="08-promessa-kicker">PROMESSA / HOJE</div>
+
+      <div data-hf-id="hf-qglj" id="08-promessa-opening" aria-label="Escolha hoje">
+        <span data-hf-id="hf-a8ma" id="08-promessa-escolha">ESCOLHA</span>
+        <span data-hf-id="hf-dmoa" id="08-promessa-hoje">HOJE</span>
+      </div>
+
+      <div data-hf-id="hf-gu33" id="08-promessa-sequence-wrap">
+        <span data-hf-id="hf-1uid" id="08-promessa-sequence"></span>
+      </div>
+
+      <div data-hf-id="hf-z91q" id="08-promessa-final" aria-label="Uma promessa possível">
+        <span data-hf-id="hf-bl5y">UMA</span>
+        <span data-hf-id="hf-cu4b">PROMESSA</span>
+        <span data-hf-id="hf-i4u8">POSSÍVEL</span>
+      </div>
+
+      <div data-hf-id="hf-633i" id="08-promessa-ledger">
+        <div data-hf-id="hf-qre0" id="08-promessa-ledger-mark"></div>
+        <div data-hf-id="hf-rml1" id="08-promessa-ledger-line"></div>
+      </div>
+
+      <div data-hf-id="hf-labx" id="08-promessa-stamp">REPETIR AMANHÃ</div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+  <script>
+    (() => {
+      const tl = gsap.timeline({ paused: true });
+      window.__timelines = window.__timelines || {};
+      window.__timelines["08-promessa"] = tl;
+
+      const opening = document.getElementById("08-promessa-opening");
+      const escolha = document.getElementById("08-promessa-escolha");
+      const hoje = document.getElementById("08-promessa-hoje");
+      const sequenceWrap = document.getElementById("08-promessa-sequence-wrap");
+      const sequenceEl = document.getElementById("08-promessa-sequence");
+      const finalLockup = document.getElementById("08-promessa-final");
+      const ledger = document.getElementById("08-promessa-ledger");
+      const ledgerLine = document.getElementById("08-promessa-ledger-line");
+      const ledgerMark = document.getElementById("08-promessa-ledger-mark");
+      const stamp = document.getElementById("08-promessa-stamp");
+
+      const sequence = [
+        { t: 0.00, text: "" },
+        { t: 0.20, text: "PEQUENA" },
+        { t: 0.48, text: "PEQUENA PARA" },
+        { t: 0.82, text: "PEQUENA PARA CUMPRIR" },
+        { t: 1.52, text: "IMPORTANTE" },
+        { t: 1.84, text: "IMPORTANTE PARA" },
+        { t: 2.18, text: "IMPORTANTE PARA REPETIR" }
+      ];
+
+      function textAt(time) {
+        for (let i = sequence.length - 1; i >= 0; i -= 1) {
+          if (time >= sequence[i].t) return sequence[i].text;
+        }
+        return "";
+      }
+
+      const driver = { t: 0 };
+
+      tl.fromTo(escolha,
+        { y: 70, opacity: 0 },
+        { y: 0, opacity: 1, duration: 0.52, ease: "power4.out" },
+        0.08
+      );
+      tl.fromTo(hoje,
+        { y: 70, opacity: 0 },
+        { y: 0, opacity: 1, duration: 0.52, ease: "power4.out" },
+        0.68
+      );
+      tl.fromTo(ledgerLine,
+        { scaleX: 0, opacity: 0.18 },
+        { scaleX: 1, opacity: 1, duration: 1.18, ease: "power3.out" },
+        0.34
+      );
+      tl.fromTo(ledger,
+        { opacity: 0 },
+        { opacity: 1, duration: 0.42, ease: "none" },
+        0.28
+      );
+
+      tl.to(opening, { x: -230, duration: 0.34, ease: "power4.in" }, 1.66);
+      tl.to(opening, { opacity: 0, duration: 0.30, ease: "power1.in" }, 1.68);
+      tl.fromTo(sequenceWrap,
+        { x: 36, opacity: 0.35 },
+        { x: 0, opacity: 1, duration: 0.34, ease: "power4.out" },
+        2.00
+      );
+      tl.to(driver, {
+        t: 2.72,
+        duration: 2.72,
+        ease: "none",
+        onUpdate: () => {
+          sequenceEl.textContent = textAt(driver.t);
+        }
+      }, 2.00);
+
+      tl.to(sequenceWrap, { scale: 0.8, filter: "blur(10px)", duration: 0.20, ease: "power3.in" }, 4.80);
+      tl.to(sequenceWrap, { opacity: 0.15, duration: 0.20, ease: "none" }, 4.80);
+      tl.set(sequenceWrap, { opacity: 0 }, 5.00);
+      tl.set(finalLockup, { opacity: 0.15, scale: 1.25, filter: "blur(10px)" }, 5.00);
+      tl.to(finalLockup, {
+        opacity: 1,
+        scale: 1,
+        filter: "blur(0px)",
+        duration: 0.50,
+        ease: "expo.out"
+      }, 5.00);
+
+      tl.fromTo(ledgerMark,
+        { opacity: 0, scale: 0.6 },
+        { opacity: 1, scale: 1, duration: 0.28, ease: "power4.out" },
+        5.34
+      );
+      tl.set(ledgerMark, { textContent: "✓" }, 5.34);
+      tl.fromTo(stamp,
+        { opacity: 0, scale: 1.35, rotation: -3 },
+        { opacity: 1, scale: 1, rotation: -3, duration: 0.34, ease: "power4.out" },
+        5.72
+      );
+      tl.set({}, {}, 6.648);
+    })();
+  </script>
+</template>

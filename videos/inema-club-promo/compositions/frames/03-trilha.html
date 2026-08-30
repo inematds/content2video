@@ -1,0 +1,400 @@
+<template>
+  <style>
+    #root {
+      position: relative;
+      width: 1080px;
+      height: 1920px;
+      overflow: hidden;
+      container-type: size;
+      color: #e2e8f0;
+    }
+
+    [class~="f03-trilha-bg"],
+    [class~="f03-trilha-scene"] {
+      position: absolute;
+      inset: 0;
+      width: 1080px;
+      height: 1920px;
+      overflow: hidden;
+    }
+
+    [class~="f03-trilha-bg"] {
+      background: #1a1f3a;
+    }
+
+    [class~="f03-trilha-context"] {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: 50% 50%;
+      opacity: 0.32;
+    }
+
+    [class~="f03-trilha-bg-wash"] {
+      position: absolute;
+      inset: 0;
+      background: rgba(26, 31, 58, 0.72);
+    }
+
+    [class~="f03-trilha-world"] {
+      position: absolute;
+      inset: 0;
+      width: 1080px;
+      height: 4700px;
+      transform-origin: 50% 50%;
+      will-change: transform;
+    }
+
+    [class~="f03-trilha-rail"] {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 1080px;
+      height: 4400px;
+      overflow: visible;
+      pointer-events: none;
+    }
+
+    [class~="f03-trilha-rail-path"] {
+      fill: none;
+      stroke: #00d9ff;
+      stroke-width: 5;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      opacity: 0.88;
+    }
+
+    [class~="f03-trilha-station"] {
+      position: absolute;
+      left: 50px;
+      width: 980px;
+      height: 900px;
+    }
+
+    [class~="f03-trilha-station-1"] { top: 250px; }
+    [class~="f03-trilha-station-2"] { top: 1250px; }
+    [class~="f03-trilha-station-3"] { top: 2250px; }
+    [class~="f03-trilha-station-4"] { top: 3250px; }
+
+    [class~="f03-trilha-marker"] {
+      position: absolute;
+      left: 0;
+      top: 405px;
+      width: 72px;
+      height: 72px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: #00d9ff;
+      color: #1a1f3a;
+      font-size: 26px;
+      font-weight: 800;
+      letter-spacing: 0.02em;
+      border: 7px solid #1a1f3a;
+      box-sizing: border-box;
+    }
+
+    [class~="f03-trilha-surface"] {
+      position: absolute;
+      left: 92px;
+      top: 50px;
+      width: 858px;
+      height: 800px;
+      overflow: hidden;
+      border-radius: 14px;
+      border: 1.5px solid rgba(0, 217, 255, 0.2);
+      background: rgba(0, 217, 255, 0.04);
+      box-sizing: border-box;
+    }
+
+    [class~="f03-trilha-shot"] {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    [class~="f03-trilha-shot-fundamentos"] { object-position: 22% 78%; }
+    [class~="f03-trilha-shot-dados"] { object-position: 62% 82%; }
+    [class~="f03-trilha-shot-agentes"] { object-position: 35% 5%; }
+    [class~="f03-trilha-shot-deploy"] { object-position: 62% 88%; }
+
+    [class~="f03-trilha-surface-wash"] {
+      position: absolute;
+      inset: 0;
+      background: rgba(26, 31, 58, 0.34);
+    }
+
+    [class~="f03-trilha-titlebar"] {
+      position: absolute;
+      left: 122px;
+      right: 30px;
+      top: 86px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 24px;
+    }
+
+    [class~="f03-trilha-label"] {
+      max-width: 690px;
+      margin: 0;
+      color: #e2e8f0;
+      font-size: 62px;
+      line-height: 1.05;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+
+    [class~="f03-trilha-step-pill"] {
+      flex: none;
+      min-width: 82px;
+      padding: 14px 20px;
+      border-radius: 100px;
+      color: #00d9ff;
+      background: rgba(0, 217, 255, 0.08);
+      border: 1.5px solid rgba(0, 217, 255, 0.2);
+      text-align: center;
+      font-size: 22px;
+      line-height: 1;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+    }
+
+    [class~="f03-trilha-subpoints"] {
+      position: absolute;
+      left: 122px;
+      top: 690px;
+      display: flex;
+      gap: 16px;
+    }
+
+    [class~="f03-trilha-subpoint"] {
+      display: flex;
+      align-items: center;
+      gap: 11px;
+      padding: 13px 20px;
+      border-radius: 100px;
+      color: #e2e8f0;
+      background: rgba(0, 217, 255, 0.08);
+      border: 1.5px solid rgba(0, 217, 255, 0.2);
+      font-size: 21px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+    }
+
+    [class~="f03-trilha-subdot"] {
+      width: 13px;
+      height: 13px;
+      border-radius: 50%;
+      background: #00d9ff;
+    }
+
+    [class~="f03-trilha-summary"] {
+      position: absolute;
+      left: 122px;
+      top: 690px;
+      width: 800px;
+      height: 190px;
+      padding: 30px 38px 24px;
+      box-sizing: border-box;
+      border-radius: 14px;
+      border: 1.5px solid rgba(0, 217, 255, 0.2);
+      background: rgba(0, 217, 255, 0.08);
+    }
+
+    [class~="f03-trilha-summary-svg"] {
+      position: absolute;
+      left: 38px;
+      top: 24px;
+      width: 724px;
+      height: 72px;
+      overflow: visible;
+    }
+
+    [class~="f03-trilha-summary-line"] {
+      fill: none;
+      stroke: #00d9ff;
+      stroke-width: 5;
+      stroke-linecap: round;
+    }
+
+    [class~="f03-trilha-summary-dot"] {
+      fill: #00d9ff;
+      stroke: #1a1f3a;
+      stroke-width: 7;
+    }
+
+    [class~="f03-trilha-summary-label"] {
+      position: absolute;
+      left: 38px;
+      right: 38px;
+      bottom: 25px;
+      color: #e2e8f0;
+      text-align: center;
+      font-size: 32px;
+      line-height: 1;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+    }
+  </style>
+
+  <div data-hf-id="hf-ng09" id="root" data-composition-id="03-trilha" data-width="1080" data-height="1920" data-duration="8.732">
+    <div data-hf-id="hf-anb2" class="clip f03-trilha-bg" data-start="0" data-duration="8.732" data-track-index="0">
+      <img data-hf-id="hf-2lnf" class="f03-trilha-context" src="assets/scroll-021.png" alt="">
+      <div data-hf-id="hf-jdfm" class="f03-trilha-bg-wash"></div>
+    </div>
+
+    <div data-hf-id="hf-k3f4" class="clip f03-trilha-scene" data-start="0" data-duration="8.732" data-track-index="1">
+      <div data-hf-id="hf-nq66" class="f03-trilha-world" id="f03-trilha-world">
+        <svg data-hf-id="hf-i3c5" class="f03-trilha-rail" viewBox="0 0 1080 4400" aria-hidden="true">
+          <path data-hf-id="hf-i92j" class="f03-trilha-rail-path" id="f03-trilha-rail-path" d="M 86 700 C 30 1000, 142 1370, 86 1700 C 30 2030, 142 2370, 86 2700 C 30 3030, 142 3370, 86 3700" />
+        </svg>
+
+        <section data-hf-id="hf-taf1" class="f03-trilha-station f03-trilha-station-1" id="f03-trilha-station-1">
+          <div data-hf-id="hf-mpb5" class="f03-trilha-marker" id="f03-trilha-marker-1">01</div>
+          <div data-hf-id="hf-jfkw" class="f03-trilha-surface" id="f03-trilha-surface-1">
+            <img data-hf-id="hf-2pss" class="f03-trilha-shot f03-trilha-shot-fundamentos" src="assets/scroll-021.png" alt="">
+            <div data-hf-id="hf-e16w" class="f03-trilha-surface-wash"></div>
+          </div>
+          <div data-hf-id="hf-lnue" class="f03-trilha-titlebar">
+            <h2 data-hf-id="hf-kxlk" class="f03-trilha-label">FUNDAMENTOS</h2>
+            <div data-hf-id="hf-7mc9" class="f03-trilha-step-pill">BASE 01</div>
+          </div>
+        </section>
+
+        <section data-hf-id="hf-tcft" class="f03-trilha-station f03-trilha-station-2" id="f03-trilha-station-2">
+          <div data-hf-id="hf-d5nz" class="f03-trilha-marker" id="f03-trilha-marker-2">02</div>
+          <div data-hf-id="hf-s3gr" class="f03-trilha-surface" id="f03-trilha-surface-2">
+            <img data-hf-id="hf-07lh" class="f03-trilha-shot f03-trilha-shot-dados" src="assets/scroll-021.png" alt="">
+            <div data-hf-id="hf-cv0g" class="f03-trilha-surface-wash"></div>
+          </div>
+          <div data-hf-id="hf-bxay" class="f03-trilha-titlebar">
+            <h2 data-hf-id="hf-twzc" class="f03-trilha-label" id="f03-trilha-discrete-label">DADOS</h2>
+            <div data-hf-id="hf-8t9c" class="f03-trilha-step-pill">BASE 02</div>
+          </div>
+          <div data-hf-id="hf-7ubq" class="f03-trilha-subpoints">
+            <div data-hf-id="hf-mdjk" class="f03-trilha-subpoint" id="f03-trilha-subpoint-data"><span data-hf-id="hf-98cb" class="f03-trilha-subdot"></span>DADOS</div>
+            <div data-hf-id="hf-2gqn" class="f03-trilha-subpoint" id="f03-trilha-subpoint-vision"><span data-hf-id="hf-txdn" class="f03-trilha-subdot"></span>VISÃO</div>
+          </div>
+        </section>
+
+        <section data-hf-id="hf-8o4t" class="f03-trilha-station f03-trilha-station-3" id="f03-trilha-station-3">
+          <div data-hf-id="hf-q2f1" class="f03-trilha-marker" id="f03-trilha-marker-3">03</div>
+          <div data-hf-id="hf-o5cq" class="f03-trilha-surface" id="f03-trilha-surface-3">
+            <img data-hf-id="hf-34uv" class="f03-trilha-shot f03-trilha-shot-agentes" src="assets/scroll-029.png" alt="">
+            <div data-hf-id="hf-bo3d" class="f03-trilha-surface-wash"></div>
+          </div>
+          <div data-hf-id="hf-cblz" class="f03-trilha-titlebar">
+            <h2 data-hf-id="hf-fw6z" class="f03-trilha-label">AGENTES DE CÓDIGO</h2>
+            <div data-hf-id="hf-8eyb" class="f03-trilha-step-pill">BASE 03</div>
+          </div>
+        </section>
+
+        <section data-hf-id="hf-ibjt" class="f03-trilha-station f03-trilha-station-4" id="f03-trilha-station-4">
+          <div data-hf-id="hf-f09b" class="f03-trilha-marker" id="f03-trilha-marker-4">04</div>
+          <div data-hf-id="hf-5dn1" class="f03-trilha-surface" id="f03-trilha-surface-4">
+            <img data-hf-id="hf-mxjn" class="f03-trilha-shot f03-trilha-shot-deploy" src="assets/scroll-021.png" alt="">
+            <div data-hf-id="hf-c2ee" class="f03-trilha-surface-wash"></div>
+          </div>
+          <div data-hf-id="hf-cpx0" class="f03-trilha-titlebar">
+            <h2 data-hf-id="hf-zulj" class="f03-trilha-label">DEPLOY</h2>
+            <div data-hf-id="hf-6ff6" class="f03-trilha-step-pill">BASE 04</div>
+          </div>
+          <div data-hf-id="hf-r5wu" class="f03-trilha-summary" id="f03-trilha-summary">
+            <svg data-hf-id="hf-4rbx" class="f03-trilha-summary-svg" viewBox="0 0 724 72" aria-hidden="true">
+              <path data-hf-id="hf-7nk2" class="f03-trilha-summary-line" id="f03-trilha-summary-line" d="M 42 36 L 682 36" />
+              <circle data-hf-id="hf-typg" class="f03-trilha-summary-dot" cx="42" cy="36" r="18" />
+              <circle data-hf-id="hf-1oay" class="f03-trilha-summary-dot" cx="255" cy="36" r="18" />
+              <circle data-hf-id="hf-es4v" class="f03-trilha-summary-dot" cx="469" cy="36" r="18" />
+              <circle data-hf-id="hf-bf0m" class="f03-trilha-summary-dot" cx="682" cy="36" r="18" />
+            </svg>
+            <div data-hf-id="hf-fh2r" class="f03-trilha-summary-label" id="f03-trilha-summary-label">NA ORDEM CERTA</div>
+          </div>
+        </section>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    (() => {
+      const world = document.getElementById("f03-trilha-world");
+      const railPath = document.getElementById("f03-trilha-rail-path");
+      const summaryLine = document.getElementById("f03-trilha-summary-line");
+      const discreteLabel = document.getElementById("f03-trilha-discrete-label");
+      const marker1 = document.getElementById("f03-trilha-marker-1");
+      const marker2 = document.getElementById("f03-trilha-marker-2");
+      const marker3 = document.getElementById("f03-trilha-marker-3");
+      const marker4 = document.getElementById("f03-trilha-marker-4");
+      const surface1 = document.getElementById("f03-trilha-surface-1");
+      const surface2 = document.getElementById("f03-trilha-surface-2");
+      const surface3 = document.getElementById("f03-trilha-surface-3");
+      const surface4 = document.getElementById("f03-trilha-surface-4");
+      const subpointData = document.getElementById("f03-trilha-subpoint-data");
+      const subpointVision = document.getElementById("f03-trilha-subpoint-vision");
+      const summary = document.getElementById("f03-trilha-summary");
+      const summaryLabel = document.getElementById("f03-trilha-summary-label");
+
+      const railLength = railPath.getTotalLength();
+      railPath.style.strokeDasharray = `${railLength}`;
+      railPath.style.strokeDashoffset = `${railLength}`;
+
+      const summaryLength = summaryLine.getTotalLength();
+      summaryLine.style.strokeDasharray = `${summaryLength}`;
+      summaryLine.style.strokeDashoffset = `${summaryLength}`;
+
+      const cam = { scale: 1, x: 0, y: 20 };
+      const applyCamera = () => {
+        world.style.transform = `translate(${cam.x}px, ${cam.y}px) scale(${cam.scale})`;
+      };
+      applyCamera();
+
+      const sequence = [
+        { t: 0, text: "DADOS" },
+        { t: 2.85, text: "DADOS +" },
+        { t: 3.15, text: "DADOS + VISÃO" }
+      ];
+      const textAt = (time) => {
+        for (let index = sequence.length - 1; index >= 0; index -= 1) {
+          if (time >= sequence[index].t) return sequence[index].text;
+        }
+        return "DADOS";
+      };
+      const discreteDriver = { t: 0 };
+
+      window.__timelines = window.__timelines || {};
+      const tl = gsap.timeline({ paused: true });
+      window.__timelines["03-trilha"] = tl;
+
+      tl.fromTo(surface1, { opacity: 0.72, y: 36 }, { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" }, 0);
+      tl.fromTo(marker1, { opacity: 0, scale: 0.55 }, { opacity: 1, scale: 1, duration: 0.42, ease: "back.out(1.7)" }, 0.1);
+
+      tl.to(cam, { y: -980, duration: 1.35, ease: "power3.inOut", onUpdate: applyCamera }, 0.75);
+      tl.fromTo(surface2, { opacity: 0.62, y: 70 }, { opacity: 1, y: 0, duration: 0.52, ease: "power4.out" }, 1.72);
+      tl.fromTo(marker2, { opacity: 0, scale: 0.55 }, { opacity: 1, scale: 1, duration: 0.4, ease: "back.out(1.7)" }, 1.9);
+      tl.fromTo(subpointData, { opacity: 0, x: 90 }, { opacity: 1, x: 0, duration: 0.34, ease: "power4.out" }, 2.22);
+      tl.fromTo(subpointVision, { opacity: 0, x: 90 }, { opacity: 1, x: 0, duration: 0.34, ease: "power4.out" }, 3.05);
+      tl.to(discreteDriver, {
+        t: 8.232,
+        duration: 8.232,
+        ease: "none",
+        onUpdate: () => { discreteLabel.textContent = textAt(discreteDriver.t); }
+      }, 0);
+
+      tl.to(cam, { y: -1980, duration: 1.35, ease: "power3.inOut", onUpdate: applyCamera }, 3.55);
+      tl.to(railPath, { strokeDashoffset: 0, duration: 1.65, ease: "power2.out" }, 4.25);
+      tl.fromTo(surface3, { opacity: 0.62, y: 70 }, { opacity: 1, y: 0, duration: 0.52, ease: "power4.out" }, 4.22);
+      tl.fromTo(marker3, { opacity: 0, scale: 0.55 }, { opacity: 1, scale: 1, duration: 0.4, ease: "back.out(1.7)" }, 4.42);
+
+      tl.to(cam, { y: -2980, duration: 1.12, ease: "power3.inOut", onUpdate: applyCamera }, 5.68);
+      tl.fromTo(surface4, { opacity: 0.62, y: 70 }, { opacity: 1, y: 0, duration: 0.5, ease: "power4.out" }, 6.32);
+      tl.fromTo(marker4, { opacity: 0, scale: 0.55 }, { opacity: 1, scale: 1, duration: 0.4, ease: "back.out(1.7)" }, 6.48);
+      tl.fromTo(summary, { opacity: 0, y: 74 }, { opacity: 1, y: 0, duration: 0.48, ease: "power4.out" }, 6.58);
+      tl.to(summaryLine, { strokeDashoffset: 0, duration: 0.62, ease: "power2.out" }, 6.76);
+      tl.fromTo(summaryLabel, { opacity: 0, y: 22 }, { opacity: 1, y: 0, duration: 0.42, ease: "power2.out" }, 7.22);
+    })();
+  </script>
+</template>
