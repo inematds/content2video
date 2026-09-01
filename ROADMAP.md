@@ -61,6 +61,21 @@ Recursos entregues na versão `v1.01.00`.
 - [x] Identificar na interface as fases reutilizadas.
 - [x] Criar a pasta `renders/` antes de salvar o MP4 final.
 
+### v1.05.00
+
+- [x] Permitir escolher o jeito de falar na criação: popular, natural ou técnico.
+- [x] Usar **Popular e simples** como padrão para facilitar a assimilação pelo público geral.
+- [x] Permitir escolher ritmo de fala calmo, natural ou rápido.
+- [x] Registrar estilo, ritmo e taxa da voz no briefing e nos metadados antes do áudio.
+- [x] Preservar estilo e ritmo nas edições, cópias e regenerações.
+
+### v1.06.00
+
+- [x] Trocar os seletores de estilo e ritmo por dropdowns compactos e acessíveis.
+- [x] Permitir informar um objetivo editorial além do link de origem.
+- [x] Usar o objetivo para orientar público, recorte e mensagem sem inventar fatos fora da fonte.
+- [x] Registrar o objetivo no briefing e nos metadados do projeto.
+
 ## Correções entregues
 
 ### v1.01.01

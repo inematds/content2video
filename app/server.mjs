@@ -13,11 +13,65 @@ const PACKAGE = JSON.parse(readFileSync(path.join(ROOT, "package.json"), "utf8")
 
 loadEnv(path.join(ROOT, ".env"));
 
+const CONVERSATION_STYLES = {
+  preserve: {
+    label: "Manter estilo atual",
+    description: "Preserva o jeito de falar de um projeto anterior.",
+    prompt: "Preserve o jeito de falar que o projeto já usa. Não simplifique nem torne o texto mais técnico sem uma instrução explícita do usuário.",
+    selectable: false
+  },
+  popular: {
+    label: "Popular e simples",
+    description: "Frases curtas, palavras comuns e toda ideia difícil explicada com exemplo.",
+    prompt: "Fale para o público em geral com frases curtas, palavras comuns e uma ideia por vez. Explique todo termo técnico na primeira vez que aparecer e use exemplos concretos do cotidiano. Evite linguagem acadêmica, rebuscada, abstrata ou excessivamente formal."
+  },
+  natural: {
+    label: "Conversa natural",
+    description: "Tom próximo e acessível, com detalhes na medida certa.",
+    prompt: "Use um tom próximo e conversado, acessível para quem não é especialista. Pode usar termos técnicos apenas quando ajudarem, sempre com uma explicação curta. Mantenha ritmo natural e detalhes na medida certa."
+  },
+  technical: {
+    label: "Técnico e detalhado",
+    description: "Mais precisão, conceitos e vocabulário para quem já conhece o assunto.",
+    prompt: "Use linguagem técnica, precisa e detalhada para um público que já conhece o assunto. Preserve conceitos, ressalvas e vocabulário especializado, sem rebuscamento desnecessário."
+  }
+};
+
+const SPEECH_PACES = {
+  preserve: {
+    label: "Manter ritmo atual",
+    description: "Preserva a velocidade de um projeto anterior.",
+    voiceRate: "inalterada",
+    prompt: "Preserve exatamente a velocidade e as pausas da narração existente.",
+    selectable: false
+  },
+  calm: {
+    label: "Calma",
+    description: "Mais pausas e tempo para assimilar.",
+    voiceRate: "-10%",
+    prompt: "Use uma narração calma e pausada, com respiros claros entre ideias e velocidade de voz em -10%."
+  },
+  natural: {
+    label: "Natural",
+    description: "Cadência equilibrada para a maioria dos vídeos.",
+    voiceRate: "+0%",
+    prompt: "Use uma cadência natural e equilibrada, com velocidade de voz em +0% e pausas apenas onde ajudarem a compreensão."
+  },
+  fast: {
+    label: "Rápida",
+    description: "Mais energia e informação por minuto.",
+    voiceRate: "+12%",
+    prompt: "Use uma narração rápida e dinâmica, mas ainda claramente compreensível, com velocidade de voz em +12% e pausas curtas."
+  }
+};
+
 const config = {
   provider: process.env.AI_PROVIDER || "codex",
   language: process.env.OUTPUT_LANGUAGE || "pt-BR",
   voiceProvider: process.env.VOICE_PROVIDER || "edge-tts",
   voiceId: process.env.VOICE_ID || "pt-BR-FranciscaNeural",
+  conversationStyle: selectableConversationStyle(process.env.CONVERSATION_STYLE) ? process.env.CONVERSATION_STYLE : "popular",
+  speechPace: selectableSpeechPace(process.env.SPEECH_PACE) ? process.env.SPEECH_PACE : "natural",
   targetDuration: numberFromEnv("TARGET_DURATION_SECONDS", 60),
   tolerance: numberFromEnv("DURATION_TOLERANCE_PERCENT", 30),
   minimumDuration: numberFromEnv("MINIMUM_DURATION_SECONDS", 42),
@@ -123,6 +177,10 @@ function publicConfig() {
     language: config.language,
     voiceProvider: config.voiceProvider,
     voiceId: config.voiceId,
+    conversationStyle: config.conversationStyle,
+    conversationStyles: Object.entries(CONVERSATION_STYLES).filter(([, style]) => style.selectable !== false).map(([value, style]) => ({ value, label: style.label, description: style.description })),
+    speechPace: config.speechPace,
+    speechPaces: Object.entries(SPEECH_PACES).filter(([, pace]) => pace.selectable !== false).map(([value, pace]) => ({ value, label: pace.label, description: pace.description, voiceRate: pace.voiceRate })),
     targetDuration: config.targetDuration,
     tolerance: config.tolerance,
     durationRange: [config.minimumDuration, config.maximumDuration],
@@ -179,12 +237,18 @@ async function listProjects() {
     const thumbnail = findThumbnail(projectDir, entry.name);
     const info = await stat(projectDir);
     const metadata = readProjectMetadata(projectDir);
+    const conversationStyle = validConversationStyle(metadata.conversation_style) ? metadata.conversation_style : "preserve";
+    const speechPace = validSpeechPace(metadata.speech_pace) ? metadata.speech_pace : "preserve";
     projects.push({
       slug: entry.name,
       name: humanize(entry.name),
       modifiedAt: info.mtime.toISOString(),
       aspectRatio: metadata.aspect_ratio || metadata.aspectRatio || config.aspectRatio,
       includeCta: metadata.include_cta !== false,
+      conversationStyle,
+      conversationStyleLabel: CONVERSATION_STYLES[conversationStyle].label,
+      speechPace,
+      speechPaceLabel: SPEECH_PACES[speechPace].label,
       thumbnail,
       renders,
       preview: previews.get(entry.name)?.url || null
@@ -247,6 +311,10 @@ function serializeJob(job) {
     instructions: job.instructions || null,
     aspectRatio: job.aspectRatio,
     includeCta: job.includeCta,
+    conversationStyle: job.conversationStyle,
+    conversationStyleLabel: CONVERSATION_STYLES[job.conversationStyle]?.label || CONVERSATION_STYLES[config.conversationStyle].label,
+    speechPace: job.speechPace,
+    speechPaceLabel: SPEECH_PACES[job.speechPace]?.label || SPEECH_PACES[config.speechPace].label,
     checkpointId: job.checkpointId || null,
     retryable,
     resumeAvailable: retryable && renderCheckpointAvailable(job),
@@ -291,6 +359,8 @@ function makeJob(type, project, options = {}) {
     instructions: options.instructions || null,
     aspectRatio: options.aspectRatio || config.aspectRatio,
     includeCta: options.includeCta !== false,
+    conversationStyle: validConversationStyle(options.conversationStyle) ? options.conversationStyle : config.conversationStyle,
+    speechPace: validSpeechPace(options.speechPace) ? options.speechPace : config.speechPace,
     checkpointId: options.checkpointId || id,
     retryMode: options.retryMode || "restart",
     skippedPhases: [],
@@ -332,6 +402,22 @@ function validAspectRatio(value) {
   return value === "9:16" || value === "16:9";
 }
 
+function validConversationStyle(value) {
+  return typeof value === "string" && Object.hasOwn(CONVERSATION_STYLES, value);
+}
+
+function selectableConversationStyle(value) {
+  return validConversationStyle(value) && CONVERSATION_STYLES[value].selectable !== false;
+}
+
+function validSpeechPace(value) {
+  return typeof value === "string" && Object.hasOwn(SPEECH_PACES, value);
+}
+
+function selectableSpeechPace(value) {
+  return validSpeechPace(value) && SPEECH_PACES[value].selectable !== false;
+}
+
 function activeJobForProject(project) {
   return [...jobs.values()].find((job) => job.project === project && ["queued", "running", "cancelling"].includes(job.status));
 }
@@ -367,13 +453,20 @@ function appendLog(job, line) {
 function startGeneration(job) {
   const projectDir = path.join(config.videosDir, job.project);
   const dimensions = dimensionsFor(job.aspectRatio);
+  const conversation = CONVERSATION_STYLES[job.conversationStyle];
+  const pace = SPEECH_PACES[job.speechPace];
+  const objective = job.instructions
+    ? `Objetivo específico informado pelo usuário: ${job.instructions}\nTrate esse objetivo como a direção editorial principal, sem inventar fatos além da fonte. `
+    : "O usuário não informou um objetivo adicional; identifique o recorte mais útil e fiel à fonte. ";
   const prompt = `Crie um vídeo HyperFrames completo a partir desta URL: ${job.sourceUrl}\n\n` +
     `Trabalhe dentro de ${projectDir}. Siga integralmente o AGENTS.md e os defaults do projeto. ` +
+    objective +
     `Use saída ${config.language}, voz ${config.voiceProvider}/${config.voiceId} em todas as cenas, ` +
+    `estilo de conversa "${conversation.label}" e ritmo de fala "${pace.label}". ${conversation.prompt} ${pace.prompt} ` +
     `duração alvo ${config.targetDuration}s entre ${config.minimumDuration}s e ${config.maximumDuration}s, ` +
     `formato ${job.aspectRatio} ${dimensions.width}x${dimensions.height} ${config.fps}fps e qualidade mínima ${config.minimumQuality}. ` +
     `Pesquise e leia a URL, crie BRIEF.md, roteiro, mídia local, narração, composição e snapshots. ` +
-    `Registre aspect_ratio, width, height e include_cta: ${job.includeCta} no meta.json. ` +
+    `Antes de gerar o áudio, registre o objetivo editorial, language, voice_provider, voice_id, conversation_style: ${job.conversationStyle}, speech_pace: ${job.speechPace}, voice_rate: ${pace.voiceRate}, aspect_ratio, width, height e include_cta: ${job.includeCta} no BRIEF.md e no meta.json. ` +
     `Garanta que todas as manchetes caibam na área segura. Rode hyperframes check ao final. ` +
     `Não renderize o MP4 ainda: a aprovação ocorrerá na interface. Não faça perguntas; os defaults já foram aprovados.`;
 
@@ -384,6 +477,8 @@ async function startProjectTransformation(job, duplicate) {
   const sourceDir = path.join(config.videosDir, job.sourceProject || job.project);
   const projectDir = path.join(config.videosDir, job.project);
   const dimensions = dimensionsFor(job.aspectRatio);
+  const conversation = CONVERSATION_STYLES[job.conversationStyle];
+  const pace = SPEECH_PACES[job.speechPace];
   try {
     updateJob(job, { status: "running" });
     if (duplicate) {
@@ -401,6 +496,9 @@ async function startProjectTransformation(job, duplicate) {
         createdAt: new Date().toISOString(),
         aspect_ratio: job.aspectRatio,
         include_cta: job.includeCta,
+        conversation_style: job.conversationStyle,
+        speech_pace: job.speechPace,
+        voice_rate: pace.voiceRate,
         width: dimensions.width,
         height: dimensions.height
       }, null, 2)}\n`);
@@ -412,7 +510,8 @@ async function startProjectTransformation(job, duplicate) {
       `Siga integralmente o AGENTS.md deste repositório. Mantenha tudo que a instrução não pedir para alterar. ` +
       `O resultado deve usar formato ${job.aspectRatio} em ${dimensions.width}x${dimensions.height}, ${config.fps}fps. ` +
       `Para narração em português brasileiro, mantenha ${config.voiceProvider}/${config.voiceId} em todas as cenas e regenerações. ` +
-      `Atualize BRIEF.md e meta.json com language, voice_provider, voice_id, aspect_ratio, width, height e include_cta: ${job.includeCta} antes de regenerar áudio. ` +
+      `Mantenha o estilo de conversa "${conversation.label}" e o ritmo de fala "${pace.label}". ${conversation.prompt} ${pace.prompt} ` +
+      `Atualize BRIEF.md e meta.json com language, voice_provider, voice_id, conversation_style: ${job.conversationStyle}, speech_pace: ${job.speechPace}, voice_rate: ${pace.voiceRate}, aspect_ratio, width, height e include_cta: ${job.includeCta} antes de regenerar áudio. ` +
       `Ajuste composição, roteiro, mídia, voz e legendas somente quando necessário para cumprir a instrução. ` +
       `Valide títulos na área segura, rode hyperframes check e gere snapshots ao final. Não renderize o MP4 e não faça perguntas.`;
     runCodexJob(job, prompt, projectDir);
@@ -472,12 +571,20 @@ function runCodexJob(job, prompt, projectDir) {
     if (code === 0 && hasAssembledComposition(projectDir)) {
       try {
         const dimensions = dimensionsFor(job.aspectRatio);
-        await updateProjectMetadata(projectDir, {
+        const metadataPatch = {
+          language: config.language,
+          voice_provider: config.voiceProvider,
+          voice_id: config.voiceId,
+          conversation_style: job.conversationStyle,
+          speech_pace: job.speechPace,
+          voice_rate: SPEECH_PACES[job.speechPace].voiceRate,
           aspect_ratio: job.aspectRatio,
           width: dimensions.width,
           height: dimensions.height,
           include_cta: job.includeCta
-        });
+        };
+        if (job.type === "generation") metadataPatch.source_objective = job.instructions || null;
+        await updateProjectMetadata(projectDir, metadataPatch);
       } catch (error) {
         updateJob(job, { status: "failed", stage: "Falha ao salvar preferências", error: error.message });
         return;
@@ -519,6 +626,8 @@ function createRenderJob(project, options = {}) {
   return makeJob("render", project, {
     aspectRatio: options.aspectRatio || metadata.aspect_ratio || metadata.aspectRatio || config.aspectRatio,
     includeCta: typeof options.includeCta === "boolean" ? options.includeCta : metadata.include_cta !== false,
+    conversationStyle: validConversationStyle(metadata.conversation_style) ? metadata.conversation_style : "preserve",
+    speechPace: validSpeechPace(metadata.speech_pace) ? metadata.speech_pace : "preserve",
     checkpointId: options.checkpointId,
     retryMode: options.retryMode || "restart"
   });
@@ -830,10 +939,16 @@ const server = http.createServer(async (req, res) => {
       if (!["http:", "https:"].includes(parsed.protocol)) return json(res, 400, { error: "A URL precisa começar com http:// ou https://." });
       const aspectRatio = body.aspectRatio || config.aspectRatio;
       if (!validAspectRatio(aspectRatio)) return json(res, 400, { error: "Escolha o formato 9:16 ou 16:9." });
+      const conversationStyle = body.conversationStyle || config.conversationStyle;
+      if (!selectableConversationStyle(conversationStyle)) return json(res, 400, { error: "Escolha um jeito de falar disponível." });
+      const speechPace = body.speechPace || config.speechPace;
+      if (!selectableSpeechPace(speechPace)) return json(res, 400, { error: "Escolha um ritmo de fala disponível." });
+      const objective = String(body.objective || "").trim();
+      if (objective.length > 4000) return json(res, 400, { error: "O objetivo deve ter no máximo 4.000 caracteres." });
       let slug = slugFromUrl(body.url);
       if (existsSync(path.join(config.videosDir, slug))) slug = `${slug}-${Date.now().toString(36).slice(-5)}`;
       const includeCta = body.includeCta !== false;
-      const job = makeJob("generation", slug, { sourceUrl: body.url, aspectRatio, includeCta });
+      const job = makeJob("generation", slug, { sourceUrl: body.url, instructions: objective, aspectRatio, includeCta, conversationStyle, speechPace });
       startGeneration(job);
       return json(res, 202, { job: serializeJob(job) });
     }
@@ -883,13 +998,15 @@ const server = http.createServer(async (req, res) => {
       const aspectRatio = body.aspectRatio || sourceMetadata.aspect_ratio || sourceMetadata.aspectRatio || config.aspectRatio;
       if (!validAspectRatio(aspectRatio)) return json(res, 400, { error: "Escolha o formato 9:16 ou 16:9." });
       const includeCta = typeof body.includeCta === "boolean" ? body.includeCta : sourceMetadata.include_cta !== false;
+      const conversationStyle = validConversationStyle(sourceMetadata.conversation_style) ? sourceMetadata.conversation_style : "preserve";
+      const speechPace = validSpeechPace(sourceMetadata.speech_pace) ? sourceMetadata.speech_pace : "preserve";
 
       if (activeJobForProject(sourceProject)) {
         return json(res, 409, { error: "Este projeto já possui um trabalho em andamento. Cancele ou aguarde antes de continuar." });
       }
 
       const project = operation === "duplicate" ? uniqueProjectSlug(`${sourceProject}-copia`) : sourceProject;
-      const job = makeJob(operation, project, { sourceProject, instructions, aspectRatio, includeCta });
+      const job = makeJob(operation, project, { sourceProject, instructions, aspectRatio, includeCta, conversationStyle, speechPace });
       startProjectTransformation(job, operation === "duplicate");
       return json(res, 202, { job: serializeJob(job) });
     }

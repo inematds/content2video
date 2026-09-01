@@ -14,6 +14,8 @@ const settings = {
   language: process.env.OUTPUT_LANGUAGE || "pt-BR",
   voiceProvider: process.env.VOICE_PROVIDER || "edge-tts",
   voiceId: process.env.VOICE_ID || "pt-BR-FranciscaNeural",
+  conversationStyle: process.env.CONVERSATION_STYLE || "popular",
+  speechPace: process.env.SPEECH_PACE || "natural",
   targetDuration: numberSetting("TARGET_DURATION_SECONDS", 60),
   minimumDuration: numberSetting("MINIMUM_DURATION_SECONDS", 42),
   maximumDuration: numberSetting("MAXIMUM_DURATION_SECONDS", 78),
@@ -64,10 +66,11 @@ async function createVideo(sourceUrl, requestedSlug) {
   const prompt = `Crie um vídeo HyperFrames completo a partir desta URL: ${parsed.href}\n\n` +
     `Trabalhe dentro de ${projectDir}. Siga integralmente o AGENTS.md e os defaults do projeto. ` +
     `Use saída ${settings.language}, voz ${settings.voiceProvider}/${settings.voiceId} em todas as cenas, ` +
+    `estilo de conversa ${settings.conversationStyle} e ritmo de fala ${settings.speechPace}. Para o estilo popular, use frases curtas, palavras comuns, exemplos concretos e explique todo termo técnico. ` +
     `duração alvo ${settings.targetDuration}s entre ${settings.minimumDuration}s e ${settings.maximumDuration}s, ` +
     `formato ${settings.aspectRatio} ${settings.width}x${settings.height} ${settings.fps}fps e qualidade mínima ${settings.minimumQuality}. ` +
     `Pesquise e leia a URL, crie BRIEF.md, roteiro, mídia local, narração, composição e snapshots. ` +
-    `Registre include_cta: true no meta.json. Garanta que todas as manchetes caibam na área segura. Rode hyperframes check ao final. ` +
+    `Antes do áudio, registre language, voice_provider, voice_id, conversation_style, speech_pace e include_cta: true no BRIEF.md e no meta.json. Garanta que todas as manchetes caibam na área segura. Rode hyperframes check ao final. ` +
     `Não renderize o MP4 ainda. Não faça perguntas; os defaults já foram aprovados.`;
 
   const childEnv = { ...process.env };

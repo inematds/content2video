@@ -14,6 +14,13 @@
     "source_language_must_not_override_output_voice": true,
     "allow_change_only_on_explicit_user_request": true
   },
+  "communication": {
+    "conversation_style": "popular",
+    "speech_pace": "natural",
+    "voice_rate": "+0%",
+    "explain_technical_terms": true,
+    "prefer_short_sentences": true
+  },
   "headline_safe_area": {
     "horizontal_inset_ratio": 0.075,
     "vertical_inset_ratio": 0.06,

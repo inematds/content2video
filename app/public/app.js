@@ -9,7 +9,10 @@ const state = {
 const elements = {
   form: document.querySelector("#create-form"),
   input: document.querySelector("#source-url"),
+  objective: document.querySelector("#video-objective"),
   aspectInputs: [...document.querySelectorAll('input[name="aspectRatio"]')],
+  conversationSelect: document.querySelector("#conversation-style"),
+  speechPaceSelect: document.querySelector("#speech-pace"),
   createCta: document.querySelector("#create-cta"),
   createButton: document.querySelector("#create-button"),
   formMessage: document.querySelector("#form-message"),
@@ -62,6 +65,10 @@ async function initialize() {
 
 function renderConfig() {
   const config = state.config;
+  const conversation = config.conversationStyles?.find((item) => item.value === config.conversationStyle);
+  const pace = config.speechPaces?.find((item) => item.value === config.speechPace);
+  if (config.conversationStyles?.some((item) => item.value === config.conversationStyle)) elements.conversationSelect.value = config.conversationStyle;
+  if (config.speechPaces?.some((item) => item.value === config.speechPace)) elements.speechPaceSelect.value = config.speechPace;
   elements.appVersion.textContent = config.version;
   elements.authLabel.textContent = config.authReady
     ? `${config.authMessage} · ${config.voiceId}`
@@ -73,6 +80,7 @@ function renderConfig() {
     `${config.targetDuration}s ±${config.tolerance}%`,
     `${config.aspectRatio} · ${config.resolution}`,
     `${config.language} · ${config.voiceId}`,
+    `${conversation?.label || config.conversationStyle} · fala ${pace?.label?.toLowerCase() || config.speechPace}`,
     `qualidade ≥ ${config.minimumQuality}`
   ];
   elements.defaults.innerHTML = facts.map((fact) => `<span>${escapeHtml(fact)}</span>`).join("");
@@ -138,7 +146,7 @@ function renderJobs() {
       ${job.retryable && job.error ? `<p class="job-error-detail">Detalhe: ${escapeHtml(job.error)}</p>` : ""}
       <ol class="job-phases" aria-label="Fases de ${escapeHtml(typeLabel)}">${phases}</ol>
       <div class="job-progress" aria-label="${escapeHtml(statusLabel)}"><i></i></div>
-      <div class="job-actions"><span class="job-format">${escapeHtml(typeLabel)} · ${escapeHtml(job.aspectRatio)} · ${formatDuration(job.totalDurationMs ?? elapsedDuration(job))} no total</span>${cancel}</div>
+      <div class="job-actions"><span class="job-format">${escapeHtml(typeLabel)} · ${escapeHtml(job.aspectRatio)} · ${escapeHtml(job.conversationStyleLabel)} · fala ${escapeHtml(job.speechPaceLabel?.toLowerCase())} · ${formatDuration(job.totalDurationMs ?? elapsedDuration(job))} no total</span>${cancel}</div>
       ${recovery}
     </article>`;
   }).join("");
@@ -195,6 +203,8 @@ function renderProjects() {
           <span class="project-status ${statusClass}">${escapeHtml(projectStatus)}</span>
           <span>${escapeHtml(renderMeta)}</span>
           <span>${escapeHtml(project.aspectRatio)}</span>
+          <span>${escapeHtml(project.conversationStyleLabel)}</span>
+          <span>Fala ${escapeHtml(project.speechPaceLabel.toLowerCase())}</span>
           <span>${effectiveCta ? "CTA no final" : "Sem CTA"}</span>
           <span>Atualizado ${formatDate(project.modifiedAt)}</span>
         </div>
@@ -262,10 +272,14 @@ elements.form.addEventListener("submit", async (event) => {
   elements.form.classList.add("is-working");
   try {
     const url = elements.input.value.trim();
+    const objective = elements.objective.value.trim();
     const aspectRatio = elements.aspectInputs.find((input) => input.checked)?.value || "9:16";
+    const conversationStyle = elements.conversationSelect.value || "popular";
+    const speechPace = elements.speechPaceSelect.value || "natural";
     const includeCta = elements.createCta.checked;
-    await api("/api/jobs", { method: "POST", body: JSON.stringify({ url, aspectRatio, includeCta }) });
+    await api("/api/jobs", { method: "POST", body: JSON.stringify({ url, objective, aspectRatio, conversationStyle, speechPace, includeCta }) });
     elements.input.value = "";
+    elements.objective.value = "";
     toast("Produção iniciada. Você pode acompanhar o andamento abaixo.");
     await refresh();
   } catch (error) {

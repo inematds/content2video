@@ -6,11 +6,11 @@ O padrão atual é vídeo vertical em português brasileiro, com cerca de 1 minu
 
 [Abrir o guia visual](https://inematds.github.io/content2video/guia/) · [Plano do projeto](docs/plano_content2video_inema.md)
 
-Versão atual: `v1.04.00`. O histórico e as evoluções planejadas estão no [ROADMAP](ROADMAP.md).
+Versão atual: `v1.06.00`. O histórico e as evoluções planejadas estão no [ROADMAP](ROADMAP.md).
 
 ## Arquitetura e provedores da versão atual
 
-A `v1.04.00` não usa um serviço externo de vídeo generativo. O resultado atual é uma composição programável: o agente cria roteiro e cenas, o HyperFrames organiza e anima os elementos, e o FFmpeg entrega o MP4.
+A `v1.06.00` não usa um serviço externo de vídeo generativo. O resultado atual é uma composição programável: o agente cria roteiro e cenas, o HyperFrames organiza e anima os elementos, e o FFmpeg entrega o MP4.
 
 | Componente | Responsabilidade atual | Gera clipes por IA? |
 |---|---|---|
@@ -126,14 +126,19 @@ npm start
 Na interface:
 
 1. Cole o link da página ou artigo.
-2. Escolha **9:16 Vertical** (`1080 × 1920`) ou **16:9 Horizontal** (`1920 × 1080`).
-3. Mantenha **Adicionar CTA INEMA.CLUB ao final** marcado ou desmarque para produzir sem o encerramento.
-4. Clique em **Gerar vídeo** e acompanhe cada fase do trabalho.
-5. Durante a produção, a situação mostra a atividade atual e mantém editor, edição por prompt, cópia e render bloqueados para evitar abrir ou alterar uma composição incompleta.
-6. Quando a produção terminar sem MP4, a situação mostra **Aguardando revisão**: use **Abrir editor** ou **Editar com prompt**.
-7. Use **Criar cópia** quando quiser adaptar uma versão sem tocar no projeto original.
-8. Clique em **Aprovar e renderizar** e baixe o MP4 pelo próprio card do projeto.
-9. Quando a situação mudar para **Pronto para assistir**, o play aparece na capa e abre o MP4 final.
+2. Se quiser orientar o recorte, preencha **Objetivo do vídeo**. Essa instrução complementa o link e define público, foco e mensagem sem substituir os fatos da fonte.
+3. Escolha **9:16 Vertical** (`1080 × 1920`) ou **16:9 Horizontal** (`1920 × 1080`).
+4. No dropdown **Jeito de falar**, escolha **Popular e simples**, **Conversa natural** ou **Técnico e detalhado**. O padrão popular usa frases curtas, palavras comuns e explica termos difíceis com exemplos.
+5. No dropdown **Ritmo da fala**, escolha **Calma** (`-10%`), **Natural** (`+0%`) ou **Rápida** (`+12%`).
+6. Mantenha **Adicionar CTA INEMA.CLUB ao final** marcado ou desmarque para produzir sem o encerramento.
+7. Clique em **Gerar vídeo** e acompanhe cada fase do trabalho.
+8. Durante a produção, a situação mostra a atividade atual e mantém editor, edição por prompt, cópia e render bloqueados para evitar abrir ou alterar uma composição incompleta.
+9. Quando a produção terminar sem MP4, a situação mostra **Aguardando revisão**: use **Abrir editor** ou **Editar com prompt**.
+10. Use **Criar cópia** quando quiser adaptar uma versão sem tocar no projeto original.
+11. Clique em **Aprovar e renderizar** e baixe o MP4 pelo próprio card do projeto.
+12. Quando a situação mudar para **Pronto para assistir**, o play aparece na capa e abre o MP4 final.
+
+As duas escolhas ficam registradas no `BRIEF.md` e no `meta.json` como `conversation_style`, `speech_pace` e `voice_rate` antes da geração do áudio. Edições e regenerações preservam o estilo e o ritmo do projeto.
 
 ### Fases, retomada e cancelamento
 
@@ -246,7 +251,7 @@ OPENAI_API_KEY=sk-...
 
 Nunca envie a chave ao Git. O `.gitignore` já exclui `.env` e variantes locais.
 
-Essas duas opções controlam o agente que constrói o projeto. Nenhuma delas ativa geração de clipes de vídeo na `v1.04.00`.
+Essas duas opções controlam o agente que constrói o projeto. Nenhuma delas ativa geração de clipes de vídeo na `v1.06.00`.
 
 ## Padrões configuráveis
 

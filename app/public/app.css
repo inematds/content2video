@@ -56,10 +56,10 @@ body {
     var(--ink);
 }
 
-button, input, textarea { font: inherit; }
+button, input, select, textarea { font: inherit; }
 button { color: inherit; }
 
-button:focus-visible, input:focus-visible, textarea:focus-visible, a:focus-visible {
+button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible, a:focus-visible {
   outline: 3px solid var(--cyan-soft);
   outline-offset: 3px;
 }
@@ -235,6 +235,40 @@ main { padding: clamp(30px, 5vw, 72px) clamp(20px, 4vw, 64px) 72px; }
 
 .url-control input::placeholder { color: #7886a6; }
 
+.url-form .objective-field {
+  margin: 16px 0 0;
+  display: grid;
+  gap: 8px;
+  color: var(--text);
+}
+
+.objective-field > span small {
+  display: block;
+  margin-top: 2px;
+  color: var(--muted);
+  font-size: 11px;
+  font-weight: 400;
+  line-height: 1.4;
+}
+
+.objective-field textarea {
+  width: 100%;
+  min-height: 86px;
+  padding: 13px 15px;
+  resize: vertical;
+  border: 1px solid var(--line-bright);
+  border-radius: 12px;
+  outline: 0;
+  background: var(--surface);
+  color: var(--text);
+  font-size: 16px;
+  line-height: 1.45;
+  transition: border-color 160ms ease, background 160ms ease;
+}
+.objective-field textarea::placeholder { color: #7886a6; }
+.objective-field textarea:hover { background: var(--surface-raised); }
+.objective-field textarea:focus { border-color: var(--cyan); background: var(--surface); }
+
 .primary-action {
   min-height: 66px;
   padding: 0 22px;
@@ -307,6 +341,80 @@ main { padding: clamp(30px, 5vw, 72px) clamp(20px, 4vw, 64px) 72px; }
 .format-icon { display: inline-block; border: 1.5px solid currentColor; border-radius: 3px; }
 .format-icon.vertical { width: 7px; height: 12px; }
 .format-icon.horizontal { width: 13px; height: 8px; }
+
+.voice-controls {
+  margin-top: 18px;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 14px;
+}
+
+.url-form .select-field {
+  min-width: 0;
+  margin: 0;
+  display: grid;
+  gap: 8px;
+  color: var(--text);
+  font-size: 13px;
+  font-weight: 650;
+}
+
+.select-field > span:first-child small {
+  display: block;
+  margin-top: 2px;
+  color: var(--muted);
+  font-size: 11px;
+  font-weight: 400;
+  line-height: 1.35;
+}
+
+.select-shell {
+  min-width: 0;
+  position: relative;
+  display: block;
+}
+
+.select-shell select {
+  width: 100%;
+  min-height: 54px;
+  padding: 0 42px 0 14px;
+  appearance: none;
+  border: 1px solid var(--line-bright);
+  border-radius: 12px;
+  background: var(--surface);
+  color: var(--text);
+  font-size: 16px;
+  font-weight: 500;
+  text-overflow: ellipsis;
+  cursor: pointer;
+  transition: border-color 160ms ease, background 160ms ease;
+}
+
+.select-shell select:hover { border-color: var(--muted); background: var(--surface-raised); }
+.select-shell select:focus-visible { border-color: var(--cyan); }
+.select-shell svg {
+  width: 18px;
+  position: absolute;
+  top: 50%;
+  right: 14px;
+  transform: translateY(-50%);
+  fill: none;
+  stroke: var(--cyan-soft);
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  pointer-events: none;
+}
+
+.select-shell option {
+  background: var(--surface);
+  color: var(--text);
+}
+
+.url-form .select-field > span {
+  min-width: 0;
+  margin: 0;
+}
 
 .cta-choice {
   width: fit-content;
@@ -665,6 +773,7 @@ main { padding: clamp(30px, 5vw, 72px) clamp(20px, 4vw, 64px) 72px; }
   .intake-copy h1 { font-size: clamp(44px, 13vw, 82px); }
   .url-control { grid-template-columns: 1fr; }
   .primary-action { justify-content: center; }
+  .voice-controls { grid-template-columns: 1fr; }
   .project { grid-template-columns: 72px minmax(0, 1fr); gap: 16px; padding: 18px; }
   .project-poster { width: 72px; }
   .project.is-horizontal { grid-template-columns: 100px minmax(0, 1fr); }
