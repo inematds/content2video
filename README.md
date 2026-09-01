@@ -131,12 +131,14 @@ Na interface:
 4. No dropdown **Jeito de falar**, escolha **Popular e simples**, **Conversa natural** ou **Técnico e detalhado**. O padrão popular usa frases curtas, palavras comuns e explica termos difíceis com exemplos.
 5. No dropdown **Ritmo da fala**, escolha **Calma** (`-10%`), **Natural** (`+0%`) ou **Rápida** (`+12%`).
 6. Mantenha **Adicionar CTA INEMA.CLUB ao final** marcado ou desmarque para produzir sem o encerramento.
-7. Clique em **Gerar vídeo** e acompanhe cada fase do trabalho.
-8. Durante a produção, a situação mostra a atividade atual e mantém editor, edição por prompt, cópia e render bloqueados para evitar abrir ou alterar uma composição incompleta.
-9. Quando a produção terminar sem MP4, a situação mostra **Aguardando revisão**: use **Abrir editor** ou **Editar com prompt**.
-10. Use **Criar cópia** quando quiser adaptar uma versão sem tocar no projeto original.
-11. Clique em **Aprovar e renderizar** e baixe o MP4 pelo próprio card do projeto.
-12. Quando a situação mudar para **Pronto para assistir**, o play aparece na capa e abre o MP4 final.
+7. Escolha o **Preset visual**. O padrão **Automático — plano decide** analisa fonte, público e formato para formular uma direção específica; os demais presets aplicam contratos visuais definidos. Use **Editar preset em outra tela** para ajustar paleta, tipografia, composição, movimento e mídia.
+8. Clique em **Criar direção visual**. O sistema pesquisa a fonte e prepara somente o briefing, storyboard e uma cena-piloto.
+9. No gate visual, confira a imagem. Use **Aprovar visual e produzir**, **Editar preset** ou **Atualizar cena-piloto**. Voz e cenas completas só são geradas depois da aprovação.
+10. Durante a produção, a situação mostra a atividade atual e mantém editor, edição por prompt, cópia e render bloqueados para evitar abrir ou alterar uma composição incompleta.
+11. Quando a produção terminar sem MP4, a situação mostra **Aguardando revisão**: use **Abrir editor** ou **Editar com prompt**.
+12. Use **Criar cópia** quando quiser adaptar uma versão sem tocar no projeto original.
+13. Clique em **Aprovar e renderizar** e baixe o MP4 pelo próprio card do projeto.
+14. Quando a situação mudar para **Pronto para assistir**, o play aparece na capa e abre o MP4 final.
 
 As duas escolhas ficam registradas no `BRIEF.md` e no `meta.json` como `conversation_style`, `speech_pace` e `voice_rate` antes da geração do áudio. Edições e regenerações preservam o estilo e o ritmo do projeto.
 
@@ -168,6 +170,90 @@ troque o CTA final e deixe o ritmo mais direto.
 ```
 
 Edições e cópias aceitam a troca de formato e a opção de CTA no mesmo painel. O agente atualiza composição, briefing e metadados, mantém `pt-BR-FranciscaNeural` quando a saída é brasileira e roda a validação antes de liberar a revisão.
+
+### Biblioteca de prompts para edição
+
+Copie um bloco para **Objetivo do vídeo** ao criar uma direção ou para **Editar com prompt** em um vídeo existente. No objetivo, ele orienta a nova produção; na edição, altera o projeto atual.
+
+**Trocar somente a direção visual**
+
+```text
+Mude somente a direção visual. Use uma estética editorial premium, com fundo escuro,
+tipografia forte, uma ideia dominante por quadro e movimento curto. Preserve fatos,
+roteiro, duração, voz e CTA. Evite neon, glassmorphism e cartões em excesso.
+```
+
+**Melhorar legibilidade sem redesenhar**
+
+```text
+Preserve a identidade visual atual. Melhore contraste, hierarquia e respiro.
+Quebre títulos por sentido, mantenha-os dentro da área segura e dê tempo real de leitura.
+Não altere roteiro, narração, imagens ou duração sem necessidade.
+```
+
+**Editorial científico**
+
+```text
+Use direção editorial científica: diagramas claros, dados com fonte visível, paleta sóbria
+e tipografia precisa. Explique a relação entre causa e efeito visualmente. Evite imagens
+decorativas, jargão sem explicação e aparência de apresentação corporativa.
+```
+
+**Tecnologia sem neon**
+
+```text
+Crie uma estética de tecnologia madura, com azul profundo, branco e um único acento.
+Use interfaces, fluxos e detalhes reais do produto. Não use neon, grades futuristas,
+códigos aleatórios, robôs genéricos ou brilho decorativo.
+```
+
+**Dados como protagonista**
+
+```text
+Transforme os números principais em uma narrativa visual. Mostre contexto, comparação
+e consequência; uma métrica por momento. Preserve a precisão e escreva a fonte no quadro.
+Evite gráficos 3D, eixos enganosos e contadores sem referência.
+```
+
+**Simplificar o movimento**
+
+```text
+Reduza o movimento ao necessário para orientar a atenção. Use entradas curtas, repouso
+para leitura e transições motivadas pelo conteúdo. Preserve layout e identidade.
+Retire flutuação contínua, parallax decorativo e animações simultâneas.
+```
+
+**Fortalecer o gancho inicial**
+
+```text
+Reescreva apenas os primeiros 5 segundos para abrir com a consequência mais concreta
+da matéria. Faça a imagem provar a frase. Preserve fatos, voz, estilo e restante do vídeo.
+Não use pergunta genérica nem promessa sensacionalista.
+```
+
+**Auditar área segura**
+
+```text
+Valide todas as manchetes no início, pico e fim de cada animação depois que as fontes
+estiverem carregadas. Em 9:16, mantenha largura máxima de 85% e margens laterais de 7,5%.
+Quebre por sentido antes de reduzir a fonte. Corrija qualquer pixel fora da área segura.
+```
+
+**Adaptar o formato corretamente**
+
+```text
+Adapte esta versão para 9:16. Recomponha cada cena para o novo quadro; não apenas recorte
+ou escale o layout horizontal. Preserve roteiro, voz, identidade e tempo de leitura.
+Reposicione imagens e dados para aproveitar a leitura vertical.
+```
+
+**Reutilizar o estilo de outro projeto**
+
+```text
+Use como referência visual o projeto <nome-do-projeto>: paleta, tipografia, densidade,
+tratamento de imagem e ritmo de movimento. Não copie conteúdo nem estrutura de cenas.
+Preserve o roteiro e a voz deste vídeo e registre a referência no briefing.
+```
 
 ### CTA automático
 

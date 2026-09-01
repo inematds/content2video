@@ -21,9 +21,10 @@
           <span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i></span>
           <span>Content<span>2</span>Video</span>
         </a>
-        <span class="app-version" id="app-version" aria-label="Versão do sistema">v1.06.00</span>
+        <span class="app-version" id="app-version" aria-label="Versão do sistema">v1.07.02</span>
         <span class="brand-separator" aria-hidden="true">/</span>
         <a class="inema-link" href="https://www.inema.club/" target="_blank" rel="noopener noreferrer">INEMA.CLUB</a>
+        <a class="topbar-link" href="/presets.html">Presets visuais</a>
       </div>
       <div class="system-state is-checking" id="system-state">
         <span class="status-dot" aria-hidden="true"></span>
@@ -43,7 +44,7 @@
           <div class="url-control">
             <input id="source-url" name="url" type="url" inputmode="url" autocomplete="url" placeholder="https://exemplo.com/materia" required>
             <button id="create-button" class="primary-action" type="submit">
-              <span>Gerar vídeo</span>
+              <span>Criar direção visual</span>
               <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6"/></svg>
             </button>
           </div>
@@ -85,6 +86,16 @@
                 <svg viewBox="0 0 20 20" aria-hidden="true"><path d="m5 7.5 5 5 5-5"/></svg>
               </span>
             </label>
+          </div>
+          <div class="preset-control">
+            <label class="select-field" for="visual-preset">
+              <span>Preset visual <small>Direção usada na cena-piloto e em todas as cenas</small></span>
+              <span class="select-shell">
+                <select id="visual-preset" name="visualPresetId" required></select>
+                <svg viewBox="0 0 20 20" aria-hidden="true"><path d="m5 7.5 5 5 5-5"/></svg>
+              </span>
+            </label>
+            <a class="preset-edit-link" id="preset-edit-link" href="/presets.html">Editar preset em outra tela</a>
           </div>
           <label class="cta-choice" for="create-cta">
             <input id="create-cta" name="includeCta" type="checkbox" checked>

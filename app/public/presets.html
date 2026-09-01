@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#11182f">
+    <title>Presets visuais — Content2Video</title>
+    <link rel="stylesheet" href="/app.css">
+  </head>
+  <body>
+    <header class="topbar">
+      <div class="brand-group">
+        <a class="brand" href="/" aria-label="Content2Video — início"><span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i></span><span>Content<span>2</span>Video</span></a>
+        <span class="brand-separator" aria-hidden="true">/</span>
+        <span class="page-context">Presets visuais</span>
+      </div>
+      <a class="topbar-link" href="/">Voltar à produção</a>
+    </header>
+
+    <main class="preset-page">
+      <header class="preset-hero">
+        <p class="eyebrow">Direção reutilizável</p>
+        <h1>O estilo é decidido <span>antes</span> da produção.</h1>
+        <p>Edite o contrato visual que orienta a cena-piloto e todas as cenas seguintes. Alterações ficam somente neste computador.</p>
+      </header>
+
+      <div class="preset-workspace">
+        <aside class="preset-index" aria-labelledby="preset-list-title">
+          <div class="section-heading"><div><h2 id="preset-list-title">Presets</h2><p>Biblioteca visual local</p></div></div>
+          <div id="preset-list" class="preset-list"></div>
+        </aside>
+
+        <section class="preset-editor" aria-labelledby="preset-editor-title">
+          <div class="preset-editor-heading">
+            <div><p class="eyebrow">Contrato visual</p><h2 id="preset-editor-title">Carregando preset</h2></div>
+            <div id="palette-preview" class="palette-preview" aria-label="Cores detectadas"></div>
+          </div>
+          <form id="preset-form" class="preset-form">
+            <label>Nome<input name="name" maxlength="120" required></label>
+            <label>Descrição<textarea name="description" maxlength="1200" rows="2" required></textarea></label>
+            <label>Paleta<textarea name="palette" maxlength="1200" rows="3" required></textarea></label>
+            <label>Tipografia<textarea name="typography" maxlength="1200" rows="3" required></textarea></label>
+            <label>Composição<textarea name="composition" maxlength="1200" rows="3" required></textarea></label>
+            <label>Movimento<textarea name="motion" maxlength="1200" rows="3" required></textarea></label>
+            <label>Imagens e mídia<textarea name="imagery" maxlength="1200" rows="3" required></textarea></label>
+            <label>Evitar<textarea name="avoid" maxlength="1200" rows="3" required></textarea></label>
+            <label class="preset-form-wide">Instruções adicionais<textarea name="instructions" maxlength="4000" rows="4" required></textarea></label>
+            <div class="preset-savebar">
+              <p id="preset-message" role="status" aria-live="polite">Nenhuma alteração.</p>
+              <button class="primary-action" type="submit"><span>Salvar preset local</span></button>
+            </div>
+          </form>
+        </section>
+      </div>
+
+      <section class="produced-videos" aria-labelledby="produced-title">
+        <div class="section-heading"><div><h2 id="produced-title">Vídeos produzidos</h2><p id="produced-count">Carregando filmoteca</p></div><a class="topbar-link" href="/#library-title">Ver filmoteca completa</a></div>
+        <div id="produced-list" class="produced-list"></div>
+      </section>
+    </main>
+    <div class="toast-region" id="toast-region" aria-live="polite"></div>
+    <script type="module" src="/presets.js"></script>
+  </body>
+</html>

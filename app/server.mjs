@@ -10,6 +10,8 @@ const APP_DIR = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.dirname(APP_DIR);
 const PUBLIC_DIR = path.join(APP_DIR, "public");
 const PACKAGE = JSON.parse(readFileSync(path.join(ROOT, "package.json"), "utf8"));
+const BUILTIN_PRESETS_FILE = path.join(ROOT, "config", "visual-presets.json");
+const RUNTIME_PRESETS_FILE = path.join(ROOT, ".runtime", "visual-presets.json");
 
 loadEnv(path.join(ROOT, ".env"));
 
@@ -98,11 +100,62 @@ const previews = new Map();
 let nextPreviewPort = config.previewPort;
 
 const JOB_PHASES = {
-  generation: ["Preparando", "Analisando a fonte", "Criando roteiro e cenas", "Produzindo mídia e voz", "Validando composição", "Pronto para revisar"],
+  generation: ["Preparando", "Criando direção visual", "Aguardando aprovação visual", "Produzindo mídia e voz", "Validando composição", "Pronto para revisar"],
   duplicate: ["Copiando o projeto", "Aplicando as instruções", "Atualizando mídia e voz", "Validando a nova versão", "Cópia pronta"],
   edit: ["Preparando a edição", "Aplicando as instruções", "Atualizando mídia e voz", "Validando as mudanças", "Edição pronta"],
   render: ["Preparando", "Validando composição", "Renderizando vídeo", "Adicionando CTA", "MP4 pronto"]
 };
+
+const PRESET_FIELDS = ["name", "description", "palette", "typography", "composition", "motion", "imagery", "avoid", "instructions"];
+
+function readPresetDocument(filename, fallback = { presets: [] }) {
+  if (!existsSync(filename)) return fallback;
+  try { return JSON.parse(readFileSync(filename, "utf8")); } catch { return fallback; }
+}
+
+function visualPresets() {
+  const builtin = readPresetDocument(BUILTIN_PRESETS_FILE);
+  const runtime = readPresetDocument(RUNTIME_PRESETS_FILE);
+  const overrides = new Map((runtime.presets || []).map((preset) => [preset.id, preset]));
+  return {
+    version: builtin.version || 1,
+    defaultPresetId: builtin.defaultPresetId,
+    presets: (builtin.presets || []).map((preset) => ({ ...preset, ...(overrides.get(preset.id) || {}) }))
+  };
+}
+
+function visualPreset(id) {
+  const document = visualPresets();
+  return document.presets.find((preset) => preset.id === id) || null;
+}
+
+function validatePreset(body, id) {
+  if (!safeSlug(id)) throw new Error("Identificador de preset inválido.");
+  const preset = { id };
+  for (const field of PRESET_FIELDS) {
+    const value = String(body[field] || "").trim();
+    if (!value) throw new Error(`Preencha o campo ${field}.`);
+    if (value.length > (field === "instructions" ? 4000 : 1200)) throw new Error(`O campo ${field} está muito longo.`);
+    preset[field] = value;
+  }
+  return preset;
+}
+
+async function savePreset(preset) {
+  const runtime = readPresetDocument(RUNTIME_PRESETS_FILE, { version: 1, presets: [] });
+  const presets = (runtime.presets || []).filter((item) => item.id !== preset.id);
+  presets.push(preset);
+  await mkdir(path.dirname(RUNTIME_PRESETS_FILE), { recursive: true });
+  await writeFile(RUNTIME_PRESETS_FILE, `${JSON.stringify({ version: 1, presets }, null, 2)}\n`);
+}
+
+function visualPresetPrompt(preset) {
+  return `Preset visual obrigatório: "${preset.name}" (${preset.id}).\n` +
+    `Descrição: ${preset.description}\nPaleta: ${preset.palette}\nTipografia: ${preset.typography}\n` +
+    `Composição: ${preset.composition}\nMovimento: ${preset.motion}\nImagens: ${preset.imagery}\n` +
+    `Evite: ${preset.avoid}\nInstruções adicionais: ${preset.instructions}\n` +
+    `Aplique este contrato em todos os arquivos visuais e registre visual_preset_id e visual_preset_name no BRIEF.md e no meta.json.`;
+}
 
 function loadEnv(filename) {
   if (!existsSync(filename)) return;
@@ -169,6 +222,7 @@ function slugFromUrl(value) {
 
 function publicConfig() {
   const auth = authenticationStatus();
+  const presets = visualPresets();
   return {
     version: formatDisplayVersion(PACKAGE.version),
     provider: config.provider,
@@ -190,7 +244,9 @@ function publicConfig() {
     aspectRatio: config.aspectRatio,
     resolution: `${config.width}×${config.height}`,
     fps: config.fps,
-    renderQuality: config.renderQuality
+    renderQuality: config.renderQuality,
+    defaultVisualPresetId: presets.defaultPresetId,
+    visualPresets: presets.presets.map(({ id, name, description }) => ({ id, name, description }))
   };
 }
 
@@ -251,6 +307,8 @@ async function listProjects() {
       conversationStyleLabel: CONVERSATION_STYLES[conversationStyle].label,
       speechPace,
       speechPaceLabel: SPEECH_PACES[speechPace].label,
+      visualPresetId: metadata.visual_preset_id || visualPresets().defaultPresetId,
+      visualPresetName: metadata.visual_preset_name || visualPreset(metadata.visual_preset_id || visualPresets().defaultPresetId)?.name || "Preset visual",
       thumbnail,
       renders,
       preview: previews.get(entry.name)?.url || null
@@ -295,6 +353,22 @@ function hasAssembledComposition(projectDir) {
   return /data-composition-src\s*=|class=["'][^"']*\bclip\b[^"']*["']/i.test(html);
 }
 
+function visualGatePreview(projectDir, slug) {
+  for (const relative of ["snapshots/visual-gate.png", "snapshots/visual-gate.jpg", "snapshots/visual-gate.jpeg"]) {
+    if (existsSync(path.join(projectDir, relative))) {
+      return `/project-media/${encodeURIComponent(slug)}/${relative.split("/").map(encodeURIComponent).join("/")}`;
+    }
+  }
+  return null;
+}
+
+function hasVisualGate(projectDir) {
+  return existsSync(path.join(projectDir, "BRIEF.md")) &&
+    existsSync(path.join(projectDir, "frame.md")) &&
+    existsSync(path.join(projectDir, "STORYBOARD.md")) &&
+    Boolean(visualGatePreview(projectDir, path.basename(projectDir)));
+}
+
 function humanize(slug) {
   return slug.split("-").map((word) => word.charAt(0).toUpperCase() + word.slice(1)).join(" ");
 }
@@ -317,6 +391,9 @@ function serializeJob(job) {
     conversationStyleLabel: CONVERSATION_STYLES[job.conversationStyle]?.label || CONVERSATION_STYLES[config.conversationStyle].label,
     speechPace: job.speechPace,
     speechPaceLabel: SPEECH_PACES[job.speechPace]?.label || SPEECH_PACES[config.speechPace].label,
+    visualPresetId: job.visualPresetId || null,
+    visualPresetName: job.visualPreset?.name || null,
+    visualGate: job.type === "generation" ? { previewUrl: visualGatePreview(path.join(config.videosDir, job.project), job.project) } : null,
     checkpointId: job.checkpointId || null,
     retryable,
     resumeAvailable: retryable && renderCheckpointAvailable(job),
@@ -325,7 +402,7 @@ function serializeJob(job) {
     stage: job.stage,
     phaseIndex: job.phaseIndex,
     phases: job.phases,
-    cancelable: ["queued", "running", "cancelling"].includes(job.status),
+    cancelable: ["queued", "running", "cancelling", "awaiting_approval"].includes(job.status),
     createdAt: job.createdAt,
     updatedAt: job.updatedAt,
     error: job.error || null,
@@ -363,6 +440,9 @@ function makeJob(type, project, options = {}) {
     includeCta: options.includeCta !== false,
     conversationStyle: validConversationStyle(options.conversationStyle) ? options.conversationStyle : config.conversationStyle,
     speechPace: validSpeechPace(options.speechPace) ? options.speechPace : config.speechPace,
+    visualPresetId: options.visualPresetId || visualPresets().defaultPresetId,
+    visualPreset: options.visualPreset || visualPreset(options.visualPresetId || visualPresets().defaultPresetId),
+    gateStep: options.gateStep || (type === "generation" ? "direction" : null),
     checkpointId: options.checkpointId || id,
     retryMode: options.retryMode || "restart",
     skippedPhases: [],
@@ -421,7 +501,7 @@ function selectableSpeechPace(value) {
 }
 
 function activeJobForProject(project) {
-  return [...jobs.values()].find((job) => job.project === project && ["queued", "running", "cancelling"].includes(job.status));
+  return [...jobs.values()].find((job) => job.project === project && ["queued", "running", "cancelling", "awaiting_approval"].includes(job.status));
 }
 
 function uniqueProjectSlug(base) {
@@ -452,7 +532,7 @@ function appendLog(job, line) {
   job.updatedAt = new Date().toISOString();
 }
 
-function startGeneration(job) {
+function generationContext(job) {
   const projectDir = path.join(config.videosDir, job.project);
   const dimensions = dimensionsFor(job.aspectRatio);
   const conversation = CONVERSATION_STYLES[job.conversationStyle];
@@ -460,18 +540,39 @@ function startGeneration(job) {
   const objective = job.instructions
     ? `Objetivo específico informado pelo usuário: ${job.instructions}\nTrate esse objetivo como a direção editorial principal, sem inventar fatos além da fonte. `
     : "O usuário não informou um objetivo adicional; identifique o recorte mais útil e fiel à fonte. ";
-  const prompt = `Crie um vídeo HyperFrames completo a partir desta URL: ${job.sourceUrl}\n\n` +
+  return { projectDir, dimensions, conversation, pace, objective };
+}
+
+function startGeneration(job) {
+  const { projectDir, dimensions, conversation, pace, objective } = generationContext(job);
+  job.gateStep = "direction";
+  const prompt = `Crie somente a direção visual e uma cena-piloto para um futuro vídeo HyperFrames a partir desta URL: ${job.sourceUrl}\n\n` +
     `Trabalhe dentro de ${projectDir}. Siga integralmente o AGENTS.md e os defaults do projeto. ` +
     objective +
+    `${visualPresetPrompt(job.visualPreset)}\n` +
     `Use saída ${config.language}, voz ${config.voiceProvider}/${config.voiceId} em todas as cenas, ` +
     `estilo de conversa "${conversation.label}" e ritmo de fala "${pace.label}". ${conversation.prompt} ${pace.prompt} ` +
     `duração alvo ${config.targetDuration}s entre ${config.minimumDuration}s e ${config.maximumDuration}s, ` +
     `formato ${job.aspectRatio} ${dimensions.width}x${dimensions.height} ${config.fps}fps e qualidade mínima ${config.minimumQuality}. ` +
-    `Pesquise e leia a URL, crie BRIEF.md, roteiro, mídia local, narração, composição e snapshots. ` +
+    `Pesquise e leia a URL. Crie BRIEF.md, frame.md, STORYBOARD.md, meta.json e um visual-gate.html autocontido que represente a cena mais importante. ` +
     `Antes de gerar o áudio, registre o objetivo editorial, language, voice_provider, voice_id, conversation_style: ${job.conversationStyle}, speech_pace: ${job.speechPace}, voice_rate: ${pace.voiceRate}, aspect_ratio, width, height e include_cta: ${job.includeCta} no BRIEF.md e no meta.json. ` +
-    `Garanta que todas as manchetes caibam na área segura. Rode hyperframes check ao final. ` +
-    `Não renderize o MP4 ainda: a aprovação ocorrerá na interface. Não faça perguntas; os defaults já foram aprovados.`;
+    `Capture exatamente snapshots/visual-gate.png em ${dimensions.width}x${dimensions.height}. Garanta que a manchete caiba na área segura no início, pico e fim da animação. ` +
+    `Este é um gate: NÃO gere áudio, vídeo, MP4, index.html final nem outras cenas. Não faça perguntas; a aprovação ocorrerá na interface.`;
 
+  runCodexJob(job, prompt, projectDir);
+}
+
+function continueGeneration(job) {
+  const { projectDir, dimensions, conversation, pace, objective } = generationContext(job);
+  job.gateStep = "production";
+  setPhase(job, 3, "Produzindo mídia e voz");
+  const prompt = `A direção visual e a cena-piloto deste vídeo foram aprovadas. Agora produza o vídeo HyperFrames completo a partir de ${job.sourceUrl}.\n\n` +
+    `Projeto: ${projectDir}. ${objective}${visualPresetPrompt(job.visualPreset)}\n` +
+    `Trate BRIEF.md, frame.md, STORYBOARD.md e visual-gate.html como direção aprovada. Preserve a ideia central da cena-piloto e aplique o preset atual a todas as cenas. ` +
+    `Use ${config.language}, ${config.voiceProvider}/${config.voiceId}, conversa "${conversation.label}" e fala "${pace.label}" (${pace.voiceRate}). ${conversation.prompt} ${pace.prompt} ` +
+    `Produza roteiro, mídia local, narração, legendas e index.html em ${job.aspectRatio}, ${dimensions.width}x${dimensions.height}, ${config.fps}fps, duração entre ${config.minimumDuration}s e ${config.maximumDuration}s. ` +
+    `Atualize BRIEF.md e meta.json antes do áudio com language, voice_provider, voice_id, conversation_style, speech_pace, voice_rate, aspect_ratio, width, height, include_cta, visual_preset_id e visual_preset_name. ` +
+    `Valide todas as manchetes na área segura no início, pico e fim; gere snapshots e rode hyperframes check até passar. Não renderize MP4 e não faça perguntas.`;
   runCodexJob(job, prompt, projectDir);
 }
 
@@ -546,7 +647,8 @@ function runCodexJob(job, prompt, projectDir) {
     "--skip-git-repo-check", "-C", ROOT, prompt
   ];
   updateJob(job, { status: "running" });
-  setPhase(job, 1);
+  if (job.type === "generation" && job.gateStep === "direction" && job.phaseIndex >= 2) setPhase(job, 2, "Atualizando direção visual");
+  else setPhase(job, 1);
   const child = spawn("codex", args, { cwd: ROOT, env: childEnv, detached: true, stdio: ["ignore", "pipe", "pipe"] });
   trackChild(job, child);
 
@@ -570,6 +672,11 @@ function runCodexJob(job, prompt, projectDir) {
       updateJob(job, { status: "cancelled", stage: "Cancelado pelo usuário" });
       return;
     }
+    if (code === 0 && job.type === "generation" && job.gateStep === "direction" && hasVisualGate(projectDir)) {
+      setPhase(job, 2, "Direção visual pronta para aprovação");
+      updateJob(job, { status: "awaiting_approval", stage: "Direção visual pronta para aprovação" });
+      return;
+    }
     if (code === 0 && hasAssembledComposition(projectDir)) {
       try {
         const dimensions = dimensionsFor(job.aspectRatio);
@@ -585,7 +692,11 @@ function runCodexJob(job, prompt, projectDir) {
           height: dimensions.height,
           include_cta: job.includeCta
         };
-        if (job.type === "generation") metadataPatch.source_objective = job.instructions || null;
+        if (job.type === "generation") {
+          metadataPatch.source_objective = job.instructions || null;
+          metadataPatch.visual_preset_id = job.visualPresetId;
+          metadataPatch.visual_preset_name = job.visualPreset?.name || null;
+        }
         await updateProjectMetadata(projectDir, metadataPatch);
       } catch (error) {
         updateJob(job, { status: "failed", stage: "Falha ao salvar preferências", error: error.message });
@@ -596,8 +707,10 @@ function runCodexJob(job, prompt, projectDir) {
     } else if (code === 0) {
       updateJob(job, {
         status: "failed",
-        stage: "Composição incompleta",
-        error: "O processo terminou sem montar as cenas no editor. Use Continuar de onde parou para concluir."
+        stage: job.gateStep === "direction" ? "Cena-piloto incompleta" : "Composição incompleta",
+        error: job.gateStep === "direction"
+          ? "O processo terminou sem criar todos os arquivos do gate visual e sua imagem de revisão."
+          : "O processo terminou sem montar as cenas no editor. Use Continuar de onde parou para concluir."
       });
     } else if (job.status !== "failed") {
       updateJob(job, { status: "failed", stage: "Processo interrompido", error: `O Codex terminou com código ${code}.` });
@@ -608,10 +721,11 @@ function runCodexJob(job, prompt, projectDir) {
 function consumeCodexEvent(job, line) {
   try {
     const event = JSON.parse(line);
-    if (event.type === "turn.started") setPhase(job, Math.min(2, job.phases.length - 2));
+    if (event.type === "turn.started") setPhase(job, job.type === "generation" && job.gateStep === "direction" ? 1 : Math.min(2, job.phases.length - 2));
     if (event.type === "item.started" && event.item?.type === "command_execution") {
       const command = event.item.command || "Executando etapa";
-      if (/\bhyperframes(?:@\S+)?\s+(?:check|snapshot)\b/i.test(command)) setPhase(job, job.phases.length - 2);
+      if (job.type === "generation" && job.gateStep === "direction") setPhase(job, 1, /snapshot|screenshot|visual-gate/i.test(command) ? "Capturando cena-piloto" : "Criando direção visual");
+      else if (/\bhyperframes(?:@\S+)?\s+(?:check|snapshot)\b/i.test(command)) setPhase(job, job.phases.length - 2);
       else if (/edge-tts|ffmpeg|audio|voice|caption|asset/i.test(command)) setPhase(job, Math.min(3, job.phases.length - 2));
       else setPhase(job, Math.min(2, job.phases.length - 2));
       appendLog(job, command);
@@ -827,7 +941,7 @@ function signalChild(child, signal) {
 }
 
 function cancelJob(job) {
-  if (!["queued", "running", "cancelling"].includes(job.status)) return false;
+  if (!["queued", "running", "cancelling", "awaiting_approval"].includes(job.status)) return false;
   updateJob(job, { status: "cancelling", stage: "Cancelando…" });
   for (const child of job.children) signalChild(child, "SIGTERM");
   if (job.children.size === 0) updateJob(job, { status: "cancelled", stage: "Cancelado pelo usuário" });
@@ -930,6 +1044,22 @@ const server = http.createServer(async (req, res) => {
 
     if (req.method === "GET" && pathname === "/api/config") return json(res, 200, publicConfig());
     if (req.method === "GET" && pathname === "/api/projects") return json(res, 200, { projects: await listProjects() });
+    if (req.method === "GET" && pathname === "/api/visual-presets") return json(res, 200, visualPresets());
+    const presetMatch = pathname.match(/^\/api\/visual-presets\/([a-z0-9-]+)$/);
+    if (req.method === "GET" && presetMatch) {
+      const preset = visualPreset(presetMatch[1]);
+      return preset ? json(res, 200, { preset }) : json(res, 404, { error: "Preset visual não encontrado." });
+    }
+    if (req.method === "PUT" && presetMatch) {
+      if (!visualPreset(presetMatch[1])) return json(res, 404, { error: "Preset visual não encontrado." });
+      try {
+        const preset = validatePreset(await readJson(req), presetMatch[1]);
+        await savePreset(preset);
+        return json(res, 200, { preset });
+      } catch (error) {
+        return json(res, 400, { error: error.message });
+      }
+    }
     if (req.method === "GET" && pathname === "/api/jobs") {
       return json(res, 200, { jobs: [...jobs.values()].map(serializeJob).sort((a, b) => b.createdAt.localeCompare(a.createdAt)) });
     }
@@ -945,12 +1075,37 @@ const server = http.createServer(async (req, res) => {
       if (!selectableConversationStyle(conversationStyle)) return json(res, 400, { error: "Escolha um jeito de falar disponível." });
       const speechPace = body.speechPace || config.speechPace;
       if (!selectableSpeechPace(speechPace)) return json(res, 400, { error: "Escolha um ritmo de fala disponível." });
+      const visualPresetId = body.visualPresetId || visualPresets().defaultPresetId;
+      const selectedPreset = visualPreset(visualPresetId);
+      if (!selectedPreset) return json(res, 400, { error: "Escolha um preset visual disponível." });
       const objective = String(body.objective || "").trim();
       if (objective.length > 4000) return json(res, 400, { error: "O objetivo deve ter no máximo 4.000 caracteres." });
       let slug = slugFromUrl(body.url);
       if (existsSync(path.join(config.videosDir, slug))) slug = `${slug}-${Date.now().toString(36).slice(-5)}`;
       const includeCta = body.includeCta !== false;
-      const job = makeJob("generation", slug, { sourceUrl: body.url, instructions: objective, aspectRatio, includeCta, conversationStyle, speechPace });
+      const job = makeJob("generation", slug, { sourceUrl: body.url, instructions: objective, aspectRatio, includeCta, conversationStyle, speechPace, visualPresetId, visualPreset: selectedPreset });
+      startGeneration(job);
+      return json(res, 202, { job: serializeJob(job) });
+    }
+
+    const approveVisualMatch = pathname.match(/^\/api\/jobs\/([a-z0-9-]+)\/approve-visual$/);
+    if (req.method === "POST" && approveVisualMatch) {
+      const job = jobs.get(approveVisualMatch[1]);
+      if (!job) return json(res, 404, { error: "Trabalho não encontrado nesta sessão." });
+      if (job.type !== "generation" || job.status !== "awaiting_approval") return json(res, 409, { error: "Este trabalho não está aguardando aprovação visual." });
+      if (!hasVisualGate(path.join(config.videosDir, job.project))) return json(res, 409, { error: "A cena-piloto não está completa." });
+      continueGeneration(job);
+      return json(res, 202, { job: serializeJob(job) });
+    }
+
+    const regenerateVisualMatch = pathname.match(/^\/api\/jobs\/([a-z0-9-]+)\/regenerate-visual$/);
+    if (req.method === "POST" && regenerateVisualMatch) {
+      const job = jobs.get(regenerateVisualMatch[1]);
+      if (!job) return json(res, 404, { error: "Trabalho não encontrado nesta sessão." });
+      if (job.type !== "generation" || job.status !== "awaiting_approval") return json(res, 409, { error: "A direção visual só pode ser atualizada durante o gate." });
+      job.visualPreset = visualPreset(job.visualPresetId) || job.visualPreset;
+      await unlink(path.join(config.videosDir, job.project, "snapshots", "visual-gate.png")).catch(() => {});
+      updateJob(job, { status: "queued", stage: "Atualizando direção visual", error: null });
       startGeneration(job);
       return json(res, 202, { job: serializeJob(job) });
     }

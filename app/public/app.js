@@ -13,6 +13,8 @@ const elements = {
   aspectInputs: [...document.querySelectorAll('input[name="aspectRatio"]')],
   conversationSelect: document.querySelector("#conversation-style"),
   speechPaceSelect: document.querySelector("#speech-pace"),
+  visualPresetSelect: document.querySelector("#visual-preset"),
+  presetEditLink: document.querySelector("#preset-edit-link"),
   createCta: document.querySelector("#create-cta"),
   createButton: document.querySelector("#create-button"),
   formMessage: document.querySelector("#form-message"),
@@ -54,6 +56,7 @@ async function initialize() {
     state.config = await api("/api/config");
     renderConfig();
     await refresh();
+    openRequestedProjectEdit();
     setInterval(refresh, 3500);
   } catch (error) {
     toast(error.message, true);
@@ -63,12 +66,25 @@ async function initialize() {
   }
 }
 
+function openRequestedProjectEdit() {
+  const slug = new URLSearchParams(location.search).get("edit");
+  const project = state.projects.find((item) => item.slug === slug);
+  if (!project) return;
+  state.command = { project: slug, mode: "edit", instructions: "", aspectRatio: project.aspectRatio || "9:16", includeCta: project.includeCta !== false };
+  renderProjects();
+  document.querySelector(`[data-project="${CSS.escape(slug)}"] textarea`)?.focus();
+  history.replaceState(null, "", `${location.pathname}#library-title`);
+}
+
 function renderConfig() {
   const config = state.config;
   const conversation = config.conversationStyles?.find((item) => item.value === config.conversationStyle);
   const pace = config.speechPaces?.find((item) => item.value === config.speechPace);
   if (config.conversationStyles?.some((item) => item.value === config.conversationStyle)) elements.conversationSelect.value = config.conversationStyle;
   if (config.speechPaces?.some((item) => item.value === config.speechPace)) elements.speechPaceSelect.value = config.speechPace;
+  elements.visualPresetSelect.innerHTML = (config.visualPresets || []).map((preset) => `<option value="${escapeHtml(preset.id)}">${escapeHtml(preset.name)} — ${escapeHtml(preset.description)}</option>`).join("");
+  elements.visualPresetSelect.value = config.defaultVisualPresetId;
+  updatePresetEditLink();
   elements.appVersion.textContent = config.version;
   elements.authLabel.textContent = config.authReady
     ? `${config.authMessage} · ${config.voiceId}`
@@ -81,7 +97,8 @@ function renderConfig() {
     `${config.aspectRatio} · ${config.resolution}`,
     `${config.language} · ${config.voiceId}`,
     `${conversation?.label || config.conversationStyle} · fala ${pace?.label?.toLowerCase() || config.speechPace}`,
-    `qualidade ≥ ${config.minimumQuality}`
+    `qualidade ≥ ${config.minimumQuality}`,
+    "gate visual antes da produção"
   ];
   elements.defaults.innerHTML = facts.map((fact) => `<span>${escapeHtml(fact)}</span>`).join("");
 }
@@ -109,7 +126,7 @@ function renderJobs() {
   }
   elements.jobs.innerHTML = state.jobs.map((job) => {
     const presentation = jobPresentation(job);
-    const statusLabel = { queued: "Na fila", running: "Em andamento", cancelling: "Cancelando", cancelled: "Cancelado", completed: "Concluído", failed: "Falhou" }[job.status] || job.status;
+    const statusLabel = { queued: "Na fila", running: "Em andamento", awaiting_approval: "Sua aprovação", cancelling: "Cancelando", cancelled: "Cancelado", completed: "Concluído", failed: "Falhou" }[job.status] || job.status;
     const typeLabel = { generation: "Novo vídeo", duplicate: "Cópia", edit: "Edição por prompt", render: "Render" }[job.type] || job.type;
     const message = job.retryable
       ? job.resumeAvailable
@@ -128,7 +145,7 @@ function renderJobs() {
     const cancel = job.cancelable
       ? `<button class="cancel-action" type="button" data-job-action="cancel" data-job="${escapeHtml(job.id)}" ${job.status === "cancelling" ? "disabled" : ""}>${icons.cancel}<span>${job.status === "cancelling" ? "Cancelando" : "Cancelar"}</span></button>`
       : "";
-    const projectBusy = state.jobs.some((candidate) => candidate.id !== job.id && candidate.project === job.project && ["queued", "running", "cancelling"].includes(candidate.status));
+    const projectBusy = state.jobs.some((candidate) => candidate.id !== job.id && candidate.project === job.project && ["queued", "running", "cancelling", "awaiting_approval"].includes(candidate.status));
     const recovery = job.retryable && !projectBusy
       ? job.resumeAvailable
         ? `<div class="job-recovery" aria-label="Opções para tentar novamente">
@@ -136,6 +153,21 @@ function renderJobs() {
             <button class="retry-action" type="button" data-job-action="restart" data-job="${escapeHtml(job.id)}">${icons.retry}<span>Refazer render completo</span></button>
           </div>`
         : `<div class="job-recovery"><button class="retry-action is-primary" type="button" data-job-action="restart" data-job="${escapeHtml(job.id)}">${icons.retry}<span>Tentar novamente</span></button></div>`
+      : "";
+    const visualGate = job.status === "awaiting_approval" && job.visualGate?.previewUrl
+      ? `<section class="visual-gate${job.aspectRatio === "16:9" ? " is-horizontal" : ""}" aria-label="Aprovação da direção visual">
+          <a class="visual-gate-preview" href="${escapeHtml(job.visualGate.previewUrl)}" target="_blank" rel="noopener" aria-label="Abrir cena-piloto em tamanho completo"><img src="${escapeHtml(job.visualGate.previewUrl)}" alt="Cena-piloto de ${escapeHtml(humanize(job.project))}"></a>
+          <div class="visual-gate-copy">
+            <span>Preset em uso</span>
+            <strong>${escapeHtml(job.visualPresetName || "Preset visual")}</strong>
+            <p>Confira composição, tipografia, cores e tratamento das imagens. A produção completa só começa após sua aprovação.</p>
+            <div class="visual-gate-actions">
+              <button class="retry-action is-primary" type="button" data-job-action="approve-visual" data-job="${escapeHtml(job.id)}">${icons.render}<span>Aprovar visual e produzir</span></button>
+              <a class="retry-action" href="/presets.html?preset=${encodeURIComponent(job.visualPresetId || "")}" target="_blank" rel="noopener">${icons.edit}<span>Editar preset</span></a>
+              <button class="retry-action" type="button" data-job-action="regenerate-visual" data-job="${escapeHtml(job.id)}">${icons.retry}<span>Atualizar cena-piloto</span></button>
+            </div>
+          </div>
+        </section>`
       : "";
     return `<article class="job ${escapeHtml(job.status)}">
       <div class="job-top">
@@ -147,6 +179,7 @@ function renderJobs() {
       <ol class="job-phases" aria-label="Fases de ${escapeHtml(typeLabel)}">${phases}</ol>
       <div class="job-progress" aria-label="${escapeHtml(statusLabel)}"><i></i></div>
       <div class="job-actions"><span class="job-format">${escapeHtml(typeLabel)} · ${escapeHtml(job.aspectRatio)} · ${escapeHtml(job.conversationStyleLabel)} · fala ${escapeHtml(job.speechPaceLabel?.toLowerCase())} · ${formatDuration(job.totalDurationMs ?? elapsedDuration(job))} no total</span>${cancel}</div>
+      ${visualGate}
       ${recovery}
     </article>`;
   }).join("");
@@ -163,7 +196,7 @@ function renderProjects() {
     const posterMedia = project.thumbnail
       ? `<img src="${project.thumbnail}" alt="Prévia de ${escapeHtml(project.name)}" loading="lazy">`
       : `<div class="poster-placeholder" aria-hidden="true">${icons.project}</div>`;
-    const activeJob = state.jobs.find((job) => job.project === project.slug && ["queued", "running", "cancelling"].includes(job.status));
+    const activeJob = state.jobs.find((job) => job.project === project.slug && ["queued", "running", "cancelling", "awaiting_approval"].includes(job.status));
     const activePresentation = activeJob ? jobPresentation(activeJob) : null;
     const effectiveCta = activeJob ? activeJob.includeCta ?? project.includeCta : project.includeCta;
     const projectStatus = activeJob ? `${activePresentation.stage} · editor após concluir` : latest ? "Pronto para assistir" : "Aguardando revisão";
@@ -204,6 +237,7 @@ function renderProjects() {
           <span>${escapeHtml(renderMeta)}</span>
           <span>${escapeHtml(project.aspectRatio)}</span>
           <span>${escapeHtml(project.conversationStyleLabel)}</span>
+          <span>${escapeHtml(project.visualPresetName)}</span>
           <span>Fala ${escapeHtml(project.speechPaceLabel.toLowerCase())}</span>
           <span>${effectiveCta ? "CTA no final" : "Sem CTA"}</span>
           <span>Atualizado ${formatDate(project.modifiedAt)}</span>
@@ -276,11 +310,12 @@ elements.form.addEventListener("submit", async (event) => {
     const aspectRatio = elements.aspectInputs.find((input) => input.checked)?.value || "9:16";
     const conversationStyle = elements.conversationSelect.value || "popular";
     const speechPace = elements.speechPaceSelect.value || "natural";
+    const visualPresetId = elements.visualPresetSelect.value;
     const includeCta = elements.createCta.checked;
-    await api("/api/jobs", { method: "POST", body: JSON.stringify({ url, objective, aspectRatio, conversationStyle, speechPace, includeCta }) });
+    await api("/api/jobs", { method: "POST", body: JSON.stringify({ url, objective, aspectRatio, conversationStyle, speechPace, visualPresetId, includeCta }) });
     elements.input.value = "";
     elements.objective.value = "";
-    toast("Produção iniciada. Você pode acompanhar o andamento abaixo.");
+    toast("Direção visual iniciada. A produção completa aguardará sua aprovação.");
     await refresh();
   } catch (error) {
     elements.formMessage.textContent = error.message;
@@ -289,6 +324,12 @@ elements.form.addEventListener("submit", async (event) => {
     elements.form.classList.remove("is-working");
   }
 });
+
+function updatePresetEditLink() {
+  elements.presetEditLink.href = `/presets.html?preset=${encodeURIComponent(elements.visualPresetSelect.value || "")}`;
+}
+
+elements.visualPresetSelect.addEventListener("change", updatePresetEditLink);
 
 elements.projects.addEventListener("click", async (event) => {
   const button = event.target.closest("button[data-action]");
@@ -401,11 +442,18 @@ elements.jobs.addEventListener("click", async (event) => {
   const related = button.closest(".job")?.querySelectorAll("button[data-job-action]") || [button];
   related.forEach((item) => { item.disabled = true; });
   button.disabled = true;
-  button.querySelector("span").textContent = action === "cancel" ? "Cancelando" : action === "restart" ? "Reiniciando…" : "Continuando…";
+  const label = button.querySelector("span");
+  if (label) label.textContent = action === "cancel" ? "Cancelando" : action === "restart" ? "Reiniciando…" : action === "approve-visual" ? "Iniciando produção…" : action === "regenerate-visual" ? "Atualizando…" : "Continuando…";
   try {
     if (action === "cancel") {
       await api(`/api/jobs/${button.dataset.job}/cancel`, { method: "POST", body: "{}" });
       toast("Cancelamento solicitado. Os checkpoints concluídos serão preservados.");
+    } else if (action === "approve-visual") {
+      await api(`/api/jobs/${button.dataset.job}/approve-visual`, { method: "POST", body: "{}" });
+      toast("Visual aprovado. A produção completa foi iniciada.");
+    } else if (action === "regenerate-visual") {
+      await api(`/api/jobs/${button.dataset.job}/regenerate-visual`, { method: "POST", body: "{}" });
+      toast("Cena-piloto sendo atualizada com a versão atual do preset.");
     } else {
       await api(`/api/jobs/${button.dataset.job}/retry`, { method: "POST", body: JSON.stringify({ mode: action === "restart" ? "restart" : "resume" }) });
       toast(action === "restart" ? "Render completo reiniciado. Todas as fases serão executadas." : "Trabalho retomado. As etapas válidas serão reutilizadas.");
@@ -414,7 +462,7 @@ elements.jobs.addEventListener("click", async (event) => {
   } catch (error) {
     toast(error.message, true);
     related.forEach((item) => { item.disabled = false; });
-    button.querySelector("span").textContent = action === "cancel" ? "Cancelar" : action === "restart" ? "Refazer render completo" : "Continuar de onde parou";
+    if (label) label.textContent = action === "cancel" ? "Cancelar" : action === "restart" ? "Refazer render completo" : action === "approve-visual" ? "Aprovar visual e produzir" : action === "regenerate-visual" ? "Atualizar cena-piloto" : "Continuar de onde parou";
   }
 });
 

@@ -22,6 +22,11 @@
     "explain_technical_terms": true,
     "prefer_short_sentences": true
   },
+  "visual": {
+    "default_preset_id": "automatico",
+    "approval_gate": true,
+    "pilot_filename": "snapshots/visual-gate.png"
+  },
   "headline_safe_area": {
     "horizontal_inset_ratio": 0.075,
     "vertical_inset_ratio": 0.06,

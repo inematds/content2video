@@ -1,0 +1,90 @@
+{
+  "version": 1,
+  "defaultPresetId": "automatico",
+  "presets": [
+    {
+      "id": "automatico",
+      "name": "Automático — plano decide",
+      "description": "O plano analisa a fonte, o público e o formato para propor a direção visual mais adequada.",
+      "palette": "Definida pelo plano a partir do tema, do tom editorial, das imagens disponíveis e do contraste necessário. Limitar a paleta a neutros e até dois acentos com função clara.",
+      "typography": "Definida pelo plano conforme densidade, tom e tempo de leitura. Usar fontes locais ou licenciadas e manter hierarquia, legibilidade e área segura.",
+      "composition": "Derivada do conteúdo e adaptada ao formato escolhido. Cada cena deve ter uma ideia dominante, uma grade coerente e espaço real para leitura.",
+      "motion": "Planejado conforme a narrativa: movimento deve explicar mudança, relação ou ênfase. Incluir repouso suficiente e evitar animação puramente decorativa.",
+      "imagery": "Selecionada pelo plano entre fotografia documental, recortes da fonte, diagramas, mapas, dados ou tipografia, sempre de acordo com a evidência disponível.",
+      "avoid": "Clichês visuais do tema, estética genérica de template, excesso de cartões, neon gratuito, imagens sem relação com a fonte e decisões que prejudiquem a leitura.",
+      "instructions": "Antes de criar a cena-piloto, formule uma direção visual específica para este conteúdo e registre no frame.md as decisões de paleta, tipografia, composição, mídia e movimento, com uma justificativa curta. Não escolha automaticamente o mesmo estilo entre projetos. A decisão continua sujeita ao gate de aprovação do usuário."
+    },
+    {
+      "id": "editorial-cobalto",
+      "name": "Editorial Cobalto",
+      "description": "Clareza jornalística, contraste alto e presença técnica sem aparência genérica de template.",
+      "palette": "Azul-marinho #0B1021, cobalto #246BFD, ciano #00D9FF, branco-gelo #EEF3FF e âmbar #FFCA6A apenas para alertas.",
+      "typography": "Manchetes condensadas e fortes; texto funcional em sans-serif humanista. Hierarquia por escala e peso, nunca por excesso de caixas.",
+      "composition": "Uma ideia dominante por quadro, alinhamento editorial, margens generosas e áreas seguras obrigatórias. Dados e imagens sustentam a manchete.",
+      "motion": "Entradas objetivas em 2 ou 3 fases, aceleração curta e repouso suficiente para leitura. Evitar movimento contínuo decorativo.",
+      "imagery": "Fotografia documental, recortes de fonte, mapas, diagramas e dados verificáveis. Preferir enquadramentos com espaço negativo para títulos.",
+      "avoid": "Neon gratuito, glassmorphism, cartões em excesso, gradientes decorativos, ícones genéricos e transições que competem com a informação.",
+      "instructions": "O resultado deve parecer uma peça editorial autoral da INEMA. Preserve consistência entre cenas e adapte a composição ao formato escolhido, sem apenas recortar o mesmo layout."
+    },
+    {
+      "id": "ciencia-clara",
+      "name": "Ciência Clara",
+      "description": "Explicações rigorosas com diagramas limpos, evidência visível e leitura acessível.",
+      "palette": "Grafite #111827, azul-laboratório #2563EB, turquesa #14B8A6, branco #F8FAFC e amarelo #FACC15 apenas para descobertas importantes.",
+      "typography": "Sans-serif precisa para títulos e texto; números tabulares e rótulos compactos. Termos científicos recebem definição curta no próprio quadro.",
+      "composition": "Hipótese, evidência e consequência organizadas em camadas claras. Diagramas ocupam o centro; rótulos apontam relações sem cobrir a informação.",
+      "motion": "Construção progressiva de diagramas, traçados e comparações. Cada etapa termina em repouso legível antes da próxima explicação.",
+      "imagery": "Microscopia, natureza, laboratórios reais, ilustrações anatômicas, escalas e gráficos com fonte. Diferenciar claramente fotografia, simulação e hipótese.",
+      "avoid": "Moléculas decorativas, DNA genérico, jalecos sem contexto, gráficos sem escala, certezas além da fonte e jargão sem explicação.",
+      "instructions": "Faça a imagem demonstrar a explicação. Mantenha precisão científica, indique incerteza quando existir e preserve a fonte dos dados no quadro."
+    },
+    {
+      "id": "tecnologia-sobria",
+      "name": "Tecnologia Sóbria",
+      "description": "Produto e inovação com aparência madura, concreta e sem clichês futuristas.",
+      "palette": "Preto-azulado #080D18, azul-elétrico controlado #3B82F6, violeta #8B5CF6, cinza-claro #E5E7EB e verde #22C55E para estados positivos.",
+      "typography": "Títulos geométricos fortes e interface em sans-serif neutra. Código somente quando for conteúdo real e legível.",
+      "composition": "Fluxos de produto, arquitetura e interfaces reais em planos amplos. Um recurso ou consequência por cena, com chamadas diretamente ligadas ao elemento explicado.",
+      "motion": "Zooms funcionais, conexões entre módulos e transições por continuidade espacial. Movimento comunica fluxo ou mudança de estado.",
+      "imagery": "Capturas reais, componentes, infraestrutura, pessoas usando tecnologia e diagramas de sistema. Fundos escuros com contraste técnico.",
+      "avoid": "Neon excessivo, chuva de código, robôs genéricos, cérebros digitais, grades futuristas, hologramas e brilho sem função.",
+      "instructions": "Mostre como a tecnologia funciona ou muda uma tarefa concreta. O visual deve transmitir competência e não ficção científica."
+    },
+    {
+      "id": "dados-em-foco",
+      "name": "Dados em Foco",
+      "description": "Números como narrativa, com contexto, comparação e fontes sempre visíveis.",
+      "palette": "Azul-petróleo #0F2A3D, azul #38BDF8, verde #34D399, papel #F1F5F9 e coral #FB7185 somente para quedas ou alertas.",
+      "typography": "Números grandes em sans-serif condensada; unidades, períodos e fontes em texto funcional. Escalas e legendas nunca dependem apenas de cor.",
+      "composition": "Uma métrica principal por momento, seguida de referência e consequência. Gráficos ocupam espaço dominante e mantêm eixos honestos.",
+      "motion": "Contagens curtas, barras e linhas construídas no sentido da leitura. Comparações preservam a mesma escala durante a transição.",
+      "imagery": "Gráficos 2D, mapas proporcionais, tabelas resumidas, pictogramas e fotografias apenas quando contextualizam o número.",
+      "avoid": "Gráficos 3D, eixos truncados sem aviso, dashboards cheios, números soltos, contadores longos e decoração que pareça dado.",
+      "instructions": "Apresente sempre valor, unidade, período, referência de comparação e fonte. O público deve entender por que o número importa."
+    },
+    {
+      "id": "documental-humano",
+      "name": "Documental Humano",
+      "description": "Fotografia e relato em primeiro plano, com calor, textura e intervenção gráfica mínima.",
+      "palette": "Carvão #171717, areia #E7D7BD, terracota #C66A45, creme #FFF7E8 e azul-noite #1E3A5F para contraste.",
+      "typography": "Serif editorial nas manchetes e sans-serif discreta nos créditos, locais e dados. Citações recebem espaço e ritmo próprios.",
+      "composition": "Pessoas, lugares e gestos conduzem o quadro. Texto ocupa o espaço negativo e nunca cobre rostos ou ações essenciais.",
+      "motion": "Cortes motivados por gesto, movimentos de câmera lentos e entradas tipográficas discretas. Priorizar presença e observação.",
+      "imagery": "Fotografia documental, arquivos identificados, detalhes de ambiente, retratos consentidos e texturas materiais relacionadas à história.",
+      "avoid": "Banco de imagem posado, dramatização artificial, filtros pesados, sentimentalismo automático e legendas sobre rostos.",
+      "instructions": "Dê prioridade à dignidade das pessoas retratadas e ao contexto. Use gráficos somente quando acrescentarem informação indispensável."
+    },
+    {
+      "id": "tipografia-direta",
+      "name": "Tipografia Direta",
+      "description": "Ritmo rápido e poucos elementos, com palavras, contraste e timing conduzindo a mensagem.",
+      "palette": "Preto #0A0A0A, branco #FAFAFA, ciano #06B6D4 e vermelho #EF4444 reservado a oposição ou urgência real.",
+      "typography": "Manchetes condensadas em escala extrema, palavras-chave em cor e texto auxiliar mínimo. Quebras de linha seguem o sentido da frase.",
+      "composition": "Texto dominante com uma imagem ou forma de apoio por cena. Alternar escalas e alinhamentos sem perder a grade e a área segura.",
+      "motion": "Kinetic typography precisa, trocas por corte, máscaras simples e pausas fortes. Sincronizar ênfase com a voz sem animar cada palavra.",
+      "imagery": "Recortes fotográficos de alto contraste, formas planas, números e símbolos diretamente relacionados ao roteiro.",
+      "avoid": "Parágrafos longos, muitas fontes, letras tremendo, animação palavra por palavra, efeitos 3D e fundos visualmente ruidosos.",
+      "instructions": "Faça cada quadro comunicar uma frase curta imediatamente. Preserve leitura confortável mesmo nos momentos de maior escala da animação."
+    }
+  ]
+}
