@@ -146,11 +146,11 @@ Cada trabalho mostra seu tipo, formato, tempo total, fase atual e quanto tempo f
 
 A interface usa a atividade mais recente do gerador para evitar anunciar validação enquanto as cenas ainda estão sendo construídas. Um trabalho só é concluído quando o `index.html` contém uma composição montada; o arquivo inicial vazio não libera o editor.
 
-O cancelamento preserva os arquivos produzidos até aquele momento para inspeção ou retomada. O histórico de trabalhos fica em memória durante a sessão atual do servidor; ao reiniciar a aplicação, a lista de jobs é limpa, mas os projetos e arquivos permanecem em `videos/`.
+O cancelamento preserva os arquivos produzidos até aquele momento para inspeção ou retomada. O histórico de trabalhos fica em memória durante a sessão atual do servidor; ao reiniciar a aplicação, a lista de jobs é limpa, mas os projetos e arquivos permanecem em `output/content2video/`.
 
 Quando um render falha ou é cancelado, os arquivos válidos ficam como checkpoints em `.runtime/render-staging/`. Durante a mesma sessão do servidor, a ação **Continuar de onde parou** reutiliza esses arquivos e pula validação, renderização ou CTA que já tenham sido concluídos. As fases puladas aparecem como **reutilizada** e não ganham um novo tempo.
 
-Esse é o comportamento padrão: continuar aproveita o que já está pronto. Use **Refazer render completo** somente quando quiser descartar o checkpoint daquela tentativa e executar todas as fases novamente. Depois que o MP4 é salvo corretamente em `videos/<projeto>/renders/`, os checkpoints temporários são removidos.
+Esse é o comportamento padrão: continuar aproveita o que já está pronto. Use **Refazer render completo** somente quando quiser descartar o checkpoint daquela tentativa e executar todas as fases novamente. Depois que o MP4 é salvo corretamente em `output/content2video/<projeto>/renders/`, os checkpoints temporários são removidos.
 
 ### Editar visualmente ou por prompt
 
@@ -178,8 +178,8 @@ Ao clicar em **Aprovar e renderizar**, o sistema renderiza a composição editá
 Os arquivos reutilizados pelo render ficam em:
 
 ```text
-videos/inema-club-cta/renders/inema-club-cta.mp4
-videos/inema-club-cta/renders/inema-club-cta-16x9.mp4
+output/content2video/inema-club-cta/renders/inema-club-cta.mp4
+output/content2video/inema-club-cta/renders/inema-club-cta-16x9.mp4
 ```
 
 Durante o render, a interface mostra separadamente **Renderizando vídeo** e **Adicionando CTA**. Se o CTA estiver desmarcado, essa etapa é ignorada.
@@ -202,7 +202,7 @@ Crie um projeto a partir de uma URL. O último argumento, opcional, define o nom
 npm run video:create -- https://www.inema.club/ inema-club-promo
 ```
 
-O comando cria `videos/inema-club-promo/`, gera o material editável e valida a composição, mas não renderiza automaticamente. Depois:
+O comando cria `output/content2video/inema-club-promo/`, gera o material editável e valida a composição, mas não renderiza automaticamente. Depois:
 
 ```bash
 npm run video:list
@@ -214,13 +214,13 @@ npm run video:render -- inema-club-promo
 O MP4 final fica em:
 
 ```text
-videos/<nome-do-projeto>/renders/<nome-do-projeto>.mp4
+output/content2video/<nome-do-projeto>/renders/<nome-do-projeto>.mp4
 ```
 
 Também é possível executar o HyperFrames diretamente dentro de qualquer vídeo:
 
 ```bash
-cd videos/inema-club-promo
+cd output/content2video/inema-club-promo
 npx --yes hyperframes@0.8.20 check
 npx --yes hyperframes@0.8.20 preview
 npx --yes hyperframes@0.8.20 render --quality high --output renders/inema-club-promo.mp4
@@ -269,15 +269,15 @@ O `.env.example` reúne idioma, voz, duração, tolerância, nota mínima, forma
 
 ## Projetos de exemplo
 
-- `videos/inema-club-promo`: vídeo do INEMA.club;
-- `videos/zuckerberg-anti-dolly-parton`: artigo em inglês narrado com a mesma voz brasileira;
-- `videos/mudancas-compostas`: MVP original de aproximadamente 1 minuto.
+- `output/content2video/inema-club-promo`: vídeo do INEMA.club;
+- `output/content2video/zuckerberg-anti-dolly-parton`: artigo em inglês narrado com a mesma voz brasileira;
+- `output/content2video/mudancas-compostas`: MVP original de aproximadamente 1 minuto.
 
 Para validar um exemplo completo:
 
 ```bash
 npm run video:check -- mudancas-compostas
-ffprobe videos/mudancas-compostas/renders/mudancas-compostas.mp4
+ffprobe output/content2video/mudancas-compostas/renders/mudancas-compostas.mp4
 ```
 
 ## Estrutura
@@ -289,7 +289,7 @@ docs/                        plano e relatório do MVP
 scripts/video.mjs            comandos de terminal
 start.sh                     inicia o servidor em segundo plano
 stop.sh                      encerra com segurança a instância iniciada
-videos/<projeto>/            fontes editáveis, mídia, snapshots e renders
+output/content2video/<projeto>/  fontes editáveis, mídia, snapshots e renders
 .runtime/                    PID e log locais, ignorados pelo Git
 .env.example                 configuração segura de referência
 ```

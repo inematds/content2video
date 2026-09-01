@@ -1,6 +1,7 @@
 {
   "version": 1,
   "output": {
+    "directory": "output/content2video",
     "language": "pt-BR",
     "target_duration_seconds": 60,
     "minimum_duration_seconds": 42,

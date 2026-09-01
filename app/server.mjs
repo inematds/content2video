@@ -1,6 +1,6 @@
 import http from "node:http";
 import net from "node:net";
-import { createReadStream, existsSync, readFileSync } from "node:fs";
+import { createReadStream, existsSync, mkdirSync, readFileSync } from "node:fs";
 import { cp, mkdir, readdir, rename, stat, unlink, writeFile } from "node:fs/promises";
 import path from "node:path";
 import { spawn, spawnSync } from "node:child_process";
@@ -87,9 +87,11 @@ const config = {
   appPort: numberFromEnv("APP_PORT", 3000),
   previewHost: process.env.PREVIEW_HOST || process.env.APP_HOST || "127.0.0.1",
   previewPort: numberFromEnv("PREVIEW_PORT", 3022),
-  videosDir: path.resolve(ROOT, process.env.VIDEOS_DIRECTORY || "./videos"),
+  videosDir: path.join(ROOT, "output", "content2video"),
   rendersDirName: process.env.RENDERS_DIRECTORY_NAME || "renders"
 };
+
+mkdirSync(config.videosDir, { recursive: true });
 
 const jobs = new Map();
 const previews = new Map();

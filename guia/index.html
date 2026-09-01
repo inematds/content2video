@@ -51,12 +51,12 @@
   @media(max-width:760px){nav .links a.sec{display:none}}
   .hero{position:relative;overflow:hidden;border-bottom:1px solid var(--line)}
   .hero .glow{position:absolute;inset:-40% -20% auto auto;width:70%;height:600px;background:radial-gradient(closest-side,rgba(226,162,59,.22),transparent 70%);pointer-events:none}
-  .hero .wrap{display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:center;padding:74px 22px}
+  .hero .wrap{display:grid;grid-template-columns:minmax(0,.72fr) minmax(0,1.28fr);gap:40px;align-items:center;padding:74px 22px}
   .hero h1{font-size:clamp(2.2rem,5vw,3.5rem);font-weight:800;letter-spacing:-.025em}
   .hero p.lead{font-size:1.18rem;color:var(--mut);margin:1.1em 0 1.6em;max-width:34ch}
   .hero .cta{display:flex;gap:12px;flex-wrap:wrap}
   .hero figure{margin:0;border-radius:16px;overflow:hidden;border:1px solid var(--line);box-shadow:0 30px 80px -30px #000}
-  .hero figure img{width:100%;display:block}
+  .hero figure img{width:100%;height:auto;display:block}
   @media(max-width:780px){.hero .wrap{grid-template-columns:1fr;padding:48px 22px}}
   section{padding:62px 0;border-bottom:1px solid var(--line)}
   section h2{font-size:clamp(1.5rem,3.4vw,2.1rem);font-weight:800;letter-spacing:-.02em}
@@ -110,13 +110,13 @@
     <p class="lead">Transforme páginas e artigos em vídeos verticais editáveis, narrados em português e prontos para revisão antes do render.</p>
     <div class="cta"><a class="btn" href="#guia">Começar o guia</a><a class="btn ghost" href="https://github.com/inematds/content2video" target="_blank" rel="noopener">Ver no GitHub</a></div>
   </div>
-  <figure><img src="assets/hero.png" alt="Capa do Content2Video INEMA"></figure>
+  <figure><img src="assets/content2video-destaque.png" width="1672" height="941" alt="Content2Video: um link entra e um vídeo sai, ilustrado por uma URL sendo transformada em vídeo MP4" fetchpriority="high"></figure>
 </div></header>
 
 <section id="oque"><div class="wrap"><span class="chip">O que é</span><h2>Uma pequena fábrica de vídeo, local e revisável</h2>
   <p class="sub">A IA pesquisa a fonte e monta a produção. Você mantém o controle editorial, abre cada composição e decide quando gerar o arquivo final.</p>
   <div class="grid g3">
-    <div class="card"><h3>🔗 Link como entrada</h3><p>Cole uma URL na interface ou passe-a pelo terminal. O sistema cria um projeto organizado em <code>videos/</code>.</p></div>
+    <div class="card"><h3>🔗 Link como entrada</h3><p>Cole uma URL na interface ou passe-a pelo terminal. O sistema cria um projeto local em <code>output/content2video/</code>.</p></div>
     <div class="card"><h3>✏️ Tudo editável</h3><p>Roteiro, storyboard, voz, legendas, cenas, mídia e tempos permanecem acessíveis no HyperFrames Studio.</p></div>
     <div class="card"><h3>🎞️ Render sob aprovação</h3><p>O MP4 só é gerado depois da validação, com um botão na interface ou um comando no terminal.</p></div>
   </div>
@@ -147,14 +147,14 @@ npm install</span></pre></div></div>
   <div class="step"><div class="b">3</div><div><h3>Ou crie pelo terminal</h3><p>O slug opcional define o nome da pasta do vídeo.</p><pre><span class="k">npm run video:create -- https://www.inema.club/ inema-club-promo</span></pre></div></div>
   <div class="step"><div class="b">4</div><div><h3>Revise e valide</h3><p>Abra o editor ou rode a checagem automática.</p><pre><span class="k">npm run video:preview -- inema-club-promo
 npm run video:check -- inema-club-promo</span></pre></div></div>
-  <div class="step"><div class="b">5</div><div><h3>Renderize</h3><p>O arquivo final vai para <code>videos/&lt;slug&gt;/renders/&lt;slug&gt;.mp4</code>.</p><pre><span class="k">npm run video:render -- inema-club-promo</span></pre></div></div>
+  <div class="step"><div class="b">5</div><div><h3>Renderize</h3><p>O arquivo final vai para <code>output/content2video/&lt;slug&gt;/renders/&lt;slug&gt;.mp4</code>.</p><pre><span class="k">npm run video:render -- inema-club-promo</span></pre></div></div>
 </div></section>
 
 <section id="exemplos"><div class="wrap"><span class="chip">Exemplos reais</span><h2>Três vídeos já produzidos</h2>
-  <p class="sub">O repositório inclui um institucional do INEMA.club, um artigo em inglês narrado em pt-BR e o MVP original.</p>
+  <p class="sub">A produção local reúne um institucional do INEMA.club, um artigo em inglês narrado em pt-BR e o MVP original.</p>
   <div class="ex">
-    <figure><img src="../videos/inema-club-promo/snapshots/contact-sheet.jpg" alt="Quadros do vídeo do INEMA.club"><figcaption>INEMA.club — página de produto transformada em vídeo vertical.</figcaption></figure>
-    <figure><img src="../videos/zuckerberg-anti-dolly-parton/snapshots/contact-sheet.jpg" alt="Quadros do vídeo sobre Zuckerberg e Dolly Parton"><figcaption>Futurism — fonte em inglês com narração brasileira consistente.</figcaption></figure>
+    <figure><img src="assets/exemplo-inema-club.jpg" alt="Quadros do vídeo do INEMA.club" loading="lazy"><figcaption>INEMA.club — página de produto transformada em vídeo vertical.</figcaption></figure>
+    <figure><img src="assets/exemplo-futurism.jpg" alt="Quadros do vídeo sobre Zuckerberg e Dolly Parton" loading="lazy"><figcaption>Futurism — fonte em inglês com narração brasileira consistente.</figcaption></figure>
   </div>
 </div></section>
 

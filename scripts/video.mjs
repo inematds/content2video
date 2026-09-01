@@ -26,7 +26,7 @@ const settings = {
   fps: numberSetting("VIDEO_FPS", 30),
   renderQuality: process.env.RENDER_QUALITY || "high",
   previewPort: numberSetting("PREVIEW_PORT", 3022),
-  videosDir: path.resolve(ROOT, process.env.VIDEOS_DIRECTORY || "./videos"),
+  videosDir: path.join(ROOT, "output", "content2video"),
   rendersDirName: process.env.RENDERS_DIRECTORY_NAME || "renders"
 };
 
@@ -56,8 +56,9 @@ async function createVideo(sourceUrl, requestedSlug) {
 
   const slug = requestedSlug || slugFromUrl(parsed);
   if (!safeSlug(slug)) fail("O slug deve usar apenas letras minúsculas, números e hífens, com até 80 caracteres.");
+  await mkdir(settings.videosDir, { recursive: true });
   const projectDir = path.join(settings.videosDir, slug);
-  if (existsSync(projectDir)) fail(`O projeto videos/${slug} já existe. Escolha outro slug.`);
+  if (existsSync(projectDir)) fail(`O projeto output/content2video/${slug} já existe. Escolha outro slug.`);
 
   if (settings.provider === "openai" && !process.env.OPENAI_API_KEY) {
     fail("AI_PROVIDER=openai exige OPENAI_API_KEY no .env.");
@@ -80,7 +81,7 @@ async function createVideo(sourceUrl, requestedSlug) {
     delete childEnv.OPENAI_API_KEY;
   }
 
-  console.log(`Criando videos/${slug} com ${settings.provider === "codex" ? "OAuth Codex" : "OpenAI API"}...`);
+  console.log(`Criando output/content2video/${slug} com ${settings.provider === "codex" ? "OAuth Codex" : "OpenAI API"}...`);
   await run("codex", [
     "exec", "--ephemeral", "--approve-for-me",
     "--skip-git-repo-check", "-C", ROOT, prompt
@@ -89,7 +90,7 @@ async function createVideo(sourceUrl, requestedSlug) {
   if (!existsSync(path.join(projectDir, "index.html"))) {
     fail("O Codex terminou, mas a composição index.html não foi criada.");
   }
-  console.log(`\nProjeto pronto para revisão: videos/${slug}`);
+  console.log(`\nProjeto pronto para revisão: output/content2video/${slug}`);
   console.log(`Abra o editor: npm run video:preview -- ${slug}`);
 }
 
@@ -109,7 +110,7 @@ function listVideos() {
 async function runHyperFrames(action, slug) {
   if (!safeSlug(slug)) fail(`Informe um projeto válido. Exemplo: npm run video:${action} -- meu-video`);
   const projectDir = path.join(settings.videosDir, slug);
-  if (!existsSync(path.join(projectDir, "index.html"))) fail(`Não encontrei videos/${slug}/index.html.`);
+  if (!existsSync(path.join(projectDir, "index.html"))) fail(`Não encontrei output/content2video/${slug}/index.html.`);
 
   if (action === "check") {
     await run("npx", ["--yes", "hyperframes@0.8.20", "check"], projectDir);

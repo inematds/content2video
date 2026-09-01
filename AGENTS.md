@@ -20,3 +20,8 @@ Estas regras valem para novos vídeos deste repositório. Não altere vídeos ex
 - A auditoria deve incluir início, pico e fim de cada animação de manchete. Qualquer pixel fora da área segura bloqueia a prévia.
 
 Os valores executáveis ficam em `config/production-defaults.json`.
+
+## Diretório de saída
+
+- Todo projeto de vídeo é local e deve ser criado em `output/content2video/`.
+- Não rastreie no Git o conteúdo de `videos/` nem de `output/content2video/`.

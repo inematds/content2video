@@ -1,8 +1,0 @@
-1
-00:00:00,100 --> 00:00:02,070
-WebMCP muda essa relação.
-
-2
-00:00:02,020 --> 00:00:08,593
-A própria página pode declarar ferramentas, com nome, descrição e campos estruturados, para o agente descobrir e chamar.
-

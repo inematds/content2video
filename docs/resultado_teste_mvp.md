@@ -13,7 +13,7 @@ narração em português brasileiro e legendas sincronizadas palavra a palavra.
 
 Arquivo final:
 
-`videos/mudancas-compostas/renders/mudancas-compostas.mp4`
+`output/content2video/mudancas-compostas/renders/mudancas-compostas.mp4`
 
 ## Validação técnica
 

@@ -24,7 +24,7 @@ Une geração orientada por link, padrões editoriais INEMA, edição no HyperFr
 
 ## Operating Context
 
-A aplicação roda em `192.168.2.99:3080`, reutiliza o OAuth salvo no Codex CLI por padrão, aceita OpenAI API opcional pelo `.env`, cria projetos dentro de `videos/` e entrega arquivos em `renders/`.
+A aplicação roda em `192.168.2.99:3080`, reutiliza o OAuth salvo no Codex CLI por padrão, aceita OpenAI API opcional pelo `.env`, cria projetos locais dentro de `output/content2video/` e entrega arquivos em `renders/`.
 
 ## Capabilities and Constraints
 
@@ -45,8 +45,8 @@ Nome Content2Video INEMA. Preservar o padrão editorial INEMA e a consistência 
 
 ## Evidence on Hand
 
-- Três projetos HyperFrames em `videos/`.
-- Vídeo promocional INEMA e seus ativos em `videos/inema-club-promo/`.
+- Projetos HyperFrames locais em `output/content2video/`.
+- Vídeo promocional INEMA e seus ativos em `output/content2video/inema-club-promo/`.
 - Plano original em `docs/plano_content2video_inema.md`.
 - Defaults executáveis em `config/production-defaults.json` e `.env`.
 
