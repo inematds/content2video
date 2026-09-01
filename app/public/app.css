@@ -414,6 +414,7 @@ main { padding: clamp(30px, 5vw, 72px) clamp(20px, 4vw, 64px) 72px; }
 .job-state.completed { color: var(--green); }
 .job-state.cancelled, .job-state.cancelling { color: var(--amber); }
 .job p { margin: 8px 0 0; color: var(--muted); font-size: 12px; line-height: 1.45; }
+.job .job-error-detail { color: var(--red); overflow-wrap: anywhere; }
 
 .job-actions { margin-top: 14px; display: flex; align-items: center; justify-content: space-between; gap: 12px; }
 .job-format { color: var(--muted); font-size: 11px; }
@@ -435,6 +436,33 @@ main { padding: clamp(30px, 5vw, 72px) clamp(20px, 4vw, 64px) 72px; }
 .cancel-action:disabled { opacity: .5; cursor: wait; }
 .cancel-action svg { width: 14px; fill: none; stroke: currentColor; stroke-width: 2; }
 
+.job-recovery {
+  margin-top: 12px;
+  display: grid;
+  gap: 8px;
+}
+.retry-action {
+  width: 100%;
+  min-height: 44px;
+  padding: 8px 11px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border: 1px solid var(--line-bright);
+  border-radius: 12px;
+  background: transparent;
+  color: var(--text);
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+}
+.retry-action:hover { border-color: var(--cyan); background: rgba(0, 217, 255, .07); }
+.retry-action.is-primary { border-color: var(--cyan); background: var(--cyan); color: var(--ink); }
+.retry-action.is-primary:hover { background: var(--cyan-soft); }
+.retry-action:disabled { opacity: .55; cursor: wait; }
+.retry-action svg { width: 15px; flex: none; fill: none; stroke: currentColor; stroke-width: 1.9; }
+
 .job-phases {
   margin: 15px 0 0;
   padding: 0;
@@ -445,8 +473,11 @@ main { padding: clamp(30px, 5vw, 72px) clamp(20px, 4vw, 64px) 72px; }
 .job-phases li { display: grid; grid-template-columns: 10px minmax(0, 1fr) auto; align-items: center; gap: 8px; color: #7886a6; font-size: 11px; }
 .job-phases li::before { content: ""; width: 7px; height: 7px; border: 1px solid var(--line-bright); border-radius: 50%; }
 .job-phases time { color: inherit; font-variant-numeric: tabular-nums; font-weight: 500; }
+.job-phases em { color: var(--cyan-soft); font-size: 11px; font-style: normal; font-weight: 600; }
 .job-phases li.done { color: var(--muted); }
 .job-phases li.done::before { border-color: var(--green); background: var(--green); }
+.job-phases li.reused { color: var(--muted); }
+.job-phases li.reused::before { border-color: var(--cyan); background: transparent; }
 .job-phases li.current { color: var(--text); font-weight: 600; }
 .job-phases li.current::before { border-color: var(--cyan); background: var(--cyan); box-shadow: 0 3px 10px rgba(0, 217, 255, .35); }
 .job.cancelled .job-phases li.current::before, .job.cancelling .job-phases li.current::before { border-color: var(--amber); background: var(--amber); box-shadow: none; }

@@ -32,7 +32,8 @@ const icons = {
   project: '<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="5" width="16" height="14" rx="2"/><path d="M8 9h8M8 13h5"/></svg>',
   render: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m8 5 11 7-11 7V5Z"/></svg>',
   download: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12m-5-5 5 5 5-5M5 21h14"/></svg>',
-  cancel: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg>'
+  cancel: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg>',
+  retry: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 11a8 8 0 1 0-2.3 5.7M20 4v7h-7"/></svg>'
 };
 
 async function api(path, options = {}) {
@@ -102,15 +103,31 @@ function renderJobs() {
     const presentation = jobPresentation(job);
     const statusLabel = { queued: "Na fila", running: "Em andamento", cancelling: "Cancelando", cancelled: "Cancelado", completed: "Concluído", failed: "Falhou" }[job.status] || job.status;
     const typeLabel = { generation: "Novo vídeo", duplicate: "Cópia", edit: "Edição por prompt", render: "Render" }[job.type] || job.type;
-    const message = job.error || presentation.stage;
+    const message = job.retryable
+      ? job.resumeAvailable
+        ? "Há etapas concluídas salvas. Continue do checkpoint ou escolha refazer todo o render."
+        : "Não há um checkpoint reutilizável desta tentativa. Uma nova tentativa começará do início."
+      : job.error || presentation.stage;
     const phases = job.phases.map((phase, index) => {
       const timing = job.phaseTimings?.find((item) => item.phaseIndex === index);
-      const phaseClass = index === presentation.phaseIndex ? "current" : timing?.startedAt || index < presentation.phaseIndex ? "done" : "";
-      const duration = timing?.durationMs == null ? "" : `<time datetime="PT${Math.max(0, Math.floor(timing.durationMs / 1000))}S">${formatDuration(timing.durationMs)}</time>`;
-      return `<li class="${phaseClass}"><span>${escapeHtml(phase)}</span>${duration}</li>`;
+      const reused = job.skippedPhases?.includes(index);
+      const phaseClass = reused ? "reused" : index === presentation.phaseIndex ? "current" : timing?.startedAt || index < presentation.phaseIndex ? "done" : "";
+      const phaseMeta = reused
+        ? "<em>reutilizada</em>"
+        : timing?.durationMs == null ? "" : `<time datetime="PT${Math.max(0, Math.floor(timing.durationMs / 1000))}S">${formatDuration(timing.durationMs)}</time>`;
+      return `<li class="${phaseClass}"><span>${escapeHtml(phase)}</span>${phaseMeta}</li>`;
     }).join("");
     const cancel = job.cancelable
       ? `<button class="cancel-action" type="button" data-job-action="cancel" data-job="${escapeHtml(job.id)}" ${job.status === "cancelling" ? "disabled" : ""}>${icons.cancel}<span>${job.status === "cancelling" ? "Cancelando" : "Cancelar"}</span></button>`
+      : "";
+    const projectBusy = state.jobs.some((candidate) => candidate.id !== job.id && candidate.project === job.project && ["queued", "running", "cancelling"].includes(candidate.status));
+    const recovery = job.retryable && !projectBusy
+      ? job.resumeAvailable
+        ? `<div class="job-recovery" aria-label="Opções para tentar novamente">
+            <button class="retry-action is-primary" type="button" data-job-action="resume" data-job="${escapeHtml(job.id)}">${icons.render}<span>Continuar de onde parou</span></button>
+            <button class="retry-action" type="button" data-job-action="restart" data-job="${escapeHtml(job.id)}">${icons.retry}<span>Refazer render completo</span></button>
+          </div>`
+        : `<div class="job-recovery"><button class="retry-action is-primary" type="button" data-job-action="restart" data-job="${escapeHtml(job.id)}">${icons.retry}<span>Tentar novamente</span></button></div>`
       : "";
     return `<article class="job ${escapeHtml(job.status)}">
       <div class="job-top">
@@ -118,9 +135,11 @@ function renderJobs() {
         <span class="job-state ${escapeHtml(job.status)}">${statusLabel}</span>
       </div>
       <p>${escapeHtml(message)}</p>
+      ${job.retryable && job.error ? `<p class="job-error-detail">Detalhe: ${escapeHtml(job.error)}</p>` : ""}
       <ol class="job-phases" aria-label="Fases de ${escapeHtml(typeLabel)}">${phases}</ol>
       <div class="job-progress" aria-label="${escapeHtml(statusLabel)}"><i></i></div>
       <div class="job-actions"><span class="job-format">${escapeHtml(typeLabel)} · ${escapeHtml(job.aspectRatio)} · ${formatDuration(job.totalDurationMs ?? elapsedDuration(job))} no total</span>${cancel}</div>
+      ${recovery}
     </article>`;
   }).join("");
 }
@@ -361,19 +380,27 @@ elements.projects.addEventListener("submit", async (event) => {
 });
 
 elements.jobs.addEventListener("click", async (event) => {
-  const button = event.target.closest('button[data-job-action="cancel"]');
+  const button = event.target.closest("button[data-job-action]");
   if (!button) return;
-  if (!window.confirm("Cancelar este trabalho agora? Os arquivos já produzidos serão preservados para inspeção.")) return;
+  const action = button.dataset.jobAction;
+  if (action === "cancel" && !window.confirm("Cancelar este trabalho agora? Os arquivos já produzidos serão preservados para inspeção.")) return;
+  const related = button.closest(".job")?.querySelectorAll("button[data-job-action]") || [button];
+  related.forEach((item) => { item.disabled = true; });
   button.disabled = true;
-  button.querySelector("span").textContent = "Cancelando";
+  button.querySelector("span").textContent = action === "cancel" ? "Cancelando" : action === "restart" ? "Reiniciando…" : "Continuando…";
   try {
-    await api(`/api/jobs/${button.dataset.job}/cancel`, { method: "POST", body: "{}" });
-    toast("Cancelamento solicitado. Encerrando os processos deste trabalho.");
+    if (action === "cancel") {
+      await api(`/api/jobs/${button.dataset.job}/cancel`, { method: "POST", body: "{}" });
+      toast("Cancelamento solicitado. Os checkpoints concluídos serão preservados.");
+    } else {
+      await api(`/api/jobs/${button.dataset.job}/retry`, { method: "POST", body: JSON.stringify({ mode: action === "restart" ? "restart" : "resume" }) });
+      toast(action === "restart" ? "Render completo reiniciado. Todas as fases serão executadas." : "Trabalho retomado. As etapas válidas serão reutilizadas.");
+    }
     await refresh();
   } catch (error) {
     toast(error.message, true);
-    button.disabled = false;
-    button.querySelector("span").textContent = "Cancelar";
+    related.forEach((item) => { item.disabled = false; });
+    button.querySelector("span").textContent = action === "cancel" ? "Cancelar" : action === "restart" ? "Refazer render completo" : "Continuar de onde parou";
   }
 });
 

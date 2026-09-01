@@ -53,6 +53,14 @@ Recursos entregues na versão `v1.01.00`.
 - [x] Mostrar **Adicionando CTA** como etapa da renderização.
 - [x] Documentar a arquitetura e deixar explícito que a versão atual não integra geração externa de clipes ou avatares.
 
+### v1.04.00
+
+- [x] Preservar checkpoints de renderização quando uma tentativa falhar ou for cancelada.
+- [x] Permitir **Continuar de onde parou**, reutilizando validação, render e CTA já concluídos.
+- [x] Permitir **Refazer render completo** como escolha explícita.
+- [x] Identificar na interface as fases reutilizadas.
+- [x] Criar a pasta `renders/` antes de salvar o MP4 final.
+
 ## Correções entregues
 
 ### v1.01.01

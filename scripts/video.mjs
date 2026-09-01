@@ -179,6 +179,7 @@ async function appendCta(sourcePath, finalPath, aspectRatio) {
       "-y", "-i", sourcePath, "-i", ctaPath, "-filter_complex", filters.join(";"), ...maps,
       "-c:v", "libx264", "-preset", "medium", "-crf", "18", "-pix_fmt", "yuv420p", "-movflags", "+faststart", temporary
     ], path.dirname(sourcePath));
+    await mkdir(path.dirname(finalPath), { recursive: true });
     await rename(temporary, finalPath);
   } finally {
     await unlink(temporary).catch(() => {});

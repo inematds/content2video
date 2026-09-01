@@ -6,11 +6,11 @@ O padrão atual é vídeo vertical em português brasileiro, com cerca de 1 minu
 
 [Abrir o guia visual](https://inematds.github.io/content2video/guia/) · [Plano do projeto](docs/plano_content2video_inema.md)
 
-Versão atual: `v1.03.00`. O histórico e as evoluções planejadas estão no [ROADMAP](ROADMAP.md).
+Versão atual: `v1.04.00`. O histórico e as evoluções planejadas estão no [ROADMAP](ROADMAP.md).
 
 ## Arquitetura e provedores da versão atual
 
-A `v1.03.00` não usa um serviço externo de vídeo generativo. O resultado atual é uma composição programável: o agente cria roteiro e cenas, o HyperFrames organiza e anima os elementos, e o FFmpeg entrega o MP4.
+A `v1.04.00` não usa um serviço externo de vídeo generativo. O resultado atual é uma composição programável: o agente cria roteiro e cenas, o HyperFrames organiza e anima os elementos, e o FFmpeg entrega o MP4.
 
 | Componente | Responsabilidade atual | Gera clipes por IA? |
 |---|---|---|
@@ -135,13 +135,17 @@ Na interface:
 8. Clique em **Aprovar e renderizar** e baixe o MP4 pelo próprio card do projeto.
 9. Quando a situação mudar para **Pronto para assistir**, o play aparece na capa e abre o MP4 final.
 
-### Fases e cancelamento
+### Fases, retomada e cancelamento
 
 Cada trabalho mostra seu tipo, formato, tempo total, fase atual e quanto tempo foi gasto em cada etapa. A duração da etapa ativa continua contando; as concluídas preservam o tempo final. Geração, cópia, edição por prompt e renderização possuem trilhas próprias. Enquanto o trabalho estiver na fila ou em execução, o botão **Cancelar** encerra o Codex, HyperFrames, navegador e FFmpeg associados ao processo.
 
 A interface usa a atividade mais recente do gerador para evitar anunciar validação enquanto as cenas ainda estão sendo construídas. Um trabalho só é concluído quando o `index.html` contém uma composição montada; o arquivo inicial vazio não libera o editor.
 
 O cancelamento preserva os arquivos produzidos até aquele momento para inspeção ou retomada. O histórico de trabalhos fica em memória durante a sessão atual do servidor; ao reiniciar a aplicação, a lista de jobs é limpa, mas os projetos e arquivos permanecem em `videos/`.
+
+Quando um render falha ou é cancelado, os arquivos válidos ficam como checkpoints em `.runtime/render-staging/`. Durante a mesma sessão do servidor, a ação **Continuar de onde parou** reutiliza esses arquivos e pula validação, renderização ou CTA que já tenham sido concluídos. As fases puladas aparecem como **reutilizada** e não ganham um novo tempo.
+
+Esse é o comportamento padrão: continuar aproveita o que já está pronto. Use **Refazer render completo** somente quando quiser descartar o checkpoint daquela tentativa e executar todas as fases novamente. Depois que o MP4 é salvo corretamente em `videos/<projeto>/renders/`, os checkpoints temporários são removidos.
 
 ### Editar visualmente ou por prompt
 
@@ -242,7 +246,7 @@ OPENAI_API_KEY=sk-...
 
 Nunca envie a chave ao Git. O `.gitignore` já exclui `.env` e variantes locais.
 
-Essas duas opções controlam o agente que constrói o projeto. Nenhuma delas ativa geração de clipes de vídeo na `v1.03.00`.
+Essas duas opções controlam o agente que constrói o projeto. Nenhuma delas ativa geração de clipes de vídeo na `v1.04.00`.
 
 ## Padrões configuráveis
 

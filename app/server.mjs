@@ -236,6 +236,7 @@ function humanize(slug) {
 function serializeJob(job) {
   const now = Date.now();
   const terminal = ["completed", "failed", "cancelled"].includes(job.status);
+  const retryable = job.type === "render" && ["failed", "cancelled"].includes(job.status);
   const jobEnd = terminal ? new Date(job.finishedAt || job.updatedAt).getTime() : now;
   return {
     id: job.id,
@@ -246,6 +247,10 @@ function serializeJob(job) {
     instructions: job.instructions || null,
     aspectRatio: job.aspectRatio,
     includeCta: job.includeCta,
+    checkpointId: job.checkpointId || null,
+    retryable,
+    resumeAvailable: retryable && renderCheckpointAvailable(job),
+    skippedPhases: job.skippedPhases || [],
     status: job.status,
     stage: job.stage,
     phaseIndex: job.phaseIndex,
@@ -276,8 +281,9 @@ function makeJob(type, project, options = {}) {
     ? ["Preparando", "Validando composição", "Renderizando vídeo", "MP4 pronto"]
     : JOB_PHASES[type] || ["Preparando", "Concluído"];
   const createdAt = new Date().toISOString();
+  const id = `${Date.now().toString(36)}-${Math.random().toString(36).slice(2, 8)}`;
   const job = {
-    id: `${Date.now().toString(36)}-${Math.random().toString(36).slice(2, 8)}`,
+    id,
     type,
     project,
     sourceUrl: options.sourceUrl || null,
@@ -285,6 +291,9 @@ function makeJob(type, project, options = {}) {
     instructions: options.instructions || null,
     aspectRatio: options.aspectRatio || config.aspectRatio,
     includeCta: options.includeCta !== false,
+    checkpointId: options.checkpointId || id,
+    retryMode: options.retryMode || "restart",
+    skippedPhases: [],
     status: "queued",
     stage: phases[0],
     phaseIndex: 0,
@@ -505,45 +514,128 @@ function consumeCodexEvent(job, line) {
   }
 }
 
-function startRender(project) {
+function createRenderJob(project, options = {}) {
   const metadata = readProjectMetadata(path.join(config.videosDir, project));
-  const job = makeJob("render", project, {
-    aspectRatio: metadata.aspect_ratio || metadata.aspectRatio || config.aspectRatio,
-    includeCta: metadata.include_cta !== false
+  return makeJob("render", project, {
+    aspectRatio: options.aspectRatio || metadata.aspect_ratio || metadata.aspectRatio || config.aspectRatio,
+    includeCta: typeof options.includeCta === "boolean" ? options.includeCta : metadata.include_cta !== false,
+    checkpointId: options.checkpointId,
+    retryMode: options.retryMode || "restart"
   });
+}
+
+function startRender(project, options = {}) {
+  const job = createRenderJob(project, options);
   runRender(job, project);
   return job;
+}
+
+function renderCheckpointPaths(job) {
+  const directory = path.join(ROOT, ".runtime", "render-staging", job.checkpointId || job.id);
+  return {
+    directory,
+    source: path.join(directory, "source.mp4"),
+    assembled: path.join(directory, "with-cta.mp4")
+  };
+}
+
+function validMediaFile(filename) {
+  if (!existsSync(filename)) return false;
+  try {
+    const media = probeMedia(filename);
+    return media.duration > 0;
+  } catch {
+    return false;
+  }
+}
+
+function renderCheckpointAvailable(job) {
+  if (!job?.checkpointId) return false;
+  const checkpoint = renderCheckpointPaths(job);
+  return validMediaFile(checkpoint.assembled) || validMediaFile(checkpoint.source);
+}
+
+async function clearRenderCheckpoint(job) {
+  const checkpoint = renderCheckpointPaths(job);
+  await Promise.all([
+    unlink(checkpoint.source).catch(() => {}),
+    unlink(checkpoint.assembled).catch(() => {})
+  ]);
 }
 
 async function runRender(job, project) {
   const projectDir = path.join(config.videosDir, project);
   const output = path.join(config.rendersDirName, `${project}.mp4`);
   const finalPath = path.join(projectDir, output);
-  const sourcePath = job.includeCta
-    ? path.join(ROOT, ".runtime", "render-staging", `${project}-${job.id}-sem-cta.mp4`)
-    : finalPath;
+  const pendingPath = `${finalPath}.pending-${job.id}`;
+  const backupPath = `${finalPath}.backup-${job.id}`;
+  const checkpoint = renderCheckpointPaths(job);
   updateJob(job, { status: "running" });
   setPhase(job, 1);
   try {
-    if (job.includeCta) await mkdir(path.dirname(sourcePath), { recursive: true });
-    await runProcess(job, "npx", ["--yes", "hyperframes@0.8.20", "check"], projectDir);
-    if (job.status === "cancelled" || job.status === "cancelling") return;
-    setPhase(job, 2);
-    await runProcess(job, "npx", ["--yes", "hyperframes@0.8.20", "render", "--quality", config.renderQuality, "--output", sourcePath], projectDir);
-    if (job.status === "cancelled" || job.status === "cancelling") return;
-    if (!existsSync(sourcePath) || (await stat(sourcePath)).size === 0) throw new Error("O render terminou sem criar um MP4 válido.");
-    if (job.includeCta) {
-      setPhase(job, 3);
-      await appendCta(job, sourcePath, finalPath);
+    await mkdir(checkpoint.directory, { recursive: true });
+    if (job.retryMode === "restart") await clearRenderCheckpoint(job);
+
+    if (job.includeCta && validMediaFile(checkpoint.assembled)) {
+      job.skippedPhases = [1, 2, 3];
+      setPhase(job, job.phases.length - 1, "Salvando MP4 já concluído");
+    } else if (validMediaFile(checkpoint.source)) {
+      job.skippedPhases = [1, 2];
+      setPhase(job, job.includeCta ? 3 : job.phases.length - 1, job.includeCta ? "Continuando: adicionando CTA" : "Salvando render concluído");
+    } else {
+      await runProcess(job, "npx", ["--yes", "hyperframes@0.8.20", "check"], projectDir);
+      if (job.status === "cancelled" || job.status === "cancelling") return;
+      setPhase(job, 2);
+      await runProcess(job, "npx", ["--yes", "hyperframes@0.8.20", "render", "--quality", config.renderQuality, "--output", checkpoint.source], projectDir);
     }
-    if (!existsSync(finalPath) || (await stat(finalPath)).size === 0) throw new Error("O render terminou sem criar um MP4 válido.");
+    if (job.status === "cancelled" || job.status === "cancelling") return;
+    if (!validMediaFile(checkpoint.source) && !validMediaFile(checkpoint.assembled)) throw new Error("O render terminou sem criar um MP4 válido.");
+    if (job.includeCta) {
+      if (!validMediaFile(checkpoint.assembled)) {
+        setPhase(job, 3);
+        await appendCta(job, checkpoint.source, checkpoint.assembled);
+      }
+      if (!validMediaFile(checkpoint.assembled)) throw new Error("O CTA terminou sem criar um MP4 válido.");
+    }
+    await mkdir(path.dirname(finalPath), { recursive: true });
+    if (job.status === "cancelled" || job.status === "cancelling") return;
+    const deliverable = job.includeCta ? checkpoint.assembled : checkpoint.source;
+    await unlink(pendingPath).catch(() => {});
+    await unlink(backupPath).catch(() => {});
+    await rename(deliverable, pendingPath);
+    if (job.status === "cancelled" || job.status === "cancelling") {
+      await rename(pendingPath, deliverable).catch(() => {});
+      return;
+    }
+    if (!existsSync(pendingPath) || (await stat(pendingPath)).size === 0) throw new Error("O render terminou sem criar um MP4 válido.");
+    if (job.status === "cancelled" || job.status === "cancelling") {
+      await rename(pendingPath, deliverable).catch(() => {});
+      return;
+    }
+    if (existsSync(finalPath)) await rename(finalPath, backupPath);
+    if (job.status === "cancelled" || job.status === "cancelling") {
+      await rename(pendingPath, deliverable).catch(() => {});
+      if (existsSync(backupPath)) await rename(backupPath, finalPath).catch(() => {});
+      return;
+    }
+    await rename(pendingPath, finalPath);
+    if (job.status === "cancelled" || job.status === "cancelling") {
+      await rename(finalPath, deliverable).catch(() => {});
+      if (existsSync(backupPath)) await rename(backupPath, finalPath).catch(() => {});
+      return;
+    }
     setPhase(job, job.phases.length - 1);
     updateJob(job, { status: "completed" });
+    await unlink(backupPath).catch(() => {});
+    await clearRenderCheckpoint(job);
   } catch (error) {
+    if (existsSync(pendingPath)) {
+      const deliverable = job.includeCta ? checkpoint.assembled : checkpoint.source;
+      await rename(pendingPath, deliverable).catch(() => {});
+    }
+    if (existsSync(backupPath)) await rename(backupPath, finalPath).catch(() => {});
     if (job.status === "cancelled" || job.status === "cancelling") updateJob(job, { status: "cancelled", stage: "Cancelado pelo usuário" });
     else updateJob(job, { status: "failed", stage: "Falha no render", error: error.message });
-  } finally {
-    if (job.includeCta) await unlink(sourcePath).catch(() => {});
   }
 }
 
@@ -559,7 +651,7 @@ function probeMedia(filename) {
   };
 }
 
-async function appendCta(job, sourcePath, finalPath) {
+async function appendCta(job, sourcePath, assembledPath) {
   const dimensions = dimensionsFor(job.aspectRatio);
   const ctaName = job.aspectRatio === "16:9" ? "inema-club-cta-16x9.mp4" : "inema-club-cta.mp4";
   const ctaPath = path.join(config.videosDir, "inema-club-cta", "renders", ctaName);
@@ -579,7 +671,7 @@ async function appendCta(job, sourcePath, finalPath) {
     );
     maps.push("-map", "[outa]", "-c:a", "aac", "-b:a", "192k");
   }
-  const temporary = path.join(path.dirname(sourcePath), `${path.basename(finalPath)}-${job.id}-com-cta.mp4`);
+  const temporary = `${assembledPath}.partial.mp4`;
   args.push(
     "-filter_complex", filters.join(";"), ...maps,
     "-c:v", "libx264", "-preset", "medium", "-crf", "18", "-pix_fmt", "yuv420p", "-movflags", "+faststart",
@@ -587,7 +679,7 @@ async function appendCta(job, sourcePath, finalPath) {
   );
   try {
     await runProcess(job, "ffmpeg", args, path.dirname(sourcePath));
-    await rename(temporary, finalPath);
+    await rename(temporary, assembledPath);
   } finally {
     await unlink(temporary).catch(() => {});
   }
@@ -752,6 +844,29 @@ const server = http.createServer(async (req, res) => {
       if (!job) return json(res, 404, { error: "Trabalho não encontrado nesta sessão." });
       if (!cancelJob(job)) return json(res, 409, { error: "Este trabalho já terminou e não pode mais ser cancelado." });
       return json(res, 200, { job: serializeJob(job) });
+    }
+
+    const retryMatch = pathname.match(/^\/api\/jobs\/([a-z0-9-]+)\/retry$/);
+    if (req.method === "POST" && retryMatch) {
+      const body = await readJson(req);
+      const previous = jobs.get(retryMatch[1]);
+      if (!previous) return json(res, 404, { error: "Trabalho não encontrado nesta sessão." });
+      if (previous.type !== "render" || !["failed", "cancelled"].includes(previous.status)) {
+        return json(res, 409, { error: "Somente renders com falha ou cancelados podem ser retomados." });
+      }
+      if (activeJobForProject(previous.project)) {
+        return json(res, 409, { error: "Este projeto já possui um trabalho em andamento." });
+      }
+      const retryMode = body.mode === "restart" ? "restart" : "resume";
+      const job = createRenderJob(previous.project, {
+        aspectRatio: previous.aspectRatio,
+        includeCta: previous.includeCta,
+        checkpointId: retryMode === "resume" ? previous.checkpointId : undefined,
+        retryMode
+      });
+      if (retryMode === "restart") await clearRenderCheckpoint(previous);
+      runRender(job, previous.project);
+      return json(res, 202, { job: serializeJob(job) });
     }
 
     const transformMatch = pathname.match(/^\/api\/projects\/([a-z0-9-]+)\/(duplicate|edit)$/);
