@@ -1,0 +1,551 @@
+<template>
+  <div data-hf-id="hf-lia0" id="root" data-composition-id="04-circuito" data-duration="9.836" data-width="1080" data-height="1920">
+    <style>
+      @font-face {
+        font-family: "EB Garamond";
+        src: url("assets/fonts/EBGaramond-400.woff2") format("woff2");
+        font-style: normal;
+        font-weight: 400;
+      }
+
+      @font-face {
+        font-family: "Inter";
+        src: url("assets/fonts/Inter-400.woff2") format("woff2");
+        font-style: normal;
+        font-weight: 400;
+      }
+
+      @font-face {
+        font-family: "Inter";
+        src: url("assets/fonts/Inter-500.woff2") format("woff2");
+        font-style: normal;
+        font-weight: 500;
+      }
+
+      @font-face {
+        font-family: "JetBrains Mono";
+        src: url("assets/fonts/JetBrainsMono-500.woff2") format("woff2");
+        font-style: normal;
+        font-weight: 500;
+      }
+
+      #root {
+        position: relative;
+        width: 1080px;
+        height: 1920px;
+        overflow: hidden;
+        container-type: size;
+        color: #141413;
+      }
+
+      #root * {
+        box-sizing: border-box;
+      }
+
+      .frame04-circuito-ground,
+      .frame04-circuito-shot {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+      }
+
+      .frame04-circuito-ground {
+        background: #FAF9F5;
+      }
+
+      .frame04-circuito-shot {
+        overflow: hidden;
+      }
+
+      .frame04-circuito-kicker {
+        position: absolute;
+        top: 6.2cqh;
+        left: 7.5cqw;
+        display: flex;
+        align-items: center;
+        gap: 2.2cqw;
+        font-family: "JetBrains Mono";
+        font-size: 2.55cqw;
+        font-weight: 500;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        white-space: nowrap;
+      }
+
+      .frame04-circuito-spike {
+        color: #CC785C;
+        font-size: 3.2cqw;
+        line-height: 1;
+      }
+
+      .frame04-circuito-title {
+        position: absolute;
+        top: 10.5cqh;
+        left: 7.5cqw;
+        width: 85cqw;
+        margin: 0;
+        font-family: "EB Garamond";
+        font-size: 8.8cqw;
+        font-weight: 400;
+        line-height: 0.98;
+        letter-spacing: -0.024em;
+      }
+
+      .frame04-circuito-stage {
+        position: absolute;
+        top: 21.5cqh;
+        left: 4.8cqw;
+        width: 90.4cqw;
+        height: 60.2cqh;
+      }
+
+      .frame04-circuito-field {
+        position: absolute;
+        inset: 0;
+        border: 1px solid rgba(20, 20, 19, 0.12);
+        border-radius: 12px;
+        background: #EFE9DE;
+        box-shadow: 0 1px 3px rgba(20, 20, 19, 0.08), 0 4px 16px rgba(20, 20, 19, 0.04);
+      }
+
+      .frame04-circuito-orbit {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        overflow: visible;
+      }
+
+      .frame04-circuito-orbit-base {
+        fill: none;
+        stroke: rgba(20, 20, 19, 0.12);
+        stroke-width: 1;
+        stroke-dasharray: 5 11;
+      }
+
+      .frame04-circuito-connector {
+        fill: none;
+        stroke: #141413;
+        stroke-width: 2;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+      }
+
+      .frame04-circuito-arrow {
+        fill: #141413;
+      }
+
+      .frame04-circuito-node {
+        position: absolute;
+        width: 30cqw;
+        min-height: 8.2cqh;
+        padding: 2.3cqw 2.7cqw;
+        display: flex;
+        align-items: center;
+        gap: 2.5cqw;
+        border: 1px solid rgba(20, 20, 19, 0.16);
+        border-radius: 12px;
+        background: #FAF9F5;
+      }
+
+      .frame04-circuito-node-icon {
+        width: 7.8cqw;
+        height: 7.8cqw;
+        flex: 0 0 7.8cqw;
+        display: grid;
+        place-items: center;
+        border: 1px solid rgba(20, 20, 19, 0.2);
+        border-radius: 9999px;
+        font-family: "EB Garamond";
+        font-size: 4.6cqw;
+        line-height: 1;
+      }
+
+      .frame04-circuito-node-copy {
+        display: flex;
+        flex-direction: column;
+        gap: 0.7cqh;
+      }
+
+      .frame04-circuito-node-label {
+        font-family: "JetBrains Mono";
+        font-size: 2.35cqw;
+        font-weight: 500;
+        letter-spacing: 0.09em;
+        text-transform: uppercase;
+      }
+
+      .frame04-circuito-node-role {
+        font-family: "Inter";
+        font-size: 2.25cqw;
+        font-weight: 400;
+        line-height: 1.2;
+      }
+
+      .frame04-circuito-user {
+        top: 4.2cqh;
+        left: 29.9cqw;
+      }
+
+      .frame04-circuito-agent {
+        top: 23.5cqh;
+        right: 3.8cqw;
+      }
+
+      .frame04-circuito-app {
+        left: 29.9cqw;
+        bottom: 3.8cqh;
+      }
+
+      .frame04-circuito-browser {
+        position: absolute;
+        top: 23.1cqh;
+        left: 23cqw;
+        width: 37cqw;
+        height: 19.5cqh;
+        overflow: hidden;
+        border: 1px solid rgba(20, 20, 19, 0.2);
+        border-radius: 12px;
+        background: #FAF9F5;
+        box-shadow: 0 1px 3px rgba(20, 20, 19, 0.08), 0 4px 16px rgba(20, 20, 19, 0.04);
+      }
+
+      .frame04-circuito-browser-bar {
+        height: 4.5cqh;
+        padding: 0 2.4cqw;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        background: #ECE3D4;
+        border-bottom: 1px solid rgba(20, 20, 19, 0.12);
+      }
+
+      .frame04-circuito-dots {
+        display: flex;
+        gap: 1.1cqw;
+      }
+
+      .frame04-circuito-dots i {
+        width: 1.25cqw;
+        height: 1.25cqw;
+        border: 1px solid rgba(20, 20, 19, 0.28);
+        border-radius: 9999px;
+      }
+
+      .frame04-circuito-tab {
+        font-family: "JetBrains Mono";
+        font-size: 1.9cqw;
+        letter-spacing: 0.04em;
+      }
+
+      .frame04-circuito-browser-body {
+        height: 15cqh;
+        padding: 2.9cqw;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+      }
+
+      .frame04-circuito-browser-name {
+        font-family: "EB Garamond";
+        font-size: 6.6cqw;
+        font-weight: 400;
+        line-height: 1;
+        letter-spacing: -0.022em;
+      }
+
+      .frame04-circuito-browser-rule {
+        width: 100%;
+        height: 1px;
+        background: rgba(20, 20, 19, 0.16);
+      }
+
+      .frame04-circuito-browser-meta {
+        display: flex;
+        justify-content: space-between;
+        font-family: "JetBrains Mono";
+        font-size: 1.85cqw;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+      }
+
+      .frame04-circuito-chip {
+        position: absolute;
+        top: 38.8cqh;
+        padding: 1.25cqh 2.5cqw;
+        border: 1px solid rgba(20, 20, 19, 0.2);
+        border-radius: 9999px;
+        background: #FAF9F5;
+        font-family: "JetBrains Mono";
+        font-size: 2cqw;
+        font-weight: 500;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        white-space: nowrap;
+      }
+
+      .frame04-circuito-session {
+        left: 2.8cqw;
+      }
+
+      .frame04-circuito-state {
+        left: 2.8cqw;
+        top: 44.5cqh;
+      }
+
+      .frame04-circuito-result {
+        top: 30.3cqh;
+        left: 35.2cqw;
+        background: #ECE3D4;
+      }
+
+      .frame04-circuito-confirm {
+        position: absolute;
+        top: 44cqh;
+        left: 70cqw;
+        width: 27.8cqw;
+        min-height: 7cqh;
+        box-sizing: border-box;
+        padding: 2cqw 2.4cqw;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 2cqw;
+        border: 1px solid rgba(20, 20, 19, 0.2);
+        border-radius: 8px;
+        background: #FAF9F5;
+        box-shadow: 0 1px 3px rgba(20, 20, 19, 0.08), 0 4px 16px rgba(20, 20, 19, 0.04);
+      }
+
+      .frame04-circuito-confirm-label {
+        font-family: "JetBrains Mono";
+        font-size: 2.1cqw;
+        font-weight: 500;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+      }
+
+      .frame04-circuito-check {
+        width: 7.4cqw;
+        height: 7.4cqw;
+        display: grid;
+        place-items: center;
+        border: 1px solid #141413;
+        border-radius: 9999px;
+        font-family: "Inter";
+        font-size: 4.1cqw;
+        line-height: 1;
+      }
+
+      .frame04-circuito-footer-rule {
+        position: absolute;
+        left: 7.5cqw;
+        top: 83cqh;
+        width: 85cqw;
+        height: 1px;
+        background: rgba(20, 20, 19, 0.12);
+      }
+    </style>
+
+    <div data-hf-id="hf-h79a" class="clip frame04-circuito-ground" data-start="0" data-duration="9.836" data-track-index="0"></div>
+
+    <div data-hf-id="hf-itq2" class="clip frame04-circuito-shot" data-start="0" data-duration="9.836" data-track-index="1">
+      <div data-hf-id="hf-ql16" class="frame04-circuito-kicker">
+        <span data-hf-id="hf-45gf" class="frame04-circuito-spike">✱</span>
+        <span data-hf-id="hf-tb5i">Circuito da aba</span>
+      </div>
+      <h1 data-hf-id="hf-te0t" class="frame04-circuito-title">O contexto fica no centro</h1>
+
+      <div data-hf-id="hf-egzl" class="frame04-circuito-stage">
+        <div data-hf-id="hf-1cx7" class="frame04-circuito-field"></div>
+
+        <svg data-hf-id="hf-9cm9" class="frame04-circuito-orbit" viewBox="0 0 976 1156" aria-hidden="true">
+          <ellipse data-hf-id="hf-ioqo" class="frame04-circuito-orbit-base" cx="488" cy="586" rx="367" ry="476" />
+          <path data-hf-id="hf-vzwp" id="frame04-circuito-path-user" class="frame04-circuito-connector" d="M488 207 C610 235 710 323 748 445" />
+          <path data-hf-id="hf-s0ia" id="frame04-circuito-path-agent" class="frame04-circuito-connector" d="M829 531 C860 686 758 831 625 899" />
+          <path data-hf-id="hf-f2i3" id="frame04-circuito-path-app" class="frame04-circuito-connector" d="M481 988 C315 975 178 852 139 705" />
+          <path data-hf-id="hf-hv6l" id="frame04-circuito-path-final" class="frame04-circuito-connector" d="M134 566 C151 402 278 265 427 213" />
+          <path data-hf-id="hf-9wqq" class="frame04-circuito-arrow" d="M741 426 l18 17 -24 4 z" />
+          <path data-hf-id="hf-0nmg" class="frame04-circuito-arrow" d="M643 888 l-10 23 -14 -21 z" />
+          <path data-hf-id="hf-mc2q" class="frame04-circuito-arrow" d="M153 722 l-22 -12 20 -15 z" />
+          <path data-hf-id="hf-7wgp" id="frame04-circuito-arrow-final" class="frame04-circuito-arrow" d="M406 218 l23 -11 -3 25 z" />
+        </svg>
+
+        <div data-hf-id="hf-x0gl" class="frame04-circuito-node frame04-circuito-user">
+          <div data-hf-id="hf-u8c4" class="frame04-circuito-node-icon">U</div>
+          <div data-hf-id="hf-5mll" class="frame04-circuito-node-copy">
+            <span data-hf-id="hf-o5x9" class="frame04-circuito-node-label">Usuário</span>
+            <span data-hf-id="hf-4226" class="frame04-circuito-node-role">intenção</span>
+          </div>
+        </div>
+
+        <div data-hf-id="hf-4tgv" class="frame04-circuito-node frame04-circuito-agent">
+          <div data-hf-id="hf-26go" class="frame04-circuito-node-icon">A</div>
+          <div data-hf-id="hf-1lel" class="frame04-circuito-node-copy">
+            <span data-hf-id="hf-4paf" class="frame04-circuito-node-label">Agente</span>
+            <span data-hf-id="hf-i5wn" class="frame04-circuito-node-role">decisão</span>
+          </div>
+        </div>
+
+        <div data-hf-id="hf-7hfx" class="frame04-circuito-node frame04-circuito-app">
+          <div data-hf-id="hf-vf97" class="frame04-circuito-node-icon">P</div>
+          <div data-hf-id="hf-2sbo" class="frame04-circuito-node-copy">
+            <span data-hf-id="hf-xl3k" class="frame04-circuito-node-label">Aplicação</span>
+            <span data-hf-id="hf-ieoo" class="frame04-circuito-node-role">execução</span>
+          </div>
+        </div>
+
+        <div data-hf-id="hf-etef" class="frame04-circuito-browser">
+          <div data-hf-id="hf-sviv" class="frame04-circuito-browser-bar">
+            <div data-hf-id="hf-3akp" class="frame04-circuito-dots"><i data-hf-id="hf-wt6k"></i><i data-hf-id="hf-zeb8"></i><i data-hf-id="hf-y7e5"></i></div>
+            <span data-hf-id="hf-5pbm" class="frame04-circuito-tab">aba ativa</span>
+          </div>
+          <div data-hf-id="hf-xoro" class="frame04-circuito-browser-body">
+            <span data-hf-id="hf-xqg3" class="frame04-circuito-browser-name">Navegador</span>
+            <div data-hf-id="hf-cjqa" class="frame04-circuito-browser-rule"></div>
+            <div data-hf-id="hf-eyjb" class="frame04-circuito-browser-meta">
+              <span data-hf-id="hf-chj9">contexto</span>
+              <span data-hf-id="hf-qlhw">local</span>
+            </div>
+          </div>
+        </div>
+
+        <div data-hf-id="hf-lx6y" class="frame04-circuito-chip frame04-circuito-session">Sessão</div>
+        <div data-hf-id="hf-kfpb" class="frame04-circuito-chip frame04-circuito-state">Estado</div>
+        <div data-hf-id="hf-70hw" class="frame04-circuito-chip frame04-circuito-result">Resultado ↖</div>
+
+        <div data-hf-id="hf-xx1v" class="frame04-circuito-confirm">
+          <span data-hf-id="hf-9feb" class="frame04-circuito-confirm-label">Confirmar?</span>
+          <span data-hf-id="hf-2l47" class="frame04-circuito-check">✓</span>
+        </div>
+      </div>
+
+      <div data-hf-id="hf-lt1r" class="frame04-circuito-footer-rule"></div>
+    </div>
+
+    <script src="/node_modules/gsap/dist/gsap.min.js"></script>
+    <script>
+      (() => {
+        const root = document.querySelector('[data-composition-id="04-circuito"]');
+        const q = (selector) => root.querySelector(selector);
+        const qa = (selector) => Array.from(root.querySelectorAll(selector));
+        const duration = 9.336;
+        const connectorPaths = qa(".frame04-circuito-connector");
+        const arrows = qa(".frame04-circuito-arrow");
+
+        connectorPaths.forEach((path) => {
+          const length = path.getTotalLength();
+          gsap.set(path, { strokeDasharray: length, strokeDashoffset: length });
+        });
+
+        gsap.set(arrows, { autoAlpha: 0 });
+
+        const tl = gsap.timeline({ paused: true });
+
+        tl.fromTo(q(".frame04-circuito-field"),
+          { autoAlpha: 0 },
+          { autoAlpha: 1, duration: 0.35, ease: "power1.out" },
+          0
+        );
+        tl.fromTo(q(".frame04-circuito-kicker"),
+          { autoAlpha: 0, y: 18 },
+          { autoAlpha: 1, y: 0, duration: 0.42, ease: "power2.out" },
+          0.08
+        );
+        tl.fromTo(q(".frame04-circuito-spike"),
+          { autoAlpha: 0, scale: 0.92 },
+          { autoAlpha: 1, scale: 1, duration: 0.36, ease: "power2.out" },
+          0.18
+        );
+        tl.fromTo(q(".frame04-circuito-title"),
+          { autoAlpha: 0, y: 22 },
+          { autoAlpha: 1, y: 0, duration: 0.48, ease: "power2.out" },
+          0.18
+        );
+        tl.fromTo(q(".frame04-circuito-orbit-base"),
+          { autoAlpha: 0 },
+          { autoAlpha: 1, duration: 0.5, ease: "none" },
+          0.3
+        );
+        tl.fromTo(q(".frame04-circuito-browser"),
+          { autoAlpha: 0, scale: 1.42, y: -40 },
+          { autoAlpha: 1, scale: 1, y: 0, duration: 1.1, ease: "power3.inOut" },
+          0.25
+        );
+
+        tl.fromTo(q(".frame04-circuito-user"),
+          { autoAlpha: 0, scale: 0.78, y: 16 },
+          { autoAlpha: 1, scale: 1, y: 0, duration: 0.55, ease: "back.out(1.4)" },
+          1.7
+        );
+        tl.to(q("#frame04-circuito-path-user"),
+          { strokeDashoffset: 0, duration: 0.62, ease: "power1.inOut" },
+          2.1
+        );
+        tl.to(arrows[0], { autoAlpha: 1, duration: 0.12 }, 2.64);
+
+        tl.fromTo(q(".frame04-circuito-agent"),
+          { autoAlpha: 0, scale: 0.78, x: 18 },
+          { autoAlpha: 1, scale: 1, x: 0, duration: 0.55, ease: "back.out(1.4)" },
+          2.75
+        );
+        tl.to(q("#frame04-circuito-path-agent"),
+          { strokeDashoffset: 0, duration: 0.65, ease: "power1.inOut" },
+          3.15
+        );
+        tl.to(arrows[1], { autoAlpha: 1, duration: 0.12 }, 3.72);
+
+        tl.fromTo(q(".frame04-circuito-app"),
+          { autoAlpha: 0, scale: 0.78, y: 18 },
+          { autoAlpha: 1, scale: 1, y: 0, duration: 0.55, ease: "back.out(1.4)" },
+          3.85
+        );
+        tl.to(q("#frame04-circuito-path-app"),
+          { strokeDashoffset: 0, duration: 0.72, ease: "power1.inOut" },
+          4.3
+        );
+        tl.to(arrows[2], { autoAlpha: 1, duration: 0.12 }, 4.93);
+
+        tl.fromTo(q(".frame04-circuito-session"),
+          { autoAlpha: 0, x: -70 },
+          { autoAlpha: 1, x: 0, y: 0, duration: 0.95, ease: "power2.inOut" },
+          5.2
+        );
+        tl.fromTo(q(".frame04-circuito-state"),
+          { autoAlpha: 0, x: -70 },
+          { autoAlpha: 1, x: 0, duration: 0.95, ease: "power2.inOut" },
+          5.65
+        );
+        tl.fromTo(q(".frame04-circuito-result"),
+          { autoAlpha: 0, scale: 0.86, x: -350, y: -250 },
+          { autoAlpha: 1, scale: 1, x: -350, y: -250, duration: 0.82, ease: "power2.out" },
+          6.42
+        );
+
+        tl.fromTo(q(".frame04-circuito-confirm"),
+          { autoAlpha: 0, scale: 0.9 },
+          { autoAlpha: 1, scale: 1, duration: 0.38, ease: "power2.out" },
+          7.4
+        );
+        tl.fromTo(q(".frame04-circuito-check"),
+          { autoAlpha: 0, scale: 0.55 },
+          { autoAlpha: 1, scale: 1, duration: 0.35, ease: "back.out(1.3)" },
+          7.92
+        );
+        tl.to(q("#frame04-circuito-path-final"),
+          { strokeDashoffset: 0, duration: 0.62, ease: "power1.inOut" },
+          8.22
+        );
+        tl.to(q("#frame04-circuito-arrow-final"),
+          { autoAlpha: 1, duration: 0.12 },
+          8.75
+        );
+        tl.to({}, { duration: duration - 8.87 });
+
+        window.__timelines = window.__timelines || {};
+        window.__timelines["04-circuito"] = tl;
+      })();
+    </script>
+  </div>
+</template>

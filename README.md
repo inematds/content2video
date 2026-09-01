@@ -6,10 +6,43 @@ O padrão atual é vídeo vertical em português brasileiro, com cerca de 1 minu
 
 [Abrir o guia visual](https://inematds.github.io/content2video/guia/) · [Plano do projeto](docs/plano_content2video_inema.md)
 
+Versão atual: `v1.03.00`. O histórico e as evoluções planejadas estão no [ROADMAP](ROADMAP.md).
+
+## Arquitetura e provedores da versão atual
+
+A `v1.03.00` não usa um serviço externo de vídeo generativo. O resultado atual é uma composição programável: o agente cria roteiro e cenas, o HyperFrames organiza e anima os elementos, e o FFmpeg entrega o MP4.
+
+| Componente | Responsabilidade atual | Gera clipes por IA? |
+|---|---|---|
+| Codex via OAuth ou OpenAI API | Pesquisa a fonte, planeja o vídeo e cria ou edita roteiro, HTML, cenas e metadados | Não |
+| HyperFrames | Monta a timeline, anima, valida, abre o editor e renderiza a composição | Não; renderiza a composição criada |
+| Edge TTS | Gera a narração, usando `pt-BR-FranciscaNeural` para saídas em português brasileiro | Não |
+| FFmpeg/FFprobe | Processa áudio e vídeo, verifica o arquivo e anexa o CTA ao MP4 final | Não |
+| Mídia local | Fornece imagens, vídeos, fontes, ícones e outros arquivos usados pelas cenas | Não por si só |
+
+`AI_PROVIDER=codex` e `AI_PROVIDER=openai` escolhem como o agente de produção é executado. Essa configuração não escolhe um gerador de clipes e não significa que o vídeo seja gerado pelos modelos de vídeo da OpenAI.
+
+Não estão integrados nesta versão provedores de clipes generativos ou avatares, como HeyGen, Veo, Runway, Kling ou Sora. Portanto, não existe ainda na interface uma escolha de provedor de vídeo, modelo, duração de clipe ou créditos desse tipo de serviço.
+
+O fluxo atual produz principalmente motion graphics, tipografia animada, diagramas, imagens e mídia local. Um projeto pode usar um vídeo já disponível como mídia, mas o Content2Video não solicita esse clipe a um provedor generativo.
+
+### Evolução prevista
+
+Uma versão futura poderá permitir a escolha por cena entre:
+
+- composição e motion graphic do HyperFrames;
+- clipe gerado por IA;
+- apresentador ou avatar;
+- imagem animada;
+- mídia enviada ou selecionada pelo usuário.
+
+Essa evolução deverá registrar em cada cena o provedor, o modelo, a duração, a situação da solicitação, o custo estimado e os créditos efetivamente consumidos. A integração também deverá manter um caminho de fallback para HyperFrames ou mídia local quando um provedor falhar ou não for selecionado.
+
 ## Pré-requisitos
 
 - Node.js 22 ou superior;
 - FFmpeg e FFprobe;
+- `curl`, usado pela verificação de saúde do `start.sh`;
 - Codex CLI autenticado com `codex login` (padrão), ou uma chave da OpenAI configurada no `.env`;
 - acesso à internet para ler a URL e obter o HyperFrames na primeira execução.
 
@@ -31,25 +64,118 @@ cp .env.example .env
 npm install
 ```
 
-O `.env` real nunca é versionado. Os padrões documentados ficam em `.env.example`; ajuste principalmente `APP_HOST` e `PREVIEW_HOST` para o IP do computador que executará o sistema.
+O `.env` real nunca é versionado. Os padrões documentados ficam em `.env.example`. Por padrão, `APP_HOST=0.0.0.0` e `PREVIEW_HOST=0.0.0.0` disponibilizam a interface e o editor em todas as interfaces de rede da máquina.
 
 ## Usar com a interface
 
-Inicie o servidor:
+Inicie o servidor em segundo plano:
+
+```bash
+./start.sh
+```
+
+O script cria `.runtime/content2video.pid`, grava a saída em `.runtime/content2video.log` e evita iniciar uma segunda instância. Para encerrar o servidor e os editores abertos por ele:
+
+```bash
+./stop.sh
+```
+
+O `stop.sh` valida se o PID pertence a este projeto antes de enviar `SIGTERM`, espera até 10 segundos pelo encerramento normal e usa `SIGKILL` somente se o processo não responder. Arquivos de execução em `.runtime/` não são versionados.
+
+Na própria máquina, abra `http://127.0.0.1:3080`. Em outro computador, celular ou tablet da rede local, use o IP da máquina que executa o Content2Video, por exemplo:
+
+```text
+http://192.168.2.99:3080
+http://192.168.1.172:3080
+```
+
+Liste os endereços disponíveis com `hostname -I`. O endereço `0.0.0.0` é somente o endereço de escuta do servidor e não deve ser digitado no navegador.
+
+### Operação e diagnóstico
+
+```bash
+# iniciar
+./start.sh
+
+# consultar o processo
+cat .runtime/content2video.pid
+
+# acompanhar o log
+tail -f .runtime/content2video.log
+
+# encerrar
+./stop.sh
+```
+
+`APP_PORT` continua vindo do `.env` (padrão `3080`). É possível sobrescrever parâmetros em uma execução específica:
+
+```bash
+APP_PORT=4080 ./start.sh
+```
+
+Para restringir a interface a um endereço específico, defina `APP_HOST` e `PREVIEW_HOST` antes do comando ou altere o `.env`. Os scripts priorizam variáveis informadas no terminal.
+
+> Segurança: a interface não possui login. Use-a somente em redes confiáveis e limite a porta `3080` à LAN no firewall. Não encaminhe essa porta no roteador e não exponha o serviço diretamente à internet.
+
+Também é possível executar em primeiro plano, útil durante desenvolvimento:
 
 ```bash
 npm start
 ```
 
-Com o padrão deste ambiente, abra `http://192.168.2.99:3080`. Em outra máquina ou rede, troque o IP no `.env`.
-
 Na interface:
 
 1. Cole o link da página ou artigo.
-2. Clique em **Criar vídeo** e acompanhe o trabalho.
-3. Abra o projeto no editor para revisar texto, cenas, imagens e tempos.
-4. Clique em **Aprovar e renderizar**.
-5. Baixe o MP4 pelo próprio card do projeto.
+2. Escolha **9:16 Vertical** (`1080 × 1920`) ou **16:9 Horizontal** (`1920 × 1080`).
+3. Mantenha **Adicionar CTA INEMA.CLUB ao final** marcado ou desmarque para produzir sem o encerramento.
+4. Clique em **Gerar vídeo** e acompanhe cada fase do trabalho.
+5. Durante a produção, a situação mostra a atividade atual e mantém editor, edição por prompt, cópia e render bloqueados para evitar abrir ou alterar uma composição incompleta.
+6. Quando a produção terminar sem MP4, a situação mostra **Aguardando revisão**: use **Abrir editor** ou **Editar com prompt**.
+7. Use **Criar cópia** quando quiser adaptar uma versão sem tocar no projeto original.
+8. Clique em **Aprovar e renderizar** e baixe o MP4 pelo próprio card do projeto.
+9. Quando a situação mudar para **Pronto para assistir**, o play aparece na capa e abre o MP4 final.
+
+### Fases e cancelamento
+
+Cada trabalho mostra seu tipo, formato, tempo total, fase atual e quanto tempo foi gasto em cada etapa. A duração da etapa ativa continua contando; as concluídas preservam o tempo final. Geração, cópia, edição por prompt e renderização possuem trilhas próprias. Enquanto o trabalho estiver na fila ou em execução, o botão **Cancelar** encerra o Codex, HyperFrames, navegador e FFmpeg associados ao processo.
+
+A interface usa a atividade mais recente do gerador para evitar anunciar validação enquanto as cenas ainda estão sendo construídas. Um trabalho só é concluído quando o `index.html` contém uma composição montada; o arquivo inicial vazio não libera o editor.
+
+O cancelamento preserva os arquivos produzidos até aquele momento para inspeção ou retomada. O histórico de trabalhos fica em memória durante a sessão atual do servidor; ao reiniciar a aplicação, a lista de jobs é limpa, mas os projetos e arquivos permanecem em `videos/`.
+
+### Editar visualmente ou por prompt
+
+- O play aparece na capa somente quando existe um MP4 pronto e reproduz diretamente o vídeo final.
+- **Abrir editor** abre o HyperFrames Studio para revisão e edição direta.
+- **Editar com prompt** altera o projeto atual. Escreva o que deseja mudar e, de preferência, o que deve ser preservado.
+- Dentro de **Editar com prompt**, o atalho **Continuar de onde parou** conclui o material incompleto, preserva o que já está correto, corrige a validação e prepara snapshots sem renderizar.
+- **Criar cópia** duplica o projeto, exclui os renders antigos da cópia e aplica a instrução somente na nova pasta. A cópia recebe um nome como `<projeto>-copia` ou `<projeto>-copia-2`.
+
+Exemplo de instrução:
+
+```text
+Retire a cena sobre preços, mantenha a voz e as cores atuais,
+troque o CTA final e deixe o ritmo mais direto.
+```
+
+Edições e cópias aceitam a troca de formato e a opção de CTA no mesmo painel. O agente atualiza composição, briefing e metadados, mantém `pt-BR-FranciscaNeural` quando a saída é brasileira e roda a validação antes de liberar a revisão.
+
+### CTA automático
+
+**Adicionar CTA INEMA.CLUB ao final** vem marcado por padrão na criação, na edição por prompt e na criação de cópias. A escolha fica salva como `include_cta` no `meta.json` do projeto e aparece no card como **CTA no final** ou **Sem CTA**.
+
+Ao clicar em **Aprovar e renderizar**, o sistema renderiza a composição editável e, quando a opção está ativa, anexa um encerramento de 5,5 segundos adequado ao formato escolhido. O CTA não é inserido nas cenas editáveis: ele é unido somente ao MP4 final. Assim, pode ser ligado ou desligado em uma edição futura sem alterar o conteúdo do vídeo.
+
+Os arquivos reutilizados pelo render ficam em:
+
+```text
+videos/inema-club-cta/renders/inema-club-cta.mp4
+videos/inema-club-cta/renders/inema-club-cta-16x9.mp4
+```
+
+Durante o render, a interface mostra separadamente **Renderizando vídeo** e **Adicionando CTA**. Se o CTA estiver desmarcado, essa etapa é ignorada.
+
+O comando `npm run video:render -- <projeto>` também respeita `include_cta`. Já o comando direto `npx hyperframes render` produz somente a composição, sem fazer a união automática do CTA.
 
 A interface não exige login próprio. Ela foi feita para uso local ou em rede privada; não a exponha diretamente à internet sem adicionar autenticação e HTTPS.
 
@@ -86,9 +212,9 @@ Também é possível executar o HyperFrames diretamente dentro de qualquer víde
 
 ```bash
 cd videos/inema-club-promo
-npx --yes hyperframes@0.8.19 check
-npx --yes hyperframes@0.8.19 preview
-npx --yes hyperframes@0.8.19 render --quality high --output renders/inema-club-promo.mp4
+npx --yes hyperframes@0.8.20 check
+npx --yes hyperframes@0.8.20 preview
+npx --yes hyperframes@0.8.20 render --quality high --output renders/inema-club-promo.mp4
 ```
 
 ## OAuth da assinatura ou API
@@ -116,6 +242,8 @@ OPENAI_API_KEY=sk-...
 
 Nunca envie a chave ao Git. O `.gitignore` já exclui `.env` e variantes locais.
 
+Essas duas opções controlam o agente que constrói o projeto. Nenhuma delas ativa geração de clipes de vídeo na `v1.03.00`.
+
 ## Padrões configuráveis
 
 O `.env.example` reúne idioma, voz, duração, tolerância, nota mínima, formato, resolução, FPS, qualidade, pastas e endereços da interface. As regras editoriais executáveis também estão em `config/production-defaults.json` e `AGENTS.md`.
@@ -127,6 +255,7 @@ O `.env.example` reúne idioma, voz, duração, tolerância, nota mínima, forma
 | Duração | 60 s, faixa aceita de 42 a 78 s |
 | Qualidade mínima | 8 |
 | Formato | 9:16, 1080 × 1920, 30 fps |
+| Formato alternativo | 16:9, 1920 × 1080, 30 fps |
 | Render | MP4 em qualidade alta, após aprovação |
 
 ## Projetos de exemplo
@@ -149,7 +278,10 @@ app/                         interface e servidor local
 config/                      padrões de produção
 docs/                        plano e relatório do MVP
 scripts/video.mjs            comandos de terminal
+start.sh                     inicia o servidor em segundo plano
+stop.sh                      encerra com segurança a instância iniciada
 videos/<projeto>/            fontes editáveis, mídia, snapshots e renders
+.runtime/                    PID e log locais, ignorados pelo Git
 .env.example                 configuração segura de referência
 ```
 
@@ -159,6 +291,16 @@ videos/<projeto>/            fontes editáveis, mídia, snapshots e renders
 - revisar direitos de uso das mídias capturadas da página de origem;
 - manter a interface restrita à rede confiável enquanto estiver sem login;
 - conferir manchetes na área segura e ouvir a narração antes do render final.
+
+## Versionamento
+
+A versão exibida segue o formato `vMAJOR.RECURSO.CORREÇÃO`:
+
+- `v1.01.00`: novo recurso entregue; incrementa RECURSO e reinicia CORREÇÃO em `00`;
+- `v1.01.01`: correção de bug sem novo recurso; incrementa somente CORREÇÃO;
+- `v2.00.00`: mudança maior ou incompatível; incrementa MAJOR e reinicia os demais campos.
+
+Os campos RECURSO e CORREÇÃO são exibidos com dois dígitos, mas ficam numericamente compatíveis com o `package.json` (`1.1.1`, por exemplo).
 
 ## Licença
 

@@ -1,0 +1,465 @@
+<template>
+  <style>
+    @font-face{font-family:"Lazzer";font-weight:700;font-style:normal;font-display:block;src:url("assets/fonts/Lazzer-Bold.woff") format("woff");}
+    @font-face{font-family:"Lazzer";font-weight:500;font-style:normal;font-display:block;src:url("assets/fonts/Lazzer-Medium.woff") format("woff");}
+    @font-face{font-family:"Lazzer";font-weight:400;font-style:normal;font-display:block;src:url("assets/fonts/Lazzer-Regular.woff") format("woff");}
+    @font-face{font-family:"Lazzer";font-weight:600;font-style:normal;font-display:block;src:url("assets/fonts/Lazzer-SemiBold.woff") format("woff");}
+
+    #root {
+      position: relative;
+      width: 1080px;
+      height: 1920px;
+      overflow: hidden;
+      container-type: size;
+      font-family: "Lazzer";
+      color: #000000;
+    }
+
+    #root .clip {
+      position: absolute;
+      inset: 0;
+    }
+
+    #root [class~="f05-lacunas-acao-ground"] {
+      z-index: 0;
+      background: #FFFFFF;
+    }
+
+    #root [class~="f05-lacunas-acao-scene"] {
+      z-index: 1;
+      width: 1080px;
+      height: 1920px;
+      overflow: hidden;
+    }
+
+    #root [class~="f05-lacunas-acao-guide"] {
+      position: absolute;
+      left: 81px;
+      top: 130px;
+      width: 4px;
+      height: 1410px;
+      border-radius: 3px;
+      background: rgba(193, 144, 255, 0.18);
+    }
+
+    #root [class~="f05-lacunas-acao-guide-dot"] {
+      position: absolute;
+      left: -6px;
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background: #C190FF;
+    }
+
+    #root [class~="f05-lacunas-acao-guide-dot-a"] { top: 0; }
+    #root [class~="f05-lacunas-acao-guide-dot-b"] { top: 577px; opacity: 0.64; }
+    #root [class~="f05-lacunas-acao-guide-dot-c"] { bottom: 0; opacity: 0.34; }
+
+    #root [class~="f05-lacunas-acao-header"] {
+      position: absolute;
+      left: 111px;
+      top: 132px;
+      width: 858px;
+      height: 190px;
+    }
+
+    #root [class~="f05-lacunas-acao-eyebrow"] {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      color: #8966B5;
+      font-size: 22px;
+      font-weight: 600;
+      line-height: 1;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    #root [class~="f05-lacunas-acao-eyebrow-rule"] {
+      display: block;
+      width: 60px;
+      height: 4px;
+      border-radius: 2px;
+      background: #C190FF;
+      transform-origin: left center;
+    }
+
+    #root [class~="f05-lacunas-acao-headline"] {
+      margin-top: 28px;
+      max-width: 858px;
+      color: #000000;
+      font-size: 78px;
+      font-weight: 700;
+      line-height: 0.98;
+      letter-spacing: -0.02em;
+      white-space: nowrap;
+    }
+
+    #root [class~="f05-lacunas-acao-asset-window"] {
+      position: absolute;
+      left: 250px;
+      top: 326px;
+      width: 760px;
+      height: 1040px;
+      overflow: hidden;
+      border-radius: 14px 0 0 14px;
+      opacity: 0.19;
+    }
+
+    #root [class~="f05-lacunas-acao-asset"] {
+      position: absolute;
+      right: -214px;
+      top: 60px;
+      width: 980px;
+      height: auto;
+    }
+
+    #root [class~="f05-lacunas-acao-field-label"] {
+      position: absolute;
+      right: 83px;
+      top: 354px;
+      padding: 10px 18px 9px;
+      border-radius: 100px;
+      background: rgba(193, 144, 255, 0.08);
+      color: #8462AE;
+      font-size: 17px;
+      font-weight: 600;
+      line-height: 1;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    #root [class~="f05-lacunas-acao-cards"] {
+      position: absolute;
+      left: 111px;
+      top: 472px;
+      width: 858px;
+      height: 760px;
+      z-index: 3;
+    }
+
+    #root [class~="f05-lacunas-acao-card"] {
+      position: absolute;
+      left: 0;
+      width: 858px;
+      height: 206px;
+      box-sizing: border-box;
+      display: grid;
+      grid-template-columns: 104px 1fr;
+      align-items: center;
+      gap: 28px;
+      padding: 32px 38px;
+      border: 1.5px solid rgba(193, 144, 255, 0.2);
+      border-radius: 14px;
+      background: rgba(250, 247, 255, 0.94);
+      overflow: hidden;
+    }
+
+    #root [class~="f05-lacunas-acao-card-a"] { top: 0; }
+    #root [class~="f05-lacunas-acao-card-b"] { top: 258px; }
+    #root [class~="f05-lacunas-acao-card-c"] { top: 516px; }
+
+    #root [class~="f05-lacunas-acao-index"] {
+      width: 82px;
+      height: 82px;
+      box-sizing: border-box;
+      display: grid;
+      place-items: center;
+      border: 1.5px solid rgba(193, 144, 255, 0.2);
+      border-radius: 50%;
+      background: rgba(193, 144, 255, 0.08);
+      color: #C190FF;
+      font-size: 26px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+
+    #root [class~="f05-lacunas-acao-card-copy"] {
+      min-width: 0;
+    }
+
+    #root [class~="f05-lacunas-acao-card-kicker"] {
+      color: #9A9A9A;
+      font-size: 17px;
+      font-weight: 500;
+      line-height: 1;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    #root [class~="f05-lacunas-acao-card-title"] {
+      margin-top: 13px;
+      color: #000000;
+      font-size: 34px;
+      font-weight: 600;
+      line-height: 1.04;
+      letter-spacing: -0.02em;
+      white-space: nowrap;
+    }
+
+    #root [class~="f05-lacunas-acao-track"] {
+      position: relative;
+      width: 100%;
+      height: 14px;
+      margin-top: 23px;
+      overflow: hidden;
+      border-radius: 6px;
+      background: rgba(193, 144, 255, 0.08);
+    }
+
+    #root [class~="f05-lacunas-acao-fill"] {
+      display: block;
+      position: relative;
+      width: 100%;
+      height: 100%;
+      border-radius: 6px;
+      background: #C190FF;
+      transform-origin: left center;
+    }
+
+    #root [class~="f05-lacunas-acao-tip"] {
+      position: absolute;
+      right: 0;
+      top: 0;
+      width: 24px;
+      height: 100%;
+      border-radius: 6px;
+      background: #FFFFFF;
+      opacity: 0.82;
+    }
+
+    #root [class~="f05-lacunas-acao-action"] {
+      position: absolute;
+      left: 111px;
+      top: 1330px;
+      z-index: 5;
+      width: 858px;
+      height: 206px;
+      box-sizing: border-box;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 48px;
+      overflow: hidden;
+      border: 1.5px solid rgba(193, 144, 255, 0.32);
+      border-radius: 14px;
+      background: #F3EAFF;
+    }
+
+    #root [class~="f05-lacunas-acao-action-copy"] {
+      position: relative;
+      z-index: 2;
+      color: #000000;
+      font-size: 42px;
+      font-weight: 700;
+      line-height: 1;
+      letter-spacing: -0.02em;
+      white-space: nowrap;
+    }
+
+    #root [class~="f05-lacunas-acao-action-mark"] {
+      position: relative;
+      z-index: 2;
+      width: 78px;
+      height: 78px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      background: #C190FF;
+      color: #000000;
+      font-size: 40px;
+      font-weight: 500;
+      line-height: 1;
+    }
+
+    #root [class~="f05-lacunas-acao-glow"] {
+      position: absolute;
+      left: -260px;
+      top: -58px;
+      width: 230px;
+      height: 320px;
+      opacity: 0.82;
+      background: linear-gradient(90deg, rgba(255,255,255,0), rgba(255,255,255,0.88), rgba(193,144,255,0.16), rgba(255,255,255,0));
+      filter: blur(12px);
+      transform: skewX(-18deg);
+    }
+
+    #root [class~="f05-lacunas-acao-progress"] {
+      position: absolute;
+      left: 81px;
+      top: 1570px;
+      width: 918px;
+      height: 3px;
+      overflow: hidden;
+      background: rgba(193, 144, 255, 0.08);
+    }
+
+    #root [class~="f05-lacunas-acao-progress-fill"] {
+      display: block;
+      width: 100%;
+      height: 100%;
+      background: #C190FF;
+      transform-origin: left center;
+    }
+  </style>
+
+  <div data-hf-id="hf-50mx" id="root" data-composition-id="05-lacunas-acao" data-width="1080" data-height="1920" data-duration="10.05">
+    <div data-hf-id="hf-le18" id="f05-background" class="clip f05-lacunas-acao-ground" data-start="0" data-duration="10.05" data-track-index="0"></div>
+
+    <section data-hf-id="hf-ldol" id="f05-content" class="clip f05-lacunas-acao-scene" data-start="0" data-duration="10.05" data-track-index="1">
+      <div data-hf-id="hf-zhrg" class="f05-lacunas-acao-guide" aria-hidden="true">
+        <span data-hf-id="hf-h5d3" class="f05-lacunas-acao-guide-dot f05-lacunas-acao-guide-dot-a"></span>
+        <span data-hf-id="hf-69vg" class="f05-lacunas-acao-guide-dot f05-lacunas-acao-guide-dot-b"></span>
+        <span data-hf-id="hf-71j9" class="f05-lacunas-acao-guide-dot f05-lacunas-acao-guide-dot-c"></span>
+      </div>
+
+      <header data-hf-id="hf-g5hk" class="f05-lacunas-acao-header">
+        <div data-hf-id="hf-aolq" id="f05-lacunas-acao-eyebrow" class="f05-lacunas-acao-eyebrow">
+          <span data-hf-id="hf-e6b5" id="f05-lacunas-acao-eyebrow-rule" class="f05-lacunas-acao-eyebrow-rule"></span>
+          <span data-hf-id="hf-xwni">Mapa de oportunidades</span>
+        </div>
+        <div data-hf-id="hf-m98p" id="f05-lacunas-acao-headline" class="headline f05-lacunas-acao-headline">ENCONTRE A LACUNA</div>
+      </header>
+
+      <div data-hf-id="hf-84mf" id="f05-lacunas-acao-asset-window" class="f05-lacunas-acao-asset-window" aria-hidden="true">
+        <img data-hf-id="hf-m5tx" class="f05-lacunas-acao-asset" src="assets/svg-84a2b6fc.svg" alt="">
+      </div>
+      <div data-hf-id="hf-mn3z" id="f05-lacunas-acao-field-label" class="f05-lacunas-acao-field-label">Sinais competitivos</div>
+
+      <div data-hf-id="hf-lorg" class="f05-lacunas-acao-cards">
+        <article data-hf-id="hf-s2uy" id="f05-lacunas-acao-card-a" class="f05-lacunas-acao-card f05-lacunas-acao-card-a">
+          <div data-hf-id="hf-90zy" class="f05-lacunas-acao-index" data-layout-allow-overlap data-layout-allow-occlusion>01</div>
+          <div data-hf-id="hf-gbnd" class="f05-lacunas-acao-card-copy">
+            <div data-hf-id="hf-s699" class="f05-lacunas-acao-card-kicker" data-layout-allow-overlap data-layout-allow-occlusion>Descoberta</div>
+            <div data-hf-id="hf-ukjs" class="f05-lacunas-acao-card-title" data-layout-allow-overlap data-layout-allow-occlusion>CONSULTAS</div>
+            <div data-hf-id="hf-x9mc" class="f05-lacunas-acao-track"><span data-hf-id="hf-bvrx" id="f05-lacunas-acao-fill-a" class="f05-lacunas-acao-fill"><i data-hf-id="hf-loyy" class="f05-lacunas-acao-tip"></i></span></div>
+          </div>
+        </article>
+
+        <article data-hf-id="hf-b570" id="f05-lacunas-acao-card-b" class="f05-lacunas-acao-card f05-lacunas-acao-card-b">
+          <div data-hf-id="hf-9faz" class="f05-lacunas-acao-index" data-layout-allow-overlap data-layout-allow-occlusion>02</div>
+          <div data-hf-id="hf-h1vx" class="f05-lacunas-acao-card-copy">
+            <div data-hf-id="hf-87bm" class="f05-lacunas-acao-card-kicker" data-layout-allow-overlap data-layout-allow-occlusion>Cobertura</div>
+            <div data-hf-id="hf-4ezo" class="f05-lacunas-acao-card-title" data-layout-allow-overlap data-layout-allow-occlusion>TEMAS + PROMPTS</div>
+            <div data-hf-id="hf-xouk" class="f05-lacunas-acao-track"><span data-hf-id="hf-i1hq" id="f05-lacunas-acao-fill-b" class="f05-lacunas-acao-fill"><i data-hf-id="hf-4dwu" class="f05-lacunas-acao-tip"></i></span></div>
+          </div>
+        </article>
+
+        <article data-hf-id="hf-vhaq" id="f05-lacunas-acao-card-c" class="f05-lacunas-acao-card f05-lacunas-acao-card-c">
+          <div data-hf-id="hf-9tm0" class="f05-lacunas-acao-index" data-layout-allow-overlap data-layout-allow-occlusion>03</div>
+          <div data-hf-id="hf-i8t0" class="f05-lacunas-acao-card-copy">
+            <div data-hf-id="hf-c9ca" class="f05-lacunas-acao-card-kicker" data-layout-allow-overlap data-layout-allow-occlusion>Influência</div>
+            <div data-hf-id="hf-m9u0" class="f05-lacunas-acao-card-title" data-layout-allow-overlap data-layout-allow-occlusion>FONTES CITADAS</div>
+            <div data-hf-id="hf-whxh" class="f05-lacunas-acao-track"><span data-hf-id="hf-lzlr" id="f05-lacunas-acao-fill-c" class="f05-lacunas-acao-fill"><i data-hf-id="hf-4s7v" class="f05-lacunas-acao-tip"></i></span></div>
+          </div>
+        </article>
+      </div>
+
+      <div data-hf-id="hf-fia0" id="f05-lacunas-acao-action" class="f05-lacunas-acao-action">
+        <div data-hf-id="hf-n87r" id="f05-lacunas-acao-glow" class="f05-lacunas-acao-glow" data-layout-allow-overflow aria-hidden="true"></div>
+        <div data-hf-id="hf-kkba" class="f05-lacunas-acao-action-copy" data-layout-allow-overlap>TRANSFORME EM AÇÃO</div>
+        <div data-hf-id="hf-5ahx" class="f05-lacunas-acao-action-mark">→</div>
+      </div>
+
+      <div data-hf-id="hf-g40q" class="f05-lacunas-acao-progress"><span data-hf-id="hf-60ib" id="f05-lacunas-acao-progress-fill" class="f05-lacunas-acao-progress-fill"></span></div>
+    </section>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+  <script>
+    document.fonts.ready.then(function () {
+      const tl = gsap.timeline({ paused: true });
+      window.__timelines = window.__timelines || {};
+      window.__timelines["05-lacunas-acao"] = tl;
+
+      tl.fromTo(
+        '[id="f05-lacunas-acao-asset-window"]',
+        { opacity: 0, x: 54, scale: 1.04 },
+        { opacity: 0.19, x: 0, scale: 1, duration: 0.64, ease: "power3.out" },
+        0.02
+      );
+      tl.fromTo(
+        '[id="f05-lacunas-acao-eyebrow"]',
+        { opacity: 0, x: -28 },
+        { opacity: 1, x: 0, duration: 0.48, ease: "power3.out" },
+        0.08
+      );
+      tl.fromTo(
+        '[id="f05-lacunas-acao-eyebrow-rule"]',
+        { scaleX: 0 },
+        { scaleX: 1, duration: 0.5, ease: "power3.out" },
+        0.2
+      );
+      tl.fromTo(
+        '[id="f05-lacunas-acao-headline"]',
+        { opacity: 0, y: 38, scale: 0.98 },
+        { opacity: 1, y: 0, scale: 1, duration: 0.7, ease: "power3.out" },
+        0.2
+      );
+      tl.fromTo(
+        '[id="f05-lacunas-acao-field-label"]',
+        { opacity: 0, x: 24 },
+        { opacity: 1, x: 0, duration: 0.5, ease: "power3.out" },
+        1.22
+      );
+
+      const cardBeats = [2.2, 3.72, 5.2];
+      const cards = ["a", "b", "c"];
+      const fillTargets = [0.78, 0.9, 0.68];
+      cards.forEach(function (key, index) {
+        const beat = cardBeats[index];
+        tl.fromTo(
+          '[id="f05-lacunas-acao-card-' + key + '"]',
+          { opacity: 0, y: 46, scale: 0.965 },
+          { opacity: 1, y: 0, scale: 1, duration: 0.58, ease: "power3.out" },
+          beat
+        );
+        tl.fromTo(
+          '[id="f05-lacunas-acao-fill-' + key + '"]',
+          { scaleX: 0 },
+          { scaleX: fillTargets[index], duration: 1.02, ease: "power2.out" },
+          beat + 0.32
+        );
+      });
+
+      const mergeStart = 7.2;
+      const mergeDistances = [830, 572, 314];
+      cards.forEach(function (key, index) {
+        const distance = mergeDistances[index];
+        tl.to(
+          '[id="f05-lacunas-acao-card-' + key + '"]',
+          { y: distance * 0.1, duration: 0.2, ease: "power3.in" },
+          mergeStart
+        );
+        tl.to(
+          '[id="f05-lacunas-acao-card-' + key + '"]',
+          { y: distance * 0.75, duration: 0.18, ease: "none" },
+          mergeStart + 0.2
+        );
+        tl.to(
+          '[id="f05-lacunas-acao-card-' + key + '"]',
+          { y: distance, duration: 0.62, ease: "power4.out" },
+          mergeStart + 0.38
+        );
+      });
+      tl.fromTo(
+        '[id="f05-lacunas-acao-action"]',
+        { opacity: 0, scaleX: 0.82, scaleY: 0.94 },
+        { opacity: 1, scaleX: 1, scaleY: 1, duration: 0.72, ease: "power3.out" },
+        mergeStart + 0.27
+      );
+      tl.fromTo(
+        '[id="f05-lacunas-acao-glow"]',
+        { x: 0 },
+        { x: 1360, duration: 0.9, ease: "power2.inOut" },
+        8.18
+      );
+      tl.fromTo(
+        '[id="f05-lacunas-acao-progress-fill"]',
+        { scaleX: 0 },
+        { scaleX: 1, duration: 9.25, ease: "none" },
+        0.12
+      );
+    });
+  </script>
+</template>

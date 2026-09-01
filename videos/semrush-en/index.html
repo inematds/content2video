@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=1080, height=1920">
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js" integrity="sha384-sG0Hv1tP1lZCk9KQmrIbY/XNwi+OY84GQqhMscbnsoBFqAz8KNCil1kvfL3Hbbk2" crossorigin="anonymous"></script>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        width: 1080px;
+        height: 1920px;
+        overflow: hidden;
+        background: #000;
+      }
+      #root {
+        position: relative;
+        width: 1080px;
+        height: 1920px;
+        overflow: hidden;
+        background: #FFFFFF;
+      }
+      .scene {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+      }
+    </style>
+  </head>
+  <body>
+    <div data-hf-id="hf-9hfs" id="root" data-composition-id="main" data-start="0" data-duration="61.25" data-width="1080" data-height="1920">
+      <div data-hf-id="hf-yzir" id="el-01-voce-aparece" class="scene" data-composition-id="01-voce-aparece" data-composition-src="compositions/frames/01-voce-aparece.html" data-start="0" data-duration="6.5" data-track-index="0"></div>
+      <audio data-hf-id="hf-85vt" id="el-01-voce-aparece-voice" src="assets/audio/vo-01.mp3" data-start="0" data-duration="5.88" data-track-index="10" data-volume="1"></audio>
+
+      <div data-hf-id="hf-6ckf" id="el-02-futuro-agora" class="scene" data-composition-id="02-futuro-agora" data-composition-src="compositions/frames/02-futuro-agora.html" data-start="6" data-duration="8.8" data-track-index="1"></div>
+      <audio data-hf-id="hf-ee1c" id="el-02-futuro-agora-voice" src="assets/audio/vo-02.mp3" data-start="6" data-duration="8.256" data-track-index="10" data-volume="1"></audio>
+
+      <div data-hf-id="hf-dng2" id="el-03-pronto-rastreadores" class="scene" data-composition-id="03-pronto-rastreadores" data-composition-src="compositions/frames/03-pronto-rastreadores.html" data-start="14.4" data-duration="9.9" data-track-index="0"></div>
+      <audio data-hf-id="hf-lh17" id="el-03-pronto-rastreadores-voice" src="assets/audio/vo-03.mp3" data-start="14.4" data-duration="9.144" data-track-index="10" data-volume="1"></audio>
+
+      <div data-hf-id="hf-15yw" id="el-04-meca-mencoes" class="scene" data-composition-id="04-meca-mencoes" data-composition-src="compositions/frames/04-meca-mencoes.html" data-start="23.700000000000003" data-duration="12.4" data-track-index="1"></div>
+      <audio data-hf-id="hf-4pl3" id="el-04-meca-mencoes-voice" src="assets/audio/vo-04.mp3" data-start="23.700000000000003" data-duration="11.784" data-track-index="10" data-volume="1"></audio>
+
+      <div data-hf-id="hf-bzhv" id="el-05-lacunas-acao" class="scene" data-composition-id="05-lacunas-acao" data-composition-src="compositions/frames/05-lacunas-acao.html" data-start="35.6" data-duration="10.05" data-track-index="0"></div>
+      <audio data-hf-id="hf-2q8f" id="el-05-lacunas-acao-voice" src="assets/audio/vo-05.mp3" data-start="35.6" data-duration="9.432" data-track-index="10" data-volume="1"></audio>
+
+      <div data-hf-id="hf-mc6u" id="el-06-confianca-escala" class="scene" data-composition-id="06-confianca-escala" data-composition-src="compositions/frames/06-confianca-escala.html" data-start="45.150000000000006" data-duration="9.3" data-track-index="1"></div>
+      <audio data-hf-id="hf-oanc" id="el-06-confianca-escala-voice" src="assets/audio/vo-06.mp3" data-start="45.150000000000006" data-duration="8.592" data-track-index="10" data-volume="1"></audio>
+
+      <div data-hf-id="hf-7s8k" id="el-07-ganhe-hoje" class="scene" data-composition-id="07-ganhe-hoje" data-composition-src="compositions/frames/07-ganhe-hoje.html" data-start="53.85000000000001" data-duration="7.4" data-track-index="0"></div>
+      <audio data-hf-id="hf-fodb" id="el-07-ganhe-hoje-voice" src="assets/audio/vo-07.mp3" data-start="53.85000000000001" data-duration="7.296" data-track-index="10" data-volume="1"></audio>
+
+      <video data-hf-id="hf-ouu8" id="el-02-futuro-agora-video-1" src="assets/main-animation_x1.mp4" preload="auto" muted playsinline class="clip" style="position:absolute;left:81px;top:200px;width:918px;height:537px;object-fit:cover" data-start="6" data-duration="2.4" data-track-index="2001"></video>
+
+    </div>
+
+    <script>
+      window.__timelines = window.__timelines || {};
+      window.__timelines["main"] = gsap.timeline({ paused: true });
+      // ── frame transitions (injected by transitions.mjs) ──
+      (function () { var tl = window.__timelines["main"];
+        tl.to("#el-01-voce-aparece", { x: -1080, duration: 0.5, ease: "power3.inOut" }, 6);
+        tl.fromTo("#el-02-futuro-agora", { x: 1080, opacity: 1 }, { x: 0, duration: 0.5, ease: "power3.inOut" }, 6);
+        tl.to("#el-02-futuro-agora", { scaleX: 0, transformOrigin: "left center", duration: 0.4, ease: "power3.inOut" }, 14.4);
+        tl.fromTo("#el-03-pronto-rastreadores", { scaleX: 0, transformOrigin: "right center", opacity: 1 }, { scaleX: 1, transformOrigin: "right center", duration: 0.4, ease: "power3.inOut" }, 14.4);
+        tl.to("#el-03-pronto-rastreadores", { filter: "blur(10px)", scale: 1.03, opacity: 0, duration: 0.6, ease: "power2.inOut" }, 23.7);
+        tl.fromTo("#el-04-meca-mencoes", { filter: "blur(10px)", scale: 0.97, opacity: 0 }, { filter: "blur(0px)", scale: 1, opacity: 1, duration: 0.6, ease: "power2.inOut" }, 23.7);
+        tl.to("#el-04-meca-mencoes", { y: -1920, duration: 0.5, ease: "power3.inOut" }, 35.6);
+        tl.fromTo("#el-05-lacunas-acao", { y: 1920, opacity: 1 }, { y: 0, duration: 0.5, ease: "power3.inOut" }, 35.6);
+        tl.to("#el-05-lacunas-acao", { opacity: 0, duration: 0.5, ease: "power2.inOut" }, 45.15);
+        tl.fromTo("#el-06-confianca-escala", { opacity: 0 }, { opacity: 1, duration: 0.5, ease: "power2.inOut" }, 45.15);
+        tl.to("#el-06-confianca-escala", { filter: "blur(10px)", opacity: 0, duration: 0.6, ease: "power2.inOut" }, 53.85);
+        tl.fromTo("#el-07-ganhe-hoje", { filter: "blur(10px)", scale: 0.97, opacity: 0 }, { filter: "blur(0px)", scale: 1, opacity: 1, duration: 0.6, ease: "power2.inOut" }, 53.85);
+        tl.to({}, { duration: 61.25 }, 0); // full-span anchor — main.duration() == composition total (Studio master duration)
+      })();
+    </script>
+  </body>
+</html>

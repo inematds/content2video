@@ -1,0 +1,326 @@
+<template>
+  <style>
+    #root {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      container-type: size;
+      color: #141413;
+    }
+
+    .clip {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+    }
+
+    .frame-07-comecar-ground { background: #FAF9F5; }
+    .frame-07-comecar-stage { overflow: hidden; container-type: size; }
+
+    .frame-07-comecar-kicker {
+      position: absolute;
+      top: 6cqh;
+      left: 7.5cqw;
+      width: 85cqw;
+      display: flex;
+      align-items: center;
+      gap: 2cqw;
+      font-family: monospace;
+      font-size: 2.35cqw;
+      font-weight: 500;
+      line-height: 1.2;
+      letter-spacing: 0.14em;
+    }
+
+    .frame-07-comecar-spike {
+      color: #CC785C;
+      font-size: 3cqw;
+      line-height: 1;
+    }
+
+    .frame-07-comecar-form-shell {
+      position: absolute;
+      top: 15.5cqh;
+      left: 7.5cqw;
+      width: 85cqw;
+      height: 39cqh;
+      border: 1px solid rgba(20, 20, 19, 0.2);
+      border-radius: 12px;
+      background: #EFE9DE;
+      box-shadow: 0 1px 3px rgba(20, 20, 19, 0.08), 0 4px 16px rgba(20, 20, 19, 0.04);
+      transform-origin: 50% 50%;
+      overflow: hidden;
+    }
+
+    .frame-07-comecar-browserbar {
+      height: 5.8cqh;
+      padding: 0 3.2cqw;
+      display: flex;
+      align-items: center;
+      gap: 1.1cqw;
+      border-bottom: 1px solid rgba(20, 20, 19, 0.12);
+      background: #ECE3D4;
+      box-sizing: border-box;
+    }
+
+    .frame-07-comecar-dot {
+      width: 1.1cqw;
+      height: 1.1cqw;
+      border: 1px solid rgba(20, 20, 19, 0.28);
+      border-radius: 9999px;
+    }
+
+    .frame-07-comecar-url {
+      flex: 1;
+      height: 2.2cqh;
+      margin-left: 1.3cqw;
+      border: 1px solid rgba(20, 20, 19, 0.12);
+      border-radius: 9999px;
+      background: #FAF9F5;
+    }
+
+    .frame-07-comecar-form {
+      position: relative;
+      height: calc(100% - 5.8cqh);
+      padding: 5cqw;
+      box-sizing: border-box;
+    }
+
+    .frame-07-comecar-form-title {
+      font-family: serif;
+      font-size: 6.8cqw;
+      font-weight: 400;
+      line-height: 1;
+      letter-spacing: -0.022em;
+    }
+
+    .frame-07-comecar-field-label {
+      display: block;
+      margin-top: 3.2cqh;
+      margin-bottom: 1.1cqh;
+      font-family: sans-serif;
+      font-size: 2.35cqw;
+      line-height: 1.2;
+    }
+
+    .frame-07-comecar-input {
+      height: 5.8cqh;
+      display: flex;
+      align-items: center;
+      padding: 0 3cqw;
+      border: 1px solid rgba(20, 20, 19, 0.2);
+      border-radius: 8px;
+      background: #FAF9F5;
+      box-sizing: border-box;
+      font-family: sans-serif;
+      font-size: 2.45cqw;
+    }
+
+    .frame-07-comecar-form-row {
+      margin-top: 2.5cqh;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 2.5cqw;
+    }
+
+    .frame-07-comecar-action-slot {
+      min-width: 31cqw;
+      height: 5.1cqh;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid rgba(20, 20, 19, 0.2);
+      border-radius: 8px;
+      background: #ECE3D4;
+      font-family: monospace;
+      font-size: 2.35cqw;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      overflow: hidden;
+    }
+
+    .frame-07-comecar-action {
+      position: absolute;
+      width: 100%;
+      text-align: center;
+    }
+
+    .frame-07-comecar-tool-label {
+      padding: 1.25cqh 2.5cqw;
+      border: 1px solid #CC785C;
+      border-radius: 9999px;
+      color: #CC785C;
+      font-family: monospace;
+      font-size: 2.05cqw;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+    }
+
+    .frame-07-comecar-tool-outline {
+      position: absolute;
+      inset: 1.7cqw;
+      border: 1px solid #CC785C;
+      border-radius: 10px;
+      pointer-events: none;
+    }
+
+    .frame-07-comecar-resolve {
+      position: absolute;
+      top: 55cqh;
+      left: 7.5cqw;
+      width: 85cqw;
+      height: 21cqh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transform-origin: 50% 50%;
+    }
+
+    .frame-07-comecar-headline {
+      position: absolute;
+      left: 0;
+      width: 100%;
+      max-height: 24cqh;
+      text-align: center;
+      font-family: serif;
+      font-size: 10.4cqw;
+      font-weight: 400;
+      line-height: 0.98;
+      letter-spacing: -0.026em;
+      white-space: nowrap;
+      transform-origin: 50% 50%;
+    }
+
+    .frame-07-comecar-arrow {
+      position: absolute;
+      left: 11cqw;
+      top: 10.3cqh;
+      width: 63cqw;
+      height: 1px;
+      background: #CC785C;
+      transform-origin: 0 50%;
+    }
+
+    .frame-07-comecar-arrow::after {
+      content: "";
+      position: absolute;
+      right: -1px;
+      top: -0.55cqw;
+      width: 1.1cqw;
+      height: 1.1cqw;
+      border-top: 1px solid #CC785C;
+      border-right: 1px solid #CC785C;
+      transform: rotate(45deg);
+    }
+
+    .frame-07-comecar-closer {
+      position: absolute;
+      top: 76cqh;
+      left: 7.5cqw;
+      width: 85cqw;
+      text-align: center;
+      font-family: monospace;
+      font-size: 2.25cqw;
+      font-weight: 500;
+      line-height: 1.25;
+      letter-spacing: 0.14em;
+    }
+  </style>
+
+  <div data-hf-id="hf-fpvl" id="root" data-composition-id="07-comecar" data-duration="10.584" data-width="1080" data-height="1920">
+    <div data-hf-id="hf-p4uk" class="clip frame-07-comecar-ground" data-start="0" data-duration="10.584" data-track-index="0"></div>
+    <div data-hf-id="hf-sio6" class="clip frame-07-comecar-stage" data-start="0" data-duration="10.584" data-track-index="1">
+      <div data-hf-id="hf-jfa8" class="frame-07-comecar-kicker">
+        <span data-hf-id="hf-2hgp" class="frame-07-comecar-spike">✱</span>
+        <span data-hf-id="hf-kd95">PROPOSTA EXPERIMENTAL</span>
+      </div>
+
+      <section data-hf-id="hf-l76k" class="frame-07-comecar-form-shell" aria-label="Formulário preparado como ferramenta">
+        <div data-hf-id="hf-96ob" class="frame-07-comecar-browserbar" aria-hidden="true">
+          <span data-hf-id="hf-lugl" class="frame-07-comecar-dot"></span>
+          <span data-hf-id="hf-ub3d" class="frame-07-comecar-dot"></span>
+          <span data-hf-id="hf-vi0g" class="frame-07-comecar-dot"></span>
+          <span data-hf-id="hf-e2er" class="frame-07-comecar-url"></span>
+        </div>
+        <div data-hf-id="hf-u40p" class="frame-07-comecar-form">
+          <h2 data-hf-id="hf-kabf" class="frame-07-comecar-form-title">Encontrar conteúdo</h2>
+          <span data-hf-id="hf-aqum" class="frame-07-comecar-field-label">O que você procura?</span>
+          <div data-hf-id="hf-ufjr" class="frame-07-comecar-input">WebMCP</div>
+          <div data-hf-id="hf-xqqq" class="frame-07-comecar-form-row">
+            <div data-hf-id="hf-g82w" class="frame-07-comecar-action-slot" aria-live="off">
+              <span data-hf-id="hf-4axd" class="frame-07-comecar-action frame-07-comecar-action-a">BUSCAR</span>
+              <span data-hf-id="hf-74go" class="frame-07-comecar-action frame-07-comecar-action-b">FILTRAR</span>
+              <span data-hf-id="hf-55bm" class="frame-07-comecar-action frame-07-comecar-action-c">ENVIAR</span>
+            </div>
+            <div data-hf-id="hf-1e9s" class="frame-07-comecar-tool-label">tool: buscar</div>
+          </div>
+          <div data-hf-id="hf-b17g" class="frame-07-comecar-tool-outline"></div>
+        </div>
+      </section>
+
+      <div data-hf-id="hf-d3jp" class="frame-07-comecar-resolve">
+        <div data-hf-id="hf-vftl" class="frame-07-comecar-headline frame-07-comecar-findable headline" data-peak-scale="1">ENCONTRÁVEL</div>
+        <div data-hf-id="hf-qw2u" class="frame-07-comecar-arrow"></div>
+        <div data-hf-id="hf-v5gt" class="frame-07-comecar-headline frame-07-comecar-executable headline" data-peak-scale="1">EXECUTÁVEL</div>
+      </div>
+      <div data-hf-id="hf-prqf" class="frame-07-comecar-closer">COMECE POR UM FLUXO CLARO</div>
+    </div>
+  </div>
+
+  <script>
+    (() => {
+      const build = () => {
+        const root = document.querySelector('[data-composition-id="07-comecar"]');
+        if (!root || !window.gsap) return;
+
+        const q = (selector) => root.querySelector(selector);
+        const fitHeadline = (element) => {
+          const rootRect = root.getBoundingClientRect();
+          const maxWidth = rootRect.width * 0.85;
+          const maxHeight = rootRect.height * 0.24;
+          const peakScale = Number(element.dataset.peakScale || 1);
+          let size = parseFloat(getComputedStyle(element).fontSize);
+          let rect = element.getBoundingClientRect();
+          while ((rect.width * peakScale > maxWidth || rect.height * peakScale > maxHeight) && size > 42) {
+            size -= 1;
+            element.style.fontSize = `${size}px`;
+            rect = element.getBoundingClientRect();
+          }
+        };
+
+        root.querySelectorAll('.headline').forEach(fitHeadline);
+
+        const tl = gsap.timeline({ paused: true });
+        tl.fromTo(q('.frame-07-comecar-kicker'), { opacity: 0, y: -12 }, { opacity: 1, y: 0, duration: 0.42, ease: 'power2.out' }, 0);
+        tl.fromTo(q('.frame-07-comecar-form-shell'), { opacity: 0, y: 28, scale: 0.975 }, { opacity: 1, y: 0, scale: 1, duration: 0.62, ease: 'power3.out' }, 0.18);
+        tl.fromTo(q('.frame-07-comecar-tool-outline'), { opacity: 0, scale: 0.985 }, { opacity: 1, scale: 1, duration: 0.52, ease: 'power2.out' }, 1.42);
+        tl.fromTo(q('.frame-07-comecar-tool-label'), { opacity: 0, x: 18 }, { opacity: 1, x: 0, duration: 0.42, ease: 'power2.out' }, 1.58);
+
+        tl.fromTo(q('.frame-07-comecar-action-a'), { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: 0.34, ease: 'power2.out' }, 2);
+        tl.to(q('.frame-07-comecar-action-a'), { opacity: 0, y: -12, duration: 0.24, ease: 'power1.in' }, 2.8);
+        tl.fromTo(q('.frame-07-comecar-action-b'), { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: 0.34, ease: 'power2.out' }, 2.94);
+        tl.to(q('.frame-07-comecar-action-b'), { opacity: 0, y: -12, duration: 0.24, ease: 'power1.in' }, 3.78);
+        tl.fromTo(q('.frame-07-comecar-action-c'), { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: 0.34, ease: 'power2.out' }, 3.92);
+        tl.to(q('.frame-07-comecar-tool-outline'), { scale: 1.01, duration: 0.36, ease: 'sine.inOut' }, 4.56);
+
+        tl.to(q('.frame-07-comecar-form-shell'), { opacity: 0, scale: 0.72, duration: 0.48, ease: 'power2.in' }, 5.36);
+        tl.fromTo(q('.frame-07-comecar-findable'), { opacity: 0, scale: 0.72 }, { opacity: 1, scale: 1, duration: 0.58, ease: 'back.out(1.35)' }, 5.58);
+        tl.to(q('.frame-07-comecar-findable'), { opacity: 0, scale: 0.78, duration: 0.38, ease: 'power2.in' }, 6.84);
+        tl.fromTo(q('.frame-07-comecar-arrow'), { opacity: 0, scaleX: 0 }, { opacity: 1, scaleX: 1, duration: 0.48, ease: 'power2.inOut' }, 6.9);
+        tl.to(q('.frame-07-comecar-arrow'), { opacity: 0, duration: 0.22, ease: 'power1.out' }, 7.34);
+        tl.fromTo(q('.frame-07-comecar-executable'), { opacity: 0, scale: 0.78 }, { opacity: 1, scale: 1, duration: 0.58, ease: 'back.out(1.35)' }, 7.16);
+        tl.fromTo(q('.frame-07-comecar-closer'), { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.48, ease: 'power2.out' }, 7.86);
+        tl.to(q('.frame-07-comecar-executable'), { scale: 0.99, duration: 1.4, ease: 'sine.out' }, 8.5);
+
+        window.__timelines["07-comecar"] = tl;
+        if (window.__hfForceTimelineRebind) window.__hfForceTimelineRebind();
+      };
+
+      document.fonts.ready.then(build);
+    })();
+  </script>
+</template>

@@ -1,0 +1,1687 @@
+{
+  "total_duration_s": 65.544,
+  "width": 1080,
+  "height": 1920,
+  "groups": [
+    {
+      "id": "caption-group-0",
+      "frame": 1,
+      "start": 0.1,
+      "end": 0.441,
+      "text": "Hoje,",
+      "words": [
+        {
+          "id": "caption-word-0-0",
+          "text": "Hoje,",
+          "start": 0.1,
+          "end": 0.441
+        }
+      ]
+    },
+    {
+      "id": "caption-group-1",
+      "frame": 1,
+      "start": 0.441,
+      "end": 1.464,
+      "text": "um agente de",
+      "words": [
+        {
+          "id": "caption-word-1-0",
+          "text": "um",
+          "start": 0.441,
+          "end": 0.782
+        },
+        {
+          "id": "caption-word-1-1",
+          "text": "agente",
+          "start": 0.782,
+          "end": 1.123
+        },
+        {
+          "id": "caption-word-1-2",
+          "text": "de",
+          "start": 1.123,
+          "end": 1.464
+        }
+      ]
+    },
+    {
+      "id": "caption-group-2",
+      "frame": 1,
+      "start": 1.464,
+      "end": 2.488,
+      "text": "IA olha para",
+      "words": [
+        {
+          "id": "caption-word-2-0",
+          "text": "IA",
+          "start": 1.464,
+          "end": 1.805
+        },
+        {
+          "id": "caption-word-2-1",
+          "text": "olha",
+          "start": 1.805,
+          "end": 2.146
+        },
+        {
+          "id": "caption-word-2-2",
+          "text": "para",
+          "start": 2.146,
+          "end": 2.488
+        }
+      ]
+    },
+    {
+      "id": "caption-group-3",
+      "frame": 1,
+      "start": 2.488,
+      "end": 3.511,
+      "text": "muitos sites como",
+      "words": [
+        {
+          "id": "caption-word-3-0",
+          "text": "muitos",
+          "start": 2.488,
+          "end": 2.829
+        },
+        {
+          "id": "caption-word-3-1",
+          "text": "sites",
+          "start": 2.829,
+          "end": 3.17
+        },
+        {
+          "id": "caption-word-3-2",
+          "text": "como",
+          "start": 3.17,
+          "end": 3.511
+        }
+      ]
+    },
+    {
+      "id": "caption-group-4",
+      "frame": 1,
+      "start": 3.511,
+      "end": 4.534,
+      "text": "quem tenta entender",
+      "words": [
+        {
+          "id": "caption-word-4-0",
+          "text": "quem",
+          "start": 3.511,
+          "end": 3.852
+        },
+        {
+          "id": "caption-word-4-1",
+          "text": "tenta",
+          "start": 3.852,
+          "end": 4.193
+        },
+        {
+          "id": "caption-word-4-2",
+          "text": "entender",
+          "start": 4.193,
+          "end": 4.534
+        }
+      ]
+    },
+    {
+      "id": "caption-group-5",
+      "frame": 1,
+      "start": 4.534,
+      "end": 5.557,
+      "text": "uma máquina por",
+      "words": [
+        {
+          "id": "caption-word-5-0",
+          "text": "uma",
+          "start": 4.534,
+          "end": 4.875
+        },
+        {
+          "id": "caption-word-5-1",
+          "text": "máquina",
+          "start": 4.875,
+          "end": 5.216
+        },
+        {
+          "id": "caption-word-5-2",
+          "text": "por",
+          "start": 5.216,
+          "end": 5.557
+        }
+      ]
+    },
+    {
+      "id": "caption-group-6",
+      "frame": 1,
+      "start": 5.557,
+      "end": 6.239,
+      "text": "uma fotografia:",
+      "words": [
+        {
+          "id": "caption-word-6-0",
+          "text": "uma",
+          "start": 5.557,
+          "end": 5.898
+        },
+        {
+          "id": "caption-word-6-1",
+          "text": "fotografia:",
+          "start": 5.898,
+          "end": 6.239
+        }
+      ]
+    },
+    {
+      "id": "caption-group-7",
+      "frame": 1,
+      "start": 6.239,
+      "end": 7.263,
+      "text": "ele vê botões,",
+      "words": [
+        {
+          "id": "caption-word-7-0",
+          "text": "ele",
+          "start": 6.239,
+          "end": 6.58
+        },
+        {
+          "id": "caption-word-7-1",
+          "text": "vê",
+          "start": 6.58,
+          "end": 6.922
+        },
+        {
+          "id": "caption-word-7-2",
+          "text": "botões,",
+          "start": 6.922,
+          "end": 7.263
+        }
+      ]
+    },
+    {
+      "id": "caption-group-8",
+      "frame": 1,
+      "start": 7.263,
+      "end": 8.286,
+      "text": "mas precisa adivinhar",
+      "words": [
+        {
+          "id": "caption-word-8-0",
+          "text": "mas",
+          "start": 7.263,
+          "end": 7.604
+        },
+        {
+          "id": "caption-word-8-1",
+          "text": "precisa",
+          "start": 7.604,
+          "end": 7.945
+        },
+        {
+          "id": "caption-word-8-2",
+          "text": "adivinhar",
+          "start": 7.945,
+          "end": 8.286
+        }
+      ]
+    },
+    {
+      "id": "caption-group-9",
+      "frame": 1,
+      "start": 8.286,
+      "end": 9.088,
+      "text": "como agir.",
+      "words": [
+        {
+          "id": "caption-word-9-0",
+          "text": "como",
+          "start": 8.286,
+          "end": 8.627
+        },
+        {
+          "id": "caption-word-9-1",
+          "text": "agir.",
+          "start": 8.627,
+          "end": 8.968
+        }
+      ]
+    },
+    {
+      "id": "caption-group-10",
+      "frame": 2,
+      "start": 9.124,
+      "end": 10.601,
+      "text": "WebMCP muda essa",
+      "words": [
+        {
+          "id": "caption-word-10-0",
+          "text": "WebMCP",
+          "start": 9.124,
+          "end": 9.616
+        },
+        {
+          "id": "caption-word-10-1",
+          "text": "muda",
+          "start": 9.616,
+          "end": 10.109
+        },
+        {
+          "id": "caption-word-10-2",
+          "text": "essa",
+          "start": 10.109,
+          "end": 10.601
+        }
+      ]
+    },
+    {
+      "id": "caption-group-11",
+      "frame": 2,
+      "start": 10.601,
+      "end": 11.044,
+      "text": "relação.",
+      "words": [
+        {
+          "id": "caption-word-11-0",
+          "text": "relação.",
+          "start": 10.601,
+          "end": 11.094
+        }
+      ]
+    },
+    {
+      "id": "caption-group-12",
+      "frame": 2,
+      "start": 11.044,
+      "end": 12.139,
+      "text": "A própria página",
+      "words": [
+        {
+          "id": "caption-word-12-0",
+          "text": "A",
+          "start": 11.044,
+          "end": 11.409
+        },
+        {
+          "id": "caption-word-12-1",
+          "text": "própria",
+          "start": 11.409,
+          "end": 11.774
+        },
+        {
+          "id": "caption-word-12-2",
+          "text": "página",
+          "start": 11.774,
+          "end": 12.139
+        }
+      ]
+    },
+    {
+      "id": "caption-group-13",
+      "frame": 2,
+      "start": 12.139,
+      "end": 13.235,
+      "text": "pode declarar ferramentas,",
+      "words": [
+        {
+          "id": "caption-word-13-0",
+          "text": "pode",
+          "start": 12.139,
+          "end": 12.505
+        },
+        {
+          "id": "caption-word-13-1",
+          "text": "declarar",
+          "start": 12.505,
+          "end": 12.87
+        },
+        {
+          "id": "caption-word-13-2",
+          "text": "ferramentas,",
+          "start": 12.87,
+          "end": 13.235
+        }
+      ]
+    },
+    {
+      "id": "caption-group-14",
+      "frame": 2,
+      "start": 13.235,
+      "end": 13.965,
+      "text": "com nome,",
+      "words": [
+        {
+          "id": "caption-word-14-0",
+          "text": "com",
+          "start": 13.235,
+          "end": 13.6
+        },
+        {
+          "id": "caption-word-14-1",
+          "text": "nome,",
+          "start": 13.6,
+          "end": 13.965
+        }
+      ]
+    },
+    {
+      "id": "caption-group-15",
+      "frame": 2,
+      "start": 13.965,
+      "end": 15.061,
+      "text": "descrição e campos",
+      "words": [
+        {
+          "id": "caption-word-15-0",
+          "text": "descrição",
+          "start": 13.965,
+          "end": 14.33
+        },
+        {
+          "id": "caption-word-15-1",
+          "text": "e",
+          "start": 14.33,
+          "end": 14.696
+        },
+        {
+          "id": "caption-word-15-2",
+          "text": "campos",
+          "start": 14.696,
+          "end": 15.061
+        }
+      ]
+    },
+    {
+      "id": "caption-group-16",
+      "frame": 2,
+      "start": 15.061,
+      "end": 15.426,
+      "text": "estruturados,",
+      "words": [
+        {
+          "id": "caption-word-16-0",
+          "text": "estruturados,",
+          "start": 15.061,
+          "end": 15.426
+        }
+      ]
+    },
+    {
+      "id": "caption-group-17",
+      "frame": 2,
+      "start": 15.426,
+      "end": 16.522,
+      "text": "para o agente",
+      "words": [
+        {
+          "id": "caption-word-17-0",
+          "text": "para",
+          "start": 15.426,
+          "end": 15.791
+        },
+        {
+          "id": "caption-word-17-1",
+          "text": "o",
+          "start": 15.791,
+          "end": 16.156
+        },
+        {
+          "id": "caption-word-17-2",
+          "text": "agente",
+          "start": 16.156,
+          "end": 16.522
+        }
+      ]
+    },
+    {
+      "id": "caption-group-18",
+      "frame": 2,
+      "start": 16.522,
+      "end": 17.737,
+      "text": "descobrir e chamar.",
+      "words": [
+        {
+          "id": "caption-word-18-0",
+          "text": "descobrir",
+          "start": 16.522,
+          "end": 16.887
+        },
+        {
+          "id": "caption-word-18-1",
+          "text": "e",
+          "start": 16.887,
+          "end": 17.252
+        },
+        {
+          "id": "caption-word-18-2",
+          "text": "chamar.",
+          "start": 17.252,
+          "end": 17.617
+        }
+      ]
+    },
+    {
+      "id": "caption-group-19",
+      "frame": 3,
+      "start": 17.764,
+      "end": 18.865,
+      "text": "Em vez de",
+      "words": [
+        {
+          "id": "caption-word-19-0",
+          "text": "Em",
+          "start": 17.764,
+          "end": 18.131
+        },
+        {
+          "id": "caption-word-19-1",
+          "text": "vez",
+          "start": 18.131,
+          "end": 18.498
+        },
+        {
+          "id": "caption-word-19-2",
+          "text": "de",
+          "start": 18.498,
+          "end": 18.865
+        }
+      ]
+    },
+    {
+      "id": "caption-group-20",
+      "frame": 3,
+      "start": 18.865,
+      "end": 19.599,
+      "text": "procurar elementos,",
+      "words": [
+        {
+          "id": "caption-word-20-0",
+          "text": "procurar",
+          "start": 18.865,
+          "end": 19.232
+        },
+        {
+          "id": "caption-word-20-1",
+          "text": "elementos,",
+          "start": 19.232,
+          "end": 19.599
+        }
+      ]
+    },
+    {
+      "id": "caption-group-21",
+      "frame": 3,
+      "start": 19.599,
+      "end": 20.699,
+      "text": "tirar screenshots e",
+      "words": [
+        {
+          "id": "caption-word-21-0",
+          "text": "tirar",
+          "start": 19.599,
+          "end": 19.965
+        },
+        {
+          "id": "caption-word-21-1",
+          "text": "screenshots",
+          "start": 19.965,
+          "end": 20.332
+        },
+        {
+          "id": "caption-word-21-2",
+          "text": "e",
+          "start": 20.332,
+          "end": 20.699
+        }
+      ]
+    },
+    {
+      "id": "caption-group-22",
+      "frame": 3,
+      "start": 20.699,
+      "end": 21.433,
+      "text": "simular cliques,",
+      "words": [
+        {
+          "id": "caption-word-22-0",
+          "text": "simular",
+          "start": 20.699,
+          "end": 21.066
+        },
+        {
+          "id": "caption-word-22-1",
+          "text": "cliques,",
+          "start": 21.066,
+          "end": 21.433
+        }
+      ]
+    },
+    {
+      "id": "caption-group-23",
+      "frame": 3,
+      "start": 21.433,
+      "end": 22.534,
+      "text": "o agente recebe",
+      "words": [
+        {
+          "id": "caption-word-23-0",
+          "text": "o",
+          "start": 21.433,
+          "end": 21.8
+        },
+        {
+          "id": "caption-word-23-1",
+          "text": "agente",
+          "start": 21.8,
+          "end": 22.167
+        },
+        {
+          "id": "caption-word-23-2",
+          "text": "recebe",
+          "start": 22.167,
+          "end": 22.534
+        }
+      ]
+    },
+    {
+      "id": "caption-group-24",
+      "frame": 3,
+      "start": 22.534,
+      "end": 23.635,
+      "text": "uma ação explícita,",
+      "words": [
+        {
+          "id": "caption-word-24-0",
+          "text": "uma",
+          "start": 22.534,
+          "end": 22.901
+        },
+        {
+          "id": "caption-word-24-1",
+          "text": "ação",
+          "start": 22.901,
+          "end": 23.268
+        },
+        {
+          "id": "caption-word-24-2",
+          "text": "explícita,",
+          "start": 23.268,
+          "end": 23.635
+        }
+      ]
+    },
+    {
+      "id": "caption-group-25",
+      "frame": 3,
+      "start": 23.635,
+      "end": 24.735,
+      "text": "envia argumentos e",
+      "words": [
+        {
+          "id": "caption-word-25-0",
+          "text": "envia",
+          "start": 23.635,
+          "end": 24.002
+        },
+        {
+          "id": "caption-word-25-1",
+          "text": "argumentos",
+          "start": 24.002,
+          "end": 24.368
+        },
+        {
+          "id": "caption-word-25-2",
+          "text": "e",
+          "start": 24.368,
+          "end": 24.735
+        }
+      ]
+    },
+    {
+      "id": "caption-group-26",
+      "frame": 3,
+      "start": 24.735,
+      "end": 25.836,
+      "text": "obtém um resultado",
+      "words": [
+        {
+          "id": "caption-word-26-0",
+          "text": "obtém",
+          "start": 24.735,
+          "end": 25.102
+        },
+        {
+          "id": "caption-word-26-1",
+          "text": "um",
+          "start": 25.102,
+          "end": 25.469
+        },
+        {
+          "id": "caption-word-26-2",
+          "text": "resultado",
+          "start": 25.469,
+          "end": 25.836
+        }
+      ]
+    },
+    {
+      "id": "caption-group-27",
+      "frame": 3,
+      "start": 25.836,
+      "end": 26.308,
+      "text": "previsível.",
+      "words": [
+        {
+          "id": "caption-word-27-0",
+          "text": "previsível.",
+          "start": 25.836,
+          "end": 26.203
+        }
+      ]
+    },
+    {
+      "id": "caption-group-28",
+      "frame": 4,
+      "start": 26.308,
+      "end": 27.511,
+      "text": "Tudo acontece no",
+      "words": [
+        {
+          "id": "caption-word-28-0",
+          "text": "Tudo",
+          "start": 26.308,
+          "end": 26.709
+        },
+        {
+          "id": "caption-word-28-1",
+          "text": "acontece",
+          "start": 26.709,
+          "end": 27.11
+        },
+        {
+          "id": "caption-word-28-2",
+          "text": "no",
+          "start": 27.11,
+          "end": 27.511
+        }
+      ]
+    },
+    {
+      "id": "caption-group-29",
+      "frame": 4,
+      "start": 27.511,
+      "end": 28.713,
+      "text": "contexto real da",
+      "words": [
+        {
+          "id": "caption-word-29-0",
+          "text": "contexto",
+          "start": 27.511,
+          "end": 27.911
+        },
+        {
+          "id": "caption-word-29-1",
+          "text": "real",
+          "start": 27.911,
+          "end": 28.312
+        },
+        {
+          "id": "caption-word-29-2",
+          "text": "da",
+          "start": 28.312,
+          "end": 28.713
+        }
+      ]
+    },
+    {
+      "id": "caption-group-30",
+      "frame": 4,
+      "start": 28.713,
+      "end": 29.114,
+      "text": "aba:",
+      "words": [
+        {
+          "id": "caption-word-30-0",
+          "text": "aba:",
+          "start": 28.713,
+          "end": 29.114
+        }
+      ]
+    },
+    {
+      "id": "caption-group-31",
+      "frame": 4,
+      "start": 29.114,
+      "end": 29.515,
+      "text": "usuário,",
+      "words": [
+        {
+          "id": "caption-word-31-0",
+          "text": "usuário,",
+          "start": 29.114,
+          "end": 29.515
+        }
+      ]
+    },
+    {
+      "id": "caption-group-32",
+      "frame": 4,
+      "start": 29.515,
+      "end": 29.916,
+      "text": "agente,",
+      "words": [
+        {
+          "id": "caption-word-32-0",
+          "text": "agente,",
+          "start": 29.515,
+          "end": 29.916
+        }
+      ]
+    },
+    {
+      "id": "caption-group-33",
+      "frame": 4,
+      "start": 29.916,
+      "end": 31.118,
+      "text": "navegador e aplicação",
+      "words": [
+        {
+          "id": "caption-word-33-0",
+          "text": "navegador",
+          "start": 29.916,
+          "end": 30.317
+        },
+        {
+          "id": "caption-word-33-1",
+          "text": "e",
+          "start": 30.317,
+          "end": 30.718
+        },
+        {
+          "id": "caption-word-33-2",
+          "text": "aplicação",
+          "start": 30.718,
+          "end": 31.118
+        }
+      ]
+    },
+    {
+      "id": "caption-group-34",
+      "frame": 4,
+      "start": 31.118,
+      "end": 31.92,
+      "text": "compartilham sessão,",
+      "words": [
+        {
+          "id": "caption-word-34-0",
+          "text": "compartilham",
+          "start": 31.118,
+          "end": 31.519
+        },
+        {
+          "id": "caption-word-34-1",
+          "text": "sessão,",
+          "start": 31.519,
+          "end": 31.92
+        }
+      ]
+    },
+    {
+      "id": "caption-group-35",
+      "frame": 4,
+      "start": 31.92,
+      "end": 33.123,
+      "text": "estado e controles,",
+      "words": [
+        {
+          "id": "caption-word-35-0",
+          "text": "estado",
+          "start": 31.92,
+          "end": 32.321
+        },
+        {
+          "id": "caption-word-35-1",
+          "text": "e",
+          "start": 32.321,
+          "end": 32.722
+        },
+        {
+          "id": "caption-word-35-2",
+          "text": "controles,",
+          "start": 32.722,
+          "end": 33.123
+        }
+      ]
+    },
+    {
+      "id": "caption-group-36",
+      "frame": 4,
+      "start": 33.123,
+      "end": 34.325,
+      "text": "inclusive com confirmação",
+      "words": [
+        {
+          "id": "caption-word-36-0",
+          "text": "inclusive",
+          "start": 33.123,
+          "end": 33.524
+        },
+        {
+          "id": "caption-word-36-1",
+          "text": "com",
+          "start": 33.524,
+          "end": 33.925
+        },
+        {
+          "id": "caption-word-36-2",
+          "text": "confirmação",
+          "start": 33.925,
+          "end": 34.325
+        }
+      ]
+    },
+    {
+      "id": "caption-group-37",
+      "frame": 4,
+      "start": 34.325,
+      "end": 35.644,
+      "text": "humana quando necessário.",
+      "words": [
+        {
+          "id": "caption-word-37-0",
+          "text": "humana",
+          "start": 34.325,
+          "end": 34.726
+        },
+        {
+          "id": "caption-word-37-1",
+          "text": "quando",
+          "start": 34.726,
+          "end": 35.127
+        },
+        {
+          "id": "caption-word-37-2",
+          "text": "necessário.",
+          "start": 35.127,
+          "end": 35.528
+        }
+      ]
+    },
+    {
+      "id": "caption-group-38",
+      "frame": 5,
+      "start": 35.644,
+      "end": 36.796,
+      "text": "Ele não substitui",
+      "words": [
+        {
+          "id": "caption-word-38-0",
+          "text": "Ele",
+          "start": 35.644,
+          "end": 36.028
+        },
+        {
+          "id": "caption-word-38-1",
+          "text": "não",
+          "start": 36.028,
+          "end": 36.412
+        },
+        {
+          "id": "caption-word-38-2",
+          "text": "substitui",
+          "start": 36.412,
+          "end": 36.796
+        }
+      ]
+    },
+    {
+      "id": "caption-group-39",
+      "frame": 5,
+      "start": 36.796,
+      "end": 37.898,
+      "text": "o MCP tradicional.",
+      "words": [
+        {
+          "id": "caption-word-39-0",
+          "text": "o",
+          "start": 36.796,
+          "end": 37.18
+        },
+        {
+          "id": "caption-word-39-1",
+          "text": "MCP",
+          "start": 37.18,
+          "end": 37.564
+        },
+        {
+          "id": "caption-word-39-2",
+          "text": "tradicional.",
+          "start": 37.564,
+          "end": 37.948
+        }
+      ]
+    },
+    {
+      "id": "caption-group-40",
+      "frame": 5,
+      "start": 37.898,
+      "end": 39.051,
+      "text": "O MCP conecta",
+      "words": [
+        {
+          "id": "caption-word-40-0",
+          "text": "O",
+          "start": 37.898,
+          "end": 38.282
+        },
+        {
+          "id": "caption-word-40-1",
+          "text": "MCP",
+          "start": 38.282,
+          "end": 38.667
+        },
+        {
+          "id": "caption-word-40-2",
+          "text": "conecta",
+          "start": 38.667,
+          "end": 39.051
+        }
+      ]
+    },
+    {
+      "id": "caption-group-41",
+      "frame": 5,
+      "start": 39.051,
+      "end": 40.204,
+      "text": "agentes a serviços",
+      "words": [
+        {
+          "id": "caption-word-41-0",
+          "text": "agentes",
+          "start": 39.051,
+          "end": 39.435
+        },
+        {
+          "id": "caption-word-41-1",
+          "text": "a",
+          "start": 39.435,
+          "end": 39.82
+        },
+        {
+          "id": "caption-word-41-2",
+          "text": "serviços",
+          "start": 39.82,
+          "end": 40.204
+        }
+      ]
+    },
+    {
+      "id": "caption-group-42",
+      "frame": 5,
+      "start": 40.204,
+      "end": 40.973,
+      "text": "de backend;",
+      "words": [
+        {
+          "id": "caption-word-42-0",
+          "text": "de",
+          "start": 40.204,
+          "end": 40.588
+        },
+        {
+          "id": "caption-word-42-1",
+          "text": "backend;",
+          "start": 40.588,
+          "end": 40.973
+        }
+      ]
+    },
+    {
+      "id": "caption-group-43",
+      "frame": 5,
+      "start": 40.973,
+      "end": 42.126,
+      "text": "o WebMCP expõe",
+      "words": [
+        {
+          "id": "caption-word-43-0",
+          "text": "o",
+          "start": 40.973,
+          "end": 41.357
+        },
+        {
+          "id": "caption-word-43-1",
+          "text": "WebMCP",
+          "start": 41.357,
+          "end": 41.741
+        },
+        {
+          "id": "caption-word-43-2",
+          "text": "expõe",
+          "start": 41.741,
+          "end": 42.126
+        }
+      ]
+    },
+    {
+      "id": "caption-group-44",
+      "frame": 5,
+      "start": 42.126,
+      "end": 43.279,
+      "text": "as capacidades presentes",
+      "words": [
+        {
+          "id": "caption-word-44-0",
+          "text": "as",
+          "start": 42.126,
+          "end": 42.51
+        },
+        {
+          "id": "caption-word-44-1",
+          "text": "capacidades",
+          "start": 42.51,
+          "end": 42.895
+        },
+        {
+          "id": "caption-word-44-2",
+          "text": "presentes",
+          "start": 42.895,
+          "end": 43.279
+        }
+      ]
+    },
+    {
+      "id": "caption-group-45",
+      "frame": 5,
+      "start": 43.279,
+      "end": 44.432,
+      "text": "na experiência web",
+      "words": [
+        {
+          "id": "caption-word-45-0",
+          "text": "na",
+          "start": 43.279,
+          "end": 43.663
+        },
+        {
+          "id": "caption-word-45-1",
+          "text": "experiência",
+          "start": 43.663,
+          "end": 44.048
+        },
+        {
+          "id": "caption-word-45-2",
+          "text": "web",
+          "start": 44.048,
+          "end": 44.432
+        }
+      ]
+    },
+    {
+      "id": "caption-group-46",
+      "frame": 5,
+      "start": 44.432,
+      "end": 45.705,
+      "text": "aberta no navegador.",
+      "words": [
+        {
+          "id": "caption-word-46-0",
+          "text": "aberta",
+          "start": 44.432,
+          "end": 44.816
+        },
+        {
+          "id": "caption-word-46-1",
+          "text": "no",
+          "start": 44.816,
+          "end": 45.201
+        },
+        {
+          "id": "caption-word-46-2",
+          "text": "navegador.",
+          "start": 45.201,
+          "end": 45.585
+        }
+      ]
+    },
+    {
+      "id": "caption-group-47",
+      "frame": 6,
+      "start": 45.748,
+      "end": 46.892,
+      "text": "Há duas portas",
+      "words": [
+        {
+          "id": "caption-word-47-0",
+          "text": "Há",
+          "start": 45.748,
+          "end": 46.129
+        },
+        {
+          "id": "caption-word-47-1",
+          "text": "duas",
+          "start": 46.129,
+          "end": 46.511
+        },
+        {
+          "id": "caption-word-47-2",
+          "text": "portas",
+          "start": 46.511,
+          "end": 46.892
+        }
+      ]
+    },
+    {
+      "id": "caption-group-48",
+      "frame": 6,
+      "start": 46.892,
+      "end": 47.654,
+      "text": "de entrada:",
+      "words": [
+        {
+          "id": "caption-word-48-0",
+          "text": "de",
+          "start": 46.892,
+          "end": 47.273
+        },
+        {
+          "id": "caption-word-48-1",
+          "text": "entrada:",
+          "start": 47.273,
+          "end": 47.654
+        }
+      ]
+    },
+    {
+      "id": "caption-group-49",
+      "frame": 6,
+      "start": 47.654,
+      "end": 48.798,
+      "text": "uma API imperativa",
+      "words": [
+        {
+          "id": "caption-word-49-0",
+          "text": "uma",
+          "start": 47.654,
+          "end": 48.036
+        },
+        {
+          "id": "caption-word-49-1",
+          "text": "API",
+          "start": 48.036,
+          "end": 48.417
+        },
+        {
+          "id": "caption-word-49-2",
+          "text": "imperativa",
+          "start": 48.417,
+          "end": 48.798
+        }
+      ]
+    },
+    {
+      "id": "caption-group-50",
+      "frame": 6,
+      "start": 48.798,
+      "end": 49.942,
+      "text": "em JavaScript para",
+      "words": [
+        {
+          "id": "caption-word-50-0",
+          "text": "em",
+          "start": 48.798,
+          "end": 49.179
+        },
+        {
+          "id": "caption-word-50-1",
+          "text": "JavaScript",
+          "start": 49.179,
+          "end": 49.561
+        },
+        {
+          "id": "caption-word-50-2",
+          "text": "para",
+          "start": 49.561,
+          "end": 49.942
+        }
+      ]
+    },
+    {
+      "id": "caption-group-51",
+      "frame": 6,
+      "start": 49.942,
+      "end": 51.086,
+      "text": "ações mais dinâmicas,",
+      "words": [
+        {
+          "id": "caption-word-51-0",
+          "text": "ações",
+          "start": 49.942,
+          "end": 50.323
+        },
+        {
+          "id": "caption-word-51-1",
+          "text": "mais",
+          "start": 50.323,
+          "end": 50.704
+        },
+        {
+          "id": "caption-word-51-2",
+          "text": "dinâmicas,",
+          "start": 50.704,
+          "end": 51.086
+        }
+      ]
+    },
+    {
+      "id": "caption-group-52",
+      "frame": 6,
+      "start": 51.086,
+      "end": 52.229,
+      "text": "e uma API",
+      "words": [
+        {
+          "id": "caption-word-52-0",
+          "text": "e",
+          "start": 51.086,
+          "end": 51.467
+        },
+        {
+          "id": "caption-word-52-1",
+          "text": "uma",
+          "start": 51.467,
+          "end": 51.848
+        },
+        {
+          "id": "caption-word-52-2",
+          "text": "API",
+          "start": 51.848,
+          "end": 52.229
+        }
+      ]
+    },
+    {
+      "id": "caption-group-53",
+      "frame": 6,
+      "start": 52.229,
+      "end": 53.373,
+      "text": "declarativa que transforma",
+      "words": [
+        {
+          "id": "caption-word-53-0",
+          "text": "declarativa",
+          "start": 52.229,
+          "end": 52.611
+        },
+        {
+          "id": "caption-word-53-1",
+          "text": "que",
+          "start": 52.611,
+          "end": 52.992
+        },
+        {
+          "id": "caption-word-53-2",
+          "text": "transforma",
+          "start": 52.992,
+          "end": 53.373
+        }
+      ]
+    },
+    {
+      "id": "caption-group-54",
+      "frame": 6,
+      "start": 53.373,
+      "end": 54.517,
+      "text": "formulários HTML em",
+      "words": [
+        {
+          "id": "caption-word-54-0",
+          "text": "formulários",
+          "start": 53.373,
+          "end": 53.754
+        },
+        {
+          "id": "caption-word-54-1",
+          "text": "HTML",
+          "start": 53.754,
+          "end": 54.136
+        },
+        {
+          "id": "caption-word-54-2",
+          "text": "em",
+          "start": 54.136,
+          "end": 54.517
+        }
+      ]
+    },
+    {
+      "id": "caption-group-55",
+      "frame": 6,
+      "start": 54.517,
+      "end": 55.018,
+      "text": "ferramentas.",
+      "words": [
+        {
+          "id": "caption-word-55-0",
+          "text": "ferramentas.",
+          "start": 54.517,
+          "end": 54.898
+        }
+      ]
+    },
+    {
+      "id": "caption-group-56",
+      "frame": 7,
+      "start": 55.06,
+      "end": 56.117,
+      "text": "A proposta ainda",
+      "words": [
+        {
+          "id": "caption-word-56-0",
+          "text": "A",
+          "start": 55.06,
+          "end": 55.412
+        },
+        {
+          "id": "caption-word-56-1",
+          "text": "proposta",
+          "start": 55.412,
+          "end": 55.765
+        },
+        {
+          "id": "caption-word-56-2",
+          "text": "ainda",
+          "start": 55.765,
+          "end": 56.117
+        }
+      ]
+    },
+    {
+      "id": "caption-group-57",
+      "frame": 7,
+      "start": 56.117,
+      "end": 56.772,
+      "text": "é experimental.",
+      "words": [
+        {
+          "id": "caption-word-57-0",
+          "text": "é",
+          "start": 56.117,
+          "end": 56.47
+        },
+        {
+          "id": "caption-word-57-1",
+          "text": "experimental.",
+          "start": 56.47,
+          "end": 56.822
+        }
+      ]
+    },
+    {
+      "id": "caption-group-58",
+      "frame": 7,
+      "start": 56.772,
+      "end": 57.367,
+      "text": "O melhor",
+      "words": [
+        {
+          "id": "caption-word-58-0",
+          "text": "O",
+          "start": 56.772,
+          "end": 57.07
+        },
+        {
+          "id": "caption-word-58-1",
+          "text": "melhor",
+          "start": 57.07,
+          "end": 57.367
+        }
+      ]
+    },
+    {
+      "id": "caption-group-59",
+      "frame": 7,
+      "start": 57.367,
+      "end": 57.962,
+      "text": "começo é",
+      "words": [
+        {
+          "id": "caption-word-59-0",
+          "text": "começo",
+          "start": 57.367,
+          "end": 57.664
+        },
+        {
+          "id": "caption-word-59-1",
+          "text": "é",
+          "start": 57.664,
+          "end": 57.962
+        }
+      ]
+    },
+    {
+      "id": "caption-group-60",
+      "frame": 7,
+      "start": 57.962,
+      "end": 58.557,
+      "text": "um fluxo",
+      "words": [
+        {
+          "id": "caption-word-60-0",
+          "text": "um",
+          "start": 57.962,
+          "end": 58.26
+        },
+        {
+          "id": "caption-word-60-1",
+          "text": "fluxo",
+          "start": 58.26,
+          "end": 58.557
+        }
+      ]
+    },
+    {
+      "id": "caption-group-61",
+      "frame": 7,
+      "start": 58.557,
+      "end": 59.152,
+      "text": "claro e",
+      "words": [
+        {
+          "id": "caption-word-61-0",
+          "text": "claro",
+          "start": 58.557,
+          "end": 58.854
+        },
+        {
+          "id": "caption-word-61-1",
+          "text": "e",
+          "start": 58.854,
+          "end": 59.152
+        }
+      ]
+    },
+    {
+      "id": "caption-group-62",
+      "frame": 7,
+      "start": 59.152,
+      "end": 59.449,
+      "text": "repetitivo,",
+      "words": [
+        {
+          "id": "caption-word-62-0",
+          "text": "repetitivo,",
+          "start": 59.152,
+          "end": 59.449
+        }
+      ]
+    },
+    {
+      "id": "caption-group-63",
+      "frame": 7,
+      "start": 59.449,
+      "end": 60.045,
+      "text": "como buscar,",
+      "words": [
+        {
+          "id": "caption-word-63-0",
+          "text": "como",
+          "start": 59.449,
+          "end": 59.747
+        },
+        {
+          "id": "caption-word-63-1",
+          "text": "buscar,",
+          "start": 59.747,
+          "end": 60.045
+        }
+      ]
+    },
+    {
+      "id": "caption-group-64",
+      "frame": 7,
+      "start": 60.045,
+      "end": 60.639,
+      "text": "filtrar ou",
+      "words": [
+        {
+          "id": "caption-word-64-0",
+          "text": "filtrar",
+          "start": 60.045,
+          "end": 60.342
+        },
+        {
+          "id": "caption-word-64-1",
+          "text": "ou",
+          "start": 60.342,
+          "end": 60.639
+        }
+      ]
+    },
+    {
+      "id": "caption-group-65",
+      "frame": 7,
+      "start": 60.639,
+      "end": 61.234,
+      "text": "enviar um",
+      "words": [
+        {
+          "id": "caption-word-65-0",
+          "text": "enviar",
+          "start": 60.639,
+          "end": 60.937
+        },
+        {
+          "id": "caption-word-65-1",
+          "text": "um",
+          "start": 60.937,
+          "end": 61.234
+        }
+      ]
+    },
+    {
+      "id": "caption-group-66",
+      "frame": 7,
+      "start": 61.234,
+      "end": 61.532,
+      "text": "formulário.",
+      "words": [
+        {
+          "id": "caption-word-66-0",
+          "text": "formulário.",
+          "start": 61.234,
+          "end": 61.532
+        }
+      ]
+    },
+    {
+      "id": "caption-group-67",
+      "frame": 7,
+      "start": 61.532,
+      "end": 61.943,
+      "text": "Primeiro,",
+      "words": [
+        {
+          "id": "caption-word-67-0",
+          "text": "Primeiro,",
+          "start": 61.532,
+          "end": 61.943
+        }
+      ]
+    },
+    {
+      "id": "caption-group-68",
+      "frame": 7,
+      "start": 61.943,
+      "end": 63.174,
+      "text": "torne a página",
+      "words": [
+        {
+          "id": "caption-word-68-0",
+          "text": "torne",
+          "start": 61.943,
+          "end": 62.353
+        },
+        {
+          "id": "caption-word-68-1",
+          "text": "a",
+          "start": 62.353,
+          "end": 62.764
+        },
+        {
+          "id": "caption-word-68-2",
+          "text": "página",
+          "start": 62.764,
+          "end": 63.174
+        }
+      ]
+    },
+    {
+      "id": "caption-group-69",
+      "frame": 7,
+      "start": 63.174,
+      "end": 63.585,
+      "text": "encontrável.",
+      "words": [
+        {
+          "id": "caption-word-69-0",
+          "text": "encontrável.",
+          "start": 63.174,
+          "end": 63.585
+        }
+      ]
+    },
+    {
+      "id": "caption-group-70",
+      "frame": 7,
+      "start": 63.585,
+      "end": 64.532,
+      "text": "Depois,",
+      "words": [
+        {
+          "id": "caption-word-70-0",
+          "text": "Depois,",
+          "start": 63.585,
+          "end": 64.532
+        }
+      ]
+    },
+    {
+      "id": "caption-group-71",
+      "frame": 7,
+      "start": 64.532,
+      "end": 65.6,
+      "text": "executável.",
+      "words": [
+        {
+          "id": "caption-word-71-0",
+          "text": "executável.",
+          "start": 64.532,
+          "end": 65.48
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,234 @@
+{
+  "category": "kinetic-type",
+  "duration_s": 5.5,
+  "fps": 30,
+  "canvas": {
+    "w": 1080,
+    "h": 1920,
+    "aspect": "9:16"
+  },
+  "style": "CTA tipográfico premium e enérgico sobre azul-marinho profundo, com ciano elétrico como acento e branco frio para máxima legibilidade. Três verbos entram como impulsos individuais e convergem geometricamente para um lockup final limpo. Todos os títulos permanecem dentro de 7,5% de margem lateral e 6% de margem vertical, inclusive no pico das animações; o lockup final fica completamente estável de 4,0s a 5,5s.",
+  "palette": [
+    "#071A33",
+    "#00D4FF",
+    "#F4FAFF"
+  ],
+  "font": "Space Grotesk",
+  "beats": [
+    6,
+    33,
+    60,
+    102,
+    114,
+    120
+  ],
+  "export": "mp4",
+  "asset_needs": [],
+  "block": "caption-kinetic-slam",
+  "customize": {
+    "reuse_strategy": "Adicionar caption-kinetic-slam e customizar em lugar, preservando seu contrato HyperFrames e suas entradas render-tested; usar a mesma linguagem de slam nos três verbos e adaptar o trecho final para um lockup sem animação contínua.",
+    "words": [
+      "APRENDA.",
+      "PRATIQUE.",
+      "EVOLUA."
+    ],
+    "final_signature": "APRENDA. PRATIQUE. EVOLUA.",
+    "cta": "Continue no INEMA.CLUB",
+    "url": "inema.club",
+    "emphasis_words": [
+      "APRENDA.",
+      "PRATIQUE.",
+      "EVOLUA.",
+      "INEMA.CLUB",
+      "inema.club"
+    ],
+    "palette": {
+      "background": "#071A33",
+      "accent": "#00D4FF",
+      "foreground": "#F4FAFF"
+    },
+    "font": {
+      "family": "Space Grotesk",
+      "verb_weight": 700,
+      "cta_weight": 600,
+      "url_weight": 500
+    },
+    "timing_frames": {
+      "hook_start": 0,
+      "aprenda_impact": 6,
+      "pratique_impact": 33,
+      "evolua_impact": 60,
+      "convergence_start": 102,
+      "lockup_reveal_start": 114,
+      "stable_hold_start": 120,
+      "end": 165
+    },
+    "audio": false,
+    "network_dependencies": false
+  },
+  "layout": {
+    "safe_area_px": {
+      "left": 81,
+      "right": 81,
+      "top": 116,
+      "bottom": 116
+    },
+    "max_headline_width_px": 918,
+    "max_headline_height_px": 461,
+    "alignment": "center",
+    "positions": {
+      "verb_stage": {
+        "center_x": 540,
+        "center_y": 840,
+        "width": 918,
+        "height": 360
+      },
+      "final_signature": {
+        "center_x": 540,
+        "center_y": 710,
+        "width": 880
+      },
+      "final_cta": {
+        "center_x": 540,
+        "center_y": 930,
+        "width": 880
+      },
+      "final_url": {
+        "center_x": 540,
+        "center_y": 1125,
+        "width": 720
+      },
+      "convergence_axis": {
+        "x": 540,
+        "y_start": 640,
+        "y_end": 1180
+      }
+    },
+    "headline_fit": "Após document.fonts.ready, ajustar quebra semântica, tamanho responsivo e tracking nessa ordem; medir getBoundingClientRect() no início, pico e fim de cada entrada e bloquear a prévia se qualquer pixel ultrapassar a área segura."
+  },
+  "motion": {
+    "dominant_motif": "Três impactos tipográficos convergem para um único lockup central.",
+    "phases": [
+      {
+        "start": 0,
+        "end": 0.9,
+        "primitive": "slam",
+        "direction": "bottom",
+        "description": "APRENDA. sobe e aterrissa no frame 6; compressão curta no impacto e underline_sweep ciano permanece como rastro."
+      },
+      {
+        "start": 0.9,
+        "end": 1.8,
+        "primitive": "slide_right",
+        "description": "PRATIQUE. entra da direita e assenta no frame 33; segundo traço ciano cruza o primeiro sem adicionar outro motivo visual."
+      },
+      {
+        "start": 1.8,
+        "end": 3.4,
+        "primitive": "scale_punch",
+        "description": "EVOLUA. cresce do centro e acerta o frame 60 com glow ciano breve; mantém leitura antes da mudança de estado."
+      },
+      {
+        "start": 3.4,
+        "end": 3.8,
+        "primitive": "scale_out",
+        "description": "Único pattern-interrupt: ecos dos três verbos e seus traços retraem para o eixo central, preparando o lockup."
+      },
+      {
+        "start": 3.8,
+        "end": 4,
+        "primitive": "scale_grow",
+        "description": "Assinatura, CTA e URL resolvem em 0,2s com deslocamento máximo de 24px e sem overshoot."
+      },
+      {
+        "start": 4,
+        "end": 5.5,
+        "primitive": "hold",
+        "description": "Hold absolutamente estável: sem transform, fade, glow pulsante, shimmer, ruído animado ou movimento de fundo."
+      }
+    ],
+    "exits": "Não há animação de saída; o frame 165 deve ser idêntico aos frames do hold final para concatenação direta."
+  },
+  "pacing": {
+    "hook_lands_by_s": 0.2,
+    "readable_min_s": 0.3,
+    "pattern_interrupt_s": 3.4,
+    "lockup_lands_s": 4,
+    "stable_hold_s": 1.5,
+    "cadence": "Três impactos em aceleração percebida, uma convergência curta e uma desaceleração completa no lockup."
+  },
+  "output": {
+    "format": "mp4",
+    "width": 1080,
+    "height": 1920,
+    "fps": 30,
+    "duration_s": 5.5,
+    "audio": false,
+    "concat_ready": true,
+    "final_frame_policy": "Quadro totalmente estável de 4,0s a 5,5s; sem fade para preto."
+  },
+  "shot_brief": "O espectador recebe três impulsos tipográficos rápidos — APRENDA, PRATIQUE e EVOLUA — que chegam por direções complementares e deixam rastros geométricos em ciano. No punch, os três verbos se alinham e convergem para formar a assinatura da marca; uma contração curta revela o lockup final com ‘Continue no INEMA.CLUB’ e ‘inema.club’. A única ideia dominante é a convergência, e o quadro final permanece imóvel por 1,5 segundo para leitura e concatenação segura.",
+  "content": {
+    "scenes": [
+      {
+        "id": "hook-aprenda",
+        "start": 0,
+        "end": 0.9,
+        "text": "APRENDA.",
+        "emphasis_words": [
+          "APRENDA."
+        ],
+        "emotion": "Hook — convite imediato, preciso e confiante",
+        "motion": "Slam vertical curto vindo de baixo com leve compressão no impacto; um traço ciano permanece como memória visual para a convergência.",
+        "beats": [
+          6
+        ]
+      },
+      {
+        "id": "build-pratique",
+        "start": 0.9,
+        "end": 1.8,
+        "text": "PRATIQUE.",
+        "emphasis_words": [
+          "PRATIQUE."
+        ],
+        "emotion": "Build — ação, ritmo e progressão",
+        "motion": "Slide lateral firme da direita com snap suave; um segundo traço ciano cruza o primeiro e prepara o eixo central.",
+        "beats": [
+          33
+        ]
+      },
+      {
+        "id": "punch-evolua",
+        "start": 1.8,
+        "end": 3.8,
+        "text": "EVOLUA.",
+        "emphasis_words": [
+          "EVOLUA."
+        ],
+        "emotion": "Punch — transformação e chegada",
+        "motion": "Scale punch do centro com glow ciano controlado; os rastros anteriores retornam como ecos dos três verbos e convergem para um único lockup geométrico até 3,8s.",
+        "beats": [
+          60,
+          102
+        ]
+      },
+      {
+        "id": "resolve-lockup",
+        "start": 3.8,
+        "end": 5.5,
+        "text": "APRENDA. PRATIQUE. EVOLUA.\nContinue no INEMA.CLUB\ninema.club",
+        "emphasis_words": [
+          "INEMA.CLUB",
+          "inema.club"
+        ],
+        "emotion": "Resolve — clareza, continuidade e confiança",
+        "motion": "Contração geométrica rápida entre 3,8s e 4,0s revela o lockup final centralizado; nenhuma transformação ocorre de 4,0s a 5,5s.",
+        "beats": [
+          114,
+          120
+        ]
+      }
+    ]
+  }
+}

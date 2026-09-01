@@ -1,0 +1,285 @@
+Title: O que é WebMCP: a API do navegador para agentes de IA
+
+URL Source: https://www.inboundcycle.com/pt/blog-de-inbound-marketing/que-e-webmcp
+
+Published Time: 2026-05-27T16:39:09+02:00
+
+Markdown Content:
+Se você pesquisar "WebMCP" hoje, vai encontrar pelo menos duas coisas com o mesmo nome — e que não são a mesma coisa. Uma é uma biblioteca JavaScript open source. A outra é uma proposta de padrão do W3C, impulsionada por Google e Microsoft, que pode mudar como os agentes de IA interagem com seu site.
+
+Na evolução rumo à [web agêntica](https://www.inboundcycle.com/pt/que-es-web-agentica/), WebMCP é a peça que converte seu site de encontrável e citável a diretamente operável por agentes. Um benchmark comunitário mostra que agentes processam uma tarefa com 89% menos tokens quando o site usa WebMCP em vez de capturar screenshots da tela (WebMCP-org, 2026) — dado direcional, não auditado, mas que sinaliza uma mudança estrutural.
+
+Este artigo aborda os dois projetos, explica o que é o WebMCP do W3C, como funciona e o que você pode fazer hoje.
+
+## O que é WebMCP (e qual dos dois)
+
+WebMCP (Web Model Context Protocol) é uma proposta de padrão do W3C, desenvolvida por engenheiros de Microsoft e Google, que permite às páginas web declarar ferramentas (_tools_) que os agentes de IA do navegador podem descobrir e executar diretamente — sem necessidade de um servidor intermediário nem de emulação visual da interface.
+
+Existem dois projetos com o nome "WebMCP", e o SERP brasileiro mistura ambos sem aviso. O primeiro é a spec oficial do W3C: o repositório `webmachinelearning/webmcp`, mantido pelo Web Machine Learning Community Group, com 2.400+ stars e 142 forks em maio de 2026 ([W3C WebML CG](https://github.com/webmachinelearning/webmcp), 2026). É o padrão que o Chrome implementa nativamente.
+
+O segundo é a biblioteca JavaScript de Jason McGhee (`@jason.today/webmcp`, disponível em webmcp.dev): um protótipo independente que usa WebSocket local para conectar páginas a clientes MCP como Claude Desktop. O próprio autor reconhece que sua implementação "não está em conformidade com a spec W3C" e redireciona ao repositório oficial. Existe ainda um terceiro nome confundível: "The Web MCP" da Bright Data, um produto de scraping corporativo sem relação com o padrão.
+
+Este artigo trata exclusivamente da spec W3C. Se você trabalha com marketing digital há algum tempo, essa confusão de nomes vai soar familiar — aconteceu o mesmo com "MCP" nos primeiros meses.
+
+O Draft Community Group Report foi publicado em 10 de fevereiro de 2026. É importante ser preciso: não é um W3C Standard nem está no Standards Track ainda — é um rascunho de Community Group, o primeiro passo antes da formalização (W3C WebML CG, 2026). A co-autoria é conjunta: Brandon Walderman, Leo Lee e Andrew Nolan (Microsoft), mais David Bokan, Khushal Sagar e Hannah Van Opstal (Google).
+
+A definição canônica do repositório é direta: "Web pages that use WebMCP can be thought of as MCP servers that implement tools in client-side script instead of on the backend." Em outras palavras, seu site passa a funcionar como um servidor MCP que roda no navegador do visitante, não num backend separado.
+
+A spec introduz termos que vale a pena conhecer. _Actuation_ é o padrão anterior: agentes simulando cliques e digitação como se fossem humanos — exatamente o que WebMCP substitui. _Tool Contract_ é o conjunto de ferramentas que uma página declara, como um catálogo estruturado de ações disponíveis. E _Model Context Provider_ é cada página que registra tools para agentes.
+
+Uma confusão adicional: WebMCP não é o mesmo que as Chrome AI APIs (Translator, Writer, Detector). Essas APIs expõem inteligência artificial do navegador para as páginas. WebMCP faz o oposto — expõe as capacidades da página para o agente do navegador. Direções opostas.
+
+## MCP server-side vs WebMCP browser-side — complementares, não substitutos
+
+[MCP (Model Context Protocol)](https://www.inboundcycle.com/pt/blog-de-inbound-marketing/model-context-protocol-mcp) e WebMCP resolvem problemas diferentes e operam em camadas distintas. MCP é um protocolo server-side, lançado pela Anthropic em novembro de 2024, que conecta agentes a dados e serviços de backend via JSON-RPC. WebMCP é uma API do navegador que permite que a página web declare ferramentas que o agente pode chamar diretamente, dentro da aba do usuário.
+
+### Três formas pelas quais um agente pode operar seu site
+
+Antes do WebMCP, agentes tinham duas formas de interagir com uma página. A primeira é automação por screenshot e DOM: o agente captura a tela, processa com um modelo de visão e simula cliques — frágil, lento e caro em tokens. A segunda é via APIs públicas: robusta, mas limitada, porque a maioria dos sites simplesmente não tem API pública (Search Engine Land, 2026).
+
+WebMCP é o meio-termo que faltava. O site declara suas capacidades de forma estruturada e o agente as executa dentro da aba aberta, sem precisar interpretar pixels nem acessar um backend separado.
+
+Aqui é onde a maioria se perde: WebMCP não substitui MCP — são complementares.
+
+Os números ilustram a diferença de eficiência: uma tarefa simples consome 3.801 tokens via screenshots contra 433 via WebMCP — redução de 89%, com precisão de 97,9-98% na conclusão (WebMCP-org, 2026). Caveat importante: esse benchmark vem de uma demo comunitária, não de um estudo auditado — trate como dado direcional.
+
+Em 60% dos sites que a InboundCycle auditou em 28 auditorias GEO (janeiro a maio de 2026), as IAs mencionam a marca mas citam terceiros — comparadores, agregadores — como fonte (InboundCycle, 2026). WebMCP oferece um caminho para que seu site seja não só mencionável, mas diretamente operável pelo agente do comprador.
+
+### Tabela comparativa MCP vs WebMCP
+
+| Dimensão | MCP (Anthropic) | WebMCP (W3C CG) |
+| --- | --- | --- |
+| Onde roda | Servidor backend (Python, Node.js) | Aba do navegador, JavaScript client-side |
+| Protocolo | JSON-RPC sobre HTTP/stdio | API nativa do navegador |
+| Autenticação | OAuth 2.1 / tokens | Herda sessão do usuário (cookies, SSO) |
+| Contexto visual | Nenhum — agente sem interface | Compartilhado com o usuário na mesma aba |
+| Ciclo de vida | Servidor roda continuamente | Tools existem só enquanto a aba está aberta |
+| Headless | Sim | Não — requer aba/webview |
+| Conceitos expostos | Tools, Resources, Prompts | Apenas Tools |
+
+O Non-Goal do W3C é explícito: "WebMCP is not a replacement of existing protocols" (W3C WebML CG, 2026). Ao invés do agente descobrir o que seu site pode fazer, o site diz ao agente. Essa inversão de controle é o avanço conceitual central do protocolo. Se você quer entender o [Model Context Protocol](https://www.inboundcycle.com/pt/blog-de-inbound-marketing/model-context-protocol-mcp/) server-side em profundidade, esse é território de outro artigo.
+
+## Como funciona o WebMCP — 4 atores, 2 camadas, 1 ciclo
+
+O WebMCP opera como uma coreografia entre quatro participantes, mediada pelo navegador, onde a página web declara suas capacidades e o agente as executa — tudo dentro da sessão autenticada do usuário, sem infraestrutura adicional.
+
+### Coreografia de 4 atores + ciclo de vida
+
+O modelo de funcionamento envolve quatro participantes com papéis definidos (Vijay Kumar, 2026). O **usuário** dá a intenção em linguagem natural. O **agente** interpreta essa intenção, consulta quais tools existem na página e seleciona o mais adequado. O **navegador** atua como mediador e guardião: apresenta os tools ao agente, aplica políticas de permissão e pausa para consentimento quando necessário. A **página web** executa a lógica JavaScript no handler registrado e devolve JSON estruturado.
+
+O ciclo completo segue cinco fases: discovery (que tools existem?), intent mapping (qual se encaixa na intenção do usuário?), consent gate (o usuário autoriza?), execution (a página processa) e structured return (resposta em JSON para o agente).
+
+Sem WebMCP, o agente tenta deduzir o que um site pode fazer a partir da interface visual — como alguém que tenta entender o cardápio de um restaurante olhando uma foto do interior. Com WebMCP, o site entrega o cardápio diretamente, com preços e ingredientes.
+
+Como o WebMCP conecta 4 atores
+
+O navegador media cada interação entre o agente e a página
+
+👤
+
+Usuario
+
+Da a intencao em linguagem natural
+
+→
+
+🤖
+
+Agente
+
+Interpreta e seleciona o tool
+
+→
+
+🛡️
+
+Navegador
+
+Mediador e guardiao (consent gate)
+
+→
+
+🌐
+
+Pagina web
+
+Executa e devolve JSON estruturado
+
+Ciclo de vida de uma invocaÇÃO
+
+1 Discovery
+
+2 Intent mapping
+
+3 Consent gate
+
+4 Execution
+
+5 Structured return
+
+Fonte: W3C WebML CG + Vijay Kumar, 2026
+
+E agora vem a parte que realmente importa: a segurança não é uma camada extra — está embebida no design.
+
+O WebMCP inclui quatro mecanismos de confiança. O primeiro é `requestUserInteraction(callback)` (proposta no spec W3C, ainda não implementada no Chrome): antes de ações irreversíveis, pausaria a execução para o navegador pedir confirmação ([Chrome for Developers](https://developer.chrome.com/docs/ai/webmcp), 2026). O segundo é o atributo `toolautosubmit`, desativado por padrão — o agente preenche o formulário, mas o usuário clica em enviar.
+
+O terceiro são pseudo-classes CSS (`:tool-form-active`, `:tool-submit-active`) que destacam visualmente o que o agente está preenchendo. E o quarto é a Permissions Policy `tools` (default `self`), que bloqueia iframes cross-origin de registrar tools sem autorização explícita (Chrome for Developers, 2026).
+
+Os tools herdam a sessão completa do usuário — cookies, SSO, tudo. Isso elimina a complexidade de OAuth que o MCP server-side exige. Se seu usuário está logado, o agente opera com as credenciais dele, mediado pelo navegador. A diferenciação fica por conta do `SubmitEvent.agentInvoked`, que permite registrar se a submissão foi feita por uma pessoa ou por um agente.
+
+### Duas vias de implementação — imperativa e declarativa
+
+O WebMCP oferece dois caminhos para declarar tools. A **API imperativa** usa JavaScript: você registra uma função via `document.modelContext.registerTool()`, define o nome, a descrição em linguagem natural, o JSON Schema dos parâmetros e o handler de execução. O ciclo de vida é gerenciado por `AbortSignal` — quando o sinal é abortado, o tool é desregistrado automaticamente. Requisito: HTTPS.
+
+A **API declarativa** é mais simples: você anota formulários HTML existentes com atributos como `toolname`, `tooldescription` e `toolparamdescription`. O navegador constrói o JSON Schema automaticamente a partir dos `<input>`. Um `<form>` HTML já é conceitualmente uma declaração de tool — a API declarativa torna isso explícito.
+
+| Aspecto | Imperativa (JS) | Declarativa (HTML) |
+| --- | --- | --- |
+| Controle | Total, programático | Baseado em formulários existentes |
+| Complexidade | Maior — requer JavaScript | Menor — atributos HTML |
+| Melhor para | Workflows multi-etapa, lógica custom | Formulários de contato, RFQ, demos |
+
+Olhe esse dado: a recomendação de Codely (Espanha, 2026) resume a decisão — "Todo formulário deveria ser declarado como WebMCP. O custo é muito baixo. A alternativa não é que os agentes não usem nosso site — é que eles o usem pior."
+
+Os dados da [6sense](https://6sense.com/science-of-b2b/buyer-experience-report-2025/) (2025) tornam isso urgente para B2B: 94% dos comitês de compra já usam LLMs durante a avaliação de fornecedores, e 80% dos negócios fechados vão para o primeiro do shortlist. Se o agente do seu comprador não consegue operar seu formulário de demo, você não entra nesse shortlist.
+
+Por que o WebMCP importa para B2B
+
+O agente do comprador ja e o gatekeeper do shortlist
+
+94%
+
+dos comites de compra B2B ja usam LLMs na avaliacao de fornecedores
+
+6sense, 2025
+
+80%
+
+dos deals fechados vao para o primeiro do shortlist do comprador
+
+6sense, 2025
+
+89%
+
+menos tokens para o agente processar um site com WebMCP vs screenshots
+
+WebMCP-org, 2026
+
+Nota: 6sense e vendor-published (n>4.000). Benchmark WebMCP e demo comunitaria — tratar como direcional.
+
+### Arquitetura de duas camadas paralelas
+
+O WebMCP adiciona uma segunda camada à página sem alterar a primeira. A **camada humana** é o HTML/CSS/JS visual que o visitante vê e usa. A **camada máquina** são os tool contracts em JSON Schema que os agentes consomem. O navegador funciona como a dobradiça entre as duas (Vijay Kumar, 2026).
+
+Um ponto crítico: `document.modelContext` simplesmente não existe em navegadores sem suporte WebMCP. Isso significa que sites que adotam o protocolo não quebram para usuários normais — é _progressive enhancement_ puro (DEV Community, 2026). Seu site continua funcionando para 100% dos visitantes e, além disso, fica operável para agentes nos navegadores compatíveis.
+
+## Estado atual — Chrome 146, Origin Trial 149 e o que falta
+
+Em maio de 2026, o WebMCP está disponível como flag experimental no Chrome 146 e entrando em Origin Trial público no Chrome 149, anunciado no Google I/O 2026. O suporte nativo é exclusivo do Chrome — Firefox e Safari não anunciaram implementação.
+
+Os marcos relevantes para quem precisa tomar decisões:
+
+*   **Fevereiro 2026:** Chrome 146 lança o flag `chrome://flags/#enable-webmcp-testing` para desenvolvimento local
+*   **Março 2026:** métodos `provideContext()` e `clearContext()` são removidos por vulnerabilidades — cada mudança endurece a spec, sinal de maturidade
+*   **Abril 2026:**`unregisterTool()` é descontinuado em favor de `AbortSignal`. Cloudflare adiciona suporte WebMCP ao Browser Run (Cloudflare, 2026)
+*   **Maio 2026:** Origin Trial Chrome 149 anunciado no Google I/O com seis partners: Booking.com, Expedia, Instacart, Intuit, Shopify e Redfin ([The New Stack](https://thenewstack.io/google-agent-ready-web), 2026)
+
+Roadmap WebMCP
+
+Do flag experimental ao Chrome stable
+
+Nov 2024
+
+Anthropic publica MCP (server-side) — o protocolo que inspira WebMCP
+
+Protocolo base
+
+Fev 2026
+
+Chrome 146: flag `enable-webmcp-testing` disponivel
+
+Flag
+
+Mar 2026
+
+`provideContext()` e `clearContext()` removidos por seguranca
+
+Spec endurecida
+
+Abr 2026
+
+`unregisterTool()` deprecado. Cloudflare Browser Run com WebMCP
+
+Spec endurecida
+
+Mai 2026 — ESTAMOS AQUI
+
+Origin Trial Chrome 149 no Google I/O. Partners: Booking.com, Expedia, Instacart, Intuit, Shopify, Redfin
+
+Origin Trial
+
+Mid-late 2026
+
+Edge esperado + transicao ao W3C Standards Track
+
+Previsao
+
+Late 2026 / 2027
+
+Chrome stable (on-by-default). "Mid-2027 realistic mass-adoption target"
+
+Previsao
+
+Fontes: Chrome for Developers, W3C WebML CG, The New Stack, DEV Community, 2026
+
+É justamente isso que muda a perspectiva: quando Booking.com e Shopify estão experimentando, o sinal é forte o suficiente para prestar atenção.
+
+A extensão Model Context Tool Inspector permite testar tools registrados diretamente no DevTools. SDKs emergentes já existem: webmcp-react, webmcp-next, webmcp-kit e uma integração WordPress/WooCommerce via Cloudflare Worker (`cf-webmcp`). WebMCP funciona em sites estáticos e JAMstack sem infraestrutura especial. No Brasil, a sinalização mais relevante é o W3C Search Central Live Brasil 2026, onde o time do Chrome evangelizou o protocolo para a comunidade web brasileira (Analytikos, 2026).
+
+O polyfill `@mcp-b/global` permite testar WebMCP hoje fora do Chrome Canary — uma linha de `<script>` tag habilita as funcionalidades básicas em Chrome, Edge e Firefox (npm `@mcp-b/global`, 2026).
+
+Sobre limitações: WebMCP requer aba aberta (não funciona headless), SPAs complexas podem exigir refatoração, e a spec só expõe Tools — não Resources nem Prompts. Não existe discovery antes de visitar a página: o agente precisa navegar ao site para descobrir quais tools existem. São decisões de design conscientes, não defeitos.
+
+Nem Mozilla nem Apple comprometeram implementação. Microsoft co-assina a spec mas não anunciou timeline para Edge stable. Se sua audiência usa Safari, o polyfill é a via prática por enquanto.
+
+Agora, é justo fazer a pergunta contrária: "E se eu esperar a spec amadurecer antes de mexer em qualquer coisa?" Esperar é razoável se falamos de apostar o roadmap completo num padrão em rascunho. Mas anotar formulários com `toolname` e `tooldescription` custa horas, não semanas, e não quebra nada. O polyfill funciona hoje. O custo de não começar é perder a janela de _early adopter_ — os que já estão são Booking.com, Shopify e Expedia.
+
+Dados de InboundCycle reforçam o argumento da janela: em 28 auditorias GEO a empresas na Espanha, Chile e Brasil (janeiro a maio de 2026), apenas 27% das webs tinham llms.txt implementado, e 36% não tinham dados estruturados de nenhum tipo (InboundCycle, 2026). Se a maioria do mercado não deu nem o passo mais básico, WebMCP tardará ainda mais — e isso é precisamente a oportunidade para quem começa agora.
+
+Plataformas como Wix já geram llms.txt automaticamente, inclusive com endpoint MCP (InboundCycle, 2026). É questão de tempo que plataformas integrem suporte WebMCP nativo. A previsão realista de analistas: "mid-2027 realistic mass-adoption target" (DEV Community, 2026). Experimente agora, mas não aposte o roadmap ainda.
+
+Sobre privacidade: sob a LGPD, o controlador de dados continua sendo o site. O `SubmitEvent.agentInvoked` permite criar trilhas de auditoria que distinguem ações de agentes das de humanos. Orientação específica da ANPD sobre WebMCP não existe até o momento.
+
+## O que você pode fazer hoje — 3 passos que custam horas, não semanas
+
+*   **Passo 1:** Passe seus 5 formulários principais por `isitagentready.com` — diagnóstico em minutos
+*   **Passo 2:** Adicione `toolname` e `tooldescription` a esses formulários, sem ativar `toolautosubmit` — custo: cerca de 1 hora por formulário
+*   **Passo 3:** Inclua o polyfill `@mcp-b/global` com um `<script>` tag para compatibilidade fora do Chrome
+*   **Passo 4:** Instale a extensão Model Context Tool Inspector para verificar que os tools se registram corretamente
+*   **Passo 5 (próximo trimestre):** Registre-se no Origin Trial do Chrome 149 e implemente 1-2 tools imperativos na sua página mais visitada
+
+SEO tornou você encontrável. GEO e AEO tornaram você citável. WebMCP pode tornar você executável por agentes. É experimental, mas o custo de se preparar é baixo e o de não fazer pode ser alto. Se você precisa de [ajuda para implementar WebMCP](https://www.inboundcycle.com/pt/servicos/web-agentica), nossa equipe monitora a evolução do padrão desde o primeiro dia.
+
+## Perguntas frequentes
+
+### O que é WebMCP?
+
+WebMCP (Web Model Context Protocol) é uma proposta de padrão do W3C, desenvolvida por Google e Microsoft, que permite às páginas web declarar ferramentas que os agentes de IA do navegador podem descobrir e executar. Funciona com `document.modelContext` no Chrome 146+ e não requer servidor backend. A spec está em fase de rascunho, com Origin Trial previsto no Chrome 149.
+
+### Qual é a diferença entre MCP e WebMCP?
+
+MCP server-side requer servidor dedicado e autenticação OAuth; WebMCP funciona dentro da aba do navegador e herda a sessão do usuário. São complementares: MCP conecta agentes com dados internos via backend, WebMCP permite que agentes operem diretamente sobre a interface de um site público, aproveitando a autenticação já existente.
+
+### O WebMCP funciona em todos os navegadores?
+
+Em maio de 2026, WebMCP funciona nativamente apenas no Chrome 146+ (flag) com Origin Trial no Chrome 149. Firefox e Safari não anunciaram suporte. Para outros navegadores, existe o polyfill `@mcp-b/global`, que habilita funcionalidades básicas em Chrome, Edge e Firefox com uma única linha de código.
+
+### Por que isso importa para o futuro da web?
+
+WebMCP representa a terceira camada da evolução web: SEO tornou sites encontráveis, GEO e AEO os tornaram citáveis, WebMCP os torna executáveis por agentes de IA. Com 94% dos comitês de compra B2B usando LLMs (6sense, 2025), o agente do comprador será o gatekeeper do shortlist — e WebMCP é como seu site entra nele.
+
+### Como preparar meu site para WebMCP hoje?
+
+Três passos que custam horas: audite seus formulários em isitagentready.com, adicione os atributos `toolname` e `tooldescription` a cada formulário sem ativar `toolautosubmit`, e inclua o polyfill `@mcp-b/global` com um script tag. Não quebra nada, não afeta usuários normais e posiciona você como early adopter.
+
+ Atualizado: julho de 2026

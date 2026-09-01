@@ -1,0 +1,1519 @@
+{
+  "total_duration_s": 59.832,
+  "width": 1080,
+  "height": 1920,
+  "groups": [
+    {
+      "id": "caption-group-0",
+      "frame": 1,
+      "start": 0.1,
+      "end": 0.663,
+      "text": "O salto",
+      "words": [
+        {
+          "id": "caption-word-0-0",
+          "text": "O",
+          "start": 0.1,
+          "end": 0.381
+        },
+        {
+          "id": "caption-word-0-1",
+          "text": "salto",
+          "start": 0.381,
+          "end": 0.663
+        }
+      ]
+    },
+    {
+      "id": "caption-group-1",
+      "frame": 1,
+      "start": 0.663,
+      "end": 1.226,
+      "text": "para uma",
+      "words": [
+        {
+          "id": "caption-word-1-0",
+          "text": "para",
+          "start": 0.663,
+          "end": 0.944
+        },
+        {
+          "id": "caption-word-1-1",
+          "text": "uma",
+          "start": 0.944,
+          "end": 1.226
+        }
+      ]
+    },
+    {
+      "id": "caption-group-2",
+      "frame": 1,
+      "start": 1.226,
+      "end": 1.788,
+      "text": "inteligência geral",
+      "words": [
+        {
+          "id": "caption-word-2-0",
+          "text": "inteligência",
+          "start": 1.226,
+          "end": 1.507
+        },
+        {
+          "id": "caption-word-2-1",
+          "text": "geral",
+          "start": 1.507,
+          "end": 1.788
+        }
+      ]
+    },
+    {
+      "id": "caption-group-3",
+      "frame": 1,
+      "start": 1.788,
+      "end": 2.351,
+      "text": "não é",
+      "words": [
+        {
+          "id": "caption-word-3-0",
+          "text": "não",
+          "start": 1.788,
+          "end": 2.07
+        },
+        {
+          "id": "caption-word-3-1",
+          "text": "é",
+          "start": 2.07,
+          "end": 2.351
+        }
+      ]
+    },
+    {
+      "id": "caption-group-4",
+      "frame": 1,
+      "start": 2.351,
+      "end": 2.864,
+      "text": "responder melhor.",
+      "words": [
+        {
+          "id": "caption-word-4-0",
+          "text": "responder",
+          "start": 2.351,
+          "end": 2.633
+        },
+        {
+          "id": "caption-word-4-1",
+          "text": "melhor.",
+          "start": 2.633,
+          "end": 2.914
+        }
+      ]
+    },
+    {
+      "id": "caption-group-5",
+      "frame": 1,
+      "start": 2.864,
+      "end": 3.476,
+      "text": "É aprender",
+      "words": [
+        {
+          "id": "caption-word-5-0",
+          "text": "É",
+          "start": 2.864,
+          "end": 3.17
+        },
+        {
+          "id": "caption-word-5-1",
+          "text": "aprender",
+          "start": 3.17,
+          "end": 3.476
+        }
+      ]
+    },
+    {
+      "id": "caption-group-6",
+      "frame": 1,
+      "start": 3.476,
+      "end": 4.208,
+      "text": "algo aqui",
+      "words": [
+        {
+          "id": "caption-word-6-0",
+          "text": "algo",
+          "start": 3.476,
+          "end": 3.782
+        },
+        {
+          "id": "caption-word-6-1",
+          "text": "aqui",
+          "start": 3.782,
+          "end": 4.088
+        }
+      ]
+    },
+    {
+      "id": "caption-group-7",
+      "frame": 1,
+      "start": 4.394,
+      "end": 5.007,
+      "text": "e conseguir",
+      "words": [
+        {
+          "id": "caption-word-7-0",
+          "text": "e",
+          "start": 4.394,
+          "end": 4.7
+        },
+        {
+          "id": "caption-word-7-1",
+          "text": "conseguir",
+          "start": 4.7,
+          "end": 5.007
+        }
+      ]
+    },
+    {
+      "id": "caption-group-8",
+      "frame": 1,
+      "start": 5.007,
+      "end": 5.619,
+      "text": "usar esse",
+      "words": [
+        {
+          "id": "caption-word-8-0",
+          "text": "usar",
+          "start": 5.007,
+          "end": 5.313
+        },
+        {
+          "id": "caption-word-8-1",
+          "text": "esse",
+          "start": 5.313,
+          "end": 5.619
+        }
+      ]
+    },
+    {
+      "id": "caption-group-9",
+      "frame": 1,
+      "start": 5.619,
+      "end": 6.231,
+      "text": "conhecimento em",
+      "words": [
+        {
+          "id": "caption-word-9-0",
+          "text": "conhecimento",
+          "start": 5.619,
+          "end": 5.925
+        },
+        {
+          "id": "caption-word-9-1",
+          "text": "em",
+          "start": 5.925,
+          "end": 6.231
+        }
+      ]
+    },
+    {
+      "id": "caption-group-10",
+      "frame": 1,
+      "start": 6.231,
+      "end": 6.963,
+      "text": "outro lugar.",
+      "words": [
+        {
+          "id": "caption-word-10-0",
+          "text": "outro",
+          "start": 6.231,
+          "end": 6.537
+        },
+        {
+          "id": "caption-word-10-1",
+          "text": "lugar.",
+          "start": 6.537,
+          "end": 6.843
+        }
+      ]
+    },
+    {
+      "id": "caption-group-11",
+      "frame": 2,
+      "start": 7.012,
+      "end": 8.657,
+      "text": "A IA atual,",
+      "words": [
+        {
+          "id": "caption-word-11-0",
+          "text": "A",
+          "start": 7.012,
+          "end": 7.56
+        },
+        {
+          "id": "caption-word-11-1",
+          "text": "IA",
+          "start": 7.56,
+          "end": 8.109
+        },
+        {
+          "id": "caption-word-11-2",
+          "text": "atual,",
+          "start": 8.109,
+          "end": 8.657
+        }
+      ]
+    },
+    {
+      "id": "caption-group-12",
+      "frame": 2,
+      "start": 8.657,
+      "end": 10.302,
+      "text": "inclusive a generativa,",
+      "words": [
+        {
+          "id": "caption-word-12-0",
+          "text": "inclusive",
+          "start": 8.657,
+          "end": 9.206
+        },
+        {
+          "id": "caption-word-12-1",
+          "text": "a",
+          "start": 9.206,
+          "end": 9.754
+        },
+        {
+          "id": "caption-word-12-2",
+          "text": "generativa,",
+          "start": 9.754,
+          "end": 10.302
+        }
+      ]
+    },
+    {
+      "id": "caption-group-13",
+      "frame": 2,
+      "start": 10.302,
+      "end": 11.349,
+      "text": "continua especializada.",
+      "words": [
+        {
+          "id": "caption-word-13-0",
+          "text": "continua",
+          "start": 10.302,
+          "end": 10.851
+        },
+        {
+          "id": "caption-word-13-1",
+          "text": "especializada.",
+          "start": 10.851,
+          "end": 11.399
+        }
+      ]
+    },
+    {
+      "id": "caption-group-14",
+      "frame": 2,
+      "start": 11.349,
+      "end": 11.992,
+      "text": "AGI é",
+      "words": [
+        {
+          "id": "caption-word-14-0",
+          "text": "AGI",
+          "start": 11.349,
+          "end": 11.671
+        },
+        {
+          "id": "caption-word-14-1",
+          "text": "é",
+          "start": 11.671,
+          "end": 11.992
+        }
+      ]
+    },
+    {
+      "id": "caption-group-15",
+      "frame": 2,
+      "start": 11.992,
+      "end": 12.636,
+      "text": "a hipótese",
+      "words": [
+        {
+          "id": "caption-word-15-0",
+          "text": "a",
+          "start": 11.992,
+          "end": 12.314
+        },
+        {
+          "id": "caption-word-15-1",
+          "text": "hipótese",
+          "start": 12.314,
+          "end": 12.636
+        }
+      ]
+    },
+    {
+      "id": "caption-group-16",
+      "frame": 2,
+      "start": 12.636,
+      "end": 13.279,
+      "text": "de um",
+      "words": [
+        {
+          "id": "caption-word-16-0",
+          "text": "de",
+          "start": 12.636,
+          "end": 12.957
+        },
+        {
+          "id": "caption-word-16-1",
+          "text": "um",
+          "start": 12.957,
+          "end": 13.279
+        }
+      ]
+    },
+    {
+      "id": "caption-group-17",
+      "frame": 2,
+      "start": 13.279,
+      "end": 13.922,
+      "text": "sistema que",
+      "words": [
+        {
+          "id": "caption-word-17-0",
+          "text": "sistema",
+          "start": 13.279,
+          "end": 13.6
+        },
+        {
+          "id": "caption-word-17-1",
+          "text": "que",
+          "start": 13.6,
+          "end": 13.922
+        }
+      ]
+    },
+    {
+      "id": "caption-group-18",
+      "frame": 2,
+      "start": 13.922,
+      "end": 14.565,
+      "text": "aprende sozinho",
+      "words": [
+        {
+          "id": "caption-word-18-0",
+          "text": "aprende",
+          "start": 13.922,
+          "end": 14.244
+        },
+        {
+          "id": "caption-word-18-1",
+          "text": "sozinho",
+          "start": 14.244,
+          "end": 14.565
+        }
+      ]
+    },
+    {
+      "id": "caption-group-19",
+      "frame": 2,
+      "start": 14.565,
+      "end": 15.208,
+      "text": "e resolve",
+      "words": [
+        {
+          "id": "caption-word-19-0",
+          "text": "e",
+          "start": 14.565,
+          "end": 14.887
+        },
+        {
+          "id": "caption-word-19-1",
+          "text": "resolve",
+          "start": 14.887,
+          "end": 15.208
+        }
+      ]
+    },
+    {
+      "id": "caption-group-20",
+      "frame": 2,
+      "start": 15.208,
+      "end": 15.852,
+      "text": "problemas em",
+      "words": [
+        {
+          "id": "caption-word-20-0",
+          "text": "problemas",
+          "start": 15.208,
+          "end": 15.53
+        },
+        {
+          "id": "caption-word-20-1",
+          "text": "em",
+          "start": 15.53,
+          "end": 15.852
+        }
+      ]
+    },
+    {
+      "id": "caption-group-21",
+      "frame": 2,
+      "start": 15.852,
+      "end": 16.615,
+      "text": "vários domínios.",
+      "words": [
+        {
+          "id": "caption-word-21-0",
+          "text": "vários",
+          "start": 15.852,
+          "end": 16.173
+        },
+        {
+          "id": "caption-word-21-1",
+          "text": "domínios.",
+          "start": 16.173,
+          "end": 16.495
+        }
+      ]
+    },
+    {
+      "id": "caption-group-22",
+      "frame": 3,
+      "start": 16.66,
+      "end": 17.352,
+      "text": "Para isso,",
+      "words": [
+        {
+          "id": "caption-word-22-0",
+          "text": "Para",
+          "start": 16.66,
+          "end": 17.006
+        },
+        {
+          "id": "caption-word-22-1",
+          "text": "isso,",
+          "start": 17.006,
+          "end": 17.352
+        }
+      ]
+    },
+    {
+      "id": "caption-group-23",
+      "frame": 3,
+      "start": 17.352,
+      "end": 18.389,
+      "text": "não basta juntar",
+      "words": [
+        {
+          "id": "caption-word-23-0",
+          "text": "não",
+          "start": 17.352,
+          "end": 17.697
+        },
+        {
+          "id": "caption-word-23-1",
+          "text": "basta",
+          "start": 17.697,
+          "end": 18.043
+        },
+        {
+          "id": "caption-word-23-2",
+          "text": "juntar",
+          "start": 18.043,
+          "end": 18.389
+        }
+      ]
+    },
+    {
+      "id": "caption-group-24",
+      "frame": 3,
+      "start": 18.389,
+      "end": 18.685,
+      "text": "habilidades.",
+      "words": [
+        {
+          "id": "caption-word-24-0",
+          "text": "habilidades.",
+          "start": 18.389,
+          "end": 18.735
+        }
+      ]
+    },
+    {
+      "id": "caption-group-25",
+      "frame": 3,
+      "start": 18.685,
+      "end": 19.123,
+      "text": "Memória,",
+      "words": [
+        {
+          "id": "caption-word-25-0",
+          "text": "Memória,",
+          "start": 18.685,
+          "end": 19.123
+        }
+      ]
+    },
+    {
+      "id": "caption-group-26",
+      "frame": 3,
+      "start": 19.123,
+      "end": 19.561,
+      "text": "aprendizado,",
+      "words": [
+        {
+          "id": "caption-word-26-0",
+          "text": "aprendizado,",
+          "start": 19.123,
+          "end": 19.561
+        }
+      ]
+    },
+    {
+      "id": "caption-group-27",
+      "frame": 3,
+      "start": 19.561,
+      "end": 20.876,
+      "text": "percepção e criatividade",
+      "words": [
+        {
+          "id": "caption-word-27-0",
+          "text": "percepção",
+          "start": 19.561,
+          "end": 20
+        },
+        {
+          "id": "caption-word-27-1",
+          "text": "e",
+          "start": 20,
+          "end": 20.438
+        },
+        {
+          "id": "caption-word-27-2",
+          "text": "criatividade",
+          "start": 20.438,
+          "end": 20.876
+        }
+      ]
+    },
+    {
+      "id": "caption-group-28",
+      "frame": 3,
+      "start": 20.876,
+      "end": 22.191,
+      "text": "teriam de funcionar",
+      "words": [
+        {
+          "id": "caption-word-28-0",
+          "text": "teriam",
+          "start": 20.876,
+          "end": 21.314
+        },
+        {
+          "id": "caption-word-28-1",
+          "text": "de",
+          "start": 21.314,
+          "end": 21.752
+        },
+        {
+          "id": "caption-word-28-2",
+          "text": "funcionar",
+          "start": 21.752,
+          "end": 22.191
+        }
+      ]
+    },
+    {
+      "id": "caption-group-29",
+      "frame": 3,
+      "start": 22.191,
+      "end": 23.505,
+      "text": "como um único",
+      "words": [
+        {
+          "id": "caption-word-29-0",
+          "text": "como",
+          "start": 22.191,
+          "end": 22.629
+        },
+        {
+          "id": "caption-word-29-1",
+          "text": "um",
+          "start": 22.629,
+          "end": 23.067
+        },
+        {
+          "id": "caption-word-29-2",
+          "text": "único",
+          "start": 23.067,
+          "end": 23.505
+        }
+      ]
+    },
+    {
+      "id": "caption-group-30",
+      "frame": 3,
+      "start": 23.505,
+      "end": 24.94,
+      "text": "sistema cognitivo integrado.",
+      "words": [
+        {
+          "id": "caption-word-30-0",
+          "text": "sistema",
+          "start": 23.505,
+          "end": 23.944
+        },
+        {
+          "id": "caption-word-30-1",
+          "text": "cognitivo",
+          "start": 23.944,
+          "end": 24.382
+        },
+        {
+          "id": "caption-word-30-2",
+          "text": "integrado.",
+          "start": 24.382,
+          "end": 24.82
+        }
+      ]
+    },
+    {
+      "id": "caption-group-31",
+      "frame": 4,
+      "start": 24.988,
+      "end": 27.022,
+      "text": "A pesquisa explora caminhos",
+      "words": [
+        {
+          "id": "caption-word-31-0",
+          "text": "A",
+          "start": 24.988,
+          "end": 25.496
+        },
+        {
+          "id": "caption-word-31-1",
+          "text": "pesquisa",
+          "start": 25.496,
+          "end": 26.005
+        },
+        {
+          "id": "caption-word-31-2",
+          "text": "explora",
+          "start": 26.005,
+          "end": 26.513
+        },
+        {
+          "id": "caption-word-31-3",
+          "text": "caminhos",
+          "start": 26.513,
+          "end": 27.022
+        }
+      ]
+    },
+    {
+      "id": "caption-group-32",
+      "frame": 4,
+      "start": 27.022,
+      "end": 27.53,
+      "text": "simbólicos,",
+      "words": [
+        {
+          "id": "caption-word-32-0",
+          "text": "simbólicos,",
+          "start": 27.022,
+          "end": 27.53
+        }
+      ]
+    },
+    {
+      "id": "caption-group-33",
+      "frame": 4,
+      "start": 27.53,
+      "end": 28.039,
+      "text": "conexionistas,",
+      "words": [
+        {
+          "id": "caption-word-33-0",
+          "text": "conexionistas,",
+          "start": 27.53,
+          "end": 28.039
+        }
+      ]
+    },
+    {
+      "id": "caption-group-34",
+      "frame": 4,
+      "start": 28.039,
+      "end": 28.547,
+      "text": "universalistas,",
+      "words": [
+        {
+          "id": "caption-word-34-0",
+          "text": "universalistas,",
+          "start": 28.039,
+          "end": 28.547
+        }
+      ]
+    },
+    {
+      "id": "caption-group-35",
+      "frame": 4,
+      "start": 28.547,
+      "end": 30.023,
+      "text": "corporificados e híbridos.",
+      "words": [
+        {
+          "id": "caption-word-35-0",
+          "text": "corporificados",
+          "start": 28.547,
+          "end": 29.056
+        },
+        {
+          "id": "caption-word-35-1",
+          "text": "e",
+          "start": 29.056,
+          "end": 29.564
+        },
+        {
+          "id": "caption-word-35-2",
+          "text": "híbridos.",
+          "start": 29.564,
+          "end": 30.073
+        }
+      ]
+    },
+    {
+      "id": "caption-group-36",
+      "frame": 4,
+      "start": 30.023,
+      "end": 31.158,
+      "text": "Cada um tenta",
+      "words": [
+        {
+          "id": "caption-word-36-0",
+          "text": "Cada",
+          "start": 30.023,
+          "end": 30.401
+        },
+        {
+          "id": "caption-word-36-1",
+          "text": "um",
+          "start": 30.401,
+          "end": 30.78
+        },
+        {
+          "id": "caption-word-36-2",
+          "text": "tenta",
+          "start": 30.78,
+          "end": 31.158
+        }
+      ]
+    },
+    {
+      "id": "caption-group-37",
+      "frame": 4,
+      "start": 31.158,
+      "end": 32.294,
+      "text": "explicar uma parte",
+      "words": [
+        {
+          "id": "caption-word-37-0",
+          "text": "explicar",
+          "start": 31.158,
+          "end": 31.537
+        },
+        {
+          "id": "caption-word-37-1",
+          "text": "uma",
+          "start": 31.537,
+          "end": 31.915
+        },
+        {
+          "id": "caption-word-37-2",
+          "text": "parte",
+          "start": 31.915,
+          "end": 32.294
+        }
+      ]
+    },
+    {
+      "id": "caption-group-38",
+      "frame": 4,
+      "start": 32.294,
+      "end": 33.549,
+      "text": "diferente da inteligência.",
+      "words": [
+        {
+          "id": "caption-word-38-0",
+          "text": "diferente",
+          "start": 32.294,
+          "end": 32.672
+        },
+        {
+          "id": "caption-word-38-1",
+          "text": "da",
+          "start": 32.672,
+          "end": 33.051
+        },
+        {
+          "id": "caption-word-38-2",
+          "text": "inteligência.",
+          "start": 33.051,
+          "end": 33.429
+        }
+      ]
+    },
+    {
+      "id": "caption-group-39",
+      "frame": 5,
+      "start": 33.58,
+      "end": 34.635,
+      "text": "Aprendizado profundo,",
+      "words": [
+        {
+          "id": "caption-word-39-0",
+          "text": "Aprendizado",
+          "start": 33.58,
+          "end": 34.108
+        },
+        {
+          "id": "caption-word-39-1",
+          "text": "profundo,",
+          "start": 34.108,
+          "end": 34.635
+        }
+      ]
+    },
+    {
+      "id": "caption-group-40",
+      "frame": 5,
+      "start": 34.635,
+      "end": 35.691,
+      "text": "IA generativa,",
+      "words": [
+        {
+          "id": "caption-word-40-0",
+          "text": "IA",
+          "start": 34.635,
+          "end": 35.163
+        },
+        {
+          "id": "caption-word-40-1",
+          "text": "generativa,",
+          "start": 35.163,
+          "end": 35.691
+        }
+      ]
+    },
+    {
+      "id": "caption-group-41",
+      "frame": 5,
+      "start": 35.691,
+      "end": 36.218,
+      "text": "linguagem,",
+      "words": [
+        {
+          "id": "caption-word-41-0",
+          "text": "linguagem,",
+          "start": 35.691,
+          "end": 36.218
+        }
+      ]
+    },
+    {
+      "id": "caption-group-42",
+      "frame": 5,
+      "start": 36.218,
+      "end": 38.329,
+      "text": "visão e robótica empurram",
+      "words": [
+        {
+          "id": "caption-word-42-0",
+          "text": "visão",
+          "start": 36.218,
+          "end": 36.746
+        },
+        {
+          "id": "caption-word-42-1",
+          "text": "e",
+          "start": 36.746,
+          "end": 37.273
+        },
+        {
+          "id": "caption-word-42-2",
+          "text": "robótica",
+          "start": 37.273,
+          "end": 37.801
+        },
+        {
+          "id": "caption-word-42-3",
+          "text": "empurram",
+          "start": 37.801,
+          "end": 38.329
+        }
+      ]
+    },
+    {
+      "id": "caption-group-43",
+      "frame": 5,
+      "start": 38.329,
+      "end": 39.334,
+      "text": "essa pesquisa.",
+      "words": [
+        {
+          "id": "caption-word-43-0",
+          "text": "essa",
+          "start": 38.329,
+          "end": 38.856
+        },
+        {
+          "id": "caption-word-43-1",
+          "text": "pesquisa.",
+          "start": 38.856,
+          "end": 39.384
+        }
+      ]
+    },
+    {
+      "id": "caption-group-44",
+      "frame": 5,
+      "start": 39.334,
+      "end": 40.404,
+      "text": "Mas essas tecnologias",
+      "words": [
+        {
+          "id": "caption-word-44-0",
+          "text": "Mas",
+          "start": 39.334,
+          "end": 39.691
+        },
+        {
+          "id": "caption-word-44-1",
+          "text": "essas",
+          "start": 39.691,
+          "end": 40.047
+        },
+        {
+          "id": "caption-word-44-2",
+          "text": "tecnologias",
+          "start": 40.047,
+          "end": 40.404
+        }
+      ]
+    },
+    {
+      "id": "caption-group-45",
+      "frame": 5,
+      "start": 40.404,
+      "end": 41.475,
+      "text": "são peças do",
+      "words": [
+        {
+          "id": "caption-word-45-0",
+          "text": "são",
+          "start": 40.404,
+          "end": 40.761
+        },
+        {
+          "id": "caption-word-45-1",
+          "text": "peças",
+          "start": 40.761,
+          "end": 41.118
+        },
+        {
+          "id": "caption-word-45-2",
+          "text": "do",
+          "start": 41.118,
+          "end": 41.475
+        }
+      ]
+    },
+    {
+      "id": "caption-group-46",
+      "frame": 5,
+      "start": 41.475,
+      "end": 41.951,
+      "text": "quebra-cabeça",
+      "words": [
+        {
+          "id": "caption-word-46-0",
+          "text": "quebra-cabeça",
+          "start": 41.475,
+          "end": 41.831
+        }
+      ]
+    },
+    {
+      "id": "caption-group-47",
+      "frame": 5,
+      "start": 42.188,
+      "end": 43.258,
+      "text": "não a AGI",
+      "words": [
+        {
+          "id": "caption-word-47-0",
+          "text": "não",
+          "start": 42.188,
+          "end": 42.545
+        },
+        {
+          "id": "caption-word-47-1",
+          "text": "a",
+          "start": 42.545,
+          "end": 42.901
+        },
+        {
+          "id": "caption-word-47-2",
+          "text": "AGI",
+          "start": 42.901,
+          "end": 43.258
+        }
+      ]
+    },
+    {
+      "id": "caption-group-48",
+      "frame": 5,
+      "start": 43.258,
+      "end": 43.735,
+      "text": "pronta.",
+      "words": [
+        {
+          "id": "caption-word-48-0",
+          "text": "pronta.",
+          "start": 43.258,
+          "end": 43.615
+        }
+      ]
+    },
+    {
+      "id": "caption-group-49",
+      "frame": 6,
+      "start": 43.78,
+      "end": 44.971,
+      "text": "E ainda faltam",
+      "words": [
+        {
+          "id": "caption-word-49-0",
+          "text": "E",
+          "start": 43.78,
+          "end": 44.177
+        },
+        {
+          "id": "caption-word-49-1",
+          "text": "ainda",
+          "start": 44.177,
+          "end": 44.574
+        },
+        {
+          "id": "caption-word-49-2",
+          "text": "faltam",
+          "start": 44.574,
+          "end": 44.971
+        }
+      ]
+    },
+    {
+      "id": "caption-group-50",
+      "frame": 6,
+      "start": 44.971,
+      "end": 45.765,
+      "text": "três saltos:",
+      "words": [
+        {
+          "id": "caption-word-50-0",
+          "text": "três",
+          "start": 44.971,
+          "end": 45.368
+        },
+        {
+          "id": "caption-word-50-1",
+          "text": "saltos:",
+          "start": 45.368,
+          "end": 45.765
+        }
+      ]
+    },
+    {
+      "id": "caption-group-51",
+      "frame": 6,
+      "start": 45.765,
+      "end": 46.956,
+      "text": "transferir conhecimento entre",
+      "words": [
+        {
+          "id": "caption-word-51-0",
+          "text": "transferir",
+          "start": 45.765,
+          "end": 46.162
+        },
+        {
+          "id": "caption-word-51-1",
+          "text": "conhecimento",
+          "start": 46.162,
+          "end": 46.559
+        },
+        {
+          "id": "caption-word-51-2",
+          "text": "entre",
+          "start": 46.559,
+          "end": 46.956
+        }
+      ]
+    },
+    {
+      "id": "caption-group-52",
+      "frame": 6,
+      "start": 46.956,
+      "end": 47.353,
+      "text": "domínios,",
+      "words": [
+        {
+          "id": "caption-word-52-0",
+          "text": "domínios,",
+          "start": 46.956,
+          "end": 47.353
+        }
+      ]
+    },
+    {
+      "id": "caption-group-53",
+      "frame": 6,
+      "start": 47.353,
+      "end": 48.543,
+      "text": "reproduzir criatividade emocional",
+      "words": [
+        {
+          "id": "caption-word-53-0",
+          "text": "reproduzir",
+          "start": 47.353,
+          "end": 47.749
+        },
+        {
+          "id": "caption-word-53-1",
+          "text": "criatividade",
+          "start": 47.749,
+          "end": 48.146
+        },
+        {
+          "id": "caption-word-53-2",
+          "text": "emocional",
+          "start": 48.146,
+          "end": 48.543
+        }
+      ]
+    },
+    {
+      "id": "caption-group-54",
+      "frame": 6,
+      "start": 48.543,
+      "end": 49.734,
+      "text": "e perceber o",
+      "words": [
+        {
+          "id": "caption-word-54-0",
+          "text": "e",
+          "start": 48.543,
+          "end": 48.94
+        },
+        {
+          "id": "caption-word-54-1",
+          "text": "perceber",
+          "start": 48.94,
+          "end": 49.337
+        },
+        {
+          "id": "caption-word-54-2",
+          "text": "o",
+          "start": 49.337,
+          "end": 49.734
+        }
+      ]
+    },
+    {
+      "id": "caption-group-55",
+      "frame": 6,
+      "start": 49.734,
+      "end": 50.925,
+      "text": "mundo físico com",
+      "words": [
+        {
+          "id": "caption-word-55-0",
+          "text": "mundo",
+          "start": 49.734,
+          "end": 50.131
+        },
+        {
+          "id": "caption-word-55-1",
+          "text": "físico",
+          "start": 50.131,
+          "end": 50.528
+        },
+        {
+          "id": "caption-word-55-2",
+          "text": "com",
+          "start": 50.528,
+          "end": 50.925
+        }
+      ]
+    },
+    {
+      "id": "caption-group-56",
+      "frame": 6,
+      "start": 50.925,
+      "end": 51.82,
+      "text": "riqueza humana.",
+      "words": [
+        {
+          "id": "caption-word-56-0",
+          "text": "riqueza",
+          "start": 50.925,
+          "end": 51.322
+        },
+        {
+          "id": "caption-word-56-1",
+          "text": "humana.",
+          "start": 51.322,
+          "end": 51.719
+        }
+      ]
+    },
+    {
+      "id": "caption-group-57",
+      "frame": 7,
+      "start": 51.82,
+      "end": 52.47,
+      "text": "Por isso,",
+      "words": [
+        {
+          "id": "caption-word-57-0",
+          "text": "Por",
+          "start": 51.82,
+          "end": 52.145
+        },
+        {
+          "id": "caption-word-57-1",
+          "text": "isso,",
+          "start": 52.145,
+          "end": 52.47
+        }
+      ]
+    },
+    {
+      "id": "caption-group-58",
+      "frame": 7,
+      "start": 52.47,
+      "end": 53.121,
+      "text": "AGI continua",
+      "words": [
+        {
+          "id": "caption-word-58-0",
+          "text": "AGI",
+          "start": 52.47,
+          "end": 52.796
+        },
+        {
+          "id": "caption-word-58-1",
+          "text": "continua",
+          "start": 52.796,
+          "end": 53.121
+        }
+      ]
+    },
+    {
+      "id": "caption-group-59",
+      "frame": 7,
+      "start": 53.121,
+      "end": 53.771,
+      "text": "sendo uma",
+      "words": [
+        {
+          "id": "caption-word-59-0",
+          "text": "sendo",
+          "start": 53.121,
+          "end": 53.446
+        },
+        {
+          "id": "caption-word-59-1",
+          "text": "uma",
+          "start": 53.446,
+          "end": 53.771
+        }
+      ]
+    },
+    {
+      "id": "caption-group-60",
+      "frame": 7,
+      "start": 53.771,
+      "end": 54.422,
+      "text": "meta teórica",
+      "words": [
+        {
+          "id": "caption-word-60-0",
+          "text": "meta",
+          "start": 53.771,
+          "end": 54.096
+        },
+        {
+          "id": "caption-word-60-1",
+          "text": "teórica",
+          "start": 54.096,
+          "end": 54.422
+        }
+      ]
+    },
+    {
+      "id": "caption-group-61",
+      "frame": 7,
+      "start": 54.422,
+      "end": 55.022,
+      "text": "e distante.",
+      "words": [
+        {
+          "id": "caption-word-61-0",
+          "text": "e",
+          "start": 54.422,
+          "end": 54.747
+        },
+        {
+          "id": "caption-word-61-1",
+          "text": "distante.",
+          "start": 54.747,
+          "end": 55.072
+        }
+      ]
+    },
+    {
+      "id": "caption-group-62",
+      "frame": 7,
+      "start": 55.022,
+      "end": 55.631,
+      "text": "A diferença",
+      "words": [
+        {
+          "id": "caption-word-62-0",
+          "text": "A",
+          "start": 55.022,
+          "end": 55.327
+        },
+        {
+          "id": "caption-word-62-1",
+          "text": "diferença",
+          "start": 55.327,
+          "end": 55.631
+        }
+      ]
+    },
+    {
+      "id": "caption-group-63",
+      "frame": 7,
+      "start": 55.631,
+      "end": 56.241,
+      "text": "não é",
+      "words": [
+        {
+          "id": "caption-word-63-0",
+          "text": "não",
+          "start": 55.631,
+          "end": 55.936
+        },
+        {
+          "id": "caption-word-63-1",
+          "text": "é",
+          "start": 55.936,
+          "end": 56.241
+        }
+      ]
+    },
+    {
+      "id": "caption-group-64",
+      "frame": 7,
+      "start": 56.241,
+      "end": 56.85,
+      "text": "um modelo",
+      "words": [
+        {
+          "id": "caption-word-64-0",
+          "text": "um",
+          "start": 56.241,
+          "end": 56.545
+        },
+        {
+          "id": "caption-word-64-1",
+          "text": "modelo",
+          "start": 56.545,
+          "end": 56.85
+        }
+      ]
+    },
+    {
+      "id": "caption-group-65",
+      "frame": 7,
+      "start": 56.85,
+      "end": 57.459,
+      "text": "simplesmente maior.",
+      "words": [
+        {
+          "id": "caption-word-65-0",
+          "text": "simplesmente",
+          "start": 56.85,
+          "end": 57.154
+        },
+        {
+          "id": "caption-word-65-1",
+          "text": "maior.",
+          "start": 57.154,
+          "end": 57.459
+        }
+      ]
+    },
+    {
+      "id": "caption-group-66",
+      "frame": 7,
+      "start": 57.459,
+      "end": 58.847,
+      "text": "É uma inteligência",
+      "words": [
+        {
+          "id": "caption-word-66-0",
+          "text": "É",
+          "start": 57.459,
+          "end": 57.922
+        },
+        {
+          "id": "caption-word-66-1",
+          "text": "uma",
+          "start": 57.922,
+          "end": 58.384
+        },
+        {
+          "id": "caption-word-66-2",
+          "text": "inteligência",
+          "start": 58.384,
+          "end": 58.847
+        }
+      ]
+    },
+    {
+      "id": "caption-group-67",
+      "frame": 7,
+      "start": 58.847,
+      "end": 59.892,
+      "text": "realmente geral.",
+      "words": [
+        {
+          "id": "caption-word-67-0",
+          "text": "realmente",
+          "start": 58.847,
+          "end": 59.309
+        },
+        {
+          "id": "caption-word-67-1",
+          "text": "geral.",
+          "start": 59.309,
+          "end": 59.772
+        }
+      ]
+    }
+  ]
+}

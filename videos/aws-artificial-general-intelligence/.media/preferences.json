@@ -1,0 +1,55 @@
+{
+  "version": 1,
+  "preferences": {
+    "language": {
+      "value": "pt-BR",
+      "confirmed_in": [
+        "aws-artificial-general-intelligence"
+      ],
+      "updated_at": "2026-08-30T18:42:11.568Z"
+    },
+    "destination": {
+      "value": "vertical-social",
+      "confirmed_in": [
+        "aws-artificial-general-intelligence"
+      ],
+      "updated_at": "2026-08-30T18:42:12.263Z"
+    },
+    "voice": {
+      "value": "edge-tts/pt-BR-FranciscaNeural",
+      "confirmed_in": [
+        "aws-artificial-general-intelligence"
+      ],
+      "updated_at": "2026-08-30T18:42:12.355Z"
+    },
+    "aspect": {
+      "value": "1080x1920",
+      "confirmed_in": [
+        "aws-artificial-general-intelligence"
+      ],
+      "updated_at": "2026-08-30T18:42:13.455Z"
+    },
+    "flow": {
+      "value": "automation",
+      "confirmed_in": [
+        "aws-artificial-general-intelligence"
+      ],
+      "updated_at": "2026-08-30T18:42:13.490Z"
+    },
+    "storyboard": {
+      "value": "no",
+      "confirmed_in": [
+        "aws-artificial-general-intelligence"
+      ],
+      "updated_at": "2026-08-30T18:42:14.976Z"
+    },
+    "style_preset.faceless-explainer": {
+      "value": "code-editorial",
+      "confirmed_in": [
+        "aws-artificial-general-intelligence"
+      ],
+      "updated_at": "2026-08-30T18:42:59.402Z"
+    }
+  },
+  "sightings": {}
+}

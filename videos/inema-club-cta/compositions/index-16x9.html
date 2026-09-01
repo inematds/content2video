@@ -1,0 +1,440 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1920, height=1080" />
+    <title>INEMA.CLUB — CTA 16:9</title>
+    <script src="assets/vendor/gsap.min.js"></script>
+    <style>
+      @font-face {
+        font-family: "Space Grotesk";
+        src: url("assets/fonts/space-grotesk-400.woff2") format("woff2");
+        font-weight: 400;
+        font-style: normal;
+        font-display: block;
+      }
+      @font-face {
+        font-family: "Space Grotesk";
+        src: url("assets/fonts/space-grotesk-600.woff2") format("woff2");
+        font-weight: 600;
+        font-style: normal;
+        font-display: block;
+      }
+      @font-face {
+        font-family: "Space Grotesk";
+        src: url("assets/fonts/space-grotesk-700.woff2") format("woff2");
+        font-weight: 700;
+        font-style: normal;
+        font-display: block;
+      }
+
+      :root {
+        --navy: #071a33;
+        --cyan: #00d4ff;
+        --white: #f4faff;
+        --safe-x: 144px;
+        --safe-y: 65px;
+      }
+
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        width: 1920px;
+        height: 1080px;
+        margin: 0;
+        overflow: hidden;
+        background: var(--navy);
+      }
+
+      body {
+        font-family: "Space Grotesk", sans-serif;
+      }
+
+      #stage {
+        position: relative;
+        width: 1920px;
+        height: 1080px;
+        overflow: hidden;
+        background:
+          radial-gradient(circle at 50% 50%, rgba(0, 212, 255, 0.09), transparent 34%),
+          var(--navy);
+        color: var(--white);
+      }
+
+      .clip {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+      }
+
+      .safe-frame {
+        position: absolute;
+        inset: var(--safe-y) var(--safe-x);
+        overflow: hidden;
+      }
+
+      .brand-axis {
+        position: absolute;
+        left: 50%;
+        top: 215px;
+        width: 2px;
+        height: 520px;
+        background: linear-gradient(180deg, transparent, rgba(0, 212, 255, 0.28), transparent);
+        transform: translateX(-50%);
+      }
+
+      .axis-dot {
+        position: absolute;
+        left: 50%;
+        top: 475px;
+        width: 12px;
+        height: 12px;
+        border: 2px solid var(--cyan);
+        border-radius: 50%;
+        transform: translate(-50%, -50%);
+      }
+
+      .verb-layer,
+      .lockup {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+      }
+
+      .verb {
+        max-width: 1632px;
+        margin: 0;
+        color: var(--white);
+        font-size: 174px;
+        font-weight: 700;
+        line-height: 0.96;
+        letter-spacing: -0.045em;
+        text-transform: uppercase;
+        white-space: nowrap;
+        transform-origin: 50% 56%;
+      }
+
+      .verb em {
+        color: var(--cyan);
+        font-style: normal;
+      }
+
+      .verb,
+      .trace,
+      .lockup {
+        opacity: 0;
+        visibility: hidden;
+      }
+
+      .trace {
+        position: absolute;
+        left: 50%;
+        top: calc(50% + 112px);
+        width: 570px;
+        height: 8px;
+        border-radius: 999px;
+        background: var(--cyan);
+        transform: translateX(-50%);
+        transform-origin: center;
+      }
+
+      #trace-pratique {
+        width: 720px;
+        height: 3px;
+        transform: translateX(-50%) rotate(-2deg);
+      }
+
+      #trace-evolua {
+        width: 450px;
+        height: 12px;
+        opacity: 0.78;
+      }
+
+      .lockup {
+        flex-direction: column;
+      }
+
+      .signature {
+        width: 1500px;
+        margin: 0 0 40px;
+        color: var(--white);
+        font-size: 72px;
+        font-weight: 700;
+        line-height: 1.04;
+        letter-spacing: -0.042em;
+        text-transform: uppercase;
+      }
+
+      .signature span {
+        color: var(--cyan);
+      }
+
+      .lock-rule {
+        width: 144px;
+        height: 6px;
+        margin-bottom: 42px;
+        border-radius: 999px;
+        background: var(--cyan);
+      }
+
+      .cta {
+        width: 1500px;
+        margin: 0 0 34px;
+        font-size: 72px;
+        font-weight: 600;
+        line-height: 1.04;
+        letter-spacing: -0.038em;
+      }
+
+      .cta strong {
+        color: var(--cyan);
+        font-weight: 700;
+      }
+
+      .url {
+        display: inline-flex;
+        min-width: 376px;
+        min-height: 72px;
+        align-items: center;
+        justify-content: center;
+        margin: 0;
+        padding: 14px 38px;
+        border: 2px solid rgba(0, 212, 255, 0.62);
+        border-radius: 999px;
+        color: var(--white);
+        font-size: 38px;
+        font-weight: 500;
+        line-height: 1;
+        letter-spacing: 0.035em;
+      }
+
+      #headline-audit-error {
+        position: absolute;
+        inset: 0;
+        z-index: 50;
+        display: none;
+        align-items: center;
+        justify-content: center;
+        padding: 100px;
+        background: var(--navy);
+        color: var(--white);
+        font: 600 40px/1.25 "Space Grotesk", sans-serif;
+        text-align: center;
+      }
+
+      #stage[data-headline-validation="failed"] #headline-audit-error {
+        display: flex;
+      }
+    </style>
+  </head>
+  <body>
+    <main
+      id="stage"
+      data-composition-id="inema-club-cta-16x9"
+      data-start="0"
+      data-duration="5.5"
+      data-fps="30"
+      data-width="1920"
+      data-height="1080"
+      data-headline-validation="pending"
+    >
+      <section
+        id="cta-card-16x9"
+        class="clip"
+        data-start="0"
+        data-duration="5.5"
+        data-track-index="0"
+        aria-label="Continue aprendendo no INEMA.CLUB"
+      >
+        <div class="safe-frame">
+          <div class="brand-axis" aria-hidden="true"></div>
+          <div class="axis-dot" aria-hidden="true"></div>
+
+          <div id="scene-aprenda-16x9" class="verb-layer">
+            <h1 id="headline-aprenda-16x9" class="verb">APRENDA<em>.</em></h1>
+            <div id="trace-aprenda-16x9" class="trace" aria-hidden="true"></div>
+          </div>
+
+          <div id="scene-pratique-16x9" class="verb-layer">
+            <h2 id="headline-pratique-16x9" class="verb">PRATIQUE<em>.</em></h2>
+            <div id="trace-pratique" class="trace" aria-hidden="true"></div>
+          </div>
+
+          <div id="scene-evolua-16x9" class="verb-layer">
+            <h2 id="headline-evolua-16x9" class="verb">EVOLUA<em>.</em></h2>
+            <div id="trace-evolua" class="trace" aria-hidden="true"></div>
+          </div>
+
+          <div id="final-lockup-16x9" class="lockup">
+            <p id="headline-signature-16x9" class="signature">
+              APRENDA. PRATIQUE. <span>EVOLUA.</span>
+            </p>
+            <div class="lock-rule" aria-hidden="true"></div>
+            <p id="headline-cta-16x9" class="cta">Continue no <strong>INEMA.CLUB</strong></p>
+            <p id="headline-url-16x9" class="url">inema.club</p>
+          </div>
+        </div>
+      </section>
+      <div id="headline-audit-error" role="alert">
+        Prévia bloqueada: uma manchete ultrapassou a área segura.
+      </div>
+    </main>
+
+    <script>
+      (function () {
+        "use strict";
+
+        window.__timelines = window.__timelines || {};
+        var tl = gsap.timeline({ paused: true });
+
+        tl.fromTo(
+          "#headline-aprenda-16x9",
+          { y: 96, scaleX: 0.94, scaleY: 1.08, autoAlpha: 0 },
+          { y: 0, scaleX: 1, scaleY: 1, autoAlpha: 1, duration: 0.2, ease: "power4.out" },
+          0,
+        );
+        tl.fromTo(
+          "#trace-aprenda-16x9",
+          { scaleX: 0, autoAlpha: 0 },
+          { scaleX: 1, autoAlpha: 1, duration: 0.24, ease: "power3.out" },
+          0.12,
+        );
+        tl.to("#scene-aprenda-16x9", { autoAlpha: 0, duration: 0.12, ease: "power2.in" }, 0.78);
+
+        tl.fromTo(
+          "#headline-pratique-16x9",
+          { x: 32, scaleX: 0.96, autoAlpha: 0 },
+          { x: 0, scaleX: 1, autoAlpha: 1, duration: 0.2, ease: "expo.out" },
+          0.9,
+        );
+        tl.fromTo(
+          "#trace-pratique",
+          { scaleX: 0, autoAlpha: 0 },
+          { scaleX: 1, autoAlpha: 1, duration: 0.24, ease: "power3.out" },
+          1.02,
+        );
+        tl.to("#scene-pratique-16x9", { autoAlpha: 0, duration: 0.12, ease: "power2.in" }, 1.68);
+
+        tl.fromTo(
+          "#headline-evolua-16x9",
+          { scale: 0.78, autoAlpha: 0 },
+          { scale: 1, autoAlpha: 1, duration: 0.2, ease: "power4.out" },
+          1.8,
+        );
+        tl.fromTo(
+          "#trace-evolua",
+          { scaleX: 0, autoAlpha: 0 },
+          { scaleX: 1, autoAlpha: 0.78, duration: 0.24, ease: "power3.out" },
+          1.92,
+        );
+        tl.to(
+          "#headline-evolua-16x9",
+          { textShadow: "0 0 34px rgba(0, 212, 255, 0.48)", duration: 0.1, ease: "sine.out" },
+          2,
+        );
+        tl.to(
+          "#headline-evolua-16x9",
+          { textShadow: "0 0 0 rgba(0, 212, 255, 0)", duration: 0.2, ease: "sine.in" },
+          2.1,
+        );
+
+        tl.to(
+          "#scene-evolua-16x9",
+          { scale: 0.22, autoAlpha: 0, duration: 0.4, ease: "power3.in" },
+          3.4,
+        );
+        tl.fromTo(
+          "#final-lockup-16x9",
+          { y: 24, scale: 0.96, autoAlpha: 0 },
+          { y: 0, scale: 1, autoAlpha: 1, duration: 0.2, ease: "power2.out" },
+          3.8,
+        );
+        tl.to({}, { duration: 1.5 }, 4);
+
+        window.__timelines["inema-club-cta-16x9"] = tl;
+        tl.seek(0);
+
+        var SAFE = { left: 144, right: 1776, top: 65, bottom: 1015 };
+        var AUDIT_POINTS = [
+          { time: 0, ids: ["headline-aprenda-16x9"] },
+          { time: 0.2, ids: ["headline-aprenda-16x9"] },
+          { time: 0.9, ids: ["headline-aprenda-16x9"] },
+          { time: 0.9, ids: ["headline-pratique-16x9"] },
+          { time: 1.1, ids: ["headline-pratique-16x9"] },
+          { time: 1.8, ids: ["headline-pratique-16x9"] },
+          { time: 1.8, ids: ["headline-evolua-16x9"] },
+          { time: 2, ids: ["headline-evolua-16x9"] },
+          { time: 3.8, ids: ["headline-evolua-16x9"] },
+          {
+            time: 3.8,
+            ids: ["headline-signature-16x9", "headline-cta-16x9", "headline-url-16x9"],
+          },
+          {
+            time: 4,
+            ids: ["headline-signature-16x9", "headline-cta-16x9", "headline-url-16x9"],
+          },
+          {
+            time: 5.5,
+            ids: ["headline-signature-16x9", "headline-cta-16x9", "headline-url-16x9"],
+          },
+        ];
+
+        function auditHeadlines() {
+          var stage = document.getElementById("stage");
+          var previousTime = tl.time();
+          var failures = [];
+
+          AUDIT_POINTS.forEach(function (point) {
+            tl.seek(point.time, true);
+            point.ids.forEach(function (id) {
+              var rect = document.getElementById(id).getBoundingClientRect();
+              if (
+                rect.left < SAFE.left - 0.5 ||
+                rect.right > SAFE.right + 0.5 ||
+                rect.top < SAFE.top - 0.5 ||
+                rect.bottom > SAFE.bottom + 0.5
+              ) {
+                failures.push({
+                  id: id,
+                  time: point.time,
+                  rect: {
+                    left: rect.left,
+                    right: rect.right,
+                    top: rect.top,
+                    bottom: rect.bottom,
+                  },
+                });
+              }
+            });
+          });
+
+          tl.seek(previousTime, true);
+          stage.dataset.headlineValidation = failures.length ? "failed" : "passed";
+          window.__headlineAuditResult = {
+            passed: failures.length === 0,
+            safeArea: SAFE,
+            checks: AUDIT_POINTS.length,
+            failures: failures,
+          };
+
+          if (failures.length) {
+            throw new Error("Headline safe-area validation failed: " + JSON.stringify(failures));
+          }
+
+          return window.__headlineAuditResult;
+        }
+
+        window.__headlineAudit = document.fonts.ready.then(auditHeadlines);
+      })();
+    </script>
+  </body>
+</html>

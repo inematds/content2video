@@ -1,0 +1,397 @@
+<template>
+  <style>
+    @font-face {
+      font-family: "EB Garamond";
+      src: url("assets/fonts/EBGaramond-400.woff2") format("woff2");
+      font-style: normal;
+      font-weight: 400;
+    }
+
+    @font-face {
+      font-family: "Inter";
+      src: url("assets/fonts/Inter-400.woff2") format("woff2");
+      font-style: normal;
+      font-weight: 400;
+    }
+
+    @font-face {
+      font-family: "JetBrains Mono";
+      src: url("assets/fonts/JetBrainsMono-500.woff2") format("woff2");
+      font-style: normal;
+      font-weight: 500;
+    }
+
+    #root {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      container-type: size;
+      color: #141413;
+    }
+
+    .clip {
+      position: absolute;
+      inset: 0;
+    }
+
+    [class~="01-fotografia-ground"] {
+      background: #FAF9F5;
+      z-index: 0;
+    }
+
+    [class~="01-fotografia-stage"] {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      overflow: hidden;
+    }
+
+    [class~="01-fotografia-index"] {
+      position: absolute;
+      top: 4.2cqw;
+      left: 4.2cqw;
+      font-family: "JetBrains Mono";
+      font-size: 2.4cqw;
+      font-weight: 500;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: #141413;
+    }
+
+    [class~="01-fotografia-rule"] {
+      position: absolute;
+      top: 9.8cqw;
+      left: 4.2cqw;
+      width: 91.6cqw;
+      height: 1px;
+      background: rgba(20, 20, 19, 0.12);
+    }
+
+    [class~="01-fotografia-beat"] {
+      position: absolute;
+      top: 13.5cqw;
+      left: 7.5cqw;
+      width: 85cqw;
+      text-align: center;
+      font-family: "EB Garamond";
+      font-size: 8.15cqw;
+      font-weight: 400;
+      line-height: 1.02;
+      letter-spacing: -0.022em;
+      color: #141413;
+      white-space: nowrap;
+      will-change: transform, opacity, filter;
+    }
+
+    [class~="01-fotografia-photo"] {
+      position: absolute;
+      top: 31cqh;
+      left: 13cqw;
+      width: 74cqw;
+      height: 47cqh;
+      padding: 3.2cqw 3.2cqw 7.6cqw;
+      box-sizing: border-box;
+      border: 1px solid rgba(20, 20, 19, 0.2);
+      border-radius: 12px;
+      background: #EFE9DE;
+      box-shadow: 0 1px 3px rgba(20, 20, 19, 0.08), 0 4px 16px rgba(20, 20, 19, 0.04);
+      transform-origin: 50% 47%;
+      will-change: transform;
+    }
+
+    [class~="01-fotografia-page"] {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      border: 1px solid rgba(20, 20, 19, 0.12);
+      border-radius: 8px;
+      background: #FAF9F5;
+    }
+
+    [class~="01-fotografia-browserbar"] {
+      display: flex;
+      align-items: center;
+      gap: 1.3cqw;
+      height: 7.2cqh;
+      padding: 0 3.2cqw;
+      border-bottom: 1px solid rgba(20, 20, 19, 0.12);
+      box-sizing: border-box;
+      background: #ECE3D4;
+    }
+
+    [class~="01-fotografia-dot"] {
+      width: 1.35cqw;
+      height: 1.35cqw;
+      border: 1px solid rgba(20, 20, 19, 0.2);
+      border-radius: 9999px;
+    }
+
+    [class~="01-fotografia-url"] {
+      flex: 1;
+      height: 2.4cqh;
+      margin-left: 1.2cqw;
+      border: 1px solid rgba(20, 20, 19, 0.12);
+      border-radius: 9999px;
+      background: #FAF9F5;
+    }
+
+    [class~="01-fotografia-pagebody"] {
+      position: relative;
+      height: calc(100% - 7.2cqh);
+      padding: 4.4cqw;
+      box-sizing: border-box;
+    }
+
+    [class~="01-fotografia-wire-title"] {
+      width: 59%;
+      height: 2.5cqh;
+      border-radius: 6px;
+      background: #141413;
+    }
+
+    [class~="01-fotografia-wire-copy"] {
+      width: 82%;
+      height: 1.2cqh;
+      margin-top: 2.2cqh;
+      border-radius: 6px;
+      background: rgba(20, 20, 19, 0.12);
+    }
+
+    [class~="01-fotografia-control"] {
+      position: absolute;
+      left: 4.4cqw;
+      right: 4.4cqw;
+      height: 7.6cqh;
+      border: 1px solid rgba(20, 20, 19, 0.2);
+      border-radius: 8px;
+      background: #EFE9DE;
+    }
+
+    [class~="01-fotografia-control"]::before {
+      content: "";
+      position: absolute;
+      top: 2.55cqh;
+      left: 3cqw;
+      width: 42%;
+      height: 1.25cqh;
+      border-radius: 6px;
+      background: rgba(20, 20, 19, 0.2);
+    }
+
+    [class~="01-fotografia-control"]::after {
+      content: "";
+      position: absolute;
+      top: 2.1cqh;
+      right: 2.4cqw;
+      width: 6.8cqw;
+      height: 2.2cqh;
+      border: 1px solid rgba(20, 20, 19, 0.2);
+      border-radius: 9999px;
+      background: #FAF9F5;
+    }
+
+    [class~="01-fotografia-control-a"] { top: 14cqh; }
+    [class~="01-fotografia-control-b"] { top: 25cqh; }
+    [class~="01-fotografia-control-c"] { top: 36cqh; }
+
+    [class~="01-fotografia-detection"] {
+      position: absolute;
+      left: 2.6cqw;
+      right: 2.6cqw;
+      height: 9.4cqh;
+      border: 1px dashed rgba(20, 20, 19, 0.42);
+      border-radius: 8px;
+      opacity: 0;
+    }
+
+    [class~="01-fotografia-detection"]::before,
+    [class~="01-fotografia-detection"]::after {
+      content: "";
+      position: absolute;
+      width: 1.3cqw;
+      height: 1.3cqw;
+      border: 1px solid #141413;
+      background: #FAF9F5;
+    }
+
+    [class~="01-fotografia-detection"]::before { top: -0.7cqw; left: -0.7cqw; }
+    [class~="01-fotografia-detection"]::after { right: -0.7cqw; bottom: -0.7cqw; }
+    [class~="01-fotografia-detection-a"] { top: 13.1cqh; }
+    [class~="01-fotografia-detection-b"] { top: 24.1cqh; }
+    [class~="01-fotografia-detection-c"] { top: 35.1cqh; }
+
+    [class~="01-fotografia-cursor"] {
+      position: absolute;
+      top: 27cqh;
+      left: 47cqw;
+      width: 4.6cqw;
+      height: 5.9cqw;
+      z-index: 4;
+      filter: drop-shadow(0 1px 1px rgba(20, 20, 19, 0.14));
+      will-change: transform;
+    }
+
+    [class~="01-fotografia-cursor"] svg {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+
+    [class~="01-fotografia-photo-caption"] {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 2.1cqh;
+      text-align: center;
+      font-family: "JetBrains Mono";
+      font-size: 2.2cqw;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(20, 20, 19, 0.62);
+    }
+
+    [class~="01-fotografia-question"] {
+      position: absolute;
+      top: 74.5cqh;
+      left: 9cqw;
+      width: 82cqw;
+      padding-top: 2.2cqh;
+      border-top: 1px solid #CC785C;
+      box-sizing: border-box;
+      text-align: center;
+      font-family: "Inter";
+      font-size: 3.15cqw;
+      font-weight: 400;
+      line-height: 1.35;
+      color: #CC785C;
+      will-change: transform, opacity;
+    }
+  </style>
+
+  <div data-hf-id="hf-46ik" id="root" data-composition-id="01-fotografia" data-width="1080" data-height="1920" data-duration="9.424">
+    <div data-hf-id="hf-ry8j" class="clip 01-fotografia-ground" data-start="0" data-duration="9.424" data-track-index="0"></div>
+
+    <div data-hf-id="hf-oy5f" class="clip 01-fotografia-stage" data-start="0" data-duration="9.424" data-track-index="1">
+      <div data-hf-id="hf-cxvq" class="01-fotografia-index">01 · interface visual</div>
+      <div data-hf-id="hf-9987" class="01-fotografia-rule"></div>
+
+      <div data-hf-id="hf-4gg4" id="01-fotografia-beat-see" class="01-fotografia-beat">Vê botões</div>
+      <div data-hf-id="hf-b6oo" id="01-fotografia-beat-guess" class="01-fotografia-beat">Mas precisa adivinhar</div>
+
+      <div data-hf-id="hf-8538" id="01-fotografia-photo" class="01-fotografia-photo">
+        <div data-hf-id="hf-ruu0" class="01-fotografia-page">
+          <div data-hf-id="hf-z4o2" class="01-fotografia-browserbar">
+            <span data-hf-id="hf-94a1" class="01-fotografia-dot"></span>
+            <span data-hf-id="hf-cee5" class="01-fotografia-dot"></span>
+            <span data-hf-id="hf-dlb8" class="01-fotografia-dot"></span>
+            <span data-hf-id="hf-guxb" class="01-fotografia-url"></span>
+          </div>
+          <div data-hf-id="hf-ll7o" class="01-fotografia-pagebody">
+            <div data-hf-id="hf-l3ef" class="01-fotografia-wire-title"></div>
+            <div data-hf-id="hf-5z0g" class="01-fotografia-wire-copy"></div>
+            <div data-hf-id="hf-jks6" class="01-fotografia-control 01-fotografia-control-a"></div>
+            <div data-hf-id="hf-df2d" class="01-fotografia-control 01-fotografia-control-b"></div>
+            <div data-hf-id="hf-cnek" class="01-fotografia-control 01-fotografia-control-c"></div>
+            <div data-hf-id="hf-qwou" class="01-fotografia-detection 01-fotografia-detection-a"></div>
+            <div data-hf-id="hf-mykt" class="01-fotografia-detection 01-fotografia-detection-b"></div>
+            <div data-hf-id="hf-m6x0" class="01-fotografia-detection 01-fotografia-detection-c"></div>
+            <div data-hf-id="hf-53dj" id="01-fotografia-cursor" class="01-fotografia-cursor" aria-hidden="true">
+              <svg data-hf-id="hf-c5ri" viewBox="0 0 52 66" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path data-hf-id="hf-14ph" d="M5 4L45 39H27L36 59L25 64L16 43L5 54V4Z" fill="#FAF9F5" stroke="#141413" stroke-width="3" stroke-linejoin="round" />
+              </svg>
+            </div>
+          </div>
+        </div>
+        <div data-hf-id="hf-1ruw" class="01-fotografia-photo-caption">fotografia</div>
+      </div>
+
+      <div data-hf-id="hf-0m3n" id="01-fotografia-question" class="01-fotografia-question">e se a página explicasse como agir?</div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+  <script>
+    window.__timelines = window.__timelines || {};
+    const tl = gsap.timeline({ paused: true });
+    window.__timelines["01-fotografia"] = tl;
+
+    const beatSee = '[id="01-fotografia-beat-see"]';
+    const beatGuess = '[id="01-fotografia-beat-guess"]';
+    const photo = '[id="01-fotografia-photo"]';
+    const cursor = '[id="01-fotografia-cursor"]';
+    const detections = '[class~="01-fotografia-detection"]';
+    const question = '[id="01-fotografia-question"]';
+
+    tl.fromTo(photo,
+      { opacity: 0, y: 34, scale: 0.96 },
+      { opacity: 1, y: 0, scale: 1, duration: 0.48, ease: "power2.out" },
+      0
+    );
+    tl.fromTo('[class~="01-fotografia-index"], [class~="01-fotografia-rule"]',
+      { opacity: 0 },
+      { opacity: 1, duration: 0.36, ease: "power1.out" },
+      0.12
+    );
+    tl.fromTo('[class~="01-fotografia-control"]',
+      { opacity: 0, y: 10 },
+      { opacity: 1, y: 0, duration: 0.34, stagger: 0.34, ease: "power2.out" },
+      0.42
+    );
+    tl.fromTo(cursor,
+      { opacity: 0, x: -18, y: -10 },
+      { opacity: 1, x: 0, y: 0, duration: 0.32, ease: "power2.out" },
+      0.28
+    );
+    tl.to(cursor, { x: -92, y: 74, duration: 0.48, ease: "power1.inOut" }, 0.72);
+    tl.to(cursor, { x: 24, y: 150, duration: 0.48, ease: "power1.inOut" }, 1.2);
+    tl.to(cursor, { x: -42, y: 18, duration: 0.42, ease: "power1.inOut" }, 1.68);
+
+    tl.fromTo(beatSee,
+      { opacity: 0, y: 18, filter: "blur(8px)" },
+      { opacity: 1, y: 0, filter: "blur(0px)", duration: 0.38, ease: "power2.out" },
+      1.82
+    );
+    tl.fromTo(detections,
+      { opacity: 0, scale: 0.985 },
+      { opacity: 1, scale: 1, duration: 0.28, stagger: 0.32, ease: "power1.out" },
+      2.1
+    );
+    tl.to(cursor, { x: 48, y: 80, duration: 0.48, ease: "power1.inOut" }, 2.24);
+    tl.to(cursor, { x: -80, y: 156, duration: 0.52, ease: "power1.inOut" }, 2.82);
+    tl.to(cursor, { x: 0, y: 0, duration: 0.52, ease: "power1.inOut" }, 3.48);
+    tl.to(cursor, { x: 70, y: 156, duration: 0.5, ease: "power1.inOut" }, 4.12);
+    tl.to(cursor, { x: 0, y: 0, duration: 0.42, ease: "power1.inOut" }, 4.62);
+
+    tl.to(beatSee,
+      { opacity: 0, scale: 1.08, filter: "blur(9px)", duration: 0.28, ease: "power2.in" },
+      4.8
+    );
+    tl.fromTo(beatGuess,
+      { opacity: 0, scale: 0.92, filter: "blur(9px)" },
+      { opacity: 1, scale: 1, filter: "blur(0px)", duration: 0.48, ease: "power2.out" },
+      4.94
+    );
+    tl.to(photo,
+      { x: "5cqw", y: "1.5cqh", scale: 0.87, duration: 1.12, ease: "power2.inOut" },
+      4.8
+    );
+    tl.to(detections, { opacity: 0.34, duration: 0.5, ease: "power1.out" }, 5.2);
+    tl.to(cursor, { x: 0, y: 0, duration: 0.68, ease: "power2.inOut" }, 5.24);
+    tl.to(photo, { scale: 0.855, duration: 0.75, ease: "power1.out" }, 6.05);
+
+    tl.fromTo(question,
+      { opacity: 0, y: 16 },
+      { opacity: 1, y: 0, duration: 0.46, ease: "power2.out" },
+      7.0
+    );
+    tl.fromTo(question,
+      { clipPath: "inset(0 100% 0 0)" },
+      { clipPath: "inset(0 0% 0 0)", duration: 0.62, ease: "power2.out" },
+      7.0
+    );
+    tl.to(photo, { scale: 0.85, duration: 1.2, ease: "power1.out" }, 7.0);
+  </script>
+</template>

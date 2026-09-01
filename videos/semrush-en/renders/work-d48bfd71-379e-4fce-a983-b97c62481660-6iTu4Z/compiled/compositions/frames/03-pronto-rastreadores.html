@@ -1,0 +1,472 @@
+<template>
+  <style>
+    @font-face{font-family:"Lazzer";font-weight:700;font-style:normal;font-display:block;src:url("assets/fonts/Lazzer-Bold.woff") format("woff");}
+    @font-face{font-family:"Lazzer";font-weight:500;font-style:normal;font-display:block;src:url("assets/fonts/Lazzer-Medium.woff") format("woff");}
+    @font-face{font-family:"Lazzer";font-weight:400;font-style:normal;font-display:block;src:url("assets/fonts/Lazzer-Regular.woff") format("woff");}
+    @font-face{font-family:"Lazzer";font-weight:600;font-style:normal;font-display:block;src:url("assets/fonts/Lazzer-SemiBold.woff") format("woff");}
+
+    #root {
+      position: relative;
+      width: 1080px;
+      height: 1920px;
+      overflow: hidden;
+      container-type: size;
+      font-family: "Lazzer";
+      color: #000000;
+    }
+
+    #root .clip {
+      position: absolute;
+      inset: 0;
+    }
+
+    #root .f03-pronto-rastreadores-ground {
+      z-index: 0;
+      background: #FFFFFF;
+    }
+
+    #root .f03-pronto-rastreadores-scene {
+      z-index: 1;
+      width: 1080px;
+      height: 1920px;
+      overflow: hidden;
+      perspective: 1800px;
+      transform-style: preserve-3d;
+    }
+
+    #root .f03-pronto-rastreadores-eyebrow {
+      position: absolute;
+      top: 128px;
+      left: 81px;
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      height: 72px;
+      color: #C190FF;
+      font-size: 34px;
+      font-weight: 600;
+      line-height: 1;
+      letter-spacing: 0.08em;
+      white-space: nowrap;
+      transform-origin: 0% 50%;
+      will-change: transform, opacity;
+    }
+
+    #root .f03-pronto-rastreadores-eyebrow-mark {
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: #C190FF;
+    }
+
+    #root .f03-pronto-rastreadores-eyebrow-rule {
+      width: 116px;
+      height: 4px;
+      border-radius: 6px;
+      background: #C190FF;
+      transform-origin: 0% 50%;
+      will-change: transform;
+    }
+
+    #root .f03-pronto-rastreadores-stage {
+      position: absolute;
+      top: 270px;
+      left: 0;
+      width: 1080px;
+      height: 1010px;
+      transform-style: preserve-3d;
+    }
+
+    #root .f03-pronto-rastreadores-layer,
+    #root .f03-pronto-rastreadores-surface {
+      position: absolute;
+      border-radius: 14px;
+      border: 1.5px solid rgba(193, 144, 255, 0.2);
+      transform-origin: 50% 50%;
+      will-change: transform, opacity;
+    }
+
+    #root .f03-pronto-rastreadores-layer-a {
+      top: 62px;
+      left: 145px;
+      width: 790px;
+      height: 880px;
+      background: rgba(193, 144, 255, 0.04);
+    }
+
+    #root .f03-pronto-rastreadores-layer-b {
+      top: 42px;
+      left: 160px;
+      width: 760px;
+      height: 900px;
+      background: rgba(193, 144, 255, 0.08);
+    }
+
+    #root .f03-pronto-rastreadores-surface {
+      top: 22px;
+      left: 16%;
+      width: 68%;
+      height: 920px;
+      overflow: hidden;
+      background: #FFFFFF;
+      transform-style: preserve-3d;
+    }
+
+    #root .f03-pronto-rastreadores-browser-chrome {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 54px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 0 24px;
+      box-sizing: border-box;
+      background: rgba(193, 144, 255, 0.04);
+      border-bottom: 1.5px solid rgba(193, 144, 255, 0.2);
+    }
+
+    #root .f03-pronto-rastreadores-chrome-dot {
+      width: 11px;
+      height: 11px;
+      border-radius: 50%;
+      background: rgba(193, 144, 255, 0.35);
+    }
+
+    #root .f03-pronto-rastreadores-url {
+      margin-left: 8px;
+      width: 215px;
+      height: 18px;
+      border-radius: 100px;
+      background: rgba(193, 144, 255, 0.15);
+    }
+
+    #root .f03-pronto-rastreadores-asset-wrap {
+      position: absolute;
+      top: 76px;
+      left: 35px;
+      width: 664px;
+      height: 388px;
+      overflow: hidden;
+      border-radius: 12px;
+      border: 1.5px solid rgba(193, 144, 255, 0.2);
+      background: #FFFFFF;
+      transform-origin: 50% 50%;
+      will-change: transform, opacity;
+    }
+
+    #root .f03-pronto-rastreadores-asset {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+
+    #root .f03-pronto-rastreadores-checks {
+      position: absolute;
+      top: 500px;
+      left: 35px;
+      width: 664px;
+      display: grid;
+      gap: 18px;
+    }
+
+    #root .f03-pronto-rastreadores-check-row {
+      position: relative;
+      height: 104px;
+      display: grid;
+      grid-template-columns: 56px 1fr 86px;
+      align-items: center;
+      gap: 18px;
+      padding: 0 22px;
+      box-sizing: border-box;
+      border-radius: 12px;
+      border: 1.5px solid rgba(193, 144, 255, 0.2);
+      background: rgba(193, 144, 255, 0.04);
+      transform-origin: 50% 50%;
+      will-change: transform, opacity;
+    }
+
+    #root .f03-pronto-rastreadores-check-icon {
+      width: 46px;
+      height: 46px;
+      overflow: visible;
+    }
+
+    #root .f03-pronto-rastreadores-check-ring {
+      fill: rgba(193, 144, 255, 0.08);
+      stroke: rgba(193, 144, 255, 0.35);
+      stroke-width: 2;
+    }
+
+    #root .f03-pronto-rastreadores-check-path {
+      fill: none;
+      stroke: #C190FF;
+      stroke-width: 4;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      stroke-dasharray: 32;
+      will-change: stroke-dashoffset;
+    }
+
+    #root .f03-pronto-rastreadores-check-copy {
+      min-width: 0;
+    }
+
+    #root .f03-pronto-rastreadores-check-label {
+      color: #000000;
+      font-size: 30px;
+      font-weight: 500;
+      line-height: 1.05;
+      letter-spacing: -0.02em;
+    }
+
+    #root .f03-pronto-rastreadores-line-track {
+      position: relative;
+      width: 100%;
+      height: 6px;
+      margin-top: 13px;
+      overflow: hidden;
+      border-radius: 6px;
+      background: rgba(193, 144, 255, 0.08);
+    }
+
+    #root .f03-pronto-rastreadores-line-fill {
+      position: absolute;
+      inset: 0;
+      border-radius: 6px;
+      background: #C190FF;
+      transform-origin: 0% 50%;
+      will-change: transform;
+    }
+
+    #root .f03-pronto-rastreadores-badge {
+      width: 78px;
+      height: 42px;
+      display: grid;
+      place-items: center;
+      border-radius: 100px;
+      border: 1.5px solid rgba(193, 144, 255, 0.2);
+      background: rgba(193, 144, 255, 0.08);
+      color: #C190FF;
+      font-size: 22px;
+      font-weight: 700;
+      line-height: 1;
+      letter-spacing: 0.05em;
+      transform-origin: 50% 50%;
+      will-change: transform, opacity, background-color;
+    }
+
+    #root .headline.f03-pronto-rastreadores-headline {
+      position: absolute;
+      top: 1315px;
+      left: 160px;
+      width: 760px;
+      max-width: 760px;
+      color: #000000;
+      font-size: 60px;
+      font-weight: 700;
+      line-height: 0.98;
+      letter-spacing: -0.025em;
+      text-align: center;
+      text-wrap: balance;
+      transform-origin: 50% 50%;
+      will-change: transform, opacity, filter;
+    }
+
+    #root .f03-pronto-rastreadores-headline-accent {
+      color: #C190FF;
+    }
+
+    #root .f03-pronto-rastreadores-progress {
+      position: absolute;
+      top: 1568px;
+      left: 81px;
+      width: 918px;
+      height: 4px;
+      overflow: hidden;
+      border-radius: 6px;
+      background: rgba(193, 144, 255, 0.08);
+    }
+
+    #root .f03-pronto-rastreadores-progress-fill {
+      position: absolute;
+      inset: 0;
+      border-radius: 6px;
+      background: #C190FF;
+      transform-origin: 0% 50%;
+      will-change: transform;
+    }
+  </style>
+
+  <div data-hf-id="hf-k59d" id="root" data-composition-id="03-pronto-rastreadores" data-width="1080" data-height="1920" data-duration="9.9">
+    <div data-hf-id="hf-m55k" id="f03-background" class="clip f03-pronto-rastreadores-ground" data-start="0" data-duration="9.9" data-track-index="0"></div>
+
+    <section data-hf-id="hf-3trd" id="f03-content" class="clip f03-pronto-rastreadores-scene" data-start="0" data-duration="9.9" data-track-index="1">
+      <div data-hf-id="hf-mmpe" id="f03-pronto-rastreadores-eyebrow" class="f03-pronto-rastreadores-eyebrow">
+        <span data-hf-id="hf-x2fp" class="f03-pronto-rastreadores-eyebrow-mark"></span>
+        <span data-hf-id="hf-5pk0">AI CRAWLERS</span>
+        <span data-hf-id="hf-igqj" id="f03-pronto-rastreadores-eyebrow-rule" class="f03-pronto-rastreadores-eyebrow-rule"></span>
+      </div>
+
+      <div data-hf-id="hf-iru9" class="f03-pronto-rastreadores-stage">
+        <div data-hf-id="hf-ql0q" id="f03-pronto-rastreadores-layer-a" class="f03-pronto-rastreadores-layer f03-pronto-rastreadores-layer-a"></div>
+        <div data-hf-id="hf-6430" id="f03-pronto-rastreadores-layer-b" class="f03-pronto-rastreadores-layer f03-pronto-rastreadores-layer-b"></div>
+
+        <article data-hf-id="hf-yl3f" id="f03-pronto-rastreadores-surface" class="f03-pronto-rastreadores-surface">
+          <div data-hf-id="hf-gea6" class="f03-pronto-rastreadores-browser-chrome">
+            <span data-hf-id="hf-p5h0" class="f03-pronto-rastreadores-chrome-dot"></span>
+            <span data-hf-id="hf-d6vg" class="f03-pronto-rastreadores-chrome-dot"></span>
+            <span data-hf-id="hf-bzyd" class="f03-pronto-rastreadores-chrome-dot"></span>
+            <span data-hf-id="hf-djhz" class="f03-pronto-rastreadores-url"></span>
+          </div>
+
+          <div data-hf-id="hf-xeti" id="f03-pronto-rastreadores-asset-wrap" class="f03-pronto-rastreadores-asset-wrap">
+            <img data-hf-id="hf-01nz" class="f03-pronto-rastreadores-asset" src="assets/svg-5aaf2fb1.svg" alt="">
+          </div>
+
+          <div data-hf-id="hf-zej6" class="f03-pronto-rastreadores-checks">
+            <div data-hf-id="hf-wovb" id="f03-pronto-rastreadores-row-1" class="f03-pronto-rastreadores-check-row">
+              <svg data-hf-id="hf-xa28" class="f03-pronto-rastreadores-check-icon" viewBox="0 0 48 48" aria-hidden="true">
+                <circle data-hf-id="hf-7ehc" class="f03-pronto-rastreadores-check-ring" cx="24" cy="24" r="21" />
+                <path data-hf-id="hf-nq91" id="f03-pronto-rastreadores-path-1" class="f03-pronto-rastreadores-check-path" d="M14 24.5l6.5 6.5L35 16.5" />
+              </svg>
+              <div data-hf-id="hf-qp77" class="f03-pronto-rastreadores-check-copy">
+                <div data-hf-id="hf-9w25" class="f03-pronto-rastreadores-check-label">crawlability</div>
+                <div data-hf-id="hf-p239" class="f03-pronto-rastreadores-line-track"><span data-hf-id="hf-k7jz" id="f03-pronto-rastreadores-line-1" class="f03-pronto-rastreadores-line-fill"></span></div>
+              </div>
+              <div data-hf-id="hf-zheq" id="f03-pronto-rastreadores-badge-1" class="f03-pronto-rastreadores-badge">OK</div>
+            </div>
+
+            <div data-hf-id="hf-ltdo" id="f03-pronto-rastreadores-row-2" class="f03-pronto-rastreadores-check-row">
+              <svg data-hf-id="hf-u03s" class="f03-pronto-rastreadores-check-icon" viewBox="0 0 48 48" aria-hidden="true">
+                <circle data-hf-id="hf-fkdk" class="f03-pronto-rastreadores-check-ring" cx="24" cy="24" r="21" />
+                <path data-hf-id="hf-rod2" id="f03-pronto-rastreadores-path-2" class="f03-pronto-rastreadores-check-path" d="M14 24.5l6.5 6.5L35 16.5" />
+              </svg>
+              <div data-hf-id="hf-dapf" class="f03-pronto-rastreadores-check-copy">
+                <div data-hf-id="hf-hpfh" class="f03-pronto-rastreadores-check-label">robots.txt</div>
+                <div data-hf-id="hf-57gp" class="f03-pronto-rastreadores-line-track"><span data-hf-id="hf-bjo4" id="f03-pronto-rastreadores-line-2" class="f03-pronto-rastreadores-line-fill"></span></div>
+              </div>
+              <div data-hf-id="hf-1tnp" id="f03-pronto-rastreadores-badge-2" class="f03-pronto-rastreadores-badge">OK</div>
+            </div>
+
+            <div data-hf-id="hf-ml1h" id="f03-pronto-rastreadores-row-3" class="f03-pronto-rastreadores-check-row">
+              <svg data-hf-id="hf-st6p" class="f03-pronto-rastreadores-check-icon" viewBox="0 0 48 48" aria-hidden="true">
+                <circle data-hf-id="hf-edgh" class="f03-pronto-rastreadores-check-ring" cx="24" cy="24" r="21" />
+                <path data-hf-id="hf-vmh3" id="f03-pronto-rastreadores-path-3" class="f03-pronto-rastreadores-check-path" d="M14 24.5l6.5 6.5L35 16.5" />
+              </svg>
+              <div data-hf-id="hf-cwee" class="f03-pronto-rastreadores-check-copy">
+                <div data-hf-id="hf-0g89" class="f03-pronto-rastreadores-check-label">site health</div>
+                <div data-hf-id="hf-6eds" class="f03-pronto-rastreadores-line-track"><span data-hf-id="hf-cbbx" id="f03-pronto-rastreadores-line-3" class="f03-pronto-rastreadores-line-fill"></span></div>
+              </div>
+              <div data-hf-id="hf-6ing" id="f03-pronto-rastreadores-badge-3" class="f03-pronto-rastreadores-badge">OK</div>
+            </div>
+          </div>
+        </article>
+      </div>
+
+      <div data-hf-id="hf-2kvw" id="f03-pronto-rastreadores-headline" class="headline f03-pronto-rastreadores-headline">
+        PRONTO PARA SER<br data-hf-id="hf-x5px"><span data-hf-id="hf-cnpd" class="f03-pronto-rastreadores-headline-accent">DESCOBERTO</span>
+      </div>
+
+      <div data-hf-id="hf-roqw" class="f03-pronto-rastreadores-progress">
+        <span data-hf-id="hf-kjj3" id="f03-pronto-rastreadores-progress-fill" class="f03-pronto-rastreadores-progress-fill"></span>
+      </div>
+    </section>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+  <script>
+    document.fonts.ready.then(function () {
+      const tl = gsap.timeline({ paused: true });
+      window.__timelines = window.__timelines || {};
+      window.__timelines["03-pronto-rastreadores"] = tl;
+
+      tl.fromTo(
+        "#f03-pronto-rastreadores-eyebrow",
+        { opacity: 0, x: -34 },
+        { opacity: 1, x: 0, duration: 0.52, ease: "power3.out" },
+        0.05
+      );
+      tl.fromTo(
+        "#f03-pronto-rastreadores-eyebrow-rule",
+        { scaleX: 0 },
+        { scaleX: 1, duration: 0.55, ease: "power3.out" },
+        0.3
+      );
+
+      tl.fromTo(
+        "#f03-pronto-rastreadores-layer-a",
+        { scale: 0, opacity: 0, y: 28, rotationY: -9, rotationX: 6 },
+        { scale: 1, opacity: 1, y: 0, rotationY: -7, rotationX: 4, duration: 0.68, ease: "power3.out" },
+        0.08
+      );
+      tl.fromTo(
+        "#f03-pronto-rastreadores-layer-b",
+        { scale: 0, opacity: 0, y: 28, rotationY: -8, rotationX: 6 },
+        { scale: 1, opacity: 1, y: 0, rotationY: -6, rotationX: 3.5, duration: 0.68, ease: "power3.out" },
+        0.14
+      );
+      tl.fromTo(
+        "#f03-pronto-rastreadores-surface",
+        { scale: 0, opacity: 0, y: 28, rotationY: -7, rotationX: 5 },
+        { scale: 1, opacity: 1, y: 0, rotationY: -5, rotationX: 3, duration: 0.68, ease: "power3.out" },
+        0.2
+      );
+      tl.fromTo(
+        "#f03-pronto-rastreadores-asset-wrap",
+        { scale: 0.92, opacity: 0, y: 18 },
+        { scale: 1, opacity: 1, y: 0, duration: 0.58, ease: "power3.out" },
+        0.62
+      );
+      tl.fromTo(
+        "#f03-pronto-rastreadores-progress-fill",
+        { scaleX: 0 },
+        { scaleX: 1, duration: 6.85, ease: "none" },
+        0.15
+      );
+
+      const checkBeats = [2.12, 3.72, 5.32];
+      checkBeats.forEach(function (at, index) {
+        const n = index + 1;
+        tl.fromTo(
+          "#f03-pronto-rastreadores-row-" + n,
+          { scale: 0, opacity: 0, y: 20 },
+          { scale: 1, opacity: 1, y: 0, duration: 0.58, ease: "power3.out" },
+          at
+        );
+        tl.fromTo(
+          "#f03-pronto-rastreadores-line-" + n,
+          { scaleX: 0 },
+          { scaleX: 1, duration: 0.62, ease: "power2.out" },
+          at + 0.22
+        );
+        tl.fromTo(
+          "#f03-pronto-rastreadores-path-" + n,
+          { strokeDashoffset: 32 },
+          { strokeDashoffset: 0, duration: 0.46, ease: "power2.out" },
+          at + 0.52
+        );
+        tl.fromTo(
+          "#f03-pronto-rastreadores-badge-" + n,
+          { scale: 0, opacity: 0, backgroundColor: "rgba(193, 144, 255, 0.08)" },
+          { scale: 1, opacity: 1, backgroundColor: "rgba(193, 144, 255, 0.15)", duration: 0.48, ease: "power3.out" },
+          at + 0.54
+        );
+      });
+
+      tl.to(
+        ["#f03-pronto-rastreadores-layer-a", "#f03-pronto-rastreadores-layer-b", "#f03-pronto-rastreadores-surface"],
+        { rotationY: 0, rotationX: 0, duration: 0.62, ease: "power3.out" },
+        7.02
+      );
+      tl.fromTo(
+        "#f03-pronto-rastreadores-headline",
+        { scale: 1.08, opacity: 0.15, filter: "blur(10px)" },
+        { scale: 1, opacity: 1, filter: "blur(0px)", duration: 0.62, ease: "expo.out" },
+        7.2
+      );
+    });
+  </script>
+</template>

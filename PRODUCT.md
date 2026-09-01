@@ -29,12 +29,14 @@ A aplicação roda em `192.168.2.99:3080`, reutiliza o OAuth salvo no Codex CLI 
 ## Capabilities and Constraints
 
 - Sem login de usuários; acesso restrito à rede local.
-- Uma URL HTTP ou HTTPS inicia a geração.
+- Uma URL HTTP ou HTTPS inicia a geração em 9:16 ou 16:9.
 - Duração alvo de 60 segundos, com tolerância de 30%.
 - Português brasileiro usa Edge TTS com `pt-BR-FranciscaNeural`.
 - Formato padrão vertical 1080 × 1920 a 30 fps.
 - Nota mínima de qualidade: 8.
 - A edição visual é feita no HyperFrames Studio.
+- Um projeto pode ser editado por prompt ou duplicado e adaptado sem alterar o original.
+- Jobs exibem fases e podem ser cancelados com preservação dos arquivos já produzidos.
 - A renderização final ocorre depois de aprovação explícita.
 
 ## Brand Commitments

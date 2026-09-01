@@ -1,8 +1,9 @@
 #!/usr/bin/env node
 
 import { existsSync, readFileSync, readdirSync } from "node:fs";
+import { mkdir, rename, unlink } from "node:fs/promises";
 import path from "node:path";
-import { spawn } from "node:child_process";
+import { spawn, spawnSync } from "node:child_process";
 import { fileURLToPath } from "node:url";
 
 const ROOT = path.dirname(path.dirname(fileURLToPath(import.meta.url)));
@@ -66,7 +67,7 @@ async function createVideo(sourceUrl, requestedSlug) {
     `duração alvo ${settings.targetDuration}s entre ${settings.minimumDuration}s e ${settings.maximumDuration}s, ` +
     `formato ${settings.aspectRatio} ${settings.width}x${settings.height} ${settings.fps}fps e qualidade mínima ${settings.minimumQuality}. ` +
     `Pesquise e leia a URL, crie BRIEF.md, roteiro, mídia local, narração, composição e snapshots. ` +
-    `Garanta que todas as manchetes caibam na área segura. Rode hyperframes check ao final. ` +
+    `Registre include_cta: true no meta.json. Garanta que todas as manchetes caibam na área segura. Rode hyperframes check ao final. ` +
     `Não renderize o MP4 ainda. Não faça perguntas; os defaults já foram aprovados.`;
 
   const childEnv = { ...process.env };
@@ -108,17 +109,80 @@ async function runHyperFrames(action, slug) {
   if (!existsSync(path.join(projectDir, "index.html"))) fail(`Não encontrei videos/${slug}/index.html.`);
 
   if (action === "check") {
-    await run("npx", ["--yes", "hyperframes@0.8.19", "check"], projectDir);
+    await run("npx", ["--yes", "hyperframes@0.8.20", "check"], projectDir);
     return;
   }
   if (action === "preview") {
-    await run("npx", ["--yes", "hyperframes@0.8.19", "preview", "--foreground", "--port", String(settings.previewPort)], projectDir);
+    await run("npx", ["--yes", "hyperframes@0.8.20", "preview", "--foreground", "--port", String(settings.previewPort)], projectDir);
     return;
   }
   const output = path.join(settings.rendersDirName, `${slug}.mp4`);
-  await run("npx", ["--yes", "hyperframes@0.8.19", "check"], projectDir);
-  await run("npx", ["--yes", "hyperframes@0.8.19", "render", "--quality", settings.renderQuality, "--output", output], projectDir);
-  console.log(`\nMP4 pronto: ${path.relative(ROOT, path.join(projectDir, output))}`);
+  const metadata = readMetadata(projectDir);
+  const includeCta = metadata.include_cta !== false;
+  const finalPath = path.join(projectDir, output);
+  const sourcePath = includeCta
+    ? path.join(ROOT, ".runtime", "render-staging", `${slug}-${Date.now()}-sem-cta.mp4`)
+    : finalPath;
+  if (includeCta) await mkdir(path.dirname(sourcePath), { recursive: true });
+  try {
+    await run("npx", ["--yes", "hyperframes@0.8.20", "check"], projectDir);
+    await run("npx", ["--yes", "hyperframes@0.8.20", "render", "--quality", settings.renderQuality, "--output", sourcePath], projectDir);
+    if (includeCta) {
+      console.log("\nAdicionando CTA INEMA.CLUB...");
+      await appendCta(sourcePath, finalPath, metadata.aspect_ratio || settings.aspectRatio);
+    }
+  } finally {
+    if (includeCta) await unlink(sourcePath).catch(() => {});
+  }
+  console.log(`\nMP4 pronto: ${path.relative(ROOT, finalPath)}`);
+}
+
+function readMetadata(projectDir) {
+  const filename = path.join(projectDir, "meta.json");
+  if (!existsSync(filename)) return {};
+  try { return JSON.parse(readFileSync(filename, "utf8")); } catch { return {}; }
+}
+
+function probeMedia(filename) {
+  const result = spawnSync("ffprobe", ["-v", "error", "-show_entries", "format=duration:stream=codec_type", "-of", "json", filename], { encoding: "utf8", timeout: 15000 });
+  if (result.status !== 0) throw new Error(`Não foi possível inspecionar ${path.basename(filename)}.`);
+  const payload = JSON.parse(result.stdout || "{}");
+  return {
+    duration: Number(payload.format?.duration || 0),
+    hasAudio: payload.streams?.some((stream) => stream.codec_type === "audio") || false
+  };
+}
+
+async function appendCta(sourcePath, finalPath, aspectRatio) {
+  const horizontal = aspectRatio === "16:9";
+  const width = horizontal ? 1920 : 1080;
+  const height = horizontal ? 1080 : 1920;
+  const ctaName = horizontal ? "inema-club-cta-16x9.mp4" : "inema-club-cta.mp4";
+  const ctaPath = path.join(settings.videosDir, "inema-club-cta", "renders", ctaName);
+  if (!existsSync(ctaPath)) throw new Error(`O CTA ${aspectRatio} ainda não está preparado.`);
+  const source = probeMedia(sourcePath);
+  const cta = probeMedia(ctaPath);
+  const normalize = `fps=${settings.fps},scale=${width}:${height}:force_original_aspect_ratio=decrease,pad=${width}:${height}:(ow-iw)/2:(oh-ih)/2,setsar=1,setpts=PTS-STARTPTS`;
+  const filters = [`[0:v:0]${normalize}[mainv]`, `[1:v:0]${normalize}[ctav]`, "[mainv][ctav]concat=n=2:v=1:a=0[outv]"];
+  const maps = ["-map", "[outv]"];
+  if (source.hasAudio) {
+    filters.push(
+      `[0:a:0]aformat=sample_rates=48000:channel_layouts=stereo,apad,atrim=duration=${source.duration.toFixed(3)},asetpts=PTS-STARTPTS[maina]`,
+      `anullsrc=r=48000:cl=stereo:d=${cta.duration.toFixed(3)}[ctaa]`,
+      "[maina][ctaa]concat=n=2:v=0:a=1[outa]"
+    );
+    maps.push("-map", "[outa]", "-c:a", "aac", "-b:a", "192k");
+  }
+  const temporary = path.join(path.dirname(sourcePath), `${path.basename(finalPath)}-${Date.now()}-com-cta.mp4`);
+  try {
+    await run("ffmpeg", [
+      "-y", "-i", sourcePath, "-i", ctaPath, "-filter_complex", filters.join(";"), ...maps,
+      "-c:v", "libx264", "-preset", "medium", "-crf", "18", "-pix_fmt", "yuv420p", "-movflags", "+faststart", temporary
+    ], path.dirname(sourcePath));
+    await rename(temporary, finalPath);
+  } finally {
+    await unlink(temporary).catch(() => {});
+  }
 }
 
 function run(commandName, args, cwd, env = process.env) {
@@ -168,7 +232,7 @@ function showHelp() {
     `  npm run video:list                     lista os projetos e MP4s\n` +
     `  npm run video:check -- <slug>           valida a composição\n` +
     `  npm run video:preview -- <slug>         abre o editor HyperFrames\n` +
-    `  npm run video:render -- <slug>          valida e gera o MP4\n`);
+    `  npm run video:render -- <slug>          valida, gera o MP4 e adiciona o CTA salvo no projeto\n`);
 }
 
 function fail(message) {

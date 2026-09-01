@@ -21,12 +21,14 @@
           <span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i></span>
           <span>Content<span>2</span>Video</span>
         </a>
+        <span class="app-version" id="app-version" aria-label="Versão do sistema">v1.03.00</span>
         <span class="brand-separator" aria-hidden="true">/</span>
         <a class="inema-link" href="https://www.inema.club/" target="_blank" rel="noopener noreferrer">INEMA.CLUB</a>
       </div>
       <div class="system-state is-checking" id="system-state">
         <span class="status-dot" aria-hidden="true"></span>
-        <span id="auth-label">Verificando sistema</span>
+        <span class="auth-detail" id="auth-label">Verificando sistema</span>
+        <span class="auth-short" id="auth-short">Verificando</span>
       </div>
     </header>
 
@@ -45,6 +47,22 @@
               <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6"/></svg>
             </button>
           </div>
+          <fieldset class="format-picker" aria-label="Formato do novo vídeo">
+            <legend>Formato do vídeo</legend>
+            <label>
+              <input type="radio" name="aspectRatio" value="9:16" checked>
+              <span><i class="format-icon vertical" aria-hidden="true"></i>9:16 <small>Vertical</small></span>
+            </label>
+            <label>
+              <input type="radio" name="aspectRatio" value="16:9">
+              <span><i class="format-icon horizontal" aria-hidden="true"></i>16:9 <small>Horizontal</small></span>
+            </label>
+          </fieldset>
+          <label class="cta-choice" for="create-cta">
+            <input id="create-cta" name="includeCta" type="checkbox" checked>
+            <span class="cta-check" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="m3.5 8.2 2.8 2.8 6.2-6.2"/></svg></span>
+            <span><strong>Adicionar CTA INEMA.CLUB ao final</strong><small>Encerramento de 5,5 segundos, adaptado ao formato do vídeo.</small></span>
+          </label>
           <div class="defaults" id="defaults" aria-label="Configuração padrão"></div>
           <p class="form-message" id="form-message" role="status" aria-live="polite"></p>
         </form>

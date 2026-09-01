@@ -1,0 +1,246 @@
+{
+  "typography": [
+    {
+      "role": "body",
+      "fontFamily": "Lazzer",
+      "fontSize": "110px",
+      "fontWeight": "600",
+      "lineHeight": "110px",
+      "letterSpacing": "-4.4px",
+      "color": "#171A22",
+      "sampleText": "28M"
+    },
+    {
+      "role": "heading",
+      "fontFamily": "Lazzer",
+      "fontSize": "64px",
+      "fontWeight": "600",
+      "lineHeight": "70.4px",
+      "letterSpacing": "-2.56px",
+      "color": "#171A22",
+      "sampleText": "What is WebMCP? Google’s agentic web explained."
+    },
+    {
+      "role": "display",
+      "fontFamily": "Lazzer",
+      "fontSize": "56px",
+      "fontWeight": "600",
+      "lineHeight": "61.6px",
+      "letterSpacing": "-2.56px",
+      "color": "#171A22",
+      "sampleText": "Get ready for WebMCP. Win the AI visibility battleground."
+    },
+    {
+      "role": "heading-2",
+      "fontFamily": "Lazzer",
+      "fontSize": "46px",
+      "fontWeight": "600",
+      "lineHeight": "46px",
+      "letterSpacing": "-1.84px",
+      "color": "#171A22",
+      "sampleText": "Marketers all over the world trust Semrush"
+    },
+    {
+      "role": "heading-3",
+      "fontFamily": "Lazzer",
+      "fontSize": "40px",
+      "fontWeight": "600",
+      "lineHeight": "48px",
+      "letterSpacing": "-0.8px",
+      "color": "#171A22",
+      "sampleText": "Ensure your site is ready for AI crawlers"
+    },
+    {
+      "role": "link",
+      "fontFamily": "Lazzer",
+      "fontSize": "18px",
+      "fontWeight": "400",
+      "lineHeight": "27px",
+      "letterSpacing": "normal",
+      "color": "#171A22",
+      "sampleText": ""
+    }
+  ],
+  "spacing": {
+    "observed": [
+      6,
+      8,
+      10,
+      12,
+      14,
+      16,
+      17,
+      20,
+      22,
+      24,
+      30,
+      32,
+      56,
+      60,
+      64
+    ],
+    "baseUnit": 8
+  },
+  "radius": [
+    "6px",
+    "100px",
+    "9999px"
+  ],
+  "shadows": [],
+  "buttons": [
+    {
+      "label": "Try free for 7 days\n                \n   ",
+      "background": "transparent",
+      "backgroundImage": "",
+      "backdropFilter": "",
+      "color": "#000000",
+      "padding": "0px",
+      "borderRadius": "0px",
+      "border": "0px none rgb(0, 0, 0)",
+      "boxShadow": "none",
+      "fontSize": "16px",
+      "fontWeight": "400",
+      "height": "53px"
+    },
+    {
+      "label": "Try free for 7 days",
+      "background": "#171A22",
+      "backgroundImage": "",
+      "backdropFilter": "",
+      "color": "#FFFFFF",
+      "padding": "0px 32px",
+      "borderRadius": "9999px",
+      "border": "0px none rgb(255, 255, 255)",
+      "boxShadow": "none",
+      "fontSize": "14px",
+      "fontWeight": "600",
+      "height": "53px"
+    },
+    {
+      "label": "Try free for 7 days",
+      "background": "#C190FF",
+      "backgroundImage": "",
+      "backdropFilter": "",
+      "color": "#171A22",
+      "padding": "0px 32px",
+      "borderRadius": "9999px",
+      "border": "0px none rgb(23, 26, 34)",
+      "boxShadow": "none",
+      "fontSize": "16px",
+      "fontWeight": "600",
+      "height": "56px"
+    },
+    {
+      "label": "WebMCP signals where discovery is headin",
+      "background": "#171A22",
+      "backgroundImage": "",
+      "backdropFilter": "",
+      "color": "#000000",
+      "padding": "90px 0px 140px",
+      "borderRadius": "0px",
+      "border": "0px none rgb(0, 0, 0)",
+      "boxShadow": "none",
+      "fontSize": "16px",
+      "fontWeight": "400",
+      "height": "483.594px"
+    },
+    {
+      "label": "Allow all cookies",
+      "background": "#181E15",
+      "backgroundImage": "",
+      "backdropFilter": "",
+      "color": "#FFFFFF",
+      "padding": "17px 24px",
+      "borderRadius": "100px",
+      "border": "0px none rgba(0, 0, 0, 0)",
+      "boxShadow": "none",
+      "fontSize": "16px",
+      "fontWeight": "600",
+      "height": "14px"
+    },
+    {
+      "label": "Deny all",
+      "background": "#FFFFFF",
+      "backgroundImage": "",
+      "backdropFilter": "",
+      "color": "#181E15",
+      "padding": "17px 24px",
+      "borderRadius": "100px",
+      "border": "1px solid rgb(24, 30, 21)",
+      "boxShadow": "none",
+      "fontSize": "16px",
+      "fontWeight": "600",
+      "height": "14px"
+    }
+  ],
+  "cards": [],
+  "nav": {
+    "label": "navigation",
+    "background": "#DCEEEB",
+    "backgroundImage": "",
+    "backdropFilter": "",
+    "color": "#000000",
+    "padding": "10px 0px",
+    "borderRadius": "0px",
+    "border": "0px none rgb(0, 0, 0)",
+    "boxShadow": "none",
+    "fontSize": "16px",
+    "fontWeight": "400",
+    "height": "73px"
+  },
+  "chips": [],
+  "statCells": [],
+  "tabs": [],
+  "backgrounds": [
+    {
+      "value": "linear-gradient(0deg, rgb(221, 202, 255) 0px, rgb(232, 225, 255) 40%, rgb(220, 238, 235) 100%), none",
+      "area": 1613910
+    },
+    {
+      "value": "url(\"https://www.semrush.com/lp/web-mcp/assets/gradient.svg?2\")",
+      "area": 1613910
+    },
+    {
+      "value": "linear-gradient(rgb(220, 238, 235) 0%, rgb(238, 233, 255) 100%)",
+      "area": 1164541
+    },
+    {
+      "value": "linear-gradient(0deg, rgba(108, 110, 121, 0.1) 0px, rgba(209, 210, 213, 0.1) 100%)",
+      "area": 724335
+    },
+    {
+      "value": "linear-gradient(45deg, rgba(255, 255, 255, 0.01) 0px, rgba(255, 255, 255, 0.7) 5%, rgb(255, 255, 255) 11%, rgba(255, 255, 255, 0.4) 50.16%, rgb(255, 255, 255) 89%, rgba(255, 255, 255, 0.7) 95%, rgba(255, 255, 255, 0.18) 100%), linear-gradient(98deg, rgba(165, 239, 255, 0.04) 38.06%, rgba(255, 255, 255, 0) 50%, rgba(235, 71, 156, 0.04) 61.94%)",
+      "area": 208250
+    },
+    {
+      "value": "linear-gradient(91deg, rgba(5, 5, 5, 0.04) 11.45%, rgba(255, 255, 255, 0.04) 88.55%)",
+      "area": 208250
+    }
+  ],
+  "glass": [
+    {
+      "backdropFilter": "blur(26px)",
+      "background": "linear-gradient(0deg, rgba(108, 110, 121, 0.1) 0px, rgba(209, 210, 213, 0.1) 100%)",
+      "border": "1px solid rgb(255, 255, 255)",
+      "borderRadius": "12px",
+      "boxShadow": "",
+      "area": 724335
+    },
+    {
+      "backdropFilter": "blur(5px)",
+      "background": "linear-gradient(91deg, rgba(5, 5, 5, 0.04) 11.45%, rgba(255, 255, 255, 0.04) 88.55%)",
+      "border": "1px solid rgba(0, 0, 0, 0)",
+      "borderRadius": "18px",
+      "boxShadow": "rgba(0, 0, 0, 0.05) 0px 2px 12px 0px",
+      "area": 161920
+    },
+    {
+      "backdropFilter": "blur(5px)",
+      "background": "linear-gradient(91deg, rgba(5, 5, 5, 0.04) 11.45%, rgba(255, 255, 255, 0.04) 88.55%)",
+      "border": "1px solid rgba(0, 0, 0, 0)",
+      "borderRadius": "50px",
+      "boxShadow": "rgba(0, 0, 0, 0.05) 0px 2px 12px 0px",
+      "area": 46330
+    }
+  ]
+}

@@ -1,0 +1,501 @@
+<template>
+  <style>
+    @font-face {
+      font-family: "EB Garamond";
+      src: url("assets/fonts/EBGaramond-400.woff2") format("woff2");
+      font-style: normal;
+      font-weight: 400;
+    }
+
+    @font-face {
+      font-family: "Inter";
+      src: url("assets/fonts/Inter-400.woff2") format("woff2");
+      font-style: normal;
+      font-weight: 400;
+    }
+
+    @font-face {
+      font-family: "Inter";
+      src: url("assets/fonts/Inter-700.woff2") format("woff2");
+      font-style: normal;
+      font-weight: 700;
+    }
+
+    @font-face {
+      font-family: "JetBrains Mono";
+      src: url("assets/fonts/JetBrainsMono-400.woff2") format("woff2");
+      font-style: normal;
+      font-weight: 400;
+    }
+
+    #root {
+      position: relative;
+      width: 1080px;
+      height: 1920px;
+      overflow: hidden;
+      container-type: size;
+      color: #faf9f5;
+    }
+
+    #root * {
+      box-sizing: border-box;
+    }
+
+    .f05-ground {
+      position: absolute;
+      inset: 0;
+      background: #faf9f5;
+    }
+
+    .f05-window {
+      position: absolute;
+      left: 81px;
+      top: 115px;
+      width: 918px;
+      height: 1440px;
+      overflow: hidden;
+      background: #181715;
+      border: 1px solid rgba(250, 249, 245, 0.14);
+      border-radius: 12px;
+    }
+
+    .f05-window::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      opacity: 0.26;
+      background-image:
+        linear-gradient(rgba(250, 249, 245, 0.055) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(250, 249, 245, 0.055) 1px, transparent 1px);
+      background-size: 54px 54px;
+    }
+
+    .f05-chrome {
+      position: absolute;
+      left: 31px;
+      right: 31px;
+      top: 28px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-family: "JetBrains Mono";
+      font-size: 15px;
+      line-height: 1;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: rgba(250, 249, 245, 0.68);
+    }
+
+    .f05-chrome-rule {
+      position: absolute;
+      left: 31px;
+      right: 31px;
+      top: 67px;
+      height: 1px;
+      background: rgba(250, 249, 245, 0.14);
+    }
+
+    .f05-anchor-wrap {
+      position: absolute;
+      left: 69px;
+      top: 92px;
+      width: 780px;
+      height: 226px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .f05-anchor {
+      font-family: "EB Garamond";
+      font-size: 174px;
+      font-weight: 400;
+      line-height: 0.92;
+      letter-spacing: -0.028em;
+      white-space: nowrap;
+      color: #faf9f5;
+    }
+
+    .f05-slot-shell {
+      position: absolute;
+      left: 74px;
+      top: 333px;
+      width: 770px;
+      height: 142px;
+      overflow: hidden;
+      border-top: 1px solid rgba(250, 249, 245, 0.14);
+      border-bottom: 1px solid rgba(250, 249, 245, 0.14);
+    }
+
+    .f05-slot-index {
+      position: absolute;
+      left: 0;
+      top: 19px;
+      width: 76px;
+      font-family: "JetBrains Mono";
+      font-size: 17px;
+      letter-spacing: 0.1em;
+      color: rgba(250, 249, 245, 0.68);
+    }
+
+    .f05-slot-text {
+      position: absolute;
+      left: 94px;
+      top: 46px;
+      width: 650px;
+      min-height: 46px;
+      font-family: "JetBrains Mono";
+      font-size: 33px;
+      font-weight: 400;
+      line-height: 1.08;
+      letter-spacing: 0.035em;
+      white-space: nowrap;
+      color: #faf9f5;
+    }
+
+    .f05-diagram {
+      position: absolute;
+      left: 31px;
+      top: 499px;
+      width: 856px;
+      height: 755px;
+    }
+
+    .f05-ring {
+      position: absolute;
+      inset: 0;
+      width: 856px;
+      height: 755px;
+      overflow: visible;
+    }
+
+    .f05-ring-path {
+      fill: none;
+      stroke: #cc785c;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      stroke-dasharray: 1660;
+      stroke-dashoffset: 1660;
+    }
+
+    .f05-module-shell {
+      position: absolute;
+      width: 218px;
+      height: 98px;
+    }
+
+    .f05-module {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 14px 18px;
+      background: #252320;
+      border: 1px solid rgba(250, 249, 245, 0.2);
+      border-radius: 8px;
+      font-family: "Inter";
+      font-size: 20px;
+      font-weight: 400;
+      line-height: 1.13;
+      text-align: center;
+      color: #faf9f5;
+    }
+
+    .f05-module::after {
+      content: "";
+      position: absolute;
+      width: 13px;
+      height: 13px;
+      border: 1px solid rgba(250, 249, 245, 0.28);
+      border-radius: 50%;
+      background: #181715;
+    }
+
+    .f05-module-shell:nth-of-type(1) {
+      left: 319px;
+      top: 18px;
+    }
+
+    .f05-module-shell:nth-of-type(1) .f05-module::after {
+      left: 102px;
+      bottom: -8px;
+    }
+
+    .f05-module-shell:nth-of-type(2) {
+      left: 32px;
+      top: 177px;
+    }
+
+    .f05-module-shell:nth-of-type(2) .f05-module::after {
+      right: -8px;
+      top: 42px;
+    }
+
+    .f05-module-shell:nth-of-type(3) {
+      left: 606px;
+      top: 177px;
+    }
+
+    .f05-module-shell:nth-of-type(3) .f05-module::after {
+      left: -8px;
+      top: 42px;
+    }
+
+    .f05-module-shell:nth-of-type(4) {
+      left: 127px;
+      top: 482px;
+    }
+
+    .f05-module-shell:nth-of-type(4) .f05-module::after {
+      right: 20px;
+      top: -8px;
+    }
+
+    .f05-module-shell:nth-of-type(5) {
+      left: 511px;
+      top: 482px;
+    }
+
+    .f05-module-shell:nth-of-type(5) .f05-module::after {
+      left: 20px;
+      top: -8px;
+    }
+
+    .f05-gap {
+      position: absolute;
+      left: 258px;
+      top: 252px;
+      width: 340px;
+      height: 174px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      border: 1px dashed rgba(250, 249, 245, 0.3);
+      border-radius: 12px;
+      background: #181715;
+    }
+
+    .f05-gap-mark {
+      position: absolute;
+      inset: 12px;
+      border: 1px solid rgba(250, 249, 245, 0.08);
+      border-radius: 8px;
+    }
+
+    .f05-final {
+      position: relative;
+      z-index: 1;
+      width: 278px;
+      font-family: "Inter";
+      font-size: 31px;
+      font-weight: 700;
+      line-height: 1.08;
+      letter-spacing: -0.025em;
+      text-align: center;
+      color: #faf9f5;
+    }
+
+    .f05-status {
+      position: absolute;
+      left: 31px;
+      right: 31px;
+      bottom: 36px;
+      height: 72px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-top: 1px solid rgba(250, 249, 245, 0.14);
+      font-family: "JetBrains Mono";
+      font-size: 17px;
+      line-height: 1;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: rgba(250, 249, 245, 0.68);
+    }
+
+    .f05-status-dot {
+      display: inline-block;
+      width: 7px;
+      height: 7px;
+      margin-right: 10px;
+      border: 1px solid rgba(250, 249, 245, 0.52);
+      border-radius: 50%;
+    }
+  </style>
+
+  <div data-hf-id="hf-5z37" id="root" data-composition-id="05-pecas-nao-todo" data-width="1080" data-height="1920" data-duration="10.7">
+    <div data-hf-id="hf-fb5j" id="frame-05-layer-1" class="clip f05-ground" data-start="0" data-duration="10.7" data-track-index="0"></div>
+
+    <div data-hf-id="hf-fzt9" id="frame-05-layer-2" class="clip f05-window" data-start="0" data-duration="10.7" data-track-index="1">
+      <div data-hf-id="hf-r1qa" class="f05-chrome">
+        <span data-hf-id="hf-skz0">mapa de pesquisa</span>
+        <span data-hf-id="hf-escr">05 módulos / 01 lacuna</span>
+      </div>
+      <div data-hf-id="hf-f0f1" class="f05-chrome-rule"></div>
+
+      <div data-hf-id="hf-pctw" class="f05-anchor-wrap">
+        <div data-hf-id="hf-zwca" class="f05-anchor" id="f05-anchor">AGI?</div>
+      </div>
+
+      <div data-hf-id="hf-o6gm" class="f05-slot-shell" id="f05-slot-shell">
+        <div data-hf-id="hf-ueot" class="f05-slot-index" id="f05-slot-index">01/05</div>
+        <div data-hf-id="hf-ddjy" class="f05-slot-text" id="f05-slot-text"></div>
+      </div>
+
+      <div data-hf-id="hf-uw3f" class="f05-diagram">
+        <svg data-hf-id="hf-82v9" class="f05-ring" viewBox="0 0 856 755" aria-hidden="true">
+          <path data-hf-id="hf-jyhv" class="f05-ring-path" id="f05-ring-path" d="M428 67 L715 226 L620 531 L236 531 L141 226 Z" />
+        </svg>
+
+        <div data-hf-id="hf-5yxp" class="f05-module-shell">
+          <div data-hf-id="hf-cq7g" class="f05-module" id="f05-module-1">Aprendizado<br data-hf-id="hf-x5px">profundo</div>
+        </div>
+        <div data-hf-id="hf-t2r5" class="f05-module-shell">
+          <div data-hf-id="hf-7qhl" class="f05-module" id="f05-module-2">IA generativa</div>
+        </div>
+        <div data-hf-id="hf-u9o8" class="f05-module-shell">
+          <div data-hf-id="hf-x4tn" class="f05-module" id="f05-module-3">Linguagem</div>
+        </div>
+        <div data-hf-id="hf-tvd7" class="f05-module-shell">
+          <div data-hf-id="hf-h1r3" class="f05-module" id="f05-module-4">Visão</div>
+        </div>
+        <div data-hf-id="hf-rvu2" class="f05-module-shell">
+          <div data-hf-id="hf-fron" class="f05-module" id="f05-module-5">Robótica</div>
+        </div>
+
+        <div data-hf-id="hf-uhfc" class="f05-gap">
+          <div data-hf-id="hf-gupi" class="f05-gap-mark"></div>
+          <div data-hf-id="hf-p2df" class="f05-final" id="f05-final">NÃO É A<br data-hf-id="hf-rsrt">AGI PRONTA</div>
+        </div>
+      </div>
+
+      <div data-hf-id="hf-bnbu" class="f05-status">
+        <span data-hf-id="hf-nsgb"><i data-hf-id="hf-7gls" class="f05-status-dot"></i>componentes conectados</span>
+        <span data-hf-id="hf-rwr2">centro incompleto</span>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    (() => {
+      const frameId = "05-pecas-nao-todo";
+      const tl = gsap.timeline({ paused: true });
+
+      const anchor = document.getElementById("f05-anchor");
+      const slotShell = document.getElementById("f05-slot-shell");
+      const slotText = document.getElementById("f05-slot-text");
+      const slotIndex = document.getElementById("f05-slot-index");
+      const finalCallout = document.getElementById("f05-final");
+      const ringPath = document.getElementById("f05-ring-path");
+      const modules = [
+        document.getElementById("f05-module-1"),
+        document.getElementById("f05-module-2"),
+        document.getElementById("f05-module-3"),
+        document.getElementById("f05-module-4"),
+        document.getElementById("f05-module-5")
+      ];
+
+      const states = [
+        { t: 1.90, text: "APRENDIZADO PROFUNDO", index: "01/05" },
+        { t: 2.88, text: "IA GENERATIVA", index: "02/05" },
+        { t: 3.86, text: "LINGUAGEM", index: "03/05" },
+        { t: 4.84, text: "VISÃO", index: "04/05" },
+        { t: 5.82, text: "ROBÓTICA", index: "05/05" }
+      ];
+
+      function stateAt(time) {
+        for (let i = states.length - 1; i >= 0; i -= 1) {
+          if (time >= states[i].t) return states[i];
+        }
+        return { text: "", index: "01/05" };
+      }
+
+      function fitHeadline(element, maxWidth, maxHeight, minSize) {
+        let size = parseFloat(getComputedStyle(element).fontSize);
+        while (size > minSize) {
+          const box = element.getBoundingClientRect();
+          if (box.width <= maxWidth && box.height <= maxHeight) break;
+          size -= 2;
+          element.style.fontSize = `${size}px`;
+        }
+      }
+
+      document.fonts.ready.then(() => {
+        fitHeadline(anchor, 780, 226, 110);
+        fitHeadline(finalCallout, 278, 112, 24);
+      });
+
+      tl.fromTo(anchor,
+        { autoAlpha: 0, scale: 0.96 },
+        { autoAlpha: 1, scale: 1, duration: 0.48, ease: "power2.out" },
+        0
+      );
+
+      tl.fromTo(slotShell,
+        { autoAlpha: 0 },
+        { autoAlpha: 1, duration: 0.24, ease: "power1.out" },
+        1.78
+      );
+
+      const driver = { t: 0 };
+      tl.to(driver, {
+        t: 10.2,
+        duration: 10.2,
+        ease: "none",
+        onUpdate: () => {
+          const state = stateAt(driver.t);
+          slotText.textContent = state.text;
+          slotIndex.textContent = state.index;
+        }
+      }, 0);
+
+      const outward = [
+        { x: 0, y: -24 },
+        { x: -24, y: -8 },
+        { x: 24, y: -8 },
+        { x: -18, y: 22 },
+        { x: 18, y: 22 }
+      ];
+
+      states.forEach((state, index) => {
+        tl.fromTo(modules[index],
+          { autoAlpha: 0, scale: 0.94, x: outward[index].x * 2, y: outward[index].y * 2 },
+          {
+            autoAlpha: 1,
+            scale: 1,
+            x: outward[index].x,
+            y: outward[index].y,
+            duration: 0.36,
+            ease: "power2.out"
+          },
+          state.t
+        );
+      });
+
+      modules.forEach((module) => {
+        tl.to(module, {
+          x: 0,
+          y: 0,
+          duration: 0.72,
+          ease: "power2.out"
+        }, 6.8);
+      });
+
+      tl.to(slotShell, { autoAlpha: 0.28, duration: 0.42, ease: "power1.out" }, 6.8);
+      tl.to(ringPath, { strokeDashoffset: 0, duration: 1.08, ease: "power2.inOut" }, 6.84);
+
+      tl.fromTo(finalCallout,
+        { autoAlpha: 0, scale: 0.96, color: "#cc785c" },
+        { autoAlpha: 1, scale: 1, color: "#cc785c", duration: 0.28, ease: "power2.out" },
+        8.6
+      );
+      tl.to(finalCallout, { color: "#faf9f5", duration: 0.34, ease: "power1.out" }, 8.88);
+
+      window.__timelines = window.__timelines || {};
+      window.__timelines[frameId] = tl;
+    })();
+  </script>
+</template>

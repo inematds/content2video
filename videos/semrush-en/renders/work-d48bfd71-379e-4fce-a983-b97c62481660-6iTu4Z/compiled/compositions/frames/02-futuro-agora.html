@@ -1,0 +1,460 @@
+<template>
+  <style>
+    @font-face {
+      font-family: "Lazzer";
+      src: url("assets/fonts/Lazzer-Regular.woff") format("woff");
+      font-weight: 400;
+      font-style: normal;
+    }
+
+    @font-face {
+      font-family: "Lazzer";
+      src: url("assets/fonts/Lazzer-Medium.woff") format("woff");
+      font-weight: 500;
+      font-style: normal;
+    }
+
+    @font-face {
+      font-family: "Lazzer";
+      src: url("assets/fonts/Lazzer-SemiBold.woff") format("woff");
+      font-weight: 600;
+      font-style: normal;
+    }
+
+    @font-face {
+      font-family: "Lazzer";
+      src: url("assets/fonts/Lazzer-Bold.woff") format("woff");
+      font-weight: 700;
+      font-style: normal;
+    }
+
+    #root {
+      position: relative;
+      width: 1080px;
+      height: 1920px;
+      overflow: hidden;
+      container-type: size;
+      font-family: "Lazzer";
+      color: #000000;
+    }
+
+    #root * {
+      box-sizing: border-box;
+    }
+
+    #root .headline {
+      max-width: 918px;
+      letter-spacing: -0.02em;
+    }
+
+    .f02-futuro-agora-ground {
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at 50% 38%, rgba(193, 144, 255, 0.09), transparent 36%),
+        #ffffff;
+      overflow: hidden;
+    }
+
+    .f02-futuro-agora-ground::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image: radial-gradient(rgba(193, 144, 255, 0.18) 1.5px, transparent 1.5px);
+      background-size: 42px 42px;
+      opacity: 0.28;
+      -webkit-mask-image: linear-gradient(to bottom, transparent 4%, #000 28%, #000 76%, transparent 88%);
+      mask-image: linear-gradient(to bottom, transparent 4%, #000 28%, #000 76%, transparent 88%);
+    }
+
+    .f02-futuro-agora-video-shell {
+      position: absolute;
+      left: 81px;
+      top: 200px;
+      width: 918px;
+      height: 537px;
+      border: 1.5px solid rgba(193, 144, 255, 0.2);
+      border-radius: 14px;
+      overflow: hidden;
+      pointer-events: none;
+    }
+
+    .f02-futuro-agora-video-shell::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: 12px;
+      background: linear-gradient(180deg, rgba(193, 144, 255, 0.05), transparent 38%, rgba(255, 255, 255, 0.08));
+    }
+
+    .f02-futuro-agora-video-chrome {
+      position: absolute;
+      top: 24px;
+      left: 28px;
+      display: flex;
+      gap: 9px;
+    }
+
+    .f02-futuro-agora-video-chrome i {
+      display: block;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: rgba(193, 144, 255, 0.55);
+    }
+
+    .f02-futuro-agora-video-glow {
+      position: absolute;
+      left: -150px;
+      top: -150px;
+      width: 1218px;
+      height: 837px;
+      background: radial-gradient(circle, rgba(126, 61, 214, 0.42) 0%, rgba(126, 61, 214, 0.12) 42%, transparent 72%);
+      opacity: 0;
+      z-index: -1;
+    }
+
+    .f02-futuro-agora-world {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 4320px;
+      height: 1594px;
+      overflow: visible;
+    }
+
+    .f02-futuro-agora-rail {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 4320px;
+      height: 1594px;
+      overflow: visible;
+    }
+
+    .f02-futuro-agora-rail path {
+      fill: none;
+      stroke: #c190ff;
+      stroke-width: 5;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .f02-futuro-agora-rail .f02-futuro-agora-rail-ghost {
+      stroke: rgba(193, 144, 255, 0.12);
+      stroke-width: 2;
+      stroke-dasharray: 5 14;
+    }
+
+    .f02-futuro-agora-station {
+      position: absolute;
+      top: 920px;
+      width: 760px;
+      height: 420px;
+      margin-left: -380px;
+      text-align: center;
+    }
+
+    .f02-futuro-agora-station-one { left: 540px; }
+    .f02-futuro-agora-station-two { left: 1470px; }
+    .f02-futuro-agora-station-three { left: 2550px; }
+
+    .f02-futuro-agora-marker {
+      width: 48px;
+      height: 48px;
+      margin: 176px auto 36px;
+      border: 10px solid #ffffff;
+      border-radius: 50%;
+      background: #c190ff;
+      outline: 1.5px solid rgba(193, 144, 255, 0.28);
+    }
+
+    .f02-futuro-agora-station h2 {
+      margin: 0 auto;
+      font-size: 112px;
+      line-height: 0.96;
+      font-weight: 700;
+    }
+
+    .f02-futuro-agora-station-one h2 {
+      font-size: 122px;
+    }
+
+    .f02-futuro-agora-station-tag {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 44px;
+      margin-top: 24px;
+      padding: 0 22px;
+      border-radius: 100px;
+      background: rgba(193, 144, 255, 0.08);
+      color: #7e3dd6;
+      font-size: 22px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .f02-futuro-agora-final {
+      position: absolute;
+      left: 3321px;
+      top: 490px;
+      width: 918px;
+      height: 760px;
+    }
+
+    .f02-futuro-agora-final-glow {
+      position: absolute;
+      inset: -180px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(126, 61, 214, 0.36), rgba(126, 61, 214, 0.08) 46%, transparent 72%);
+      opacity: 0;
+      z-index: 1;
+    }
+
+    .f02-futuro-agora-final-card {
+      position: absolute;
+      inset: 0;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 74px 80px 82px;
+      border: 1.5px solid rgba(193, 144, 255, 0.2);
+      border-radius: 14px;
+      background: rgba(193, 144, 255, 0.15);
+      overflow: hidden;
+    }
+
+    .f02-futuro-agora-final-card::after {
+      content: "";
+      position: absolute;
+      right: -100px;
+      bottom: -130px;
+      width: 420px;
+      height: 420px;
+      border: 72px solid rgba(193, 144, 255, 0.12);
+      border-radius: 50%;
+    }
+
+    .f02-futuro-agora-final-kicker {
+      position: relative;
+      z-index: 1;
+      width: 60px;
+      height: 4px;
+      margin-bottom: 42px;
+      border-radius: 2px;
+      background: #c190ff;
+    }
+
+    .f02-futuro-agora-final h2 {
+      position: relative;
+      z-index: 1;
+      width: 758px;
+      margin: 0;
+      font-size: 108px;
+      line-height: 0.98;
+      font-weight: 700;
+    }
+
+    .f02-futuro-agora-final h2 span {
+      color: #7e3dd6;
+    }
+
+    .f02-futuro-agora-logo {
+      position: absolute;
+      z-index: 3;
+      top: -340px;
+      right: 0;
+      width: 260px;
+      height: auto;
+    }
+
+    .f02-futuro-agora-progress {
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 100%;
+      height: 3px;
+      background: #c190ff;
+    }
+  </style>
+
+  <div data-hf-id="hf-b54w" id="root" data-composition-id="02-futuro-agora" data-width="1080" data-height="1920" data-duration="8.8">
+    <div data-hf-id="hf-6wu8" id="f02-background" class="clip f02-futuro-agora-ground" data-start="0" data-duration="8.8" data-track-index="0"></div>
+
+    <!-- approved frame video hoisted by assemble-index -->
+
+    <div data-hf-id="hf-4yig" class="clip f02-futuro-agora-world" id="f02-futuro-agora-world" data-layout-allow-overflow data-start="0" data-duration="8.8" data-track-index="2">
+      <svg data-hf-id="hf-88zz" class="f02-futuro-agora-rail" viewBox="0 0 4320 1594" aria-hidden="true">
+        <path data-hf-id="hf-ated" class="f02-futuro-agora-rail-ghost" d="M 540 1118 C 820 1118 1050 1118 1470 1118 C 1840 1118 2130 1118 2550 1118 C 2920 1118 3280 1118 3780 1118" />
+        <path data-hf-id="hf-3i1p" id="f02-futuro-agora-path-one" d="M 540 1118 C 820 1118 1050 1118 1470 1118" />
+        <path data-hf-id="hf-x7af" id="f02-futuro-agora-path-two" d="M 1470 1118 C 1840 1118 2130 1118 2550 1118" />
+        <path data-hf-id="hf-slpi" id="f02-futuro-agora-path-three" d="M 2550 1118 C 2920 1118 3280 1118 3780 1118" />
+      </svg>
+
+      <section data-hf-id="hf-lbb0" class="f02-futuro-agora-station f02-futuro-agora-station-one" id="f02-futuro-agora-station-one">
+        <div data-hf-id="hf-3wvx" class="f02-futuro-agora-marker" id="f02-futuro-agora-marker-one"></div>
+        <h2 data-hf-id="hf-c9wm" class="headline" data-peak-scale="1">WEBMCP</h2>
+      </section>
+
+      <section data-hf-id="hf-bl4o" class="f02-futuro-agora-station f02-futuro-agora-station-two" id="f02-futuro-agora-station-two">
+        <div data-hf-id="hf-z11v" class="f02-futuro-agora-marker" id="f02-futuro-agora-marker-two"></div>
+        <h2 data-hf-id="hf-2nrd" class="headline" data-peak-scale="1">AGENTES</h2>
+        <div data-hf-id="hf-bz6e" class="f02-futuro-agora-station-tag">direto</div>
+      </section>
+
+      <section data-hf-id="hf-cjxs" class="f02-futuro-agora-station f02-futuro-agora-station-three" id="f02-futuro-agora-station-three">
+        <div data-hf-id="hf-pt9d" class="f02-futuro-agora-marker" id="f02-futuro-agora-marker-three"></div>
+        <h2 data-hf-id="hf-lkjw" class="headline" data-peak-scale="1">SITES</h2>
+        <div data-hf-id="hf-dbxe" class="f02-futuro-agora-station-tag">conectados</div>
+      </section>
+
+      <section data-hf-id="hf-iaty" class="f02-futuro-agora-final" id="f02-futuro-agora-final">
+        <div data-hf-id="hf-4iwu" class="f02-futuro-agora-final-glow" id="f02-futuro-agora-final-glow"></div>
+        <div data-hf-id="hf-7kns" class="f02-futuro-agora-final-card" id="f02-futuro-agora-final-card">
+          <div data-hf-id="hf-cg9c" class="f02-futuro-agora-final-kicker"></div>
+          <h2 data-hf-id="hf-90nr" class="headline" data-peak-scale="1.12">SER CITADO.<br data-hf-id="hf-x5px"><span data-hf-id="hf-n2rn">AGORA.</span></h2>
+          <div data-hf-id="hf-wisf" class="f02-futuro-agora-progress"></div>
+        </div>
+        <img data-hf-id="hf-casv" class="f02-futuro-agora-logo" id="f02-futuro-agora-logo" data-layout-allow-overflow src="assets/logo-f983ff0e.svg" alt="Semrush">
+      </section>
+    </div>
+
+    <div data-hf-id="hf-1jh8" id="f02-video-shell" class="clip f02-futuro-agora-video-shell" data-layout-allow-overflow data-start="0" data-duration="2.4" data-track-index="3">
+      <div data-hf-id="hf-s87o" class="f02-futuro-agora-video-glow" id="f02-futuro-agora-video-glow" data-layout-allow-overflow></div>
+      <div data-hf-id="hf-s0ep" class="f02-futuro-agora-video-chrome" aria-hidden="true"><i data-hf-id="hf-wt6k"></i><i data-hf-id="hf-zeb8"></i><i data-hf-id="hf-y7e5"></i></div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+  <script>
+    document.fonts.ready.then(() => {
+      const fitHeadlines = () => {
+        document.querySelectorAll("#root .headline").forEach((headline) => {
+          const peakScale = Number(headline.dataset.peakScale || 1);
+          let size = parseFloat(getComputedStyle(headline).fontSize);
+          let rect = headline.getBoundingClientRect();
+          while ((rect.width * peakScale > 918 || rect.height * peakScale > 461) && size > 56) {
+            size -= 2;
+            headline.style.fontSize = `${size}px`;
+            rect = headline.getBoundingClientRect();
+          }
+        });
+      };
+
+      fitHeadlines();
+
+      const drawPaths = [
+        document.getElementById("f02-futuro-agora-path-one"),
+        document.getElementById("f02-futuro-agora-path-two"),
+        document.getElementById("f02-futuro-agora-path-three")
+      ];
+
+      drawPaths.forEach((path) => {
+        const length = path.getTotalLength();
+        path.style.strokeDasharray = `${length}`;
+        path.style.strokeDashoffset = `${length}`;
+      });
+
+      const tl = gsap.timeline({ paused: true });
+      window.__timelines = window.__timelines || {};
+      window.__timelines["02-futuro-agora"] = tl;
+
+      tl.fromTo(
+        "#f02-futuro-agora-video-glow",
+        { opacity: 0, scale: 0.82 },
+        { opacity: 0.22, scale: 1, duration: 0.8, ease: "power2.out" },
+        0
+      );
+      tl.fromTo(
+        "#f02-futuro-agora-station-one",
+        { opacity: 0, y: 22 },
+        { opacity: 1, y: 0, duration: 0.45, ease: "power2.out" },
+        0.05
+      );
+      tl.fromTo(
+        "#f02-futuro-agora-marker-one",
+        { scale: 0.72, opacity: 0 },
+        { scale: 1, opacity: 1, duration: 0.42, ease: "back.out(1.35)" },
+        0.12
+      );
+
+      tl.to(
+        "#f02-futuro-agora-path-one",
+        { strokeDashoffset: 0, duration: 0.78, ease: "power2.out" },
+        2.18
+      );
+      tl.to(
+        "#f02-futuro-agora-world",
+        { x: -930, duration: 0.9, ease: "power3.inOut" },
+        2.18
+      );
+      tl.fromTo(
+        "#f02-futuro-agora-station-two",
+        { opacity: 0.28 },
+        { opacity: 1, duration: 0.38, ease: "power1.out" },
+        2.72
+      );
+      tl.fromTo(
+        "#f02-futuro-agora-marker-two",
+        { scale: 0.72, opacity: 0.35 },
+        { scale: 1, opacity: 1, duration: 0.42, ease: "back.out(1.35)" },
+        2.72
+      );
+
+      tl.to(
+        "#f02-futuro-agora-path-two",
+        { strokeDashoffset: 0, duration: 0.82, ease: "power2.out" },
+        3.78
+      );
+      tl.to(
+        "#f02-futuro-agora-world",
+        { x: -2010, duration: 1.02, ease: "power3.inOut" },
+        3.74
+      );
+      tl.fromTo(
+        "#f02-futuro-agora-station-three",
+        { opacity: 0.28 },
+        { opacity: 1, duration: 0.38, ease: "power1.out" },
+        4.34
+      );
+      tl.fromTo(
+        "#f02-futuro-agora-marker-three",
+        { scale: 0.72, opacity: 0.35 },
+        { scale: 1, opacity: 1, duration: 0.42, ease: "back.out(1.35)" },
+        4.34
+      );
+
+      tl.to(
+        "#f02-futuro-agora-path-three",
+        { strokeDashoffset: 0, duration: 0.82, ease: "power2.out" },
+        5.2
+      );
+      tl.to(
+        "#f02-futuro-agora-world",
+        { x: -3240, duration: 1.08, ease: "power4.inOut" },
+        5.34
+      );
+      tl.fromTo(
+        "#f02-futuro-agora-final-card",
+        { opacity: 0.15, scale: 1.12, filter: "blur(10px)" },
+        { opacity: 1, scale: 1, filter: "blur(0px)", duration: 0.62, ease: "expo.out" },
+        5.94
+      );
+      tl.fromTo(
+        "#f02-futuro-agora-final-glow",
+        { opacity: 0, scale: 0.84 },
+        { opacity: 0.25, scale: 1, duration: 0.78, ease: "power2.out" },
+        5.94
+      );
+      tl.fromTo(
+        "#f02-futuro-agora-logo",
+        { opacity: 0, y: 18 },
+        { opacity: 1, y: 0, duration: 0.48, ease: "power2.out" },
+        6.3
+      );
+    });
+  </script>
+</template>

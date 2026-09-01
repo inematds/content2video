@@ -109,11 +109,29 @@ components:
     rounded: "{rounded.surface}"
     padding: "0 20px"
     height: "66px"
+  format-option:
+    backgroundColor: "transparent"
+    textColor: "{colors.text-muted}"
+    typography: "{typography.metadata}"
+    rounded: "{rounded.control}"
+    padding: "0 11px"
+    height: "44px"
+  input-command:
+    backgroundColor: "{colors.navy-ink}"
+    textColor: "{colors.text-primary}"
+    typography: "{typography.body}"
+    rounded: "{rounded.control}"
+    padding: "14px 16px"
   card-panel:
     backgroundColor: "{colors.navy-surface}"
     textColor: "{colors.text-primary}"
     rounded: "{rounded.surface}"
     padding: "24px"
+  panel-command:
+    backgroundColor: "{colors.navy-raised}"
+    textColor: "{colors.text-primary}"
+    rounded: "{rounded.control}"
+    padding: "20px"
 ---
 
 # Design System: Content2Video INEMA
@@ -124,15 +142,15 @@ components:
 
 Content2Video INEMA é uma bancada de operação editorial: escura, precisa e silenciosa, com a energia do ciano reservada para decisões, foco e progresso. A interface deve parecer uma ferramenta de produção madura — superfícies azul-marinho foscas, divisórias finas, densidade controlada e hierarquia imediatamente legível — sem ornamentação que dispute atenção com a URL, o estado do trabalho ou o preview do vídeo.
 
-O fluxo visual é intake-first. A entrada ampla abre a experiência; abaixo dela, o trilho de produção explica o que está acontecendo e a filmoteca vertical oferece os artefatos acionáveis. Em telas estreitas, essa mesma ordem vira uma pilha contínua, preservando prioridade, legibilidade e acesso às ações.
+O fluxo visual é intake-first. A entrada ampla reúne URL e formato; abaixo dela, o trilho de produção explica cada fase e a filmoteca oferece os artefatos acionáveis no enquadramento real do projeto. Em telas estreitas, essa mesma ordem vira uma pilha contínua, preservando prioridade, legibilidade e acesso às ações.
 
 **Key Characteristics:**
 
 - Azul-marinho profundo e ciano editorial de alta precisão.
 - Anton apenas para a manchete; Hanken Grotesk conduz toda a operação.
 - Superfícies foscas, divisórias finas, cantos controlados e profundidade pontual.
-- Estados neutro, pronto e erro combinam cor, texto e forma — nunca apenas cor.
-- Entrada por URL primeiro, produção em trilho compacto e filmoteca vertical acionável.
+- Estados neutro, em curso, cancelado, pronto e erro combinam cor, texto e forma — nunca apenas cor.
+- Entrada por URL e formato primeiro, produção em trilho compacto e filmoteca acionável.
 
 ## Colors
 
@@ -166,7 +184,7 @@ A paleta usa o azul-marinho como ambiente de trabalho e o ciano como sinal raro 
 
 **The Signal Rarity Rule.** O ciano forte aparece apenas onde uma ação, foco ou progresso precisa vencer a hierarquia.
 
-**The Semantic Trio Rule.** Neutro, pronto e erro mantêm papéis estáveis; cada estado repete seu significado em texto ou forma além da cor.
+**The Semantic State Rule.** Neutro, em curso, cancelamento, pronto e erro mantêm papéis estáveis; cada estado repete seu significado em texto ou forma além da cor.
 
 ## Typography
 
@@ -195,11 +213,11 @@ A paleta usa o azul-marinho como ambiente de trabalho e o ciano como sinal raro 
 
 O conteúdo ocupa um contêiner central de até 1500px, com respiro lateral fluido entre 20px e 64px. A entrada usa uma grade assimétrica: promessa editorial à esquerda e formulário mais largo à direita. A área de trabalho repete essa relação em escala menor, com um trilho de produção compacto e uma filmoteca dominante.
 
-O ritmo nasce de intervalos curtos de 8–24px dentro de componentes e saltos maiores, fluidos, entre regiões. Divisórias mantêm listas densas escaneáveis sem transformar cada item em um cartão isolado. Em larguras de até 980px, entrada e workspace viram uma única coluna e o trilho deixa de ser sticky. Até 680px, o formulário empilha campo e ação, os pôsteres encolhem e as ações dos projetos ocupam uma linha própria com alvos flexíveis.
+O ritmo nasce de intervalos curtos de 8–24px dentro de componentes e saltos maiores, fluidos, entre regiões. Divisórias mantêm listas densas escaneáveis sem transformar cada item em um cartão isolado. Em larguras de até 980px, entrada e workspace viram uma única coluna e o trilho deixa de ser sticky. Até 680px, o formulário empilha campo e ação, os pôsteres encolhem, as ações dos projetos ocupam uma linha própria e o painel de comando vira uma coluna; seletores, botões e demais controles preservam alvos de pelo menos 44px.
 
 **The Intake-First Rule.** A URL e sua ação permanecem acima do acompanhamento e da biblioteca em qualquer largura.
 
-**The Vertical Film Library Rule.** Projetos são linhas editoriais com pôster 9:16, título, metadados e ações; não se convertem em uma grade de thumbnails genérica.
+**The Format-Honest Film Library Rule.** Projetos são linhas editoriais com pôster na proporção real — 9:16 ou 16:9 —, título, metadados e ações; não se convertem em uma grade de thumbnails genérica.
 
 ## Elevation & Depth
 
@@ -230,6 +248,7 @@ Painéis e o campo composto usam cantos suavemente arredondados de 14px. Botões
 - **Hover / Focus:** hover clareia o ciano; active desloca 1px; foco usa contorno visível de 3px em Ciano de Leitura com offset de 3px.
 - **Secondary:** transparente, borda Divisor Ativo e altura mínima de 44px; hover combina borda ciano e wash ciano discreto.
 - **Download:** inverte a hierarquia com Papel Frio sobre Tinta Marinho; hover muda para Ciano de Leitura.
+- **Cancel:** transparente, texto e borda em Rosa de Erro, altura mínima de 44px e rótulo verbal; durante a solicitação, troca para “Cancelando” e reduz opacidade sem remover o contexto.
 
 ### Cards / Containers
 
@@ -244,18 +263,27 @@ Painéis e o campo composto usam cantos suavemente arredondados de 14px. Botões
 - **Style:** o input transparente vive dentro de um recipiente Mesa Marinho com borda Divisor Ativo, 14px de raio e 66px de altura.
 - **Focus:** o recipiente inteiro recebe borda Ciano de Sinal e uma expansão luminosa curta; o input não cria uma segunda borda.
 - **Error / Disabled:** erro aparece como mensagem textual em Rosa de Erro; a ação desabilitada mantém rótulo e reduz opacidade.
+- **Command Textarea:** o campo de instrução usa Tinta Marinho, borda Divisor Ativo, raio de 12px, altura inicial de 104px e redimensionamento vertical; foco troca a borda para Ciano de Sinal.
+
+### Format Selector
+
+O seletor 9:16 / 16:9 é um grupo de rádio, nunca um menu ou toggle ambíguo. Cada opção combina proporção escrita, nome “Vertical” ou “Horizontal” e um ícone geométrico correspondente. O estado selecionado usa borda ciano e wash discreto; o foco mantém contorno visível de 3px. Cada alvo tem altura mínima de 44px e o padrão de um novo vídeo é 9:16.
 
 ### Navigation
 
-A topbar de 66–76px usa fundo Tinta Marinho translúcido, divisor inferior e marca compacta à esquerda. A marca é acompanhada por um link textual Ciano de Leitura para o INEMA.CLUB. O estado do sistema fica à direita com ponto semântico e rótulo explícito; em mobile, o rótulo some para preservar marca, link e ponto de estado sem estouro horizontal.
+A topbar de 66–76px usa fundo Tinta Marinho translúcido, divisor inferior e marca compacta à esquerda. A marca é acompanhada por um link textual Ciano de Leitura para o INEMA.CLUB. O estado do sistema fica à direita com ponto semântico e rótulo explícito; em mobile, a descrição longa vira um rótulo curto como “Pronto” ou “Atenção”, preservando significado sem estourar a linha.
 
 ### Production Rail
 
-Cada trabalho é uma linha compacta com título truncado, estado textual em caixa alta, descrição da etapa e uma barra de progresso de 3px. Em andamento usa ciano e movimento; concluído usa verde e preenchimento integral; falha usa rosa e preenchimento integral. Movimento respeita `prefers-reduced-motion`.
+Cada trabalho é uma linha compacta com título truncado, estado textual em caixa alta, descrição da etapa, lista ordenada de fases, tipo e formato do job, barra de progresso de 3px e cancelamento quando disponível. Fases concluídas usam marcador verde; a fase atual usa texto claro e marcador ciano. Em andamento usa ciano e movimento; concluído usa verde; falha usa rosa; cancelando ou cancelado usa âmbar, sempre com rótulo textual. O cancelamento preserva a leitura das fases e os arquivos já produzidos. Movimento respeita `prefers-reduced-motion`.
 
-### Vertical Film Row
+### Inline Project Command
 
-Cada projeto combina pôster 9:16, nome, metadados e ações. O hover tonal cobre a linha inteira. Em mobile, o pôster reduz de 92px para 72px e as ações descem para uma faixa própria, preservando alvos de 44px.
+“Editar com prompt” e “Criar cópia” expandem um painel dentro da própria linha do projeto, em Plano Elevado e com divisor superior. O painel explica com honestidade o efeito da ação: edição altera o projeto atual; cópia mantém o original intacto. Ele reúne instrução textual, seletor de formato e ações “Fechar” e “Aplicar edição” ou “Criar cópia”. Em mobile, conteúdo, formato e ações empilham em uma coluna, mantendo alvos de 44px.
+
+### Film Row
+
+Cada projeto combina pôster proporcional, nome, metadados — incluindo 9:16 ou 16:9 — e ações separadas para editor visual, edição por prompt, cópia preservando o original, renderização e download. O pôster não força crop vertical: usa 92px de largura em 9:16 e 132px em 16:9 no desktop, respeitando a proporção real. O hover tonal cobre a linha inteira. Em mobile, os pôsteres passam para 72px e 100px, respectivamente, e as ações descem para uma faixa própria, preservando alvos de 44px.
 
 ## Do's and Don'ts
 
@@ -263,14 +291,17 @@ Cada projeto combina pôster 9:16, nome, metadados e ações. O hover tonal cobr
 
 - **Do** preservar a ordem intake, produção e filmoteca em desktop e mobile.
 - **Do** usar Ciano de Sinal para ação, foco e progresso, mantendo-o raro no restante da tela.
-- **Do** combinar toda semântica de pronto ou erro com rótulo textual, ícone, barra ou outra forma não cromática.
-- **Do** manter pôsteres de projeto em 9:16 e ações inequívocas como “Editar”, “Aprovar e renderizar” e “Baixar”.
+- **Do** combinar toda semântica de andamento, cancelamento, pronto ou erro com rótulo textual, ícone, barra ou outra forma não cromática.
+- **Do** apresentar pôsteres em 9:16 ou 16:9 sem falsificar a proporção e manter ações inequívocas como “Editar”, “Editar com prompt”, “Criar cópia”, “Aprovar e renderizar” e “Baixar”.
+- **Do** afirmar no painel de cópia que o original permanece intacto e distinguir esse fluxo da edição do projeto atual.
 - **Do** respeitar foco visível, alvos mínimos de 44px e preferência por movimento reduzido.
 
 ### Don't:
 
 - **Don't** trocar as superfícies foscas por vidro brilhante, gradientes decorativos ou cartões flutuantes em excesso.
 - **Don't** usar Anton em botões, metadados, estados ou conteúdo operacional.
-- **Don't** transformar a filmoteca vertical em uma grade genérica de capas.
+- **Don't** transformar a filmoteca editorial em uma grade genérica de capas.
+- **Don't** recortar ou apresentar um projeto 16:9 como se fosse um pôster vertical.
+- **Don't** esconder fases, estado de cancelamento ou se um comando por prompt altera o projeto atual ou preserva o original.
 - **Don't** depender apenas de verde, rosa ou ciano para comunicar estado.
 - **Don't** deixar ornamento competir com URL, status, preview ou ação principal.

@@ -2,16 +2,21 @@ const state = {
   config: null,
   projects: [],
   jobs: [],
-  loading: false
+  loading: false,
+  command: null
 };
 
 const elements = {
   form: document.querySelector("#create-form"),
   input: document.querySelector("#source-url"),
+  aspectInputs: [...document.querySelectorAll('input[name="aspectRatio"]')],
+  createCta: document.querySelector("#create-cta"),
   createButton: document.querySelector("#create-button"),
   formMessage: document.querySelector("#form-message"),
   defaults: document.querySelector("#defaults"),
+  appVersion: document.querySelector("#app-version"),
   authLabel: document.querySelector("#auth-label"),
+  authShort: document.querySelector("#auth-short"),
   systemState: document.querySelector("#system-state"),
   jobs: document.querySelector("#jobs"),
   projects: document.querySelector("#projects"),
@@ -22,8 +27,12 @@ const elements = {
 
 const icons = {
   edit: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m4 20 4.3-1 10-10a2.1 2.1 0 0 0-3-3l-10 10L4 20Z"/><path d="m14 7 3 3"/></svg>',
+  prompt: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v4m0 10v4M3 12h4m10 0h4M6.4 6.4l2.1 2.1m7 7 2.1 2.1m0-11.2-2.1 2.1m-7 7-2.1 2.1"/><circle cx="12" cy="12" r="3"/></svg>',
+  duplicate: '<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="8" y="8" width="11" height="11" rx="2"/><path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2"/></svg>',
+  project: '<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="5" width="16" height="14" rx="2"/><path d="M8 9h8M8 13h5"/></svg>',
   render: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m8 5 11 7-11 7V5Z"/></svg>',
-  download: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12m-5-5 5 5 5-5M5 21h14"/></svg>'
+  download: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12m-5-5 5 5 5-5M5 21h14"/></svg>',
+  cancel: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg>'
 };
 
 async function api(path, options = {}) {
@@ -52,9 +61,11 @@ async function initialize() {
 
 function renderConfig() {
   const config = state.config;
+  elements.appVersion.textContent = config.version;
   elements.authLabel.textContent = config.authReady
     ? `${config.authMessage} · ${config.voiceId}`
     : config.authMessage;
+  elements.authShort.textContent = config.authReady ? "Pronto" : "Atenção";
   elements.systemState.classList.remove("is-checking", "is-ready", "is-error");
   elements.systemState.classList.add(config.authReady ? "is-ready" : "is-error");
   const facts = [
@@ -74,7 +85,7 @@ async function refresh() {
     state.projects = projectsPayload.projects;
     state.jobs = jobsPayload.jobs;
     renderJobs();
-    renderProjects();
+    if (!state.command) renderProjects();
   } catch (error) {
     toast(error.message, true);
   } finally {
@@ -88,15 +99,28 @@ function renderJobs() {
     return;
   }
   elements.jobs.innerHTML = state.jobs.map((job) => {
-    const statusLabel = { queued: "Na fila", running: "Em andamento", completed: "Concluído", failed: "Falhou" }[job.status] || job.status;
-    const message = job.error || job.stage;
+    const presentation = jobPresentation(job);
+    const statusLabel = { queued: "Na fila", running: "Em andamento", cancelling: "Cancelando", cancelled: "Cancelado", completed: "Concluído", failed: "Falhou" }[job.status] || job.status;
+    const typeLabel = { generation: "Novo vídeo", duplicate: "Cópia", edit: "Edição por prompt", render: "Render" }[job.type] || job.type;
+    const message = job.error || presentation.stage;
+    const phases = job.phases.map((phase, index) => {
+      const timing = job.phaseTimings?.find((item) => item.phaseIndex === index);
+      const phaseClass = index === presentation.phaseIndex ? "current" : timing?.startedAt || index < presentation.phaseIndex ? "done" : "";
+      const duration = timing?.durationMs == null ? "" : `<time datetime="PT${Math.max(0, Math.floor(timing.durationMs / 1000))}S">${formatDuration(timing.durationMs)}</time>`;
+      return `<li class="${phaseClass}"><span>${escapeHtml(phase)}</span>${duration}</li>`;
+    }).join("");
+    const cancel = job.cancelable
+      ? `<button class="cancel-action" type="button" data-job-action="cancel" data-job="${escapeHtml(job.id)}" ${job.status === "cancelling" ? "disabled" : ""}>${icons.cancel}<span>${job.status === "cancelling" ? "Cancelando" : "Cancelar"}</span></button>`
+      : "";
     return `<article class="job ${escapeHtml(job.status)}">
       <div class="job-top">
         <strong title="${escapeHtml(job.project)}">${escapeHtml(humanize(job.project))}</strong>
         <span class="job-state ${escapeHtml(job.status)}">${statusLabel}</span>
       </div>
       <p>${escapeHtml(message)}</p>
+      <ol class="job-phases" aria-label="Fases de ${escapeHtml(typeLabel)}">${phases}</ol>
       <div class="job-progress" aria-label="${escapeHtml(statusLabel)}"><i></i></div>
+      <div class="job-actions"><span class="job-format">${escapeHtml(typeLabel)} · ${escapeHtml(job.aspectRatio)} · ${formatDuration(job.totalDurationMs ?? elapsedDuration(job))} no total</span>${cancel}</div>
     </article>`;
   }).join("");
 }
@@ -109,27 +133,107 @@ function renderProjects() {
   }
   elements.projects.innerHTML = state.projects.map((project) => {
     const latest = project.renders[0];
-    const poster = project.thumbnail
+    const posterMedia = project.thumbnail
       ? `<img src="${project.thumbnail}" alt="Prévia de ${escapeHtml(project.name)}" loading="lazy">`
-      : `<div class="poster-placeholder" aria-hidden="true">▶</div>`;
-    const renderMeta = latest ? `${formatBytes(latest.size)} · MP4 pronto` : "Ainda sem MP4";
+      : `<div class="poster-placeholder" aria-hidden="true">${icons.project}</div>`;
+    const activeJob = state.jobs.find((job) => job.project === project.slug && ["queued", "running", "cancelling"].includes(job.status));
+    const activePresentation = activeJob ? jobPresentation(activeJob) : null;
+    const effectiveCta = activeJob ? activeJob.includeCta ?? project.includeCta : project.includeCta;
+    const projectStatus = activeJob ? `${activePresentation.stage} · editor após concluir` : latest ? "Pronto para assistir" : "Aguardando revisão";
+    const statusClass = activeJob ? "is-active" : latest ? "is-ready" : "is-pending";
+    const renderMeta = latest ? formatBytes(latest.size) : "Ainda sem MP4";
     const download = latest ? `<a class="download-action" href="${latest.url}" download>${icons.download}<span>Baixar</span></a>` : "";
-    return `<article class="project" data-project="${escapeHtml(project.slug)}">
-      <div class="project-poster">${poster}</div>
+    const poster = latest
+      ? `<a class="project-poster" href="${latest.url}" target="_blank" rel="noopener noreferrer" aria-label="Assistir ao vídeo pronto ${escapeHtml(project.name)}">${posterMedia}<span class="poster-play" aria-hidden="true">${icons.render}</span></a>`
+      : `<div class="project-poster" role="img" aria-label="${escapeHtml(project.name)} — aguardando revisão">${posterMedia}</div>`;
+    const commandOpen = !activeJob && state.command?.project === project.slug;
+    const commandMode = commandOpen ? state.command.mode : "edit";
+    const isDuplicate = commandMode === "duplicate";
+    const commandTitle = isDuplicate ? "Criar uma cópia com instruções" : "Editar este projeto com uma instrução";
+    const commandDescription = isDuplicate
+      ? "O original fica intacto. A nova versão recebe somente as mudanças que você descrever."
+      : "A alteração acontece neste projeto. Diga também o que deve permanecer como está.";
+    const commandPanel = `<form class="project-command" data-command-form data-project="${escapeHtml(project.slug)}" data-mode="${escapeHtml(commandMode)}" ${commandOpen ? "" : "hidden"}>
+      <div class="project-command-copy"><h4>${commandTitle}</h4><p>${commandDescription}</p></div>
+      ${isDuplicate ? "" : `<div class="prompt-presets" aria-label="Instruções rápidas"><span>Atalhos</span><button type="button" data-prompt-preset="continue">Continuar de onde parou</button><button type="button" data-prompt-preset="validate">Corrigir e validar</button></div>`}
+      <textarea name="instructions" maxlength="6000" required placeholder="Ex.: retire a cena sobre preços, mantenha a voz e deixe o ritmo mais direto.">${commandOpen ? escapeHtml(state.command.instructions) : ""}</textarea>
+      ${formatPicker(project.slug, commandOpen ? state.command.aspectRatio : project.aspectRatio)}
+      ${ctaPicker(commandOpen ? state.command.includeCta : project.includeCta)}
+      <div class="command-actions">
+        <button class="command-close" type="button" data-command-close>Fechar</button>
+        <button class="command-submit" type="submit">${isDuplicate ? "Criar cópia" : "Aplicar edição"}</button>
+      </div>
+    </form>`;
+    const unavailable = activeJob
+      ? `disabled aria-disabled="true" title="Disponível quando a produção terminar"`
+      : "";
+    const editorLabel = activeJob ? "Editor após concluir" : "Abrir editor";
+    return `<article class="project${project.aspectRatio === "16:9" ? " is-horizontal" : ""}" data-project="${escapeHtml(project.slug)}">
+      ${poster}
       <div class="project-body">
         <h3>${escapeHtml(project.name)}</h3>
         <div class="project-meta">
+          <span class="project-status ${statusClass}">${escapeHtml(projectStatus)}</span>
           <span>${escapeHtml(renderMeta)}</span>
+          <span>${escapeHtml(project.aspectRatio)}</span>
+          <span>${effectiveCta ? "CTA no final" : "Sem CTA"}</span>
           <span>Atualizado ${formatDate(project.modifiedAt)}</span>
         </div>
       </div>
       <div class="project-actions">
-        <button class="secondary-action" type="button" data-action="edit" data-project="${escapeHtml(project.slug)}">${icons.edit}<span>Editar</span></button>
-        <button class="secondary-action" type="button" data-action="render" data-project="${escapeHtml(project.slug)}">${icons.render}<span>Aprovar e renderizar</span></button>
+        <button class="secondary-action" type="button" data-action="edit-visual" data-project="${escapeHtml(project.slug)}" ${unavailable}>${icons.edit}<span class="action-label">${editorLabel}</span></button>
+        <button class="secondary-action is-accent" type="button" data-action="edit-prompt" data-project="${escapeHtml(project.slug)}" ${unavailable}>${icons.prompt}<span class="action-label">Editar com prompt</span></button>
+        <button class="secondary-action" type="button" data-action="duplicate" data-project="${escapeHtml(project.slug)}" ${unavailable}>${icons.duplicate}<span class="action-label">Criar cópia</span></button>
+        <button class="secondary-action" type="button" data-action="render" data-project="${escapeHtml(project.slug)}" ${unavailable}>${icons.render}<span class="action-label">Aprovar e renderizar</span></button>
         ${download}
       </div>
+      ${commandPanel}
     </article>`;
   }).join("");
+}
+
+function jobPresentation(job) {
+  const presentation = { stage: job.stage, phaseIndex: job.phaseIndex };
+  if (job.status !== "running" || job.type !== "generation") return presentation;
+  if (Array.isArray(job.phaseTimings)) return presentation;
+
+  const activities = [...(job.logs || [])]
+    .reverse()
+    .filter((line) => line && !/\bERROR\b|verification failed|operation not permitted/i.test(line));
+
+  for (const activity of activities) {
+    if (/\bhyperframes(?:@\S+)?\s+check\b|validando|valida[cç][aã]o|inspe[cç][aã]o|auditoria|margem|passe final/i.test(activity)) {
+      return { stage: "Validando composição", phaseIndex: 4 };
+    }
+    if (/\bhyperframes(?:@\S+)?\s+snapshot\b|snapshots?|imagens? de revis[aã]o/i.test(activity)) {
+      return { stage: "Gerando imagens de revisão", phaseIndex: 4 };
+    }
+    if (/edge-tts|ffmpeg|\b[aá]udio\b|\bvoz\b|narra[cç][aã]o/i.test(activity)) {
+      return { stage: "Produzindo mídia e voz", phaseIndex: 3 };
+    }
+    if (/storyboard|roteiro|frames?|cenas?|composi[cç][aã]o|timelines?|primeira metade|segunda onda|constru[cç][aã]o/i.test(activity)) {
+      return { stage: "Criando cenas", phaseIndex: 2 };
+    }
+  }
+  if (job.phaseIndex >= 4) return { stage: "Produção em andamento", phaseIndex: 2 };
+  return presentation;
+}
+
+function formatPicker(project, selected) {
+  const name = `command-aspect-${project}`;
+  return `<fieldset class="format-picker" aria-label="Formato desta versão">
+    <legend>Formato</legend>
+    <label><input type="radio" name="${escapeHtml(name)}" value="9:16" ${selected === "9:16" ? "checked" : ""}><span><i class="format-icon vertical" aria-hidden="true"></i>9:16 <small>Vertical</small></span></label>
+    <label><input type="radio" name="${escapeHtml(name)}" value="16:9" ${selected === "16:9" ? "checked" : ""}><span><i class="format-icon horizontal" aria-hidden="true"></i>16:9 <small>Horizontal</small></span></label>
+  </fieldset>`;
+}
+
+function ctaPicker(checked) {
+  return `<label class="cta-choice compact">
+    <input type="checkbox" name="includeCta" ${checked ? "checked" : ""}>
+    <span class="cta-check" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="m3.5 8.2 2.8 2.8 6.2-6.2"/></svg></span>
+    <span><strong>Adicionar CTA INEMA.CLUB ao final</strong><small>Ative para incluir o encerramento; desative para renderizar sem ele.</small></span>
+  </label>`;
 }
 
 elements.form.addEventListener("submit", async (event) => {
@@ -139,7 +243,9 @@ elements.form.addEventListener("submit", async (event) => {
   elements.form.classList.add("is-working");
   try {
     const url = elements.input.value.trim();
-    await api("/api/jobs", { method: "POST", body: JSON.stringify({ url }) });
+    const aspectRatio = elements.aspectInputs.find((input) => input.checked)?.value || "9:16";
+    const includeCta = elements.createCta.checked;
+    await api("/api/jobs", { method: "POST", body: JSON.stringify({ url, aspectRatio, includeCta }) });
     elements.input.value = "";
     toast("Produção iniciada. Você pode acompanhar o andamento abaixo.");
     await refresh();
@@ -155,18 +261,34 @@ elements.projects.addEventListener("click", async (event) => {
   const button = event.target.closest("button[data-action]");
   if (!button) return;
   const project = button.dataset.project;
-  const editorWindow = button.dataset.action === "edit" ? window.open("about:blank", "_blank") : null;
+  if (button.dataset.action === "edit-prompt" || button.dataset.action === "duplicate") {
+    const projectData = state.projects.find((item) => item.slug === project);
+    state.command = {
+      project,
+      mode: button.dataset.action === "duplicate" ? "duplicate" : "edit",
+      instructions: "",
+      aspectRatio: projectData?.aspectRatio || "9:16",
+      includeCta: projectData?.includeCta !== false
+    };
+    renderProjects();
+    elements.projects.querySelector(`[data-project="${project}"] textarea`)?.focus();
+    return;
+  }
+
+  const opensPreview = button.dataset.action === "edit-visual";
+  const editorWindow = opensPreview ? window.open("about:blank", "_blank") : null;
+  const actionLabel = button.querySelector(".action-label");
   button.disabled = true;
   try {
-    if (button.dataset.action === "edit") {
+    if (opensPreview) {
       if (!editorWindow) throw new Error("O navegador bloqueou a nova aba. Permita pop-ups para abrir o editor.");
       editorWindow.document.title = "Abrindo editor…";
       editorWindow.document.body.textContent = "Preparando o HyperFrames Studio…";
-      button.querySelector("span").textContent = "Abrindo…";
+      if (actionLabel) actionLabel.textContent = "Abrindo…";
       const result = await api(`/api/projects/${project}/preview`, { method: "POST", body: "{}" });
       editorWindow.opener = null;
       editorWindow.location.href = result.url;
-      toast("Editor aberto em uma nova aba.");
+      toast("Prévia aberta. Use o play do editor para assistir e revisar.");
     } else {
       button.querySelector("span").textContent = "Renderizando…";
       toast("Validação e renderização iniciadas. Isso pode levar alguns minutos.");
@@ -179,7 +301,79 @@ elements.projects.addEventListener("click", async (event) => {
     toast(error.message, true);
   } finally {
     button.disabled = false;
-    button.querySelector("span").textContent = button.dataset.action === "edit" ? "Editar" : "Aprovar e renderizar";
+    if (actionLabel) actionLabel.textContent = opensPreview ? "Abrir editor" : "Aprovar e renderizar";
+  }
+});
+
+elements.projects.addEventListener("input", (event) => {
+  if (!state.command) return;
+  const form = event.target.closest("[data-command-form]");
+  if (!form) return;
+  if (event.target.name === "instructions") state.command.instructions = event.target.value;
+  if (event.target.type === "radio" && event.target.checked) state.command.aspectRatio = event.target.value;
+  if (event.target.name === "includeCta") state.command.includeCta = event.target.checked;
+});
+
+elements.projects.addEventListener("click", (event) => {
+  const preset = event.target.closest("[data-prompt-preset]");
+  if (preset && state.command) {
+    const instructions = preset.dataset.promptPreset === "continue"
+      ? "Continue a produção exatamente de onde parou. Preserve tudo que já está correto, conclua o que estiver incompleto, corrija os erros de validação, gere snapshots para revisão e rode hyperframes check até passar. Não renderize ainda."
+      : "Corrija todos os erros e avisos relevantes do hyperframes check. Preserve o roteiro, a voz e a identidade visual. Gere snapshots para revisão e rode o check novamente até passar. Não renderize ainda.";
+    state.command.instructions = instructions;
+    const textarea = preset.closest("[data-command-form]")?.elements.instructions;
+    if (textarea) {
+      textarea.value = instructions;
+      textarea.focus();
+    }
+    return;
+  }
+  if (!event.target.closest("[data-command-close]")) return;
+  state.command = null;
+  renderProjects();
+});
+
+elements.projects.addEventListener("submit", async (event) => {
+  const form = event.target.closest("[data-command-form]");
+  if (!form) return;
+  event.preventDefault();
+  const submit = form.querySelector(".command-submit");
+  const instructions = form.elements.instructions.value.trim();
+  const aspectRatio = form.querySelector('input[type="radio"]:checked')?.value || "9:16";
+  const includeCta = form.elements.includeCta.checked;
+  submit.disabled = true;
+  submit.textContent = form.dataset.mode === "duplicate" ? "Criando…" : "Aplicando…";
+  try {
+    await api(`/api/projects/${form.dataset.project}/${form.dataset.mode}`, {
+      method: "POST",
+      body: JSON.stringify({ instructions, aspectRatio, includeCta })
+    });
+    const duplicated = form.dataset.mode === "duplicate";
+    state.command = null;
+    renderProjects();
+    toast(duplicated ? "Cópia iniciada. O projeto original não será alterado." : "Edição iniciada. Acompanhe as fases em Produção.");
+    await refresh();
+  } catch (error) {
+    toast(error.message, true);
+    submit.disabled = false;
+    submit.textContent = form.dataset.mode === "duplicate" ? "Criar cópia" : "Aplicar edição";
+  }
+});
+
+elements.jobs.addEventListener("click", async (event) => {
+  const button = event.target.closest('button[data-job-action="cancel"]');
+  if (!button) return;
+  if (!window.confirm("Cancelar este trabalho agora? Os arquivos já produzidos serão preservados para inspeção.")) return;
+  button.disabled = true;
+  button.querySelector("span").textContent = "Cancelando";
+  try {
+    await api(`/api/jobs/${button.dataset.job}/cancel`, { method: "POST", body: "{}" });
+    toast("Cancelamento solicitado. Encerrando os processos deste trabalho.");
+    await refresh();
+  } catch (error) {
+    toast(error.message, true);
+    button.disabled = false;
+    button.querySelector("span").textContent = "Cancelar";
   }
 });
 
@@ -205,6 +399,21 @@ function formatDate(value) {
 function formatBytes(bytes) {
   if (!bytes) return "0 MB";
   return `${(bytes / 1024 / 1024).toFixed(1).replace(".", ",")} MB`;
+}
+
+function elapsedDuration(job) {
+  const end = ["completed", "failed", "cancelled"].includes(job.status) ? new Date(job.updatedAt).getTime() : Date.now();
+  return Math.max(0, end - new Date(job.createdAt).getTime());
+}
+
+function formatDuration(milliseconds) {
+  const totalSeconds = Math.max(0, Math.floor(Number(milliseconds || 0) / 1000));
+  if (totalSeconds < 60) return `${totalSeconds}s`;
+  const hours = Math.floor(totalSeconds / 3600);
+  const minutes = Math.floor((totalSeconds % 3600) / 60);
+  const seconds = totalSeconds % 60;
+  if (hours) return `${hours}h ${String(minutes).padStart(2, "0")}min`;
+  return seconds ? `${minutes}min ${String(seconds).padStart(2, "0")}s` : `${minutes}min`;
 }
 
 function escapeHtml(value) {

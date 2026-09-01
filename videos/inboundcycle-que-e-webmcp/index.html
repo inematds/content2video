@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=1080, height=1920">
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js" integrity="sha384-sG0Hv1tP1lZCk9KQmrIbY/XNwi+OY84GQqhMscbnsoBFqAz8KNCil1kvfL3Hbbk2" crossorigin="anonymous"></script>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        width: 1080px;
+        height: 1920px;
+        overflow: hidden;
+        background: #000;
+      }
+      #root {
+        position: relative;
+        width: 1080px;
+        height: 1920px;
+        overflow: hidden;
+        background: #FAF9F5;
+      }
+      .scene {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+      }
+    </style>
+  </head>
+  <body>
+    <div data-hf-id="hf-jegk" id="root" data-composition-id="main" data-start="0" data-duration="65.544" data-width="1080" data-height="1920">
+      <div data-hf-id="hf-1twe" id="el-01-fotografia" class="scene" data-composition-id="01-fotografia" data-composition-src="compositions/frames/01-fotografia.html" data-start="0" data-duration="9.424" data-track-index="0"></div>
+      <audio data-hf-id="hf-qib1" id="el-01-fotografia-voice" src="assets/voice/01.wav" data-start="0" data-duration="9.024" data-track-index="10" data-volume="1"></audio>
+
+      <div data-hf-id="hf-ucqo" id="el-02-declarar" class="scene" data-composition-id="02-declarar" data-composition-src="compositions/frames/02-declarar.html" data-start="9.024" data-duration="9.14" data-track-index="1"></div>
+      <audio data-hf-id="hf-etg7" id="el-02-declarar-voice" src="assets/voice/02.wav" data-start="9.024" data-duration="8.64" data-track-index="10" data-volume="1"></audio>
+
+      <div data-hf-id="hf-jtzt" id="el-03-contraste" class="scene" data-composition-id="03-contraste" data-composition-src="compositions/frames/03-contraste.html" data-start="17.664" data-duration="9.044" data-track-index="0"></div>
+      <audio data-hf-id="hf-03hk" id="el-03-contraste-voice" src="assets/voice/03.wav" data-start="17.664" data-duration="8.544" data-track-index="10" data-volume="1"></audio>
+
+      <div data-hf-id="hf-iwmh" id="el-04-circuito" class="scene" data-composition-id="04-circuito" data-composition-src="compositions/frames/04-circuito.html" data-start="26.208000000000002" data-duration="9.836" data-track-index="1"></div>
+      <audio data-hf-id="hf-isu7" id="el-04-circuito-voice" src="assets/voice/04.wav" data-start="26.208000000000002" data-duration="9.336" data-track-index="10" data-volume="1"></audio>
+
+      <div data-hf-id="hf-yfpk" id="el-05-complemento" class="scene" data-composition-id="05-complemento" data-composition-src="compositions/frames/05-complemento.html" data-start="35.544000000000004" data-duration="10.604" data-track-index="0"></div>
+      <audio data-hf-id="hf-s88m" id="el-05-complemento-voice" src="assets/voice/05.wav" data-start="35.544000000000004" data-duration="10.104" data-track-index="10" data-volume="1"></audio>
+
+      <div data-hf-id="hf-oxqu" id="el-06-duas-apis" class="scene" data-composition-id="06-duas-apis" data-composition-src="compositions/frames/06-duas-apis.html" data-start="45.648" data-duration="9.912" data-track-index="1"></div>
+      <audio data-hf-id="hf-oujp" id="el-06-duas-apis-voice" src="assets/voice/06.wav" data-start="45.648" data-duration="9.312" data-track-index="10" data-volume="1"></audio>
+
+      <div data-hf-id="hf-1m7f" id="el-07-comecar" class="scene" data-composition-id="07-comecar" data-composition-src="compositions/frames/07-comecar.html" data-start="54.96" data-duration="10.584" data-track-index="0"></div>
+      <audio data-hf-id="hf-fjj8" id="el-07-comecar-voice" src="assets/voice/07.wav" data-start="54.96" data-duration="10.584" data-track-index="10" data-volume="1"></audio>
+
+      <!-- captions -->
+      <div data-hf-id="hf-dbtz" id="el-captions" class="scene" data-composition-id="captions" data-composition-src="compositions/captions.html" data-start="0" data-duration="65.544" data-track-index="2"></div>
+
+    </div>
+
+    <script>
+      window.__timelines = window.__timelines || {};
+      window.__timelines["main"] = gsap.timeline({ paused: true });
+      // ── frame transitions (injected by transitions.mjs) ──
+      (function () { var tl = window.__timelines["main"];
+        tl.to("#el-01-fotografia", { scale: 2.5, opacity: 0, filter: "blur(8px)", duration: 0.4, ease: "power3.in" }, 9.024);
+        tl.fromTo("#el-02-declarar", { scale: 0.5, opacity: 0, filter: "blur(8px)" }, { scale: 1, opacity: 1, filter: "blur(0px)", duration: 0.4, ease: "power3.out" }, 9.024);
+        tl.to("#el-02-declarar", { x: -1080, duration: 0.5, ease: "power3.inOut" }, 17.664);
+        tl.fromTo("#el-03-contraste", { x: 1080, opacity: 1 }, { x: 0, duration: 0.5, ease: "power3.inOut" }, 17.664);
+        tl.to("#el-03-contraste", { x: -1080, duration: 0.5, ease: "power3.inOut" }, 26.208);
+        tl.fromTo("#el-04-circuito", { x: 1080, opacity: 1 }, { x: 0, duration: 0.5, ease: "power3.inOut" }, 26.208);
+        tl.to("#el-04-circuito", { x: -1080, duration: 0.5, ease: "power3.inOut" }, 35.544);
+        tl.fromTo("#el-05-complemento", { x: 1080, opacity: 1 }, { x: 0, duration: 0.5, ease: "power3.inOut" }, 35.544);
+        tl.to("#el-05-complemento", { x: -1080, duration: 0.5, ease: "power3.inOut" }, 45.648);
+        tl.fromTo("#el-06-duas-apis", { x: 1080, opacity: 1 }, { x: 0, duration: 0.5, ease: "power3.inOut" }, 45.648);
+        tl.to("#el-06-duas-apis", { filter: "blur(10px)", scale: 1.03, opacity: 0, duration: 0.6, ease: "power2.inOut" }, 54.96);
+        tl.fromTo("#el-07-comecar", { filter: "blur(10px)", scale: 0.97, opacity: 0 }, { filter: "blur(0px)", scale: 1, opacity: 1, duration: 0.6, ease: "power2.inOut" }, 54.96);
+        tl.to({}, { duration: 65.544 }, 0); // full-span anchor — main.duration() == composition total (Studio master duration)
+      })();
+    </script>
+  </body>
+</html>

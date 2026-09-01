@@ -1,0 +1,433 @@
+<template>
+  <style>
+    @font-face {
+      font-family: "EB Garamond";
+      src: url("assets/fonts/EBGaramond-400.woff2") format("woff2");
+      font-weight: 400;
+      font-style: normal;
+    }
+    @font-face {
+      font-family: "Inter";
+      src: url("assets/fonts/Inter-400.woff2") format("woff2");
+      font-weight: 400;
+      font-style: normal;
+    }
+    @font-face {
+      font-family: "Inter";
+      src: url("assets/fonts/Inter-700.woff2") format("woff2");
+      font-weight: 700;
+      font-style: normal;
+    }
+    @font-face {
+      font-family: "JetBrains Mono";
+      src: url("assets/fonts/JetBrainsMono-400.woff2") format("woff2");
+      font-weight: 400;
+      font-style: normal;
+    }
+
+    #root {
+      position: relative;
+      width: 1080px;
+      height: 1920px;
+      overflow: hidden;
+      container-type: size;
+      color: #141413;
+      perspective: 1800px;
+      isolation: isolate;
+    }
+
+    .clip {
+      position: absolute;
+      inset: 0;
+    }
+
+    .frame-02-ia-versus-agi-ground {
+      z-index: 0;
+      background: #faf9f5;
+    }
+
+    .frame-02-ia-versus-agi-stage {
+      position: absolute;
+      z-index: 2;
+      inset: 0;
+      transform-style: preserve-3d;
+    }
+
+    .frame-02-ia-versus-agi-index {
+      position: absolute;
+      left: 81px;
+      top: 72px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      font-family: "JetBrains Mono";
+      font-size: 19px;
+      line-height: 1;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: rgba(20, 20, 19, 0.6);
+    }
+
+    .frame-02-ia-versus-agi-index::before {
+      content: "02";
+      display: grid;
+      width: 42px;
+      height: 42px;
+      place-items: center;
+      border: 1px solid rgba(20, 20, 19, 0.18);
+      border-radius: 9999px;
+      color: #141413;
+      letter-spacing: 0;
+    }
+
+    .frame-02-ia-versus-agi-panel {
+      position: absolute;
+      left: 90px;
+      width: 900px;
+      border: 1px solid rgba(20, 20, 19, 0.14);
+      border-radius: 12px;
+      transform-style: preserve-3d;
+      backface-visibility: hidden;
+      overflow: hidden;
+    }
+
+    .frame-02-ia-versus-agi-panel-top {
+      top: 150px;
+      height: 570px;
+      background: #efe9de;
+      box-shadow: 18px 20px 38px rgba(20, 20, 19, 0.07);
+    }
+
+    .frame-02-ia-versus-agi-panel-bottom {
+      top: 805px;
+      height: 700px;
+      background: #ece3d4;
+      box-shadow: -18px 20px 38px rgba(20, 20, 19, 0.07);
+    }
+
+    .frame-02-ia-versus-agi-panel-inner {
+      position: absolute;
+      inset: 0;
+      padding: 44px 54px;
+    }
+
+    .frame-02-ia-versus-agi-heading-row {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      padding-bottom: 24px;
+      border-bottom: 1px solid rgba(20, 20, 19, 0.14);
+    }
+
+    .frame-02-ia-versus-agi-title {
+      margin: 0;
+      max-width: 720px;
+      font-family: "EB Garamond";
+      font-size: 84px;
+      font-weight: 400;
+      line-height: 0.96;
+      letter-spacing: -0.024em;
+      white-space: nowrap;
+    }
+
+    .frame-02-ia-versus-agi-tag {
+      font-family: "JetBrains Mono";
+      font-size: 18px;
+      line-height: 1;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(20, 20, 19, 0.55);
+    }
+
+    .frame-02-ia-versus-agi-specialty {
+      display: grid;
+      grid-template-columns: 0.9fr 1.1fr;
+      gap: 24px;
+      align-items: stretch;
+      margin-top: 30px;
+    }
+
+    .frame-02-ia-versus-agi-generator {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      min-height: 300px;
+      padding: 30px;
+      border: 1px solid rgba(20, 20, 19, 0.18);
+      border-radius: 8px;
+      background: rgba(250, 249, 245, 0.52);
+    }
+
+    .frame-02-ia-versus-agi-generator strong {
+      font-family: "Inter";
+      font-size: 31px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      text-transform: uppercase;
+    }
+
+    .frame-02-ia-versus-agi-generator span {
+      font-family: "JetBrains Mono";
+      font-size: 17px;
+      line-height: 1.25;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(20, 20, 19, 0.56);
+    }
+
+    .frame-02-ia-versus-agi-stack {
+      display: grid;
+      gap: 12px;
+      align-content: center;
+    }
+
+    .frame-02-ia-versus-agi-chip {
+      position: relative;
+      display: flex;
+      align-items: center;
+      min-height: 68px;
+      padding: 0 24px;
+      border: 1px solid rgba(20, 20, 19, 0.2);
+      border-radius: 9999px;
+      background: #faf9f5;
+      font-family: "Inter";
+      font-size: 23px;
+      font-weight: 700;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+    }
+
+    .frame-02-ia-versus-agi-stack .frame-02-ia-versus-agi-chip::after {
+      content: "";
+      position: absolute;
+      right: 20px;
+      width: 10px;
+      height: 10px;
+      border: 1px solid rgba(20, 20, 19, 0.48);
+      border-radius: 50%;
+      background: #efe9de;
+    }
+
+    .frame-02-ia-versus-agi-network {
+      position: relative;
+      height: 440px;
+      margin-top: 28px;
+    }
+
+    .frame-02-ia-versus-agi-network .frame-02-ia-versus-agi-chip {
+      position: absolute;
+      z-index: 3;
+      justify-content: center;
+      min-width: 252px;
+      padding: 0 20px;
+    }
+
+    .frame-02-ia-versus-agi-domain-language { left: 0; top: 38px; }
+    .frame-02-ia-versus-agi-domain-image { right: 0; top: 38px; }
+    .frame-02-ia-versus-agi-domain-code { left: 0; top: 202px; }
+    .frame-02-ia-versus-agi-domain-new { right: 0; top: 202px; min-width: 302px !important; }
+
+    .frame-02-ia-versus-agi-rail {
+      position: absolute;
+      z-index: 1;
+      left: 132px;
+      right: 132px;
+      top: 137px;
+      height: 164px;
+    }
+
+    .frame-02-ia-versus-agi-rail::before,
+    .frame-02-ia-versus-agi-rail::after {
+      content: "";
+      position: absolute;
+      background: #cc785c;
+    }
+
+    .frame-02-ia-versus-agi-rail::before {
+      left: 0;
+      right: 0;
+      top: 0;
+      height: 4px;
+    }
+
+    .frame-02-ia-versus-agi-rail::after {
+      left: 50%;
+      top: 0;
+      width: 4px;
+      height: 164px;
+      margin-left: -2px;
+    }
+
+    .frame-02-ia-versus-agi-rail-end {
+      position: absolute;
+      z-index: 2;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: #cc785c;
+    }
+
+    .frame-02-ia-versus-agi-rail-end-a { left: 126px; top: 131px; }
+    .frame-02-ia-versus-agi-rail-end-b { right: 126px; top: 131px; }
+    .frame-02-ia-versus-agi-rail-end-c { left: 126px; top: 295px; }
+    .frame-02-ia-versus-agi-rail-end-d { right: 126px; top: 295px; }
+
+    .frame-02-ia-versus-agi-conclusion {
+      position: absolute;
+      z-index: 5;
+      left: 120px;
+      top: 1532px;
+      width: 840px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+    }
+
+    .frame-02-ia-versus-agi-badge {
+      display: flex;
+      min-height: 60px;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid rgba(20, 20, 19, 0.2);
+      border-radius: 9999px;
+      background: #faf9f5;
+      box-shadow: 0 4px 16px rgba(20, 20, 19, 0.04);
+      font-family: "JetBrains Mono";
+      font-size: 18px;
+      line-height: 1;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+  </style>
+
+  <div data-hf-id="hf-0cu5" id="root" data-composition-id="02-ia-versus-agi" data-width="1080" data-height="1920" data-duration="10.148">
+    <div data-hf-id="hf-nplw" id="frame-02-layer-1" class="clip frame-02-ia-versus-agi-ground" data-start="0" data-duration="10.148" data-track-index="0"></div>
+
+    <div data-hf-id="hf-k73v" class="frame-02-ia-versus-agi-stage">
+      <div data-hf-id="hf-axlq" class="frame-02-ia-versus-agi-index">Contraste por capacidade</div>
+
+      <section data-hf-id="hf-n2vg" class="frame-02-ia-versus-agi-panel frame-02-ia-versus-agi-panel-top">
+        <div data-hf-id="hf-7wf8" class="frame-02-ia-versus-agi-panel-inner">
+          <div data-hf-id="hf-xk3c" class="frame-02-ia-versus-agi-heading-row">
+            <h2 data-hf-id="hf-43ho" class="frame-02-ia-versus-agi-title frame-02-ia-versus-agi-title-current">IA atual</h2>
+            <span data-hf-id="hf-4phg" class="frame-02-ia-versus-agi-tag">01 / específica</span>
+          </div>
+          <div data-hf-id="hf-gdm9" class="frame-02-ia-versus-agi-specialty">
+            <div data-hf-id="hf-0rpu" class="frame-02-ia-versus-agi-generator">
+              <strong data-hf-id="hf-0y7o">Generativa</strong>
+              <span data-hf-id="hf-14x0">Especializada</span>
+            </div>
+            <div data-hf-id="hf-c2jl" class="frame-02-ia-versus-agi-stack">
+              <div data-hf-id="hf-ealy" class="frame-02-ia-versus-agi-chip frame-02-ia-versus-agi-closed-chip">Linguagem</div>
+              <div data-hf-id="hf-nzlt" class="frame-02-ia-versus-agi-chip frame-02-ia-versus-agi-closed-chip">Imagem</div>
+              <div data-hf-id="hf-enva" class="frame-02-ia-versus-agi-chip frame-02-ia-versus-agi-closed-chip">Código</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section data-hf-id="hf-sx1q" class="frame-02-ia-versus-agi-panel frame-02-ia-versus-agi-panel-bottom">
+        <div data-hf-id="hf-1w2k" class="frame-02-ia-versus-agi-panel-inner">
+          <div data-hf-id="hf-oouo" class="frame-02-ia-versus-agi-heading-row">
+            <h2 data-hf-id="hf-ifuo" class="frame-02-ia-versus-agi-title frame-02-ia-versus-agi-title-agi">AGI</h2>
+            <span data-hf-id="hf-7l0w" class="frame-02-ia-versus-agi-tag">02 / geral</span>
+          </div>
+          <div data-hf-id="hf-2byb" class="frame-02-ia-versus-agi-network">
+            <div data-hf-id="hf-a3zb" class="frame-02-ia-versus-agi-rail"></div>
+            <i data-hf-id="hf-swwq" class="frame-02-ia-versus-agi-rail-end frame-02-ia-versus-agi-rail-end-a"></i>
+            <i data-hf-id="hf-oysp" class="frame-02-ia-versus-agi-rail-end frame-02-ia-versus-agi-rail-end-b"></i>
+            <i data-hf-id="hf-o74w" class="frame-02-ia-versus-agi-rail-end frame-02-ia-versus-agi-rail-end-c"></i>
+            <i data-hf-id="hf-k90v" class="frame-02-ia-versus-agi-rail-end frame-02-ia-versus-agi-rail-end-d"></i>
+            <div data-hf-id="hf-aune" class="frame-02-ia-versus-agi-chip frame-02-ia-versus-agi-domain-language">Linguagem</div>
+            <div data-hf-id="hf-9r1a" class="frame-02-ia-versus-agi-chip frame-02-ia-versus-agi-domain-image">Imagem</div>
+            <div data-hf-id="hf-3vub" class="frame-02-ia-versus-agi-chip frame-02-ia-versus-agi-domain-code">Código</div>
+            <div data-hf-id="hf-4gno" class="frame-02-ia-versus-agi-chip frame-02-ia-versus-agi-domain-new">Novo domínio</div>
+          </div>
+        </div>
+      </section>
+
+      <div data-hf-id="hf-qqe6" class="frame-02-ia-versus-agi-conclusion">
+        <div data-hf-id="hf-xfgz" class="frame-02-ia-versus-agi-badge">Aprende sozinho</div>
+        <div data-hf-id="hf-abiu" class="frame-02-ia-versus-agi-badge">Vários domínios</div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    (() => {
+      const id = "02-ia-versus-agi";
+      const scope = document.querySelector('[data-composition-id="' + id + '"]');
+      if (!scope || typeof gsap === "undefined") return;
+
+      const q = (selector) => scope.querySelector(selector);
+      const qa = (selector) => Array.from(scope.querySelectorAll(selector));
+      const topPanel = q(".frame-02-ia-versus-agi-panel-top");
+      const bottomPanel = q(".frame-02-ia-versus-agi-panel-bottom");
+      const topCopy = qa(".frame-02-ia-versus-agi-panel-top .frame-02-ia-versus-agi-heading-row, .frame-02-ia-versus-agi-generator");
+      const topChips = qa(".frame-02-ia-versus-agi-closed-chip");
+      const bottomHeading = q(".frame-02-ia-versus-agi-panel-bottom .frame-02-ia-versus-agi-heading-row");
+      const connectedChips = qa(".frame-02-ia-versus-agi-domain-language, .frame-02-ia-versus-agi-domain-image, .frame-02-ia-versus-agi-domain-code");
+      const newDomain = q(".frame-02-ia-versus-agi-domain-new");
+      const rail = q(".frame-02-ia-versus-agi-rail");
+      const railEnds = qa(".frame-02-ia-versus-agi-rail-end");
+      const badges = qa(".frame-02-ia-versus-agi-badge");
+
+      const tl = gsap.timeline({ paused: true });
+      window.__timelines = window.__timelines || {};
+      window.__timelines[id] = tl;
+
+      tl.fromTo(q(".frame-02-ia-versus-agi-index"),
+        { opacity: 0, y: -18 },
+        { opacity: 1, y: 0, duration: 0.48, ease: "power3.out" }, 0.02);
+      tl.fromTo(topPanel,
+        { x: -62, scale: 0.96, rotateY: 21, opacity: 0 },
+        { x: 0, scale: 1, rotateY: 12, opacity: 1, duration: 1.05, ease: "power3.out" }, 0.08);
+      tl.fromTo(topCopy,
+        { opacity: 0, y: 20 },
+        { opacity: 1, y: 0, duration: 0.62, stagger: 0.12, ease: "power2.out" }, 0.48);
+      tl.fromTo(topChips,
+        { opacity: 0, x: 36, scale: 0.96 },
+        { opacity: 1, x: 0, scale: 1, duration: 0.48, stagger: 0.58, ease: "power3.out" }, 2.05);
+      tl.to(topPanel, { y: -4, duration: 0.42, ease: "sine.inOut" }, 3.55);
+      tl.to(topPanel, { y: 0, duration: 0.42, ease: "sine.inOut" }, 3.97);
+
+      tl.fromTo(bottomPanel,
+        { x: 58, y: 40, scale: 0.96, rotateY: -22, opacity: 0 },
+        { x: 0, y: 0, scale: 1, rotateY: -12, opacity: 1, duration: 1.08, ease: "power3.out" }, 4.42);
+      tl.fromTo(bottomHeading,
+        { opacity: 0, y: 22 },
+        { opacity: 1, y: 0, duration: 0.58, ease: "power2.out" }, 4.78);
+      tl.fromTo(rail,
+        { opacity: 0, scaleX: 0.08, transformOrigin: "50% 0%" },
+        { opacity: 1, scaleX: 1, duration: 0.72, ease: "power3.out" }, 5.02);
+      tl.fromTo(railEnds,
+        { opacity: 0, scale: 0.2 },
+        { opacity: 1, scale: 1, duration: 0.3, stagger: 0.1, ease: "power2.out" }, 5.45);
+      tl.fromTo(connectedChips,
+        { opacity: 0, y: 20, scale: 0.96 },
+        { opacity: 1, y: 0, scale: 1, duration: 0.46, stagger: 0.42, ease: "power3.out" }, 5.08);
+      tl.fromTo(newDomain,
+        { opacity: 0, x: 50, scale: 0.94 },
+        { opacity: 1, x: 0, scale: 1, duration: 0.6, ease: "power3.out" }, 6.98);
+
+      tl.to(topPanel, { rotateY: 0, duration: 0.66, ease: "power2.inOut" }, 7.72);
+      tl.to(bottomPanel, { rotateY: 0, duration: 0.66, ease: "power2.inOut" }, 7.72);
+      tl.fromTo(badges,
+        { opacity: 0, y: 24, scale: 0.96 },
+        { opacity: 1, y: 0, scale: 1, duration: 0.52, stagger: 0.24, ease: "power3.out" }, 7.86);
+      tl.to({}, { duration: 1.02 }, 8.62);
+
+      const fitHeadlines = () => {
+        qa(".frame-02-ia-versus-agi-title").forEach((node) => {
+          let size = 84;
+          node.style.fontSize = size + "px";
+          while (node.getBoundingClientRect().width > 720 && size > 58) {
+            size -= 2;
+            node.style.fontSize = size + "px";
+          }
+        });
+      };
+      document.fonts.ready.then(fitHeadlines);
+    })();
+  </script>
+</template>

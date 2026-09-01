@@ -1,0 +1,12 @@
+{
+  "id": "aws-artificial-general-intelligence",
+  "name": "aws-artificial-general-intelligence",
+  "createdAt": "2026-08-30T18:38:44.312Z",
+  "language": "pt-BR",
+  "voice_provider": "edge-tts",
+  "voice_id": "pt-BR-FranciscaNeural",
+  "aspect_ratio": "9:16",
+  "width": 1080,
+  "height": 1920,
+  "fps": 30
+}

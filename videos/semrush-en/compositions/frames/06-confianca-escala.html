@@ -1,0 +1,329 @@
+<template>
+  <style>
+    @font-face{font-family:"Lazzer";font-weight:700;font-style:normal;font-display:block;src:url("assets/fonts/Lazzer-Bold.woff") format("woff");}
+    @font-face{font-family:"Lazzer";font-weight:800;font-style:normal;font-display:block;src:url("assets/fonts/Lazzer-ExtraBold.woff") format("woff");}
+    @font-face{font-family:"Lazzer";font-weight:500;font-style:normal;font-display:block;src:url("assets/fonts/Lazzer-Medium.woff") format("woff");}
+    @font-face{font-family:"Lazzer";font-weight:400;font-style:normal;font-display:block;src:url("assets/fonts/Lazzer-Regular.woff") format("woff");}
+    @font-face{font-family:"Lazzer";font-weight:600;font-style:normal;font-display:block;src:url("assets/fonts/Lazzer-SemiBold.woff") format("woff");}
+
+    #root {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      container-type: size;
+      font-family: "Lazzer";
+      color: #000000;
+    }
+
+    .f06-confianca-escala-ground {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+      background: #ffffff;
+    }
+
+    .f06-confianca-escala-ground::before {
+      content: "";
+      position: absolute;
+      left: -30cqw;
+      top: -11cqh;
+      width: 105cqw;
+      height: 62cqh;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(193, 144, 255, 0.15) 0%, rgba(193, 144, 255, 0.06) 42%, rgba(193, 144, 255, 0) 72%);
+    }
+
+    .f06-confianca-escala-ground::after {
+      content: "";
+      position: absolute;
+      right: -34cqw;
+      top: 32cqh;
+      width: 98cqw;
+      height: 58cqh;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(193, 144, 255, 0.12) 0%, rgba(193, 144, 255, 0.04) 48%, rgba(193, 144, 255, 0) 74%);
+    }
+
+    .f06-confianca-escala-content {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+    }
+
+    .f06-confianca-escala-kicker {
+      position: absolute;
+      left: 7.5cqw;
+      top: 5.9cqh;
+      display: flex;
+      align-items: center;
+      gap: 2.2cqw;
+      color: #c190ff;
+      font-size: 2.6cqw;
+      font-weight: 600;
+      line-height: 1;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .f06-confianca-escala-kicker-line {
+      width: 5.6cqw;
+      height: 0.22cqh;
+      border-radius: 2px;
+      background: #c190ff;
+    }
+
+    .f06-confianca-escala-window {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100cqw;
+      height: 83cqh;
+      overflow: hidden;
+      perspective: 139cqw;
+    }
+
+    .f06-confianca-escala-camera {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 194.5cqw;
+      height: 83cqh;
+      transform-origin: 50cqw 35cqh;
+      transform-style: preserve-3d;
+    }
+
+    .f06-confianca-escala-metric {
+      position: absolute;
+      top: 16.1cqh;
+      width: 75.9cqw;
+      height: 36.5cqh;
+      border: 1.5px solid rgba(193, 144, 255, 0.2);
+      border-radius: 14px;
+      background: rgba(193, 144, 255, 0.15);
+      overflow: hidden;
+      transform-origin: center center;
+    }
+
+    .f06-confianca-escala-metric::before {
+      content: "";
+      position: absolute;
+      inset: 2.8cqw;
+      border: 1px solid rgba(193, 144, 255, 0.2);
+      border-radius: 12px;
+      pointer-events: none;
+    }
+
+    .f06-confianca-escala-metric::after {
+      content: "";
+      position: absolute;
+      left: 5.6cqw;
+      right: 5.6cqw;
+      bottom: 4.2cqh;
+      height: 0.63cqh;
+      border-radius: 100px;
+      background: rgba(193, 144, 255, 0.15);
+    }
+
+    .f06-confianca-escala-metric-a { left: 12cqw; }
+    .f06-confianca-escala-metric-b { left: 106.5cqw; }
+
+    .f06-confianca-escala-plane {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding-bottom: 2.6cqh;
+    }
+
+    .f06-confianca-escala-counter-wrap {
+      display: flex;
+      align-items: baseline;
+      justify-content: center;
+      width: 61cqw;
+      color: #c190ff;
+      font-variant-numeric: tabular-nums;
+      white-space: nowrap;
+    }
+
+    .f06-confianca-escala-counter {
+      display: inline-block;
+      min-width: 25cqw;
+      text-align: right;
+      font-size: 23.1cqw;
+      font-weight: 700;
+      line-height: 0.86;
+      letter-spacing: -0.045em;
+      transform-origin: center center;
+    }
+
+    .f06-confianca-escala-suffix {
+      display: inline-block;
+      min-width: 15.7cqw;
+      font-size: 13.9cqw;
+      font-weight: 700;
+      line-height: 1;
+      letter-spacing: -0.04em;
+      transform-origin: left bottom;
+    }
+
+    .f06-confianca-escala-label {
+      margin-top: 2.2cqh;
+      color: #000000;
+      font-size: 4.35cqw;
+      font-weight: 600;
+      line-height: 1;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .f06-confianca-escala-bar {
+      position: absolute;
+      z-index: 1;
+      left: 5.6cqw;
+      bottom: 4.2cqh;
+      width: 64.7cqw;
+      height: 0.63cqh;
+      border-radius: 100px;
+      background: #c190ff;
+      transform-origin: left center;
+    }
+
+    .f06-confianca-escala-close {
+      position: absolute;
+      z-index: 4;
+      left: 7.5cqw;
+      top: 58cqh;
+      width: 85cqw;
+      height: 23cqh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      text-align: center;
+    }
+
+    .f06-confianca-escala-logo {
+      display: block;
+      width: 34.7cqw;
+      height: auto;
+    }
+
+    .f06-confianca-escala-headline {
+      margin: 3.2cqh 0 0;
+      width: 85cqw;
+      color: #000000;
+      font-size: 5.6cqw;
+      font-weight: 700;
+      line-height: 1.08;
+      letter-spacing: -0.02em;
+      white-space: nowrap;
+    }
+
+    .f06-confianca-escala-rule {
+      width: 5.6cqw;
+      height: 0.22cqh;
+      margin-top: 2.6cqh;
+      border-radius: 2px;
+      background: #c190ff;
+    }
+  </style>
+
+  <div data-hf-id="hf-ci6k" id="root" data-composition-id="06-confianca-escala" data-width="1080" data-height="1920" data-duration="9.3">
+    <div data-hf-id="hf-a82s" id="f06-background" class="clip f06-confianca-escala-ground" data-start="0" data-duration="9.3" data-track-index="0"></div>
+
+    <div data-hf-id="hf-efcq" id="f06-content" class="clip f06-confianca-escala-content" data-start="0" data-duration="9.3" data-track-index="1">
+      <div data-hf-id="hf-tolz" class="f06-confianca-escala-kicker">
+        <span data-hf-id="hf-5n1r" class="f06-confianca-escala-kicker-line"></span>
+        <span data-hf-id="hf-wq20">PROVA SOCIAL</span>
+      </div>
+
+      <div data-hf-id="hf-efqw" class="f06-confianca-escala-window">
+        <div data-hf-id="hf-rgf5" class="f06-confianca-escala-camera" data-layout-allow-overflow>
+          <section data-hf-id="hf-0p8i" class="f06-confianca-escala-metric f06-confianca-escala-metric-a">
+            <div data-hf-id="hf-dyky" class="f06-confianca-escala-plane">
+              <div data-hf-id="hf-o3kt" class="f06-confianca-escala-counter-wrap">
+                <span data-hf-id="hf-fzpv" id="f06-confianca-escala-counter-a" class="f06-confianca-escala-counter">0</span>
+                <span data-hf-id="hf-itmk" class="f06-confianca-escala-suffix f06-confianca-escala-suffix-a">M</span>
+              </div>
+              <div data-hf-id="hf-7e4j" class="f06-confianca-escala-label f06-confianca-escala-label-a">PROFISSIONAIS</div>
+            </div>
+            <div data-hf-id="hf-pt50" class="f06-confianca-escala-bar f06-confianca-escala-bar-a"></div>
+          </section>
+
+          <section data-hf-id="hf-ujip" class="f06-confianca-escala-metric f06-confianca-escala-metric-b">
+            <div data-hf-id="hf-wxhy" class="f06-confianca-escala-plane">
+              <div data-hf-id="hf-9e0h" class="f06-confianca-escala-counter-wrap">
+                <span data-hf-id="hf-cf6e" id="f06-confianca-escala-counter-b" class="f06-confianca-escala-counter" data-layout-allow-overlap>0</span>
+                <span data-hf-id="hf-hsfx" class="f06-confianca-escala-suffix f06-confianca-escala-suffix-b">%</span>
+              </div>
+              <div data-hf-id="hf-zin5" class="f06-confianca-escala-label f06-confianca-escala-label-b">FORTUNE 500</div>
+            </div>
+            <div data-hf-id="hf-0omn" class="f06-confianca-escala-bar f06-confianca-escala-bar-b"></div>
+          </section>
+        </div>
+      </div>
+
+      <div data-hf-id="hf-iie8" class="f06-confianca-escala-close">
+        <img data-hf-id="hf-itx2" class="f06-confianca-escala-logo" src="assets/logo-f983ff0e.svg" alt="Semrush">
+        <h1 data-hf-id="hf-e2b5" class="headline f06-confianca-escala-headline">CONFIANÇA EM ESCALA</h1>
+        <div data-hf-id="hf-lghq" class="f06-confianca-escala-rule"></div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+  <script>
+    (() => {
+      const buildTimeline = () => {
+        window.__timelines = window.__timelines || {};
+        if (window.__timelines["06-confianca-escala"]) return;
+
+        const tl = gsap.timeline({ paused: true });
+        const counterA = document.getElementById("f06-confianca-escala-counter-a");
+        const counterB = document.getElementById("f06-confianca-escala-counter-b");
+        const stateA = { value: 0 };
+        const stateB = { value: 0 };
+
+        tl.fromTo(".f06-confianca-escala-kicker", { opacity: 0, y: -18 }, { opacity: 1, y: 0, duration: 0.55, ease: "power2.out" }, 0.05);
+        tl.fromTo(".f06-confianca-escala-metric-a", { opacity: 0.72, y: 22, scale: 0.98 }, { opacity: 1, y: 0, scale: 1, duration: 0.5, ease: "power2.out" }, 0);
+        tl.to(stateA, {
+          value: 28,
+          duration: 1.9,
+          ease: "power3.out",
+          onUpdate: () => { counterA.textContent = Math.round(stateA.value).toLocaleString("pt-BR"); }
+        }, 0.15);
+        tl.fromTo(counterA, { scale: 0.48 }, { scale: 1, duration: 1.9, ease: "power3.out" }, 0.15);
+        tl.fromTo(".f06-confianca-escala-label-a", { opacity: 0, y: 18 }, { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" }, 0.38);
+        tl.fromTo(".f06-confianca-escala-bar-a", { scaleX: 0 }, { scaleX: 1, duration: 1.9, ease: "power3.out" }, 0.15);
+        tl.fromTo(".f06-confianca-escala-suffix-a", { opacity: 0, y: 22, scale: 0.84 }, { opacity: 1, y: 0, scale: 1, duration: 0.42, ease: "back.out(1.7)" }, 2.05);
+        tl.to(".f06-confianca-escala-camera", { x: -1020, scale: 1.015, duration: 1.05, ease: "power3.inOut" }, 2.6);
+        tl.to(".f06-confianca-escala-metric-a", { opacity: 0.36, scale: 0.72, duration: 0.9, ease: "power2.inOut" }, 2.62);
+        tl.fromTo(".f06-confianca-escala-metric-b", { opacity: 0.64, y: 24, scale: 0.96 }, { opacity: 1, y: 0, scale: 1, duration: 0.72, ease: "power2.out" }, 2.65);
+        tl.to(stateB, {
+          value: 35,
+          duration: 2,
+          ease: "power3.out",
+          onUpdate: () => { counterB.textContent = Math.round(stateB.value).toLocaleString("pt-BR"); }
+        }, 2.82);
+        tl.fromTo(counterB, { scale: 0.5 }, { scale: 1, duration: 2, ease: "power3.out" }, 2.82);
+        tl.fromTo(".f06-confianca-escala-label-b", { opacity: 0, y: 18 }, { opacity: 1, y: 0, duration: 0.62, ease: "power2.out" }, 3.08);
+        tl.fromTo(".f06-confianca-escala-bar-b", { scaleX: 0 }, { scaleX: 0.35, duration: 2, ease: "power3.out" }, 2.82);
+        tl.fromTo(".f06-confianca-escala-suffix-b", { opacity: 0, y: 22, scale: 0.84 }, { opacity: 1, y: 0, scale: 1, duration: 0.42, ease: "back.out(1.7)" }, 4.82);
+        tl.to(".f06-confianca-escala-camera", { x: 0, scale: 1, duration: 1.05, ease: "power3.inOut" }, 5.8);
+        tl.to(".f06-confianca-escala-metric-a", { x: -250, y: 78, scale: 0.55, opacity: 1, duration: 1.05, ease: "power3.inOut" }, 5.8);
+        tl.to(".f06-confianca-escala-metric-b", { x: -770, y: 78, scale: 0.55, opacity: 1, duration: 1.05, ease: "power3.inOut" }, 5.8);
+        tl.fromTo(".f06-confianca-escala-logo", { opacity: 0, y: 38, scale: 0.92 }, { opacity: 1, y: 0, scale: 1, duration: 0.72, ease: "power3.out" }, 6.42);
+        tl.fromTo(".f06-confianca-escala-headline", { opacity: 0, y: 28 }, { opacity: 1, y: 0, duration: 0.72, ease: "power2.out" }, 7.02);
+        tl.fromTo(".f06-confianca-escala-rule", { opacity: 0, scaleX: 0 }, { opacity: 1, scaleX: 1, duration: 0.65, ease: "power3.out" }, 7.42);
+        tl.to(".f06-confianca-escala-camera", { scale: 0.99, duration: 1.25, ease: "power1.out" }, 7.42);
+
+        window.__timelines["06-confianca-escala"] = tl;
+      };
+
+      document.fonts.ready.then(buildTimeline);
+    })();
+  </script>
+</template>

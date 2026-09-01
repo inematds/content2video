@@ -1,0 +1,607 @@
+<template>
+  <style>
+    @font-face {
+      font-family: "EB Garamond";
+      src: url("assets/fonts/EBGaramond-400.woff2") format("woff2");
+      font-weight: 400;
+      font-style: normal;
+      font-display: swap;
+    }
+
+    @font-face {
+      font-family: "Inter";
+      src: url("assets/fonts/Inter-400.woff2") format("woff2");
+      font-weight: 400;
+      font-style: normal;
+      font-display: swap;
+    }
+
+    @font-face {
+      font-family: "Inter";
+      src: url("assets/fonts/Inter-500.woff2") format("woff2");
+      font-weight: 500;
+      font-style: normal;
+      font-display: swap;
+    }
+
+    @font-face {
+      font-family: "JetBrains Mono";
+      src: url("assets/fonts/JetBrainsMono-500.woff2") format("woff2");
+      font-weight: 500;
+      font-style: normal;
+      font-display: swap;
+    }
+
+    #root {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      container-type: size;
+      color: #141413;
+    }
+
+    .clip {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+    }
+
+    .f05-complemento-ground {
+      background: #FAF9F5;
+    }
+
+    .f05-complemento-paper-bloom {
+      position: absolute;
+      top: 19cqh;
+      width: 42cqw;
+      height: 71cqh;
+      border-radius: 9999px;
+      background: #EFE9DE;
+      opacity: 0.5;
+    }
+
+    .f05-complemento-paper-bloom-left { left: -16cqw; }
+    .f05-complemento-paper-bloom-right { right: -16cqw; }
+
+    .f05-complemento-kicker {
+      position: absolute;
+      top: 4.8cqh;
+      left: 7.5cqw;
+      right: 7.5cqw;
+      color: #141413;
+      font: 500 28px/1 "JetBrains Mono", monospace;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+    }
+
+    .f05-complemento-spike {
+      color: #CC785C;
+      display: inline-block;
+      margin-right: 0.7em;
+    }
+
+    .f05-complemento-title {
+      position: absolute;
+      top: 8.2cqh;
+      left: 7.5cqw;
+      width: 85cqw;
+      margin: 0;
+      font: 400 9.9cqw/0.98 "EB Garamond", serif;
+      letter-spacing: -0.028em;
+      text-align: left;
+    }
+
+    .f05-complemento-title-rule {
+      position: absolute;
+      top: 15.6cqh;
+      left: 7.5cqw;
+      width: 85cqw;
+      height: 1px;
+      background: rgba(20, 20, 19, 0.12);
+      transform-origin: left center;
+    }
+
+    .f05-complemento-split {
+      position: absolute;
+      top: 17.2cqh;
+      left: 7.5cqw;
+      width: 85cqw;
+      height: 34cqh;
+      perspective: 1500px;
+    }
+
+    .f05-complemento-axis {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 50%;
+      width: 1px;
+      background: rgba(20, 20, 19, 0.12);
+    }
+
+    .f05-complemento-card-entry {
+      position: absolute;
+      top: 0;
+      width: 47.3%;
+      height: 100%;
+      transform-style: preserve-3d;
+      transform-origin: center center;
+    }
+
+    .f05-complemento-card-entry-left { left: 0; }
+    .f05-complemento-card-entry-right { right: 0; }
+
+    .f05-complemento-card-idle {
+      position: absolute;
+      inset: 0;
+    }
+
+    .f05-complemento-card {
+      position: absolute;
+      inset: 0;
+      box-sizing: border-box;
+      border: 1px solid rgba(20, 20, 19, 0.12);
+      border-radius: 12px;
+      background: #EFE9DE;
+      padding: 3.6cqw 3.2cqw;
+      overflow: hidden;
+    }
+
+    .f05-complemento-card-left {
+      box-shadow: 10px 5px 16px rgba(20, 20, 19, 0.04), 3px 1px 3px rgba(20, 20, 19, 0.08);
+    }
+
+    .f05-complemento-card-right {
+      box-shadow: -10px 5px 16px rgba(20, 20, 19, 0.04), -3px 1px 3px rgba(20, 20, 19, 0.08);
+      background: #ECE3D4;
+    }
+
+    .f05-complemento-card-index {
+      display: block;
+      margin-bottom: 1.3cqh;
+      font: 500 24px/1 "JetBrains Mono", monospace;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      opacity: 0.58;
+    }
+
+    .f05-complemento-card-name {
+      display: block;
+      margin: 0;
+      font: 400 10.2cqw/0.94 "EB Garamond", serif;
+      letter-spacing: -0.025em;
+    }
+
+    .f05-complemento-inner-rule {
+      width: 100%;
+      height: 1px;
+      margin: 2.2cqh 0 2.4cqh;
+      background: rgba(20, 20, 19, 0.12);
+      transform-origin: left center;
+    }
+
+    .f05-complemento-layer-label {
+      display: inline-flex;
+      align-items: center;
+      min-height: 3.1cqh;
+      box-sizing: border-box;
+      padding: 0.9cqh 2.3cqw;
+      border: 1px solid rgba(20, 20, 19, 0.2);
+      border-radius: 9999px;
+      background: #FAF9F5;
+      font: 500 2.25cqw/1 "Inter", sans-serif;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    .f05-complemento-layer-label-left {
+      position: absolute;
+      top: 15.2cqh;
+      right: -4.8cqw;
+      z-index: 5;
+    }
+
+    .f05-complemento-layer-label-right {
+      position: absolute;
+      top: 15.2cqh;
+      left: -4.8cqw;
+      z-index: 5;
+    }
+
+    .f05-complemento-backend-map,
+    .f05-complemento-tab-map {
+      position: relative;
+      width: 100%;
+      height: 12.2cqh;
+    }
+
+    .f05-complemento-server-stack {
+      position: absolute;
+      left: 0;
+      top: 1.2cqh;
+      width: 100%;
+      display: grid;
+      gap: 1.2cqh;
+    }
+
+    .f05-complemento-server {
+      position: relative;
+      height: 3.1cqh;
+      box-sizing: border-box;
+      border: 1px solid rgba(20, 20, 19, 0.2);
+      border-radius: 8px;
+      background: #FAF9F5;
+    }
+
+    .f05-complemento-server::before,
+    .f05-complemento-server::after {
+      content: "";
+      position: absolute;
+      top: 50%;
+      width: 6px;
+      height: 6px;
+      margin-top: -3px;
+      border-radius: 9999px;
+      background: rgba(20, 20, 19, 0.35);
+    }
+
+    .f05-complemento-server::before { left: 2.4cqw; }
+    .f05-complemento-server::after { left: 4.2cqw; }
+
+    .f05-complemento-browser {
+      position: absolute;
+      inset: 1.2cqh 0 0;
+      box-sizing: border-box;
+      border: 1px solid rgba(20, 20, 19, 0.2);
+      border-radius: 8px;
+      background: #FAF9F5;
+      overflow: hidden;
+    }
+
+    .f05-complemento-browser-bar {
+      height: 3.1cqh;
+      box-sizing: border-box;
+      border-bottom: 1px solid rgba(20, 20, 19, 0.12);
+      display: flex;
+      align-items: center;
+      gap: 1.1cqw;
+      padding: 0 2cqw;
+    }
+
+    .f05-complemento-browser-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 9999px;
+      background: rgba(20, 20, 19, 0.28);
+    }
+
+    .f05-complemento-browser-body {
+      display: grid;
+      grid-template-columns: 31% 1fr;
+      gap: 2cqw;
+      height: calc(100% - 3.1cqh);
+      box-sizing: border-box;
+      padding: 2cqh 2cqw;
+    }
+
+    .f05-complemento-page-block {
+      border-radius: 6px;
+      background: #EFE9DE;
+    }
+
+    .f05-complemento-page-lines {
+      display: grid;
+      align-content: center;
+      gap: 1.2cqh;
+    }
+
+    .f05-complemento-page-line {
+      height: 1px;
+      background: rgba(20, 20, 19, 0.2);
+      transform-origin: left center;
+    }
+
+    .f05-complemento-flow {
+      position: absolute;
+      top: 49.8cqh;
+      left: 7.5cqw;
+      width: 85cqw;
+      height: 23.5cqh;
+      overflow: visible;
+    }
+
+    .f05-complemento-flow path {
+      fill: none;
+      stroke: rgba(20, 20, 19, 0.32);
+      stroke-width: 1.4;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      vector-effect: non-scaling-stroke;
+    }
+
+    .f05-complemento-agent {
+      position: absolute;
+      top: 72.8cqh;
+      left: 32.5cqw;
+      width: 35cqw;
+      height: 7.1cqh;
+      box-sizing: border-box;
+      border: 1px solid rgba(20, 20, 19, 0.2);
+      border-radius: 12px;
+      background: #FAF9F5;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 2.4cqw;
+      box-shadow: 0 1px 3px rgba(20, 20, 19, 0.08), 0 4px 16px rgba(20, 20, 19, 0.04);
+    }
+
+    .f05-complemento-agent-mark {
+      position: relative;
+      width: 5.3cqw;
+      height: 5.3cqw;
+      border: 1px solid rgba(20, 20, 19, 0.2);
+      border-radius: 9999px;
+    }
+
+    .f05-complemento-agent-mark::before {
+      content: "";
+      position: absolute;
+      inset: 30%;
+      border-radius: 9999px;
+      background: #141413;
+    }
+
+    .f05-complemento-agent-label {
+      font: 500 2.35cqw/1 "Inter", sans-serif;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .f05-complemento-seam-rule {
+      position: absolute;
+      top: 42.9cqh;
+      left: 21.3cqw;
+      width: 57.4cqw;
+      height: 1px;
+      background: rgba(20, 20, 19, 0.2);
+      transform-origin: center center;
+    }
+
+    .f05-complemento-complement {
+      position: absolute;
+      top: 40.4cqh;
+      left: 21.8cqw;
+      width: 56.4cqw;
+      min-height: 5cqh;
+      box-sizing: border-box;
+      border: 1px solid rgba(20, 20, 19, 0.2);
+      border-radius: 9999px;
+      background: #FAF9F5;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font: 500 2.45cqw/1 "Inter", sans-serif;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      box-shadow: 0 1px 3px rgba(20, 20, 19, 0.08), 0 4px 16px rgba(20, 20, 19, 0.04);
+    }
+  </style>
+
+  <div data-hf-id="hf-lu0b" id="root" data-composition-id="05-complemento" data-width="1080" data-height="1920" data-duration="10.604">
+    <div data-hf-id="hf-3som" class="clip f05-complemento-ground" data-start="0" data-duration="10.604" data-track-index="0">
+      <div data-hf-id="hf-u4w7" class="f05-complemento-paper-bloom f05-complemento-paper-bloom-left" data-layout-allow-overflow=""></div>
+      <div data-hf-id="hf-vinw" class="f05-complemento-paper-bloom f05-complemento-paper-bloom-right" data-layout-allow-overflow=""></div>
+    </div>
+
+    <div data-hf-id="hf-sv6p" class="clip f05-complemento-content" data-start="0" data-duration="10.604" data-track-index="1">
+      <div data-hf-id="hf-yspu" class="f05-complemento-kicker"><span data-hf-id="hf-7zew" class="f05-complemento-spike">✱</span>Duas camadas</div>
+      <h1 data-hf-id="hf-cpsb" class="f05-complemento-title">Um mesmo agente</h1>
+      <div data-hf-id="hf-gt01" class="f05-complemento-title-rule"></div>
+
+      <div data-hf-id="hf-dhtg" class="f05-complemento-split">
+        <div data-hf-id="hf-0xpj" class="f05-complemento-axis"></div>
+
+        <div data-hf-id="hf-fl24" class="f05-complemento-card-entry f05-complemento-card-entry-left">
+          <div data-hf-id="hf-9e8q" class="f05-complemento-card-idle f05-complemento-card-idle-left">
+            <section data-hf-id="hf-vloy" class="f05-complemento-card f05-complemento-card-left">
+              <span data-hf-id="hf-w0wb" class="f05-complemento-card-index">01 · infraestrutura</span>
+              <strong data-hf-id="hf-rpoo" class="f05-complemento-card-name">MCP</strong>
+              <div data-hf-id="hf-tqoo" class="f05-complemento-inner-rule f05-complemento-inner-rule-left"></div>
+              <div data-hf-id="hf-bt4p" class="f05-complemento-backend-map">
+                <div data-hf-id="hf-fal6" class="f05-complemento-server-stack">
+                  <div data-hf-id="hf-6f85" class="f05-complemento-server"></div>
+                  <div data-hf-id="hf-4b7t" class="f05-complemento-server"></div>
+                  <div data-hf-id="hf-5i4w" class="f05-complemento-server"></div>
+                </div>
+              </div>
+            </section>
+            <div data-hf-id="hf-v0i7" class="f05-complemento-layer-label f05-complemento-layer-label-left">Serviços de backend</div>
+          </div>
+        </div>
+
+        <div data-hf-id="hf-e7lf" class="f05-complemento-card-entry f05-complemento-card-entry-right">
+          <div data-hf-id="hf-dxpl" class="f05-complemento-card-idle f05-complemento-card-idle-right">
+            <section data-hf-id="hf-dbi9" class="f05-complemento-card f05-complemento-card-right">
+              <span data-hf-id="hf-ktvx" class="f05-complemento-card-index">02 · experiência</span>
+              <strong data-hf-id="hf-jwwu" class="f05-complemento-card-name">WebMCP</strong>
+              <div data-hf-id="hf-017r" class="f05-complemento-inner-rule f05-complemento-inner-rule-right"></div>
+              <div data-hf-id="hf-xeas" class="f05-complemento-tab-map">
+                <div data-hf-id="hf-p070" class="f05-complemento-browser">
+                  <div data-hf-id="hf-evo4" class="f05-complemento-browser-bar">
+                    <i data-hf-id="hf-axha" class="f05-complemento-browser-dot"></i>
+                    <i data-hf-id="hf-1dya" class="f05-complemento-browser-dot"></i>
+                    <i data-hf-id="hf-1s9b" class="f05-complemento-browser-dot"></i>
+                  </div>
+                  <div data-hf-id="hf-9775" class="f05-complemento-browser-body">
+                    <div data-hf-id="hf-wett" class="f05-complemento-page-block"></div>
+                    <div data-hf-id="hf-z2q7" class="f05-complemento-page-lines">
+                      <div data-hf-id="hf-beac" class="f05-complemento-page-line"></div>
+                      <div data-hf-id="hf-bwvg" class="f05-complemento-page-line"></div>
+                      <div data-hf-id="hf-apyd" class="f05-complemento-page-line"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </section>
+            <div data-hf-id="hf-y718" class="f05-complemento-layer-label f05-complemento-layer-label-right">Experiência na aba</div>
+          </div>
+        </div>
+      </div>
+
+      <svg data-hf-id="hf-c7gs" class="f05-complemento-flow" viewBox="0 0 918 452" preserveAspectRatio="none" aria-hidden="true">
+        <path data-hf-id="hf-ah2b" class="f05-complemento-flow-left" d="M216 0 C216 120 459 104 459 290" pathLength="1" />
+        <path data-hf-id="hf-h3g2" class="f05-complemento-flow-right" d="M702 0 C702 120 459 104 459 290" pathLength="1" />
+        <path data-hf-id="hf-nacb" class="f05-complemento-flow-shared" d="M459 290 L459 436" pathLength="1" />
+      </svg>
+
+      <div data-hf-id="hf-exd3" class="f05-complemento-agent">
+        <span data-hf-id="hf-cy1m" class="f05-complemento-agent-mark"></span>
+        <span data-hf-id="hf-uz9h" class="f05-complemento-agent-label">Agente</span>
+      </div>
+
+      <div data-hf-id="hf-lj01" class="f05-complemento-seam-rule"></div>
+      <div data-hf-id="hf-eyvz" class="f05-complemento-complement">Complementares</div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+  <script>
+    (() => {
+      const tl = gsap.timeline({ paused: true });
+      window.__timelines = window.__timelines || {};
+      window.__timelines["05-complemento"] = tl;
+
+      tl.fromTo(".f05-complemento-kicker",
+        { y: -34, opacity: 0 },
+        { y: 0, opacity: 1, duration: 0.72, ease: "power3.out" },
+        0.02
+      );
+      tl.fromTo(".f05-complemento-title",
+        { y: -48, opacity: 0 },
+        { y: 0, opacity: 1, duration: 0.86, ease: "power3.out" },
+        0.08
+      );
+      tl.fromTo(".f05-complemento-title-rule",
+        { scaleX: 0, opacity: 0 },
+        { scaleX: 1, opacity: 1, duration: 0.72, ease: "power3.out" },
+        0.34
+      );
+      tl.fromTo(".f05-complemento-paper-bloom-left",
+        { scale: 0.88, opacity: 0 },
+        { scale: 1, opacity: 0.5, duration: 1.1, ease: "power3.out" },
+        0.12
+      );
+      tl.fromTo(".f05-complemento-paper-bloom-right",
+        { scale: 0.88, opacity: 0 },
+        { scale: 1, opacity: 0.5, duration: 1.1, ease: "power3.out" },
+        0.3
+      );
+      tl.fromTo(".f05-complemento-card-entry-left",
+        { x: -540, scale: 0.85, rotateY: 14, opacity: 0 },
+        { x: 0, scale: 1, rotateY: 0, opacity: 1, duration: 1.18, ease: "power3.out" },
+        0.2
+      );
+      tl.fromTo(".f05-complemento-card-entry-right",
+        { x: 540, scale: 0.85, rotateY: -14, opacity: 0 },
+        { x: 0, scale: 1, rotateY: 0, opacity: 1, duration: 1.18, ease: "power3.out" },
+        0.4
+      );
+      tl.fromTo(".f05-complemento-axis",
+        { scaleY: 0, opacity: 0 },
+        { scaleY: 1, opacity: 1, duration: 0.72, ease: "power3.out", transformOrigin: "top center" },
+        1.05
+      );
+
+      tl.fromTo(".f05-complemento-layer-label-left",
+        { scale: 0.72, opacity: 0 },
+        { scale: 1, opacity: 1, duration: 0.7, ease: "back.out(1.35)" },
+        2.02
+      );
+      tl.fromTo(".f05-complemento-inner-rule-left",
+        { scaleX: 0, opacity: 0 },
+        { scaleX: 1, opacity: 1, duration: 0.55, ease: "power3.out" },
+        2.22
+      );
+      tl.fromTo(".f05-complemento-server",
+        { y: 24, opacity: 0 },
+        { y: 0, opacity: 1, duration: 0.64, stagger: 0.32, ease: "power3.out" },
+        2.48
+      );
+      tl.fromTo(".f05-complemento-agent",
+        { y: 28, scale: 0.94, opacity: 0 },
+        { y: 0, scale: 1, opacity: 1, duration: 0.76, ease: "power3.out" },
+        3.32
+      );
+      tl.fromTo(".f05-complemento-flow-left",
+        { strokeDasharray: 1, strokeDashoffset: 1, opacity: 0 },
+        { strokeDashoffset: 0, opacity: 1, duration: 1.0, ease: "power2.inOut" },
+        3.66
+      );
+      tl.fromTo(".f05-complemento-flow-shared",
+        { strokeDasharray: 1, strokeDashoffset: 1, opacity: 0 },
+        { strokeDashoffset: 0, opacity: 1, duration: 0.74, ease: "power2.inOut" },
+        4.04
+      );
+
+      tl.fromTo(".f05-complemento-layer-label-right",
+        { scale: 0.72, opacity: 0 },
+        { scale: 1, opacity: 1, duration: 0.7, ease: "back.out(1.35)" },
+        4.82
+      );
+      tl.fromTo(".f05-complemento-inner-rule-right",
+        { scaleX: 0, opacity: 0 },
+        { scaleX: 1, opacity: 1, duration: 0.55, ease: "power3.out" },
+        5.0
+      );
+      tl.fromTo(".f05-complemento-browser",
+        { y: 28, scale: 0.96, opacity: 0 },
+        { y: 0, scale: 1, opacity: 1, duration: 0.82, ease: "power3.out" },
+        5.18
+      );
+      tl.fromTo(".f05-complemento-page-line",
+        { scaleX: 0, opacity: 0 },
+        { scaleX: 1, opacity: 1, duration: 0.46, stagger: 0.22, ease: "power3.out" },
+        5.78
+      );
+      tl.fromTo(".f05-complemento-flow-right",
+        { strokeDasharray: 1, strokeDashoffset: 1, opacity: 0 },
+        { strokeDashoffset: 0, opacity: 1, duration: 1.0, ease: "power2.inOut" },
+        6.02
+      );
+
+      tl.to(".f05-complemento-card-idle-left", { y: -5, duration: 1.0, ease: "sine.inOut" }, 2.88);
+      tl.to(".f05-complemento-card-idle-left", { y: 0, duration: 1.0, ease: "sine.inOut" }, 3.88);
+      tl.to(".f05-complemento-card-idle-left", { y: -4, duration: 1.0, ease: "sine.inOut" }, 4.88);
+      tl.to(".f05-complemento-card-idle-left", { y: 0, duration: 1.0, ease: "sine.inOut" }, 5.88);
+      tl.to(".f05-complemento-card-idle-right", { y: 5, duration: 1.0, ease: "sine.inOut" }, 2.88);
+      tl.to(".f05-complemento-card-idle-right", { y: 0, duration: 1.0, ease: "sine.inOut" }, 3.88);
+      tl.to(".f05-complemento-card-idle-right", { y: 4, duration: 1.0, ease: "sine.inOut" }, 4.88);
+      tl.to(".f05-complemento-card-idle-right", { y: 0, duration: 1.0, ease: "sine.inOut" }, 5.88);
+
+      tl.to(".f05-complemento-card-index", { opacity: 0, duration: 0.5, ease: "power2.out" }, 7.0);
+      tl.to(".f05-complemento-card-entry-left",
+        { x: 222, y: -60, duration: 1.16, ease: "power3.inOut" },
+        7.0
+      );
+      tl.to(".f05-complemento-card-entry-right",
+        { x: -222, y: 440, duration: 1.16, ease: "power3.inOut" },
+        7.0
+      );
+      tl.to(".f05-complemento-axis", { scaleY: 0.34, duration: 0.88, ease: "power3.inOut", transformOrigin: "top center" }, 7.06);
+      tl.fromTo(".f05-complemento-seam-rule",
+        { scaleX: 0, opacity: 0 },
+        { scaleX: 1, opacity: 1, duration: 0.72, ease: "power3.out" },
+        7.72
+      );
+      tl.fromTo(".f05-complemento-complement",
+        { scale: 0.72, opacity: 0 },
+        { scale: 1, opacity: 1, duration: 0.76, ease: "back.out(1.35)" },
+        8.08
+      );
+    })();
+  </script>
+</template>
