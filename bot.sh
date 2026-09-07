@@ -37,7 +37,10 @@ esac
 SEM_ESQUEMA="$(echo "$URL" | sed -E 's#^https?://##; s#[?\#].*##; s#/+$##')"
 HOST="$(echo "$SEM_ESQUEMA" | sed -E 's#/.*##; s#^www\.##; s#\..*##')"
 CAMINHO="$(echo "$SEM_ESQUEMA" | sed -E 's#^[^/]*##; s#.*/##')"
-BASE="$(echo "${HOST}${CAMINHO:+-$CAMINHO}" | iconv -f utf-8 -t ascii//TRANSLIT 2>/dev/null | tr '[:upper:]' '[:lower:]' | sed -E 's/[^a-z0-9]+/-/g; s/^-+//; s/-+$//' | cut -c1-58)"
+# `iconv` tira acentos; sem ele (ou se falhar), o sed abaixo ainda produz um
+# slug válido — por isso o fallback: com `set -e` + pipefail, um iconv ausente
+# derrubaria o script numa atribuição.
+BASE="$( { echo "${HOST}${CAMINHO:+-$CAMINHO}" | iconv -f utf-8 -t ascii//TRANSLIT 2>/dev/null || echo "${HOST}${CAMINHO:+-$CAMINHO}"; } | tr '[:upper:]' '[:lower:]' | sed -E 's/[^a-z0-9]+/-/g; s/^-+//; s/-+$//' | cut -c1-58 || true)"
 [ -n "$BASE" ] || BASE="video"
 SLUG="${BASE}-$(date +%Y%m%d-%H%M%S)"
 
