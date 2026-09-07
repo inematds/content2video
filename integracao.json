@@ -1,0 +1,37 @@
+{
+  "manifesto": 1,
+  "rota": "skill",
+  "command": "content2video",
+  "repo": {
+    "url": "https://github.com/inematds/content2video",
+    "commit": "12b885c",
+    "pasta": "content2video"
+  },
+  "invocacao": "bash {{repo}}/bot.sh {{input}} {{horizontal}}",
+  "sem_agente": true,
+  "fila": "cpu",
+  "artefato_exts": ["mp4"],
+  "timeout_segundos": 5400,
+  "max_tentativas": 2,
+  "aceita_destino": true,
+  "campos": {
+    "horizontal": { "tipo": "bandeira", "padrao": "não", "descricao": "16:9 (YouTube) em vez do 9:16 padrão" }
+  },
+  "requer": {
+    "bin": ["node", "npx", "codex", "ffmpeg", "ffprobe"],
+    "chaves": [],
+    "fontes": []
+  },
+  "descricao": "Uma URL (artigo, página) vira um vídeo narrado de ~60 s em HyperFrames, com CTA INEMA.CLUB no fim; o Codex lê a fonte e escreve o roteiro (OAuth da assinatura, sem API key).",
+  "exemplo": "content2video: https://www.inema.club/ | horizontal",
+  "gerado": {
+    "em": "2026-09-07",
+    "por": "claude",
+    "confianca": {
+      "manifesto": "lido", "rota": "lido", "command": "lido", "repo": "lido",
+      "invocacao": "lido", "fila": "lido", "artefato_exts": "lido",
+      "timeout_segundos": "chute", "max_tentativas": "lido", "aceita_destino": "lido",
+      "campos": "lido", "requer": "lido", "descricao": "lido"
+    }
+  }
+}
