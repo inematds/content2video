@@ -1,5 +1,7 @@
 # Content2Video INEMA
 
+**🇧🇷 [Português](README.md) · 🇺🇸 [English](README.en.md) · 🇪🇸 [Español](README.es.md)**
+
 Um link entra, um vídeo editável sai. O projeto lê uma página, cria roteiro, storyboard, narração, legendas e motion design no HyperFrames, deixa tudo disponível para revisão e só então renderiza o MP4.
 
 O padrão atual é vídeo vertical em português brasileiro, com cerca de 1 minuto e 30% de tolerância (42–78 s), voz fixa `pt-BR-FranciscaNeural` e nota mínima 8. A língua da página de origem não troca a voz: uma fonte em inglês continua recebendo narração pt-BR, salvo pedido explícito.

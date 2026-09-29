@@ -1,14 +1,15 @@
 <!DOCTYPE html>
+
 <!-- Landing e guia do projeto Content2Video INEMA. -->
 <html lang="pt-BR">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
 <title>Content2Video INEMA — um link entra, um vídeo sai</title>
-<meta name="description" content="Transforme páginas e artigos em vídeos verticais editáveis, com roteiro, voz pt-BR, legendas e render MP4.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<meta content="Transforme páginas e artigos em vídeos verticais editáveis, com roteiro, voz pt-BR, legendas e render MP4." name="description"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;800&amp;family=Inter:wght@400;500;600&amp;family=JetBrains+Mono:wght@400;600&amp;display=swap" rel="stylesheet"/>
 <style>
   :root{
     --bg:#0c0c10; --bg2:#14141b; --card:#16161e; --line:#272730;
@@ -91,81 +92,71 @@
   footer{padding:46px 0;text-align:center;color:var(--mut);font-size:.9rem}
   .pill{display:inline-block;border:1px solid var(--line);border-radius:999px;padding:.3em .8em;font-size:.78rem;color:var(--mut);margin:0 4px}
 </style>
-</head>
-<body>
-
+<link href="https://inematds.github.io/content2video/guia/" hreflang="pt-BR" rel="alternate"/><link href="https://inematds.github.io/content2video/guia/en/" hreflang="en" rel="alternate"/><link href="https://inematds.github.io/content2video/guia/es/" hreflang="es" rel="alternate"/></head>
+<body><div class="inema-lang" style="position:fixed;right:14px;bottom:14px;z-index:9999;display:flex;gap:2px;padding:4px;border-radius:10px;background:rgba(12,12,16,.82);border:1px solid rgba(226,162,59,.45);font:600 12px/1 Sora,Inter,system-ui,sans-serif;backdrop-filter:blur(8px)" translate="no"><a href="./" hreflang="pt-BR" style="padding:6px 8px;border-radius:7px;text-decoration:none;color:#1a1206;background:#E2A23B">PT</a><a href="en/" hreflang="en" style="padding:6px 8px;border-radius:7px;text-decoration:none;color:#e9e9ee">EN</a><a href="es/" hreflang="es" style="padding:6px 8px;border-radius:7px;text-decoration:none;color:#e9e9ee">ES</a></div>
 <nav><div class="wrap">
-  <a class="brand" href="#top"><span class="emoji">🎬</span> Content2Video</a>
-  <span class="sep">|</span>
-  <span class="clubpro"><a class="inema" href="https://inema.club" target="_blank" rel="noopener">INEMA.CLUB</a><span class="sep">-</span><a class="pro" href="https://inema.pro" target="_blank" rel="noopener">PRO</a></span>
-  <div class="links">
-    <a class="sec" href="#oque">O que é</a><a class="sec" href="#fluxo">Como funciona</a><a class="sec" href="#guia">Guia de uso</a><a class="sec" href="#exemplos">Exemplos</a>
-    <button class="tgl" id="themeToggle" aria-label="Alternar tema" title="Alternar tema">🌙</button>
-    <a class="btn" href="https://github.com/inematds/content2video" target="_blank" rel="noopener">GitHub</a>
-  </div>
+<a class="brand" href="#top"><span class="emoji">🎬</span> Content2Video</a>
+<span class="sep">|</span>
+<span class="clubpro"><a class="inema" href="https://inema.club" rel="noopener" target="_blank">INEMA.CLUB</a><span class="sep">-</span><a class="pro" href="https://inema.pro" rel="noopener" target="_blank">PRO</a></span>
+<div class="links">
+<a class="sec" href="#oque">O que é</a><a class="sec" href="#fluxo">Como funciona</a><a class="sec" href="#guia">Guia de uso</a><a class="sec" href="#exemplos">Exemplos</a>
+<button aria-label="Alternar tema" class="tgl" id="themeToggle" title="Alternar tema">🌙</button>
+<a class="btn" href="https://github.com/inematds/content2video" rel="noopener" target="_blank">GitHub</a>
+</div>
 </div></nav>
-
 <header class="hero" id="top"><div class="glow"></div><div class="wrap">
-  <div><span class="chip">Do conteúdo ao MP4</span><h1>Um link entra.<br><span class="amb">Um vídeo sai.</span></h1>
-    <p class="lead">Transforme páginas e artigos em vídeos verticais editáveis, narrados em português e prontos para revisão antes do render.</p>
-    <div class="cta"><a class="btn" href="#guia">Começar o guia</a><a class="btn ghost" href="https://github.com/inematds/content2video" target="_blank" rel="noopener">Ver no GitHub</a></div>
-  </div>
-  <figure><img src="assets/content2video-destaque.png" width="1672" height="941" alt="Content2Video: um link entra e um vídeo sai, ilustrado por uma URL sendo transformada em vídeo MP4" fetchpriority="high"></figure>
+<div><span class="chip">Do conteúdo ao MP4</span><h1>Um link entra.<br/><span class="amb">Um vídeo sai.</span></h1>
+<p class="lead">Transforme páginas e artigos em vídeos verticais editáveis, narrados em português e prontos para revisão antes do render.</p>
+<div class="cta"><a class="btn" href="#guia">Começar o guia</a><a class="btn ghost" href="https://github.com/inematds/content2video" rel="noopener" target="_blank">Ver no GitHub</a></div>
+</div>
+<figure><img alt="Content2Video: um link entra e um vídeo sai, ilustrado por uma URL sendo transformada em vídeo MP4" fetchpriority="high" height="941" src="assets/content2video-destaque.png" width="1672"/></figure>
 </div></header>
-
 <section id="oque"><div class="wrap"><span class="chip">O que é</span><h2>Uma pequena fábrica de vídeo, local e revisável</h2>
-  <p class="sub">A IA pesquisa a fonte e monta a produção. Você mantém o controle editorial, abre cada composição e decide quando gerar o arquivo final.</p>
-  <div class="grid g3">
-    <div class="card"><h3>🔗 Link como entrada</h3><p>Cole uma URL na interface ou passe-a pelo terminal. O sistema cria um projeto local em <code>output/content2video/</code>.</p></div>
-    <div class="card"><h3>✏️ Tudo editável</h3><p>Roteiro, storyboard, voz, legendas, cenas, mídia e tempos permanecem acessíveis no HyperFrames Studio.</p></div>
-    <div class="card"><h3>🎞️ Render sob aprovação</h3><p>O MP4 só é gerado depois da validação, com um botão na interface ou um comando no terminal.</p></div>
-  </div>
+<p class="sub">A IA pesquisa a fonte e monta a produção. Você mantém o controle editorial, abre cada composição e decide quando gerar o arquivo final.</p>
+<div class="grid g3">
+<div class="card"><h3>🔗 Link como entrada</h3><p>Cole uma URL na interface ou passe-a pelo terminal. O sistema cria um projeto local em <code>output/content2video/</code>.</p></div>
+<div class="card"><h3>✏️ Tudo editável</h3><p>Roteiro, storyboard, voz, legendas, cenas, mídia e tempos permanecem acessíveis no HyperFrames Studio.</p></div>
+<div class="card"><h3>🎞️ Render sob aprovação</h3><p>O MP4 só é gerado depois da validação, com um botão na interface ou um comando no terminal.</p></div>
+</div>
 </div></section>
-
 <section id="fluxo"><div class="wrap"><span class="chip">Como funciona</span><h2>Da página ao vídeo em seis etapas</h2>
-  <p class="sub">O padrão preserva a mesma voz pt-BR até quando a fonte original estiver em outro idioma.</p>
-  <div class="flow"><span>URL</span><span class="arr">→</span><span>Pesquisa</span><span class="arr">→</span><span>Roteiro</span><span class="arr">→</span><span>Cenas + voz</span><span class="arr">→</span><span>Revisão</span><span class="arr">→</span><span>MP4</span></div>
+<p class="sub">O padrão preserva a mesma voz pt-BR até quando a fonte original estiver em outro idioma.</p>
+<div class="flow"><span>URL</span><span class="arr">→</span><span>Pesquisa</span><span class="arr">→</span><span>Roteiro</span><span class="arr">→</span><span>Cenas + voz</span><span class="arr">→</span><span>Revisão</span><span class="arr">→</span><span>MP4</span></div>
 </div></section>
-
 <section id="pre"><div class="wrap"><span class="chip">Pré-requisitos</span><h2>O necessário para rodar</h2>
-  <p class="sub">Use o OAuth da assinatura pelo Codex CLI, que é o padrão, ou configure uma chave de API somente no <code>.env</code>.</p>
-  <div class="grid g3">
-    <div class="card"><h3>Node.js 22+</h3><p>Executa a interface e o CLI.</p><pre>node --version</pre></div>
-    <div class="card"><h3>Codex conectado</h3><p>Reutiliza o login OAuth local.</p><pre>codex login
+<p class="sub">Use o OAuth da assinatura pelo Codex CLI, que é o padrão, ou configure uma chave de API somente no <code>.env</code>.</p>
+<div class="grid g3">
+<div class="card"><h3>Node.js 22+</h3><p>Executa a interface e o CLI.</p><pre>node --version</pre></div>
+<div class="card"><h3>Codex conectado</h3><p>Reutiliza o login OAuth local.</p><pre>codex login
 codex login status</pre></div>
-    <div class="card"><h3>FFmpeg</h3><p>Codifica e inspeciona o vídeo final.</p><pre>ffmpeg -version</pre></div>
-  </div>
+<div class="card"><h3>FFmpeg</h3><p>Codifica e inspeciona o vídeo final.</p><pre>ffmpeg -version</pre></div>
+</div>
 </div></section>
-
 <section id="guia"><div class="wrap"><span class="chip">Guia de uso · passo a passo</span><h2>Escolha interface ou linha de comando</h2>
-  <p class="sub">Nos dois modos, os padrões vêm do <code>.env</code>: 60 segundos, tolerância de 30%, nota 8, voz Francisca e vídeo 9:16.</p>
-  <div class="step"><div class="b">1</div><div><h3>Instale</h3><p>Clone o projeto e crie sua configuração local.</p><pre><span class="k">git clone https://github.com/inematds/content2video.git
+<p class="sub">Nos dois modos, os padrões vêm do <code>.env</code>: 60 segundos, tolerância de 30%, nota 8, voz Francisca e vídeo 9:16.</p>
+<div class="step"><div class="b">1</div><div><h3>Instale</h3><p>Clone o projeto e crie sua configuração local.</p><pre><span class="k">git clone https://github.com/inematds/content2video.git
 cd content2video
 cp .env.example .env
 npm install</span></pre></div></div>
-  <div class="step"><div class="b">2</div><div><h3>Inicie a interface</h3><p>Ajuste os IPs do <code>.env</code> se necessário e abra o endereço exibido.</p><pre><span class="k">npm start</span>  <span class="c"># padrão: http://192.168.2.99:3080</span></pre></div></div>
-  <div class="step"><div class="b">3</div><div><h3>Ou crie pelo terminal</h3><p>O slug opcional define o nome da pasta do vídeo.</p><pre><span class="k">npm run video:create -- https://www.inema.club/ inema-club-promo</span></pre></div></div>
-  <div class="step"><div class="b">4</div><div><h3>Revise e valide</h3><p>Abra o editor ou rode a checagem automática.</p><pre><span class="k">npm run video:preview -- inema-club-promo
+<div class="step"><div class="b">2</div><div><h3>Inicie a interface</h3><p>Ajuste os IPs do <code>.env</code> se necessário e abra o endereço exibido.</p><pre><span class="k">npm start</span>  <span class="c"># padrão: http://192.168.2.99:3080</span></pre></div></div>
+<div class="step"><div class="b">3</div><div><h3>Ou crie pelo terminal</h3><p>O slug opcional define o nome da pasta do vídeo.</p><pre><span class="k">npm run video:create -- https://www.inema.club/ inema-club-promo</span></pre></div></div>
+<div class="step"><div class="b">4</div><div><h3>Revise e valide</h3><p>Abra o editor ou rode a checagem automática.</p><pre><span class="k">npm run video:preview -- inema-club-promo
 npm run video:check -- inema-club-promo</span></pre></div></div>
-  <div class="step"><div class="b">5</div><div><h3>Renderize</h3><p>O arquivo final vai para <code>output/content2video/&lt;slug&gt;/renders/&lt;slug&gt;.mp4</code>.</p><pre><span class="k">npm run video:render -- inema-club-promo</span></pre></div></div>
+<div class="step"><div class="b">5</div><div><h3>Renderize</h3><p>O arquivo final vai para <code>output/content2video/&lt;slug&gt;/renders/&lt;slug&gt;.mp4</code>.</p><pre><span class="k">npm run video:render -- inema-club-promo</span></pre></div></div>
 </div></section>
-
 <section id="exemplos"><div class="wrap"><span class="chip">Exemplos reais</span><h2>Três vídeos já produzidos</h2>
-  <p class="sub">A produção local reúne um institucional do INEMA.club, um artigo em inglês narrado em pt-BR e o MVP original.</p>
-  <div class="ex">
-    <figure><img src="assets/exemplo-inema-club.jpg" alt="Quadros do vídeo do INEMA.club" loading="lazy"><figcaption>INEMA.club — página de produto transformada em vídeo vertical.</figcaption></figure>
-    <figure><img src="assets/exemplo-futurism.jpg" alt="Quadros do vídeo sobre Zuckerberg e Dolly Parton" loading="lazy"><figcaption>Futurism — fonte em inglês com narração brasileira consistente.</figcaption></figure>
-  </div>
+<p class="sub">A produção local reúne um institucional do INEMA.club, um artigo em inglês narrado em pt-BR e o MVP original.</p>
+<div class="ex">
+<figure><img alt="Quadros do vídeo do INEMA.club" loading="lazy" src="assets/exemplo-inema-club.jpg"/><figcaption>INEMA.club — página de produto transformada em vídeo vertical.</figcaption></figure>
+<figure><img alt="Quadros do vídeo sobre Zuckerberg e Dolly Parton" loading="lazy" src="assets/exemplo-futurism.jpg"/><figcaption>Futurism — fonte em inglês com narração brasileira consistente.</figcaption></figure>
+</div>
 </div></section>
-
 <section id="roadmap"><div class="wrap"><span class="chip">Estado do projeto</span><h2>O que já funciona e o próximo passo</h2>
-  <p class="sub">A base operacional está pronta para teste em rede local.</p>
-  <div class="phase"><div class="tag">Pronto</div><div class="d"><strong>Criação, edição e render</strong><span>Interface sem login, CLI, OAuth Codex, API opcional, voz configurável e download do MP4.</span></div></div>
-  <div class="phase"><div class="tag">Depois</div><div class="d"><strong>Operação pública</strong><span>Adicionar autenticação, HTTPS, fila persistente e limites antes de expor a interface à internet.</span></div></div>
+<p class="sub">A base operacional está pronta para teste em rede local.</p>
+<div class="phase"><div class="tag">Pronto</div><div class="d"><strong>Criação, edição e render</strong><span>Interface sem login, CLI, OAuth Codex, API opcional, voz configurável e download do MP4.</span></div></div>
+<div class="phase"><div class="tag">Depois</div><div class="d"><strong>Operação pública</strong><span>Adicionar autenticação, HTTPS, fila persistente e limites antes de expor a interface à internet.</span></div></div>
 </div></section>
-
 <footer><div class="wrap"><div class="pill">Node.js</div><div class="pill">Codex</div><div class="pill">HyperFrames</div><p style="margin-top:18px">Content2Video INEMA · Projeto experimental · <a href="https://github.com/inematds/content2video">inematds/content2video</a> · <a href="https://inema.club">INEMA.CLUB</a></p></div></footer>
-
 <script>(function(){var KEY='content2video-theme',b=document.body,t=document.getElementById('themeToggle');if(localStorage.getItem(KEY)==='light'){b.classList.add('light');t.textContent='☀️';}t.addEventListener('click',function(){var light=b.classList.toggle('light');t.textContent=light?'☀️':'🌙';localStorage.setItem(KEY,light?'light':'dark');});})();</script>
 </body>
 </html>
